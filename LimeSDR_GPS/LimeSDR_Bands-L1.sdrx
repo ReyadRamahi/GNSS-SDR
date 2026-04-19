@@ -1,0 +1,61 @@
+<metadata xmlns="http://www.ion.org/standards/sdrwg/schema/metadata.xsd">
+
+	<system id="LimeSDR">
+		<freqbase format="MHz">10.0</freqbase>
+		<equipment>LimeSDR</equipment>
+		<source id="PatchAntenna">
+			<type>Patch</type>
+			<polarization>RHCP</polarization>
+			<idcluster>Antenna</idcluster>
+		</source>
+		<cluster id="Antenna"/>
+	</system>
+
+	<band id="L1">
+		<centerfreq format="GHz">1.575420</centerfreq>
+		<translatedfreq format="kHz">420.0</translatedfreq>
+		<delaybias format="sec">0.0</delaybias>
+		<bandwidth format="MHz">10.0</bandwidth>
+	</band>
+
+	<session id="0">
+		<toa>2017-10-15T18:00:00Z</toa>
+		<position lat="52.177182" lon="4.490108" height="10.00"/>
+		<contact>James T. Curran</contact>
+		<campaign>ION GNSS Metadata Collection</campaign>
+		<scenario>Static Rooftop</scenario>
+	</session>
+
+	<file>
+		<url>LimeSDR_Bands-L1.int16</url>
+		<timestamp>2017-10-15T18:00:00Z</timestamp>
+		<owner>JTC</owner>
+		<lane id="SingleFreqL1"/>
+	</file>
+
+	<lane id="SingleFreqL1">
+		<bandsrc idband="L1" idsrc="PatchAntenna"/>
+		<system id="LimeSDR"/>
+		<block>
+			<cycles>0</cycles>
+			<sizeheader>0</sizeheader>
+			<sizefooter>0</sizefooter>
+			<chunk>
+				<sizeword>2</sizeword>
+				<countwords>2</countwords>
+				<endian>Little</endian>
+				<lump>
+					<stream id="L1">
+					<ratefactor>1</ratefactor>
+					<quantization>16</quantization>
+					<packedbits>32</packedbits>
+					<format>IQ</format>
+					<encoding>TC</encoding>
+					<band id="L1"/>
+					</stream>
+				</lump>
+			</chunk>
+		</block>
+	</lane>
+
+</metadata>

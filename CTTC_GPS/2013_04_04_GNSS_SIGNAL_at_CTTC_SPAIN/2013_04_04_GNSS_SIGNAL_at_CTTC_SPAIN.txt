@@ -1,0 +1,1087 @@
+linux; GNU C++ version 4.6.3; Boost_104800; UHD_003.005.001-29-g3cb515f7
+
+Initializing GNSS-SDR... Please wait.
+Logging will be done at /tmp
+Use gnss-sdr --log_dir=/path/to/log to change that.
+Processing file /media/DATALOGGER/scheduled_capture.dat, which contains 1600000000 [bytes]
+GNSS signal recorded time to be processed: 199.9 [s]
+Channel 0 in state 1
+Channel 1 in state 0
+Channel 2 in state 0
+Channel 3 in state 0
+Channel 4 in state 0
+Channel 0 assigned to GPS PRN 15 (Block IIR-M) Signal 1C
+Channel 1 assigned to GPS PRN 18 (Block IIR) Signal 1C
+Channel 2 assigned to GPS PRN 16 (Block IIR) Signal 1C
+Channel 3 assigned to GPS PRN 21 (Block IIR) Signal 1C
+Channel 4 assigned to GPS PRN 3 (Block IIA) Signal 1C
+Using Volk machine: sse4_1_32
+acq_trk_diff_samples=60000
+Tracking start on channel 0 for satellite GPS PRN 1 (Block IIF)
+PULL-IN Doppler [Hz]=7250 Code Phase correction [samples]=-0.286376953125 PULL-IN Code Phase [samples]=3986.286376953125
+Channel 0 in state 2
+Channel 1 in state 1
+Channel 2 in state 0
+Channel 3 in state 0
+Channel 4 in state 0
+acq_trk_diff_samples=60000
+Tracking start on channel 1 for satellite GPS PRN 11 (Block IIR)
+PULL-IN Doppler [Hz]=5500 Code Phase correction [samples]=-0.216522216796875 PULL-IN Code Phase [samples]=350.2165222167969
+Channel 0 in state 2
+Channel 1 in state 2
+Channel 2 in state 1
+Channel 3 in state 0
+Channel 4 in state 0
+acq_trk_diff_samples=60000
+Tracking start on channel 2 for satellite GPS PRN 17 (Block IIR-M)
+PULL-IN Doppler [Hz]=9750 Code Phase correction [samples]=-0.377197265625 PULL-IN Code Phase [samples]=394.377197265625
+Channel 0 in state 2
+Channel 1 in state 2
+Channel 2 in state 2
+Channel 3 in state 1
+Channel 4 in state 0
+acq_trk_diff_samples=60000
+Tracking start on channel 3 for satellite GPS PRN 20 (Block IIR)
+PULL-IN Doppler [Hz]=8250 Code Phase correction [samples]=-0.3212890625 PULL-IN Code Phase [samples]=1243.3212890625
+Channel 0 in state 2
+Channel 1 in state 2
+Channel 2 in state 2
+Channel 3 in state 2
+Channel 4 in state 1
+acq_trk_diff_samples=60000
+Tracking start on channel 4 for satellite GPS PRN 32 (Block IIA)
+PULL-IN Doppler [Hz]=6500 Code Phase correction [samples]=-0.25146484375 PULL-IN Code Phase [samples]=3681.25146484375
+Channel 0 in state 2
+Channel 1 in state 2
+Channel 2 in state 2
+Channel 3 in state 2
+Channel 4 in state 2
+Current input signal time = 1 [s]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7073.625488281259932.54296875 [Hz] CN0 =  [Hz] CN0 = 49.7478485107421950.22770690917969 [dB-Hz] [dB-Hz]
+
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8312.501953125 [Hz] CN0 = 45.66147232055664 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5474.73486328125 [Hz] CN0 = 48.55120849609375 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6430.830078125 [Hz] CN0 = 48.62929153442383 [dB-Hz]
+Preamble detection for SAT GPS PRN 20 (Block IIR)
+Preamble detection for SAT GPS PRN 1 (Block IIF)
+Preamble detection for SAT GPS PRN 32 (Block IIA)
+Preamble detection for SAT GPS PRN 11 (Block IIR)
+Preamble detection for SAT GPS PRN 17 (Block IIR-M)
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5488.16357421875 [Hz] CN0 = 48.58271408081055 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=6434.3544921875 [Hz] CN0 = 9952.5771484375 [Hz] CN0 = 49.13840866088867 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8335.03125 [Hz] CN0 = 46.49216079711914 [dB-Hz]
+46.69869613647461 [dB-Hz]
+Current input signal time = 2 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7070.7021484375 [Hz] CN0 = 51.95330047607422 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Current input signal time = 3 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6431.1640625 [Hz] CN0 = 49.23501968383789 [dB-Hz]
+5471.41796875 [Hz] CN0 = Tracking CH 3: Satellite 47.71248626708984GPS [dB-Hz] PRN 
+20 (Block IIR), Doppler=7086.6884765625 [Hz] CN0 = 51.68729782104492 [dB-Hz]
+8330.408203125 [Hz] CN0 = 45.7144775390625 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9957.599609375 [Hz] CN0 = 47.71136093139648 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5473.10546875 [Hz] CN0 = 49.26002883911133 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9949.48046875Tracking CH  [Hz] CN0 = 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 45.10440063476562 [dB-Hz]4: Satellite 
+GPS PRN 32 (Block IIA), Doppler=8328.8857421875 [Hz] CN0 = 6438.962890625 [Hz] CN0 = 48.9451713562011747.01340103149414 [dB-Hz] [dB-Hz]
+
+Current input signal time = 4 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7081.09912109375 [Hz] CN0 = 51.18952941894531 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=5488.1748046875 [Hz] CN0 = 9954.7041015625 [Hz] CN0 = 47.77786254882812 [dB-Hz]
+48.1362190246582 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6449.7666015625 [Hz] CN0 = 49.77195739746094 [dB-Hz]
+Current input signal time = 5 [s]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=8330.1708984375 [Hz] CN0 = 44.76821517944336 [dB-Hz]
+7090.20068359375 [Hz] CN0 = 48.83835983276367 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9946.7939453125 [Hz] CN0 = 48.480224609375 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5478.00244140625 [Hz] CN0 = 48.70400238037109 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6461.0576171875 [Hz] CN0 = 51.6756706237793 [dB-Hz]
+Current input signal time = 6 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7082.42529296875 [Hz] CN0 = 52.20954513549805 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8349.0556640625 [Hz] CN0 = 44.23276901245117 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9976.5341796875 [Hz] CN0 = 48.35296630859375 [dB-Hz]
+Current input signal time = 7 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7074.3466796875 [Hz] CN0 = 50.02945709228516Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5482.77294921875 [Hz] CN0 = 47.62640762329102 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6447.2314453125 [Hz] CN0 = 50.69696426391602 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8341.767578125 [Hz] CN0 = 45.93644332885742 [dB-Hz]
+ [dB-Hz]
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 17 (Block IIR-M)
+ Frame sync SAT GPS PRN 20 (Block IIR) with preamble start at 7.037275556091308 [s]
+ Frame sync SAT GPS PRN 1 (Block IIF) with preamble start at 7.038965286193847 [s]
+ Frame sync SAT GPS PRN 32 (Block IIA) with preamble start at 7.040893886657715 [s]
+ Frame sync SAT GPS PRN 11 (Block IIR) with preamble start at 7.043064113708496 [s]
+ Frame sync SAT GPS PRN 17 (Block IIR-M) with preamble start at 7.044056122436523 [s]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5483.970703125 [Hz] CN0 = 49.44037628173828 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20Current input signal time =  (Block IIR), Doppler=8 [s]
+8322.7109375 [Hz] CN0 = 48.05225372314453 [dB-Hz]Tracking CH 
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 2: Satellite GPS PRN 6443.5844726562517 [Hz] CN0 =  (Block IIR-M), Doppler=48.46111679077148 [dB-Hz]
+0: Satellite GPS PRN 1 (Block IIF), Doppler=7079.37255859375 [Hz] CN0 = 50.6965217590332 [dB-Hz]
+9967.421875 [Hz] CN0 = 48.20889663696289 [dB-Hz]
+Tracking CH 2Tracking CH : Satellite GPS PRN 117: Satellite  (Block GPS PRN 11 (Block IIR), Doppler=IIR-M), Doppler=Current input signal time = 9 [s]
+9947.1767578125Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler= [Hz] CN0 = 7069.6748046875 [Hz] CN0 = 48.07723999023438 [dB-Hz]
+48.97273254394531 [dB-Hz]
+5476.38916015625 [Hz] CN0 = 49.88733673095703 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8344.0068359375 [Hz] CN0 = 46.60662460327148 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6413.46484375 [Hz] CN0 = 49.57060241699219 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9929.1083984375 [Hz] CN0 = Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5457.07666015625 [Hz] CN0 = 47.3275260925293 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8332.3916015625 [Hz] CN0 = 47.5075798034668 [dB-Hz]
+46.2451057434082 [dB-Hz]
+Current input signal time = 10 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7074.21337890625 [Hz] CN0 = 50.95505142211914 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6414.70361328125 [Hz] CN0 = 49.97240447998047 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9945.7841796875 [Hz] CN0 = 48.63400650024414 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8324.6142578125 [Hz] CN0 = 45.68677520751953 [dB-Hz]
+Current input signal time = 11 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7053.0556640625 [Hz] CN0 = 51.40076446533203 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6426.61962890625 [Hz] CN0 = 49.23807144165039 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5453.5263671875 [Hz] CN0 = 49.86373519897461 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9909.056640625 [Hz] CN0 = 47.63388442993164 [dB-Hz]
+5452.26318359375 [Hz] CN0 = 49.30030059814453 [dB-Hz]
+Current input signal time = 12 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7042.60693359375 [Hz] CN0 = 52.23118591308594 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6420.96923828125 [Hz] CN0 = 49.49287033081055 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8316.0888671875 [Hz] CN0 = 44.38570022583008 [dB-Hz]
+Current input signal time = 13 [s]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5439.1513671875 [Hz] CN0 = 50.34534072875977 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8306.927734375 [Hz] CN0 = 45.88810348510742 [dB-Hz]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7029.5546875 [Hz] CN0 = 50.17226409912109 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9924.0986328125 [Hz] CN0 = 48.14701080322266 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6422.015625 [Hz] CN0 = 48.23355484008789 [dB-Hz]
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 17 (Block IIR-M)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 11 (Block IIR)
+Tracking CH Tracking CH 34: Satellite GPS: Satellite  PRN GPS20 (Block  PRN IIR)32, Doppler= (Block IIA), Doppler=6412.71191406258276.7578125 [Hz] CN0 =  [Hz] CN0 = 47.85388946533203 [dB-Hz]47.45008087158203
+ [dB-Hz]
+Current input signal time = 14 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7025.04931640625 [Hz] CN0 = 51.39725112915039 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5440.64208984375 [Hz] CN0 = 49.34750747680664 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9909.806640625 [Hz] CN0 = 47.25392532348633 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9897.0595703125 [Hz] CN0 = 47.44588470458984 [dB-Hz]
+Current input signal time = 15 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7028.58251953125 [Hz] CN0 = 50.58933258056641 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6387.6611328125 [Hz] CN0 = 49.76641082763672 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8280.7802734375 [Hz] CN0 = 48.42325973510742 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5431.97265625 [Hz] CN0 = 48.97574615478516 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5425.21435546875 [Hz] CN0 = 48.78531265258789 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9902.7431640625 [Hz] CN0 = 47.37980651855469 [dB-Hz]
+Current input signal time = 16 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7032.97314453125 [Hz] CN0 = 52.22884368896484 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8284.669921875 [Hz] CN0 = 45.64875030517578 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6386.61376953125 [Hz] CN0 = 49.71665573120117 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5438.859375 [Hz] CN0 = 48.84799575805664 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6384.2080078125 [Hz] CN0 = 50.95717239379883 [dB-Hz]
+Current input signal time = 17 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7030.44921875 [Hz] CN0 = 50.68406677246094 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8263.587890625 [Hz] CN0 = 46.99738311767578 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9873.814453125 [Hz] CN0 = 46.0129280090332 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8269.1982421875 [Hz] CN0 = 47.35409927368164 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9899.4072265625 [Hz] CN0 = 47.00177001953125 [dB-Hz]
+Current input signal time = 18 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7004.35400390625 [Hz] CN0 = 51.05679702758789 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6372.380859375 [Hz] CN0 = 49.04393768310547 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5415.4619140625 [Hz] CN0 = 48.19393157958984 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5384.23486328125 [Hz] CN0 = 48.8502197265625 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6360.47705078125 [Hz] CN0 = 46.58795928955078 [dB-Hz]
+Current input signal time = 19 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6994.9599609375 [Hz] CN0 = 50.50003814697266 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8263.701171875 [Hz] CN0 = 48.66142272949219 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9874.896484375 [Hz] CN0 = 45.67042922973633 [dB-Hz]
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 17 (Block IIR-M)
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5377.4169921875 [Hz] CN0 = 47.80351638793945 [dB-Hz]
+Current input signal time = 20 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6997.05712890625 [Hz] CN0 = 52.53250885009766 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6353.2578125 [Hz] CN0 = 47.11362457275391 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9848.8193359375 [Hz] CN0 = 49.17193984985352 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8259.9033203125 [Hz] CN0 = 47.37996292114258 [dB-Hz]
+Current input signal time = 21 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6994.2275390625 [Hz] CN0 = 51.09875869750977 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5395.0712890625 [Hz] CN0 = 48.97101593017578 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8232.2607421875 [Hz] CN0 = 49.68224716186523 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6344.0380859375 [Hz] CN0 = 50.26859664916992 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9872.0478515625 [Hz] CN0 = 45.93541717529297 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5394.47412109375 [Hz] CN0 = 48.87900924682617 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8238.0224609375 [Hz] CN0 = 45.17323303222656 [dB-Hz]
+Current input signal time = 22 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6994.126953125 [Hz] CN0 = 52.57399749755859 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6324.689453125 [Hz] CN0 = 48.40287017822266 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9861.0537109375 [Hz] CN0 = 48.71295166015625 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8255.048828125 [Hz] CN0 = 45.60542297363281 [dB-Hz]
+Current input signal time = 23 [s]Tracking CH 
+4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6984.77246093756353.92333984375 [Hz] CN0 =  [Hz] CN0 = Tracking CH 152.06721496582031: Satellite GPS PRN 11 (Block IIR), Doppler=48.63445281982422 [dB-Hz]
+ [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9858.42578125 [Hz] CN0 = 45.49134826660156 [dB-Hz]
+5383.890625 [Hz] CN0 = 47.85380554199219 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5352.9619140625 [Hz] CN0 = 47.5546875 [dB-Hz]
+Current input signal time = 24 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6973.87109375 [Hz] CN0 = 50.00473785400391 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9844.298828125 [Hz] CN0 = 47.45530700683594 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6346.76904296875 [Hz] CN0 = 47.44188690185547 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8224.671875 [Hz] CN0 = 49.24540328979492 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=9864.1044921875 [Hz] CN0 = 49.83471298217773 [dB-Hz]
+6339.072265625 [Hz] CN0 = Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8228.6044921875 [Hz] CN0 = 48.95067596435547 [dB-Hz]
+45.81826400756836 [dB-Hz]
+Current input signal time = 25 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6980.7080078125 [Hz] CN0 = 50.49594497680664 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5371.44677734375 [Hz] CN0 = 50.23035049438477 [dB-Hz]
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 20 (Block IIR)
+Ephemeris record has arrived from SAT ID 20 (Block IIR)
+New Ephemeris record inserted with Toe=374400 and GPS Week=710
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 1 (Block IIF)
+Ephemeris record has arrived from SAT ID 1 (Block IIF)
+New Ephemeris record inserted with Toe=374400 and GPS Week=710
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 32 (Block IIA)
+Ephemeris record has arrived from SAT ID 32 (Block IIA)
+New Ephemeris record inserted with Toe=374400 and GPS Week=710
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 11 (Block IIR)
+Ephemeris record has arrived from SAT ID 11 (Block IIR)
+New Ephemeris record inserted with Toe=374400 and GPS Week=710
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 17 (Block IIR-M)
+Ephemeris record has arrived from SAT ID 17 (Block IIR-M)
+New Ephemeris record inserted with Toe=374400 and GPS Week=710
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8239.2431640625 [Hz] CN0 = 45.8449821472168 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9837.5244140625 [Hz] CN0 = 47.931884765625 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6331.58740234375 [Hz] CN0 = 48.49900054931641 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5371.37158203125 [Hz] CN0 = 51.24918746948242 [dB-Hz]
+Current input signal time = 26 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6969.662109375 [Hz] CN0 = 50.14153289794922 [dB-Hz]
+Position at 2013-Apr-04 06:23:48 is Lat = 41.27471731628889 [deg], Long = 1.987497969066093 [deg], Height= 65.24936532508582 [m]
+Dilution of Precision at 2013-Apr-04 06:23:48 is HDOP = 4.39313397301984 and VDOP = 2.508739685069943
+Position at 2013-Apr-04 06:23:49 is Lat = 41.27484036392559 [deg], Long = 1.987505204657305 [deg], Height= 74.46520676556975 [m]
+Dilution of Precision at 2013-Apr-04 06:23:49 is HDOP = 4.393150437311419 and VDOP = 2.508672582849511
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6338.3095703125 [Hz] CN0 = 48.45549392700195 [dB-Hz]
+9847.93359375 [Hz] CN0 = 48.27133941650391 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8247.9248046875 [Hz] CN0 = 47.85845947265625 [dB-Hz]
+Current input signal time = 27 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6970.22900390625 [Hz] CN0 = 51.94694137573242 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5354.42578125 [Hz] CN0 = 47.95117568969727 [dB-Hz]
+Position at 2013-Apr-04 06:23:49 is Lat = 41.27469655624272 [deg], Long = 1.987380028363458 [deg], Height= 93.79525658860803 [m]
+Dilution of Precision at 2013-Apr-04 06:23:49 is HDOP = 4.393165379362015 and VDOP = 2.508607893367199
+Position at 2013-Apr-04 06:23:50 is Lat = 41.27469922117494 [deg], Long = 1.987571670335804 [deg], Height= 54.29290833882987 [m]
+Dilution of Precision at 2013-Apr-04 06:23:50 is HDOP = 4.393182309728849 and VDOP = 2.508543261806843
+Current input signal time = 28 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6963.48974609375 [Hz] CN0 = 51.0787239074707 [dB-Hz]
+Tracking CH Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8215.609375 [Hz] CN0 = 46.36269760131836 [dB-Hz]
+1: Satellite GPS PRN 11 (Block IIR), Doppler=5352.72802734375 [Hz] CN0 = 50.0295295715332 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6328.78125 [Hz] CN0 = 50.32614135742188 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9853.2119140625 [Hz] CN0 = 46.2265739440918 [dB-Hz]
+Position at 2013-Apr-04 06:23:50 is Lat = 41.2746847044918 [deg], Long = 1.987460616674196 [deg], Height= 72.79340558964759 [m]
+Dilution of Precision at 2013-Apr-04 06:23:50 is HDOP = 4.393198299491131 and VDOP = 2.508477698219326
+Position at 2013-Apr-04 06:23:51 is Lat = 41.27467961760126 [deg], Long = 1.9874587951593 [deg], Height= 57.31181071326137 [m]
+Dilution of Precision at 2013-Apr-04 06:23:51 is HDOP = 4.393215036324309 and VDOP = 2.508412978633682
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Current input signal time = 29 [s]6329.92626953125
+ [Hz] CN0 = Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6957.1396484375 [Hz] CN0 = 51.15837097167969 [dB-Hz]
+50.4164924621582 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9851.8544921875 [Hz] CN0 = 51.6507682800293 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8254.5595703125 [Hz] CN0 = 45.1745491027832 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5348.46630859375 [Hz] CN0 = 47.49412536621094 [dB-Hz]
+Position at 2013-Apr-04 06:23:51 is Lat = 41.27477882670458 [deg], Long = 1.987462007634996 [deg], Height= 67.47393262013793 [m]
+Dilution of Precision at 2013-Apr-04 06:23:51 is HDOP = 4.393230948500277 and VDOP = 2.508346176363924
+Position at 2013-Apr-04 06:23:52 is Lat = 41.2746655463632 [deg], Long = 1.987410324370856 [deg], Height= 70.22709975764155 [m]
+Dilution of Precision at 2013-Apr-04 06:23:52 is HDOP = 4.393246009072935 and VDOP = 2.50828172261007
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8223.640625 [Hz] CN0 = 49.15984725952148 [dB-Hz]
+Current input signal time = 30 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6957.15576171875 [Hz] CN0 = 51.52920532226562 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9830.9580078125 [Hz] CN0 = 48.42146682739258 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6312.42431640625 [Hz] CN0 = 51.67804718017578 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5362.537109375 [Hz] CN0 = 47.71692657470703 [dB-Hz]
+Position at 2013-Apr-04 06:23:52 is Lat = 41.2747389655224 [deg], Long = 1.987494716074349 [deg], Height= 62.45520926825702 [m]
+Dilution of Precision at 2013-Apr-04 06:23:52 is HDOP = 4.39326205010794 and VDOP = 2.508215651476769
+Position at 2013-Apr-04 06:23:53 is Lat = 41.27457240469673 [deg], Long = 1.987435360636772 [deg], Height= 72.19361343886703 [m]
+Dilution of Precision at 2013-Apr-04 06:23:53 is HDOP = 4.393276125700892 and VDOP = 2.508151328324495
+Current input signal time = 31 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6947.63232421875 [Hz] CN0 = Tracking CH 4: Satellite GPS51.51993560791016 PRN  [dB-Hz]
+32 (Block Tracking CH IIA2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9820.576171875 [Hz] CN0 = 49.11072158813477 [dB-Hz]
+), Doppler=6337.28076171875 [Hz] CN0 = 50.77892684936523 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5337.8388671875 [Hz] CN0 = 46.15391540527344 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8225.3828125 [Hz] CN0 = 48.34881591796875 [dB-Hz]
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 20 (Block IIR)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 32 (Block IIA)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 1 (Block IIF)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 11 (Block IIR)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 17 (Block IIR-M)
+New UTC MODEL record has arrived 
+Position at 2013-Apr-04 06:23:53 is Lat = 41.27483967017313 [deg], Long = 1.987550793112521 [deg], Height= 49.89406172186136 [m]
+Dilution of Precision at 2013-Apr-04 06:23:53 is HDOP = 4.393294083611996 and VDOP = 2.508084306594371
+Position at 2013-Apr-04 06:23:54 is Lat = 41.27472527990607 [deg], Long = 1.987438492943919 [deg], Height= 71.51041248440742 [m]
+Dilution of Precision at 2013-Apr-04 06:23:54 is HDOP = 4.393307549119092 and VDOP = 2.508019033260501
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=8233.6162109375 [Hz] CN0 = 6304.45458984375 [Hz] CN0 = 48.1474494934082 [dB-Hz]48.32297134399414
+Current input signal time = 32 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6965.92236328125 [Hz] CN0 = 51.13312530517578 [dB-Hz]
+ [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5367.4208984375 [Hz] CN0 = 47.54449462890625 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9820.6201171875 [Hz] CN0 = 47.05913543701172 [dB-Hz]
+Position at 2013-Apr-04 06:23:54 is Lat = 41.27475727790458 [deg], Long = 1.987500345116864 [deg], Height= 52.38764969538897 [m]
+Dilution of Precision at 2013-Apr-04 06:23:54 is HDOP = 4.393324015526947 and VDOP = 2.507954157861589
+Position at 2013-Apr-04 06:23:55 is Lat = 41.27477635368653 [deg], Long = 1.987473376575355 [deg], Height= 48.61537518631667 [m]
+Dilution of Precision at 2013-Apr-04 06:23:55 is HDOP = 4.393339505995066 and VDOP = 2.507888831969105
+Tracking CH Tracking CH 24: Satellite : Satellite GPSGPS PRN  PRN 3217 (Block IIA), Doppler=6338.76171875 [Hz] CN0 = 49.01728820800781 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8240.1435546875 [Hz] CN0 = 45.58583068847656 [dB-Hz]
+ (Block IIR-M), Doppler=9822.302734375 [Hz] CN0 = 47.35038757324219 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5362.2490234375 [Hz] CN0 = 48.83142852783203 [dB-Hz]
+Current input signal time = 33 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6952.62109375 [Hz] CN0 = 51.72914123535156 [dB-Hz]
+Position at 2013-Apr-04 06:23:55 is Lat = 41.27469778173216 [deg], Long = 1.987492314294724 [deg], Height= 35.38147540390491 [m]
+Dilution of Precision at 2013-Apr-04 06:23:55 is HDOP = 4.393354295459254 and VDOP = 2.507824487562754
+Position at 2013-Apr-04 06:23:56 is Lat = 41.2747760128839 [deg], Long = 1.987503375653872 [deg], Height= 63.01822865195572 [m]
+Dilution of Precision at 2013-Apr-04 06:23:56 is HDOP = 4.39336826944136 and VDOP = 2.507757163812885
+Current input signal time = 34 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6972.205078125 [Hz] CN0 = 51.98737716674805 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6328.00732421875 [Hz] CN0 = 49.07958602905273 [dB-Hz]
+9830.01171875 [Hz] CN0 = 49.5299186706543 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5345.142578125 [Hz] CN0 = 47.06092834472656 [dB-Hz]
+8231.9794921875 [Hz] CN0 = 47.93170928955078 [dB-Hz]
+Position at 2013-Apr-04 06:23:56 is Lat = 41.27497686212585 [deg], Long = 1.98760830044593 [deg], Height= 59.0739096654579 [m]
+Dilution of Precision at 2013-Apr-04 06:23:56 is HDOP = 4.393384078904346 and VDOP = 2.507689873003781
+Position at 2013-Apr-04 06:23:57 is Lat = 41.27491490087235 [deg], Long = 1.987643127620439 [deg], Height= 52.10896541643888 [m]
+Dilution of Precision at 2013-Apr-04 06:23:57 is HDOP = 4.393399214440276 and VDOP = 2.507625537306193
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8205.9697265625 [Hz] CN0 = 47.13263702392578 [dB-Hz]
+Current input signal time = 35 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6964.84521484375 [Hz] CN0 = 51.78675842285156 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9833.818359375 [Hz] CN0 = 47.59071731567383 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5335.83642578125 [Hz] CN0 = 46.71428298950195 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6330.4091796875 [Hz] CN0 = 49.92174911499023 [dB-Hz]
+Position at 2013-Apr-04 06:23:57 is Lat = 41.27472788214532 [deg], Long = 1.987491421235735 [deg], Height= 57.93268771190196 [m]
+Dilution of Precision at 2013-Apr-04 06:23:57 is HDOP = 4.393412563513273 and VDOP = 2.507561850696157
+Position at 2013-Apr-04 06:23:58 is Lat = 41.27473627884284 [deg], Long = 1.987524119903616 [deg], Height= 43.8354069693014 [m]
+Dilution of Precision at 2013-Apr-04 06:23:58 is HDOP = 4.393427075038741 and VDOP = 2.507496656369519
+Tracking CH Tracking CH 32: Satellite : Satellite GPSGPS PRN  PRN 17 (Block 20IIR-M (Block )IIR, Doppler=), Doppler=8201.654296875 [Hz] CN0 = 9816.1513671875 [Hz] CN0 = 45.41929244995117 [dB-Hz]
+46.45559310913086 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6323.8935546875 [Hz] CN0 = 48.56053924560547 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Current input signal time = 36 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6964.21728515625 [Hz] CN0 = 49.13169479370117 [dB-Hz]
+5377.544921875 [Hz] CN0 = 46.49514770507812 [dB-Hz]
+Position at 2013-Apr-04 06:23:58 is Lat = 41.27485343512502 [deg], Long = 1.987463639378384 [deg], Height= 82.94135516695678 [m]
+Dilution of Precision at 2013-Apr-04 06:23:58 is HDOP = 4.393440345779169 and VDOP = 2.507428705107948
+Position at 2013-Apr-04 06:23:59 is Lat = 41.27486391115615 [deg], Long = 1.98764078516993 [deg], Height= 76.87035384401679 [m]
+Dilution of Precision at 2013-Apr-04 06:23:59 is HDOP = 4.393454425563689 and VDOP = 2.507363030929438
+Current input signal time = Tracking CH 337: Satellite  [s]GPS
+ PRN 20 (Block IIR), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6954.48730468758224.5166015625 [Hz] CN0 =  [Hz] CN0 = 51.659923553466849.03067779541016 [dB-Hz] [dB-Hz]
+
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5371.51953125 [Hz] CN0 = 50.27677917480469 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block 9846.328125IIA [Hz] CN0 = ), Doppler=49.00806045532227 [dB-Hz]
+6328.947265625 [Hz] CN0 = 48.82991409301758 [dB-Hz]
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 17 (Block IIR-M)
+Position at 2013-Apr-04 06:23:59 is Lat = 41.27493857236963 [deg], Long = 1.98766697216577 [deg], Height= 46.4192581763491 [m]
+Dilution of Precision at 2013-Apr-04 06:23:59 is HDOP = 4.393470533535404 and VDOP = 2.507298364166162
+Position at 2013-Apr-04 06:24:00 is Lat = 41.27492798047203 [deg], Long = 1.987734812594879 [deg], Height= 41.40263030864298 [m]
+Dilution of Precision at 2013-Apr-04 06:24:00 is HDOP = 4.393484897856722 and VDOP = 2.507233327117509
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9852.71484375 [Hz] CN0 = 49.87548065185547 [dB-Hz]
+Current input signal time = 38 [s]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6303.85302734375 [Hz] CN0 = 49.99634170532227 [dB-Hz]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6956.072265625 [Hz] CN0 = 52.3994255065918 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8196.5146484375 [Hz] CN0 = 50.68959808349609 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5364.51318359375 [Hz] CN0 = 50.2667350769043 [dB-Hz]
+Position at 2013-Apr-04 06:24:00 is Lat = 41.2749059044163 [deg], Long = 1.987707434665286 [deg], Height= 17.12815703824162 [m]
+Dilution of Precision at 2013-Apr-04 06:24:00 is HDOP = 4.393499194677071 and VDOP = 2.507168973797282
+Position at 2013-Apr-04 06:24:01 is Lat = 41.27492980715347 [deg], Long = 1.987585720147109 [deg], Height= 70.00550200324506 [m]
+Dilution of Precision at 2013-Apr-04 06:24:01 is HDOP = 4.393511160450832 and VDOP = 2.507101578765466
+Current input signal time = 39 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=6954.185546875 [Hz] CN0 = Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=51.95552444458008 [dB-Hz]
+8221.6015625 [Hz] CN0 = 49.00876998901367 [dB-Hz]
+9837.501953125 [Hz] CN0 = 46.09957122802734 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5355.4755859375 [Hz] CN0 = 49.61704254150391 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6332.6748046875 [Hz] CN0 = 50.44297790527344 [dB-Hz]
+Position at 2013-Apr-04 06:24:01 is Lat = 41.27494401048536 [deg], Long = 1.987640097632229 [deg], Height= 47.36977274063975 [m]
+Dilution of Precision at 2013-Apr-04 06:24:01 is HDOP = 4.393525251029037 and VDOP = 2.507036673718168
+Position at 2013-Apr-04 06:24:02 is Lat = 41.27484623629116 [deg], Long = 1.987575159719115 [deg], Height= 72.86023750901222 [m]
+Dilution of Precision at 2013-Apr-04 06:24:02 is HDOP = 4.393536930287672 and VDOP = 2.506971150763709
+Current input signal time = 40 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=6975.71484375 [Hz] CN0 = 50.23644638061523 [dB-Hz]
+8227.431640625 [Hz] CN0 = 46.99964904785156 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5361.82421875 [Hz] CN0 = 49.00487518310547 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6340.93359375 [Hz] CN0 = 47.53537368774414 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9823.609375 [Hz] CN0 = 49.59395980834961 [dB-Hz]
+Position at 2013-Apr-04 06:24:02 is Lat = 41.27486532451736 [deg], Long = 1.987705812478696 [deg], Height= 48.96047836914659 [m]
+Dilution of Precision at 2013-Apr-04 06:24:02 is HDOP = 4.393551650659062 and VDOP = 2.5069065340651
+Position at 2013-Apr-04 06:24:03 is Lat = 41.27481381869045 [deg], Long = 1.987557621888015 [deg], Height= 64.25955744087696 [m]
+Dilution of Precision at 2013-Apr-04 06:24:03 is HDOP = 4.393564045547186 and VDOP = 2.506841262547403
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6326.1337890625 [Hz] CN0 = 47.22295761108398 [dB-Hz]
+Tracking CH Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9839.484375 [Hz] CN0 = 47.77988052368164 [dB-Hz]
+3: Satellite GPS PRN 20 (Block IIR), Doppler=8241.234375 [Hz] CN0 = 49.20496368408203 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5367.1484375 [Hz] CN0 = 49.27902221679688 [dB-Hz]
+Current input signal time = 41 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6964.5791015625 [Hz] CN0 = 49.60532379150391 [dB-Hz]
+Position at 2013-Apr-04 06:24:03 is Lat = 41.27482720989872 [deg], Long = 1.987559940488222 [deg], Height= 48.18183538969606 [m]
+Dilution of Precision at 2013-Apr-04 06:24:03 is HDOP = 4.393578024488622 and VDOP = 2.506776490971788
+Position at 2013-Apr-04 06:24:04 is Lat = 41.27490416016971 [deg], Long = 1.987612312588331 [deg], Height= 58.29742548521608 [m]
+Dilution of Precision at 2013-Apr-04 06:24:04 is HDOP = 4.393590778515827 and VDOP = 2.5067098406486
+Current input signal time = 42 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6958.708984375 [Hz] CN0 = 50.5804328918457 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8226.380859375 [Hz] CN0 = 47.07999420166016 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5379.001953125 [Hz] CN0 = 49.29900360107422 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9814.8798828125 [Hz] CN0 = 47.58937835693359 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6333.11328125 [Hz] CN0 = 50.16098022460938 [dB-Hz]
+Position at 2013-Apr-04 06:24:04 is Lat = 41.27476485258569 [deg], Long = 1.987520659284356 [deg], Height= 72.06511837430298 [m]
+Dilution of Precision at 2013-Apr-04 06:24:04 is HDOP = 4.393602211206587 and VDOP = 2.506645253377675
+Position at 2013-Apr-04 06:24:05 is Lat = 41.2746832600633 [deg], Long = 1.987471007658422 [deg], Height= 73.33546680118889 [m]
+Dilution of Precision at 2013-Apr-04 06:24:05 is HDOP = 4.393614261094279 and VDOP = 2.506580548135724
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9855.51171875 [Hz] CN0 = 47.62917327880859 [dB-Hz]
+Current input signal time = 43 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6968.38671875 [Hz] CN0 = 50.68719863891602 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8215.8505859375 [Hz] CN0 = 46.25968170166016 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6345.9384765625 [Hz] CN0 = 50.35724258422852 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5351.39990234375 [Hz] CN0 = 45.99794769287109 [dB-Hz]
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 17 (Block IIR-M)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 11 (Block IIR)
+Position at 2013-Apr-04 06:24:05 is Lat = 41.2747878708709 [deg], Long = 1.987539080899782 [deg], Height= 38.24823187477887 [m]
+Dilution of Precision at 2013-Apr-04 06:24:05 is HDOP = 4.393629763220689 and VDOP = 2.506515985402813
+Position at 2013-Apr-04 06:24:06 is Lat = 41.27470624898713 [deg], Long = 1.98748128288309 [deg], Height= 59.8282285341993 [m]
+Dilution of Precision at 2013-Apr-04 06:24:06 is HDOP = 4.393640126028311 and VDOP = 2.506450177386456
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6343.9130859375 [Hz] CN0 = 48.16508483886719 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8219.294921875 [Hz] CN0 = 46.55903244018555 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Current input signal time = 44 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6962.59033203125 [Hz] CN0 = 51.18691253662109 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5365.11962890625 [Hz] CN0 = 46.77370452880859 [dB-Hz]
+9852.1064453125 [Hz] CN0 = 47.7248649597168 [dB-Hz]
+Position at 2013-Apr-04 06:24:06 is Lat = 41.27475954397227 [deg], Long = 1.987457297517701 [deg], Height= 79.7553179487586 [m]
+Dilution of Precision at 2013-Apr-04 06:24:06 is HDOP = 4.393652722800968 and VDOP = 2.506383928526594
+Position at 2013-Apr-04 06:24:07 is Lat = 41.27479064054885 [deg], Long = 1.987457846356859 [deg], Height= 58.13045354839414 [m]
+Dilution of Precision at 2013-Apr-04 06:24:07 is HDOP = 4.39366621749717 and VDOP = 2.50631924382383
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Current input signal time = 45 [s]
+6343.97216796875 [Hz] CN0 = 8227.976562551.17244338989258 [dB-Hz]
+ [Hz] CN0 = Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6971.78125 [Hz] CN0 = Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9831.9072265625 [Hz] CN0 = 52.75826263427734 [dB-Hz]
+47.17807769775391 [dB-Hz]
+50.25053405761719 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5389.845703125 [Hz] CN0 = 51.32176971435547 [dB-Hz]
+Position at 2013-Apr-04 06:24:07 is Lat = 41.27466199201334 [deg], Long = 1.987377835723572 [deg], Height= 52.24206266179681 [m]
+Dilution of Precision at 2013-Apr-04 06:24:07 is HDOP = 4.393677418937803 and VDOP = 2.5062551572305
+Position at 2013-Apr-04 06:24:08 is Lat = 41.27472522976103 [deg], Long = 1.987569952754008 [deg], Height= 44.07480591721833 [m]
+Dilution of Precision at 2013-Apr-04 06:24:08 is HDOP = 4.393690153343582 and VDOP = 2.506189306308087
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8241.5126953125 [Hz] CN0 = 46.4522705078125 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5372.28955078125 [Hz] CN0 = 51.25882720947266 [dB-Hz]
+Current input signal time = 46 [s]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA)Tracking CH , Doppler=0: Satellite GPS PRN 1 (Block IIF), Doppler=6348.10107421875 [Hz] CN0 = 6972.22705078125 [Hz] CN0 = 49.89845275878906 [dB-Hz]
+50.3011474609375 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9854.337890625 [Hz] CN0 = 48.44816589355469 [dB-Hz]
+Position at 2013-Apr-04 06:24:08 is Lat = 41.27473238056712 [deg], Long = 1.987510149827074 [deg], Height= 59.51656336989254 [m]
+Dilution of Precision at 2013-Apr-04 06:24:08 is HDOP = 4.393701597393711 and VDOP = 2.506123411081188
+Position at 2013-Apr-04 06:24:09 is Lat = 41.27476449988611 [deg], Long = 1.987485874424136 [deg], Height= 61.58040937036276 [m]
+Dilution of Precision at 2013-Apr-04 06:24:09 is HDOP = 4.393713675058884 and VDOP = 2.506057813930684
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8231.7578125 [Hz] CN0 = 46.23954772949219 [dB-Hz]
+Current input signal time = 47 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6984.6396484375 [Hz] CN0 = 51.94641494750977 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6368.0810546875 [Hz] CN0 = 48.82500076293945 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9832.435546875 [Hz] CN0 = 48.11430740356445 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5391.693359375 [Hz] CN0 = 49.8857421875 [dB-Hz]
+Position at 2013-Apr-04 06:24:09 is Lat = 41.27478857578112 [deg], Long = 1.987469504687742 [deg], Height= 79.96943722106516 [m]
+Dilution of Precision at 2013-Apr-04 06:24:09 is HDOP = 4.393725067909887 and VDOP = 2.505991693061388
+Position at 2013-Apr-04 06:24:10 is Lat = 41.2749140503034 [deg], Long = 1.987585492693199 [deg], Height= 21.6801972379908 [m]
+Dilution of Precision at 2013-Apr-04 06:24:10 is HDOP = 4.393740475213984 and VDOP = 2.505927774778445
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8244.9697265625 [Hz] CN0 = 47.31382751464844 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6370.494140625 [Hz] CN0 = 48.94463348388672 [dB-Hz]
+Current input signal time = 48 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6988.626953125 [Hz] CN0 = 48.5455322265625 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9877.298828125 [Hz] CN0 = 46.76698303222656 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5397.076171875 [Hz] CN0 = 47.21573638916016 [dB-Hz]
+Position at 2013-Apr-04 06:24:10 is Lat = 41.2748695221796 [deg], Long = 1.987589016478514 [deg], Height= 29.15837787557393 [m]
+Dilution of Precision at 2013-Apr-04 06:24:10 is HDOP = 4.393751346588117 and VDOP = 2.505862511612504
+Position at 2013-Apr-04 06:24:11 is Lat = 41.27471910702292 [deg], Long = 1.987532977995923 [deg], Height= 37.09720445983112 [m]
+Dilution of Precision at 2013-Apr-04 06:24:11 is HDOP = 4.393761269797514 and VDOP = 2.50579815371509
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=6364.60205078125 [Hz] CN0 = 51.39450454711914 [dB-Hz]
+8263.4287109375 [Hz] CN0 = 47.34080505371094 [dB-Hz]
+Current input signal time = 49 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=6990.5263671875 [Hz] CN0 = 51.16729354858398 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9873.1943359375 [Hz] CN0 = 49.78616333007812 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5390.13330078125 [Hz] CN0 = 46.86469650268555 [dB-Hz]
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 17 (Block IIR-M)
+Position at 2013-Apr-04 06:24:11 is Lat = 41.27488665132989 [deg], Long = 1.987596626981105 [deg], Height= 37.20053790137172 [m]
+Dilution of Precision at 2013-Apr-04 06:24:11 is HDOP = 4.393772960945594 and VDOP = 2.505731002610291
+Position at 2013-Apr-04 06:24:12 is Lat = 41.27481933544767 [deg], Long = 1.987543448675038 [deg], Height= 67.81495584174991 [m]
+Dilution of Precision at 2013-Apr-04 06:24:12 is HDOP = 4.393782577949083 and VDOP = 2.505665178492116
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8258.1787109375 [Hz] CN0 = 48.06101989746094 [dB-Hz]
+Current input signal time = 50 [s]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 5376.36718750: Satellite GPS PRN 1 (Block IIF), Doppler= [Hz] CN0 = 49.39226913452148 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9891.9541015625 [Hz] CN0 = 46.73667526245117 [dB-Hz]
+6997.041015625 [Hz] CN0 = 49.30109024047852 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6380.712890625 [Hz] CN0 = 48.39902877807617 [dB-Hz]
+Position at 2013-Apr-04 06:24:12 is Lat = 41.27473253610253 [deg], Long = 1.987452491179163 [deg], Height= 88.71404084842652 [m]
+Dilution of Precision at 2013-Apr-04 06:24:12 is HDOP = 4.393791881348524 and VDOP = 2.50559973851656
+Position at 2013-Apr-04 06:24:13 is Lat = 41.27479709632583 [deg], Long = 1.987519999900031 [deg], Height= 72.74773331359029 [m]
+Dilution of Precision at 2013-Apr-04 06:24:13 is HDOP = 4.393804236470734 and VDOP = 2.505534604291141
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5410.9970703125 [Hz] CN0 = 45.77410888671875 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6371.6767578125 [Hz] CN0 = 48.15089416503906 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8283.4697265625 [Hz] CN0 = 47.39899063110352 [dB-Hz]
+Current input signal time = 51 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7017.4208984375 [Hz] CN0 = 52.64339447021484 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9906.310546875 [Hz] CN0 = 46.53702926635742 [dB-Hz]
+Position at 2013-Apr-04 06:24:13 is Lat = 41.27481197335764 [deg], Long = 1.987477722319691 [deg], Height= 44.17434299364686 [m]
+Dilution of Precision at 2013-Apr-04 06:24:13 is HDOP = 4.393817169131325 and VDOP = 2.505470794831696
+Position at 2013-Apr-04 06:24:14 is Lat = 41.27471978495904 [deg], Long = 1.987470629947652 [deg], Height= 75.94894558936357 [m]
+Dilution of Precision at 2013-Apr-04 06:24:14 is HDOP = 4.393825340609837 and VDOP = 2.505404705940378
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9877.8369140625 [Hz] CN0 = 48.47062683105469 [dB-Hz]
+Current input signal time = 52 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7022.5361328125 [Hz] CN0 = 51.59991073608398 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6381.56982421875 [Hz] CN0 = 50.94441986083984 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5411.07470703125 [Hz] CN0 = 48.82053375244141 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8306.423828125 [Hz] CN0 = 49.6678466796875 [dB-Hz]
+Position at 2013-Apr-04 06:24:14 is Lat = 41.27472690359678 [deg], Long = 1.98745926825365 [deg], Height= 47.28331818990409 [m]
+Dilution of Precision at 2013-Apr-04 06:24:14 is HDOP = 4.393837920181115 and VDOP = 2.505340890695622
+Position at 2013-Apr-04 06:24:15 is Lat = 41.2747908893899 [deg], Long = 1.98761202462015 [deg], Height= 44.89000333845615 [m]
+Dilution of Precision at 2013-Apr-04 06:24:15 is HDOP = 4.393849043353058 and VDOP = 2.505275003647452
+Tracking CH 2Current input signal time = : Satellite GPS PRN 17 (Block 53IIR-M [s]), Doppler=
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7021.12158203125 [Hz] CN0 = 50.36857986450195 [dB-Hz]
+9891.1796875 [Hz] CN0 = 47.83166122436523 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8277.4267578125 [Hz] CN0 = 47.79665756225586 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5413.396484375 [Hz] CN0 = 49.30037307739258 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6387.3935546875 [Hz] CN0 = 47.42821884155273 [dB-Hz]
+Position at 2013-Apr-04 06:24:15 is Lat = 41.27492036118311 [deg], Long = 1.987567249746703 [deg], Height= 39.87283934559673 [m]
+Dilution of Precision at 2013-Apr-04 06:24:15 is HDOP = 4.393860763309116 and VDOP = 2.505209026721041
+Position at 2013-Apr-04 06:24:16 is Lat = 41.27501606260925 [deg], Long = 1.987731030346704 [deg], Height= 48.94555895216763 [m]
+Dilution of Precision at 2013-Apr-04 06:24:16 is HDOP = 4.393870920779126 and VDOP = 2.505142170047819
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8322.77734375 [Hz] CN0 = 46.72159194946289 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Current input signal time = 54 [s]
+9896.662109375 [Hz] CN0 = Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7039.37890625 [Hz] CN0 = 52.01841354370117 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5412.86279296875 [Hz] CN0 = 50.13467025756836 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6399.92529296875 [Hz] CN0 = 50.31579208374023 [dB-Hz]
+49.54685211181641 [dB-Hz]
+Position at 2013-Apr-04 06:24:16 is Lat = 41.27489888329463 [deg], Long = 1.987535013131593 [deg], Height= 69.46729074977338 [m]
+Dilution of Precision at 2013-Apr-04 06:24:16 is HDOP = 4.393879627797332 and VDOP = 2.505077409617783
+Position at 2013-Apr-04 06:24:17 is Lat = 41.27476458276606 [deg], Long = 1.987504474053921 [deg], Height= 82.16570590157062 [m]
+Dilution of Precision at 2013-Apr-04 06:24:17 is HDOP = 4.393887920596178 and VDOP = 2.505012638597008
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8307.6630859375 [Hz] CN0 = 44.25061416625977 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6398.80859375 [Hz] CN0 = 49.72198486328125 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9898.439453125 [Hz] CN0 = 46.97291946411133 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5440.302734375 [Hz] CN0 = 48.55463027954102 [dB-Hz]
+Current input signal time = 55 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7034.47998046875 [Hz] CN0 = 51.40909576416016 [dB-Hz]
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 20 (Block IIR)
+Ephemeris record has arrived from SAT ID 20 (Block IIR)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 32 (Block IIA)
+Ephemeris record has arrived from SAT ID 1 (Block IIF)
+Not updating the existing ephemeris
+Ephemeris record has arrived from SAT ID 32 (Block IIA)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 17 (Block IIR-M)
+Ephemeris record has arrived from SAT ID 17 (Block IIR-M)
+NAVIGATION FSM: received subframe 3 for satellite Not updating the existing ephemerisGPS PRN 
+11 (Block IIR)
+Ephemeris record has arrived from SAT ID 11 (Block IIR)
+Not updating the existing ephemeris
+Position at 2013-Apr-04 06:24:17 is Lat = 41.27472078432209 [deg], Long = 1.987378347061634 [deg], Height= 84.43277707975358 [m]
+Dilution of Precision at 2013-Apr-04 06:24:17 is HDOP = 4.393897832972375 and VDOP = 2.504947997965518
+Position at 2013-Apr-04 06:24:18 is Lat = 41.27475655692204 [deg], Long = 1.987516734167285 [deg], Height= 56.43807417992502 [m]
+Dilution of Precision at 2013-Apr-04 06:24:18 is HDOP = 4.393908467107182 and VDOP = 2.504883094191307
+Current input signal time = 56 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7055.18896484375 [Hz] CN0 = 52.80244827270508 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6406.736328125 [Hz] CN0 = 47.03076171875 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5453.95458984375 [Hz] CN0 = 47.59866714477539 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8331.69921875 [Hz] CN0 = 46.10768127441406 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9917.4365234375 [Hz] CN0 = 49.51052474975586 [dB-Hz]
+Position at 2013-Apr-04 06:24:18 is Lat = 41.27467042346883 [deg], Long = 1.987415286782755 [deg], Height= 96.19389993324876 [m]
+Dilution of Precision at 2013-Apr-04 06:24:18 is HDOP = 4.393916416600634 and VDOP = 2.504817310971395
+Position at 2013-Apr-04 06:24:19 is Lat = 41.27481440295927 [deg], Long = 1.987593796509995 [deg], Height= 45.04496154561639 [m]
+Dilution of Precision at 2013-Apr-04 06:24:19 is HDOP = 4.393929013903747 and VDOP = 2.504752628618041
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9914.88183593758299.3994140625 [Hz] CN0 =  [Hz] CN0 = 47.9644279479980548.35485076904297 [dB-Hz] [dB-Hz]
+
+Current input signal time = 57 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7043.06640625 [Hz] CN0 = 52.86818695068359 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 4: Satellite 5452.22998046875GPS [Hz] CN0 =  PRN 32 (Block IIA), Doppler=48.33260345458984 [dB-Hz]
+6400.3447265625 [Hz] CN0 = 49.37568283081055 [dB-Hz]
+Position at 2013-Apr-04 06:24:19 is Lat = 41.27483337297567 [deg], Long = 1.987665976251235 [deg], Height= 44.66778974048793 [m]
+Dilution of Precision at 2013-Apr-04 06:24:19 is HDOP = 4.393939060341094 and VDOP = 2.504687332139979
+Position at 2013-Apr-04 06:24:20 is Lat = 41.27480607288344 [deg], Long = 1.987577972785548 [deg], Height= 60.32250389177352 [m]
+Dilution of Precision at 2013-Apr-04 06:24:20 is HDOP = 4.393947368462372 and VDOP = 2.504621685500109
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9925.1513671875 [Hz] CN0 = 48.88520050048828 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8330.8271484375 [Hz] CN0 = 45.88126754760742 [dB-Hz]
+Current input signal time = 58 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7062.544921875 [Hz] CN0 = 49.86946105957031 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6411.41259765625 [Hz] CN0 = 48.48593521118164 [dB-Hz]
+5434.2822265625 [Hz] CN0 = 47.31025314331055 [dB-Hz]
+Position at 2013-Apr-04 06:24:20 is Lat = 41.27481700452567 [deg], Long = 1.987533473952653 [deg], Height= 40.92691937740892 [m]
+Dilution of Precision at 2013-Apr-04 06:24:20 is HDOP = 4.393957819926298 and VDOP = 2.5045573426623
+Position at 2013-Apr-04 06:24:21 is Lat = 41.27479633143354 [deg], Long = 1.987516774755858 [deg], Height= 54.33142777252942 [m]
+Dilution of Precision at 2013-Apr-04 06:24:21 is HDOP = 4.393966530710109 and VDOP = 2.504491874096817
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5451.13720703125 [Hz] CN0 = 51.50239181518555 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6419.34716796875 [Hz] CN0 = 49.20430374145508 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8322.017578125 [Hz] CN0 = 48.08639144897461 [dB-Hz]
+Current input signal time = 59 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7057.16748046875 [Hz] CN0 = 50.07340621948242 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9940.123046875 [Hz] CN0 = 47.71019744873047 [dB-Hz]
+Position at 2013-Apr-04 06:24:21 is Lat = 41.2747895717994 [deg], Long = 1.987439805021316 [deg], Height= 62.18562563043088 [m]
+Dilution of Precision at 2013-Apr-04 06:24:21 is HDOP = 4.393974977236868 and VDOP = 2.504426370828813
+Position at 2013-Apr-04 06:24:22 is Lat = 41.27486486304733 [deg], Long = 1.987577904184224 [deg], Height= 65.61570938117802 [m]
+Dilution of Precision at 2013-Apr-04 06:24:22 is HDOP = 4.393984561928831 and VDOP = 2.504360312558019
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9925.400390625 [Hz] CN0 = 46.90764236450195 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5486.97216796875 [Hz] CN0 = 49.26933670043945 [dB-Hz]
+Current input signal time = 60 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7069.6015625 [Hz] CN0 = 50.21234512329102 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6412.82373046875 [Hz] CN0 = 49.78703689575195 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8317.904296875 [Hz] CN0 = 44.83034133911133 [dB-Hz]
+Position at 2013-Apr-04 06:24:22 is Lat = 41.27493155245109 [deg], Long = 1.987592227249216 [deg], Height= 42.42288980912417 [m]
+Dilution of Precision at 2013-Apr-04 06:24:22 is HDOP = 4.393994770305284 and VDOP = 2.504295429037148
+Position at 2013-Apr-04 06:24:23 is Lat = 41.27486610321555 [deg], Long = 1.987575512166976 [deg], Height= 72.73192641045898 [m]
+Dilution of Precision at 2013-Apr-04 06:24:23 is HDOP = 4.394002109005423 and VDOP = 2.50422970009875
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5463.79052734375 [Hz] CN0 = 46.87021636962891 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6433.54345703125 [Hz] CN0 = 47.70781326293945 [dB-Hz]
+Current input signal time = 61 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7061.20068359375 [Hz] CN0 = 50.36907958984375 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9961.2685546875 [Hz] CN0 = 48.49455261230469 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8337.576171875 [Hz] CN0 = 46.37555694580078 [dB-Hz]
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 20 (Block IIR)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 32 (Block IIA)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 1 (Block IIF)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 17 (Block IIR-M)
+New UTC MODEL record has arrived 
+New UTC MODEL record has arrived 
+Position at 2013-Apr-04 06:24:23 is Lat = 41.27482008057949 [deg], Long = 1.987528496546944 [deg], Height= 48.65453992877156 [m]
+Dilution of Precision at 2013-Apr-04 06:24:23 is HDOP = 4.394011293640992 and VDOP = 2.504165851088265
+Position at 2013-Apr-04 06:24:24 is Lat = 41.27480572911401 [deg], Long = 1.987497363791435 [deg], Height= 71.49076547846198 [m]
+Dilution of Precision at 2013-Apr-04 06:24:24 is HDOP = 4.394018640888211 and VDOP = 2.504099819273868
+Current input signal time = 62 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5466.95361328125 [Hz] CN0 = 49.47119522094727 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6469.65283203125 [Hz] CN0 = 49.09819412231445 [dB-Hz]
+7078.2216796875 [Hz] CN0 = 51.52204513549805 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9945.447265625 [Hz] CN0 = 49.00268173217773 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8373.583984375 [Hz] CN0 = 45.87626266479492 [dB-Hz]
+Position at 2013-Apr-04 06:24:24 is Lat = 41.27474670028898 [deg], Long = 1.98746831548813 [deg], Height= 79.41433773096651 [m]
+Dilution of Precision at 2013-Apr-04 06:24:24 is HDOP = 4.394026857766011 and VDOP = 2.504035084357895
+Position at 2013-Apr-04 06:24:25 is Lat = 41.27488588109347 [deg], Long = 1.987605850025991 [deg], Height= 43.72958489693701 [m]
+Dilution of Precision at 2013-Apr-04 06:24:25 is HDOP = 4.394037515617895 and VDOP = 2.503969944950687
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9953.447265625 [Hz] CN0 = 48.59960174560547 [dB-Hz]
+Current input signal time = 63 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7088.93701171875 [Hz] CN0 = 50.7275390625 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8344.0068359375 [Hz] CN0 = 46.05178451538086 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6485.9248046875 [Hz] CN0 = 47.38020706176758 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5481.46142578125 [Hz] CN0 = 49.81984329223633 [dB-Hz]
+Position at 2013-Apr-04 06:24:25 is Lat = 41.27483703465084 [deg], Long = 1.987550272947385 [deg], Height= 50.87942602206022 [m]
+Dilution of Precision at 2013-Apr-04 06:24:25 is HDOP = 4.394045300374461 and VDOP = 2.503905049422757
+Position at 2013-Apr-04 06:24:26 is Lat = 41.27480497444083 [deg], Long = 1.987556183719798 [deg], Height= 53.06266624294221 [m]
+Dilution of Precision at 2013-Apr-04 06:24:26 is HDOP = 4.394052697094606 and VDOP = 2.503839848333502
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9954.9521484375 [Hz] CN0 = 46.43609237670898 [dB-Hz]
+Current input signal time = 64 [s]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block 5502.72216796875IIF [Hz] CN0 = ), Doppler=47.24268341064453 [dB-Hz]
+7090.06494140625 [Hz] CN0 = 50.81872177124023 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6460.81884765625 [Hz] CN0 = 49.16952514648438 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8360.271484375 [Hz] CN0 = 48.30590438842773 [dB-Hz]
+Position at 2013-Apr-04 06:24:26 is Lat = 41.27467326308515 [deg], Long = 1.987408577952122 [deg], Height= 78.49048121739179 [m]
+Dilution of Precision at 2013-Apr-04 06:24:26 is HDOP = 4.394058963764796 and VDOP = 2.503775048738164
+Position at 2013-Apr-04 06:24:27 is Lat = 41.2748174190667 [deg], Long = 1.987617468580827 [deg], Height= 50.14819890167564 [m]
+Dilution of Precision at 2013-Apr-04 06:24:27 is HDOP = 4.39406903214019 and VDOP = 2.503709544555417
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9944.09375 [Hz] CN0 = 48.96963500976562 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6462.15283203125 [Hz] CN0 = 46.63101196289062 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5497.48388671875 [Hz] CN0 = 51.01219940185547 [dB-Hz]
+Current input signal time = 65 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7092.849609375 [Hz] CN0 = 50.28116607666016 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8356.9970703125 [Hz] CN0 = 44.97478866577148 [dB-Hz]
+Position at 2013-Apr-04 06:24:27 is Lat = 41.27489522400359 [deg], Long = 1.987644525619988 [deg], Height= 33.9475118778646 [m]
+Dilution of Precision at 2013-Apr-04 06:24:27 is HDOP = 4.394078027345302 and VDOP = 2.503644350754169
+Position at 2013-Apr-04 06:24:28 is Lat = 41.27478603761585 [deg], Long = 1.98758227833919 [deg], Height= 60.76526553090662 [m]
+Dilution of Precision at 2013-Apr-04 06:24:28 is HDOP = 4.394084131977904 and VDOP = 2.503579233992758
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6478.865234375 [Hz] CN0 = 47.55950546264648 [dB-Hz]
+Current input signal time = 66 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=7093.25341796875 [Hz] CN0 = 52.05646133422852 [dB-Hz]
+Tracking CH Tracking CH 1: Satellite GPS2: Satellite  PRN GPS11 PRN  (Block 17 (Block IIRIIR-M)), Doppler=, Doppler=5508.88037109375 [Hz] CN0 = 9965.6357421875 [Hz] CN0 = 46.2668571472168 [dB-Hz]
+47.71870803833008 [dB-Hz]
+8351.6728515625 [Hz] CN0 = 47.34003448486328 [dB-Hz]
+Position at 2013-Apr-04 06:24:28 is Lat = 41.27478019289152 [deg], Long = 1.987580251954586 [deg], Height= 37.88454212527722 [m]
+Dilution of Precision at 2013-Apr-04 06:24:28 is HDOP = 4.394092024449928 and VDOP = 2.503514775214006
+Position at 2013-Apr-04 06:24:29 is Lat = 41.27468457190987 [deg], Long = 1.987465577445421 [deg], Height= 51.75135896261781 [m]
+Dilution of Precision at 2013-Apr-04 06:24:29 is HDOP = 4.39409824830611 and VDOP = 2.503450009221313
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9979.251953125 [Hz] CN0 = 47.40885543823242 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6466.923828125 [Hz] CN0 = 46.21276092529297 [dB-Hz]
+Current input signal time = 67 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7106.5263671875 [Hz] CN0 = 51.03879928588867 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5494.30419921875 [Hz] CN0 = 45.97417068481445 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8371.6708984375 [Hz] CN0 = 48.15504455566406 [dB-Hz]
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 17 (Block IIR-M)
+Position at 2013-Apr-04 06:24:29 is Lat = 41.27477692503314 [deg], Long = 1.987486588858806 [deg], Height= 53.43282389827073 [m]
+Dilution of Precision at 2013-Apr-04 06:24:29 is HDOP = 4.394106253278445 and VDOP = 2.503384033452978
+Position at 2013-Apr-04 06:24:30 is Lat = 41.27487212275009 [deg], Long = 1.987672067274431 [deg], Height= 32.74592525418848 [m]
+Dilution of Precision at 2013-Apr-04 06:24:30 is HDOP = 4.394115101335304 and VDOP = 2.503318722926303
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10007.732421875 [Hz] CN0 = Current input signal time = 47.58526611328125 [dB-Hz]
+68 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7142.728515625 [Hz] CN0 = 50.10031127929688 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6491.591796875 [Hz] CN0 = 48.79770278930664 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5522.5888671875 [Hz] CN0 = 48.28415679931641 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8377.2841796875 [Hz] CN0 = 45.81770324707031 [dB-Hz]
+Position at 2013-Apr-04 06:24:30 is Lat = 41.27472511135906 [deg], Long = 1.987541937860081 [deg], Height= 69.87056063022465 [m]
+Dilution of Precision at 2013-Apr-04 06:24:30 is HDOP = 4.394119588565842 and VDOP = 2.503253429906814
+Position at 2013-Apr-04 06:24:31 is Lat = 41.27466559119345 [deg], Long = 1.987442312203713 [deg], Height= 45.39347740635276 [m]
+Dilution of Precision at 2013-Apr-04 06:24:31 is HDOP = 4.394127306501098 and VDOP = 2.503189954385315
+Current input signal time = 69 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7111.521484375 [Hz] CN0 = 49.62651062011719 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5525.728515625 [Hz] CN0 = 47.67301559448242 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8416.421875 [Hz] CN0 = 47.72153091430664 [dB-Hz]
+6488.8681640625 [Hz] CN0 = Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9983.55859375 [Hz] CN0 = 48.0407600402832 [dB-Hz]
+48.80701446533203 [dB-Hz]
+Position at 2013-Apr-04 06:24:31 is Lat = 41.27468147739531 [deg], Long = 1.987476298551647 [deg], Height= 42.53322318196297 [m]
+Dilution of Precision at 2013-Apr-04 06:24:31 is HDOP = 4.394134266835728 and VDOP = 2.503124666943057
+Position at 2013-Apr-04 06:24:32 is Lat = 41.27477675797498 [deg], Long = 1.987658367749515 [deg], Height= 72.61686286795884 [m]
+Dilution of Precision at 2013-Apr-04 06:24:32 is HDOP = 4.394140866774978 and VDOP = 2.503057454679694
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=6503.8720703125 [Hz] CN0 = 50.9997444152832 [dB-Hz]
+5505.1064453125 [Hz] CN0 = 50.98424530029297 [dB-Hz]
+Current input signal time = 70 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7107.982421875 [Hz] CN0 = 50.79771041870117 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10002.7333984375 [Hz] CN0 = 49.95214080810547 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8377.544921875 [Hz] CN0 = 47.18183898925781 [dB-Hz]
+Position at 2013-Apr-04 06:24:32 is Lat = 41.27480123856572 [deg], Long = 1.98757530546341 [deg], Height= 29.25149829592556 [m]
+Dilution of Precision at 2013-Apr-04 06:24:32 is HDOP = 4.394149309831692 and VDOP = 2.502993885244658
+Position at 2013-Apr-04 06:24:33 is Lat = 41.27465422893825 [deg], Long = 1.987548675387151 [deg], Height= 70.14430123195052 [m]
+Dilution of Precision at 2013-Apr-04 06:24:33 is HDOP = 4.394153029161409 and VDOP = 2.502928283538155
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6503.03857421875 [Hz] CN0 = 51.70420837402344 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10005.5087890625 [Hz] CN0 = 46.72094345092773 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5529.7861328125 [Hz] CN0 = 48.00288391113281 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8400.2646484375 [Hz] CN0 = 48.58409881591797 [dB-Hz]
+Current input signal time = 71 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7124.07763671875 [Hz] CN0 = 49.28160858154297 [dB-Hz]
+Position at 2013-Apr-04 06:24:33 is Lat = 41.2746737594048 [deg], Long = 1.987431270079066 [deg], Height= 61.31233054213226 [m]
+Dilution of Precision at 2013-Apr-04 06:24:33 is HDOP = 4.394159766180528 and VDOP = 2.502863397488671
+Position at 2013-Apr-04 06:24:34 is Lat = 41.27488387421751 [deg], Long = 1.987755609107876 [deg], Height= 49.9341979091987 [m]
+Dilution of Precision at 2013-Apr-04 06:24:34 is HDOP = 4.394168113765072 and VDOP = 2.502796574322391
+Current input signal time = 72 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=7143.43212890625 [Hz] CN0 = 50.17732620239258 [dB-Hz]
+6517.78955078125 [Hz] CN0 = 50.45076370239258 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5523.39990234375 [Hz] CN0 = 47.98947143554688 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10011.408203125 [Hz] CN0 = 46.47561264038086 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8399.0048828125 [Hz] CN0 = 46.9898567199707 [dB-Hz]
+Position at 2013-Apr-04 06:24:34 is Lat = 41.27477855847788 [deg], Long = 1.98764668736809 [deg], Height= 68.95447491668165 [m]
+Dilution of Precision at 2013-Apr-04 06:24:34 is HDOP = 4.394172924375541 and VDOP = 2.502731739210075
+Position at 2013-Apr-04 06:24:35 is Lat = 41.27474082321435 [deg], Long = 1.987429989491822 [deg], Height= 50.83589168731123 [m]
+Dilution of Precision at 2013-Apr-04 06:24:35 is HDOP = 4.3941795599211 and VDOP = 2.502667961654052
+Current input signal time = 73 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7134.17041015625 [Hz] CN0 = 49.31787109375 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6523.6845703125 [Hz] CN0 = 45.69982147216797 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8388.1142578125 [Hz] CN0 = 45.45685958862305 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5544.77587890625 [Hz] CN0 = 48.22004318237305 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10004.0615234375 [Hz] CN0 = 49.05661010742188 [dB-Hz]
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 11 (Block IIR)
+NAVIGATION FSM: received subframe 1 for satellite GPS PRN 17 (Block IIR-M)
+Position at 2013-Apr-04 06:24:35 is Lat = 41.27470537373542 [deg], Long = 1.987510500057963 [deg], Height= 56.34219529200345 [m]
+Dilution of Precision at 2013-Apr-04 06:24:35 is HDOP = 4.394184984497626 and VDOP = 2.502602742370614
+Position at 2013-Apr-04 06:24:36 is Lat = 41.27494990889594 [deg], Long = 1.98766810626021 [deg], Height= 9.647171940654516 [m]
+Dilution of Precision at 2013-Apr-04 06:24:36 is HDOP = 4.394194951490642 and VDOP = 2.502537469790731
+Current input signal time = 74 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7157.42919921875 [Hz] CN0 = 50.92674255371094 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10012.4443359375 [Hz] CN0 = 49.46758651733398 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8429.404296875 [Hz] CN0 = 47.99993515014648 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6514.53515625 [Hz] CN0 = 49.31504440307617 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5538.64111328125 [Hz] CN0 = 51.45202255249023 [dB-Hz]
+Position at 2013-Apr-04 06:24:36 is Lat = 41.27481559450236 [deg], Long = 1.987587336595518 [deg], Height= 76.40737835876644 [m]
+Dilution of Precision at 2013-Apr-04 06:24:36 is HDOP = 4.394197080827122 and VDOP = 2.502470882035765
+Position at 2013-Apr-04 06:24:37 is Lat = 41.27477916790719 [deg], Long = 1.987590015388409 [deg], Height= 62.43375632632524 [m]
+Dilution of Precision at 2013-Apr-04 06:24:37 is HDOP = 4.394202891254941 and VDOP = 2.502406532940172
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6537.71875 [Hz] CN0 = 44.5685920715332 [dB-Hz]
+Tracking CH 3: Satellite Current input signal time = GPS PRN 2075 (Block  [s]IIR
+)Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7137.3310546875 [Hz] CN0 = 51.59590148925781 [dB-Hz]
+, Doppler=8385.6220703125 [Hz] CN0 = 44.96486282348633 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=9998.3935546875 [Hz] CN0 = 48.44747543334961 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5550.765625 [Hz] CN0 = 47.31273651123047 [dB-Hz]
+Position at 2013-Apr-04 06:24:37 is Lat = 41.27489292227616 [deg], Long = 1.98761896640558 [deg], Height= 29.11070271208882 [m]
+Dilution of Precision at 2013-Apr-04 06:24:37 is HDOP = 4.394210797397106 and VDOP = 2.50234185811889
+Position at 2013-Apr-04 06:24:38 is Lat = 41.27493604925175 [deg], Long = 1.987559551312873 [deg], Height= 45.21963713411242 [m]
+Dilution of Precision at 2013-Apr-04 06:24:38 is HDOP = 4.394216011521488 and VDOP = 2.502275866695236
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Current input signal time = 76 [s]
+Tracking CH Tracking CH 4: Satellite GPS PRN 32 (Block 010003.16015625: Satellite GPS [Hz] CN0 =  PRN 1 (Block IIF47.80613708496094) [dB-Hz], Doppler=
+IIA), Doppler=7143.276855468756537.40380859375 [Hz] CN0 =  [Hz] CN0 = 47.05215835571289 [dB-Hz]
+51.32315826416016 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8411.365234375 [Hz] CN0 = 48.03679275512695 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5554.1328125 [Hz] CN0 = 44.51813888549805 [dB-Hz]
+Position at 2013-Apr-04 06:24:38 is Lat = 41.27479435240123 [deg], Long = 1.987524959771005 [deg], Height= 34.21559332218021 [m]
+Dilution of Precision at 2013-Apr-04 06:24:38 is HDOP = 4.394220886967232 and VDOP = 2.502212446853411
+Position at 2013-Apr-04 06:24:39 is Lat = 41.2748687777946 [deg], Long = 1.987545054569954 [deg], Height= 39.58847164176404 [m]
+Dilution of Precision at 2013-Apr-04 06:24:39 is HDOP = 4.394226343255827 and VDOP = 2.502146432897661
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=6527.66259765625 [Hz] CN0 = 10025.0927734375 [Hz] CN0 = 45.65189361572266 [dB-Hz]
+49.13235092163086 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5584.9228515625 [Hz] CN0 = 47.07643890380859 [dB-Hz]
+Current input signal time = 77 [s]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF8426.734375) [Hz] CN0 = , Doppler=44.33341979980469 [dB-Hz]
+7147.658203125 [Hz] CN0 = 49.62322235107422 [dB-Hz]
+Position at 2013-Apr-04 06:24:39 is Lat = 41.27487206711553 [deg], Long = 1.987578885392014 [deg], Height= 51.24355508480221 [m]
+Dilution of Precision at 2013-Apr-04 06:24:39 is HDOP = 4.394231618705676 and VDOP = 2.5020810619112
+Position at 2013-Apr-04 06:24:40 is Lat = 41.27484678102202 [deg], Long = 1.987609465875765 [deg], Height= 59.77718448638916 [m]
+Dilution of Precision at 2013-Apr-04 06:24:40 is HDOP = 4.394235561784488 and VDOP = 2.502015516535417
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Current input signal time = 78 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7154.35205078125 [Hz] CN0 = 49.84844589233398 [dB-Hz]
+10023.0712890625 [Hz] CN0 = 45.21498107910156 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6535.08203125 [Hz] CN0 = 47.25305557250977 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8444.6318359375 [Hz] CN0 = 46.48794174194336 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5555.353515625 [Hz] CN0 = 47.6799430847168 [dB-Hz]
+Position at 2013-Apr-04 06:24:40 is Lat = 41.27478309090763 [deg], Long = 1.987561319535943 [deg], Height= 59.98128859978169 [m]
+Dilution of Precision at 2013-Apr-04 06:24:40 is HDOP = 4.394239452219461 and VDOP = 2.501950726339295
+Position at 2013-Apr-04 06:24:41 is Lat = 41.27481995699571 [deg], Long = 1.98754564270749 [deg], Height= 49.87032103352249 [m]
+Dilution of Precision at 2013-Apr-04 06:24:41 is HDOP = 4.394245228591909 and VDOP = 2.501885887498049
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6545.7724609375 [Hz] CN0 = 47.65209579467773 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10028.271484375 [Hz] CN0 = 48.22118759155273 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8441.173828125 [Hz] CN0 = 47.22513580322266 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5562.52490234375 [Hz] CN0 = 50.06825637817383 [dB-Hz]
+Current input signal time = 79 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7168.8115234375 [Hz] CN0 = 49.95257568359375 [dB-Hz]
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 17 (Block IIR-M)
+NAVIGATION FSM: received subframe 2 for satellite GPS PRN 11 (Block IIR)
+Position at 2013-Apr-04 06:24:41 is Lat = 41.27486006563409 [deg], Long = 1.987565875142694 [deg], Height= 62.79401492141187 [m]
+Dilution of Precision at 2013-Apr-04 06:24:41 is HDOP = 4.394250132905442 and VDOP = 2.501820121018315
+Position at 2013-Apr-04 06:24:42 is Lat = 41.27473062545073 [deg], Long = 1.987505726231613 [deg], Height= 45.22499707248062 [m]
+Dilution of Precision at 2013-Apr-04 06:24:42 is HDOP = 4.394254544574001 and VDOP = 2.501756889620761
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10048.326171875 [Hz] CN0 = 46.23081207275391 [dB-Hz]
+Current input signal time = 80 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7178.3974609375 [Hz] CN0 = 48.54061508178711 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5568.38623046875 [Hz] CN0 = 46.43428802490234 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6535.80810546875 [Hz] CN0 = 46.98836898803711 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8437.1220703125 [Hz] CN0 = 45.68165969848633 [dB-Hz]
+Position at 2013-Apr-04 06:24:42 is Lat = 41.27480792960336 [deg], Long = 1.987552651637059 [deg], Height= 43.65273238625377 [m]
+Dilution of Precision at 2013-Apr-04 06:24:42 is HDOP = 4.394259747817875 and VDOP = 2.501691208878318
+Position at 2013-Apr-04 06:24:43 is Lat = 41.27484274380986 [deg], Long = 1.98761105174146 [deg], Height= 54.04977578856051 [m]
+Dilution of Precision at 2013-Apr-04 06:24:43 is HDOP = 4.394263988325702 and VDOP = 2.501625353140294
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10017.2314453125 [Hz] CN0 = 49.51460647583008 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8455.6552734375 [Hz] CN0 = 48.59673690795898 [dB-Hz]
+Current input signal time = 81 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7194.1396484375 [Hz] CN0 = 51.05313110351562 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6515.17822265625 [Hz] CN0 = 49.52680969238281 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5564.927734375 [Hz] CN0 = 49.74717330932617 [dB-Hz]
+Position at 2013-Apr-04 06:24:43 is Lat = 41.27473199960318 [deg], Long = 1.98748083226494 [deg], Height= 48.29350049979985 [m]
+Dilution of Precision at 2013-Apr-04 06:24:43 is HDOP = 4.394267882315617 and VDOP = 2.501561667154716
+Position at 2013-Apr-04 06:24:44 is Lat = 41.27473141328128 [deg], Long = 1.987546755306977 [deg], Height= 48.88349888473749 [m]
+Dilution of Precision at 2013-Apr-04 06:24:44 is HDOP = 4.394271790767187 and VDOP = 2.501496368376838
+Current input signal time = 82 [s]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7180.0981445312510041.5556640625 [Hz] CN0 =  [Hz] CN0 = 50.52403259277344 [dB-Hz]50.5511474609375
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler= [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8463.0390625 [Hz] CN0 = 46.36244201660156 [dB-Hz]
+6551.40869140625 [Hz] CN0 = 49.62499237060547 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5601.42724609375 [Hz] CN0 = 49.58855056762695 [dB-Hz]
+Position at 2013-Apr-04 06:24:44 is Lat = 41.27487401625019 [deg], Long = 1.987645740160161 [deg], Height= 51.56543103326112 [m]
+Dilution of Precision at 2013-Apr-04 06:24:44 is HDOP = 4.394276410706194 and VDOP = 2.501429710502602
+Position at 2013-Apr-04 06:24:45 is Lat = 41.27477833104513 [deg], Long = 1.987453223963458 [deg], Height= 81.02237966004759 [m]
+Dilution of Precision at 2013-Apr-04 06:24:45 is HDOP = 4.394278578558483 and VDOP = 2.501364538998676
+Current input signal time = 83 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7177.61181640625 [Hz] CN0 = 53.38545227050781 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6586.56103515625 [Hz] CN0 = 49.82730865478516 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10016.533203125 [Hz] CN0 = 49.2196159362793 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8472.23046875 [Hz] CN0 = 47.64400863647461 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5599.02099609375 [Hz] CN0 = 47.51884460449219 [dB-Hz]
+Position at 2013-Apr-04 06:24:45 is Lat = 41.27481932402743 [deg], Long = 1.987531874175574 [deg], Height= 51.94740683026612 [m]
+Dilution of Precision at 2013-Apr-04 06:24:45 is HDOP = 4.39428360660533 and VDOP = 2.501300053194595
+Position at 2013-Apr-04 06:24:46 is Lat = 41.27503525479782 [deg], Long = 1.987648840006765 [deg], Height= 54.36132644303143 [m]
+Dilution of Precision at 2013-Apr-04 06:24:46 is HDOP = 4.394289074415163 and VDOP = 2.501233085447149
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8450.7158203125 [Hz] CN0 = 45.88730239868164 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10074.2197265625 [Hz] CN0 = 47.04417037963867 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6585.3662109375 [Hz] CN0 = 48.69026184082031 [dB-Hz]
+Current input signal time = 84 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7195.10791015625 [Hz] CN0 = 51.46525955200195 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5612.60693359375 [Hz] CN0 = 47.67062759399414 [dB-Hz]
+Position at 2013-Apr-04 06:24:46 is Lat = 41.27476304152152 [deg], Long = 1.987483130166771 [deg], Height= 83.46459149941802 [m]
+Dilution of Precision at 2013-Apr-04 06:24:46 is HDOP = 4.39428980006496 and VDOP = 2.501169411235102
+Position at 2013-Apr-04 06:24:47 is Lat = 41.2747188678572 [deg], Long = 1.987397303660448 [deg], Height= 79.88832455780357 [m]
+Dilution of Precision at 2013-Apr-04 06:24:47 is HDOP = 4.394293714422037 and VDOP = 2.501105229358435
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10082.5224609375 [Hz] CN0 = 46.25473403930664 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Current input signal time = 85 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7199.2431640625 [Hz] CN0 = 50.95539093017578 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6550.75439453125 [Hz] CN0 = 48.58237075805664 [dB-Hz]
+5579.08740234375 [Hz] CN0 = 48.70335388183594 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8447.9453125 [Hz] CN0 = 47.16019821166992 [dB-Hz]
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 20 (Block IIR)
+Ephemeris record has arrived from SAT ID 20 (Block IIR)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 1 (Block IIF)
+Ephemeris record has arrived from SAT ID 1 (Block IIF)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 32 (Block IIA)
+Ephemeris record has arrived from SAT ID 32 (Block IIA)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 11 (Block IIR)
+Ephemeris record has arrived from SAT ID 11 (Block IIR)
+Not updating the existing ephemeris
+NAVIGATION FSM: received subframe 3 for satellite GPS PRN 17 (Block IIR-M)
+Ephemeris record has arrived from SAT ID 17 (Block IIR-M)
+Not updating the existing ephemeris
+Position at 2013-Apr-04 06:24:47 is Lat = 41.27489817560225 [deg], Long = 1.987637826190628 [deg], Height= 30.6604710360989 [m]
+Dilution of Precision at 2013-Apr-04 06:24:47 is HDOP = 4.394299989919347 and VDOP = 2.501040148784601
+Position at 2013-Apr-04 06:24:48 is Lat = 41.27472992444608 [deg], Long = 1.98751206766831 [deg], Height= 55.02541096322238 [m]
+Dilution of Precision at 2013-Apr-04 06:24:48 is HDOP = 4.394300983385077 and VDOP = 2.500975601440376
+Current input signal time = 86 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIFTracking CH ), Doppler=7208.3974609375 [Hz] CN0 = 50.27945327758789 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5612.14501953125 [Hz] CN0 = 49.70938110351562 [dB-Hz]
+Tracking CH 2: Satellite 3: Satellite GPSGPS PRN  PRN 1720 (Block  (Block IIR), Doppler=IIR-M), Doppler=10044.8125 [Hz] CN0 = 48.88064193725586 [dB-Hz]
+8472.2421875 [Hz] CN0 = 44.28803253173828 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6576.99169921875 [Hz] CN0 = 46.80515670776367 [dB-Hz]
+Position at 2013-Apr-04 06:24:48 is Lat = 41.27467657534996 [deg], Long = 1.987530287008705 [deg], Height= 61.43422712758183 [m]
+Dilution of Precision at 2013-Apr-04 06:24:48 is HDOP = 4.394303598128806 and VDOP = 2.50091072424149
+Position at 2013-Apr-04 06:24:49 is Lat = 41.27481678479635 [deg], Long = 1.987575534456338 [deg], Height= 69.38052932824939 [m]
+Dilution of Precision at 2013-Apr-04 06:24:49 is HDOP = 4.394307160899073 and VDOP = 2.500844034438602
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10061.3671875 [Hz] CN0 = 48.94072341918945 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6590.81787109375 [Hz] CN0 = 49.81598281860352 [dB-Hz]
+Tracking CH Current input signal time = 87 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7216.6630859375 [Hz] CN0 = 51.414794921875 [dB-Hz]
+1: Satellite GPS PRN 11 (Block IIR), Doppler=5624.5048828125 [Hz] CN0 = 47.43704605102539 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8486.9228515625 [Hz] CN0 = 46.71588134765625 [dB-Hz]
+Position at 2013-Apr-04 06:24:49 is Lat = 41.27478480806749 [deg], Long = 1.987487515101647 [deg], Height= 53.26190840546042 [m]
+Dilution of Precision at 2013-Apr-04 06:24:49 is HDOP = 4.394310476738323 and VDOP = 2.500779961751579
+Position at 2013-Apr-04 06:24:50 is Lat = 41.27487862470053 [deg], Long = 1.987476148475333 [deg], Height= 66.90204425808042 [m]
+Dilution of Precision at 2013-Apr-04 06:24:50 is HDOP = 4.394313827432568 and VDOP = 2.500713769441686
+Current input signal time = 88 [s]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7210.908691406256601.521484375 [Hz] CN0 =  [Hz] CN0 = 50.96241760253906 [dB-Hz]
+50.18707275390625 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5618.6572265625 [Hz] CN0 = 48.8888053894043 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10075.5341796875 [Hz] CN0 = 46.78797149658203 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8471.001953125 [Hz] CN0 = 43.03604125976562 [dB-Hz]
+Position at 2013-Apr-04 06:24:50 is Lat = 41.27488377573935 [deg], Long = 1.987552075873592 [deg], Height= 41.18745672795922 [m]
+Dilution of Precision at 2013-Apr-04 06:24:50 is HDOP = 4.394317786586704 and VDOP = 2.500649657845446
+Position at 2013-Apr-04 06:24:51 is Lat = 41.27471470252914 [deg], Long = 1.987390672046475 [deg], Height= 73.13078460097313 [m]
+Dilution of Precision at 2013-Apr-04 06:24:51 is HDOP = 4.394317952683084 and VDOP = 2.500584934141026
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10081.9580078125 [Hz] CN0 = 47.70448684692383 [dB-Hz]
+Current input signal time = 89 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5632.22314453125 [Hz] CN0 = 50.85116577148438 [dB-Hz]
+7228.490234375 [Hz] CN0 = 49.63982391357422 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6621.2431640625 [Hz] CN0 = 49.16457748413086 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8496.046875 [Hz] CN0 = 47.9063606262207 [dB-Hz]
+Position at 2013-Apr-04 06:24:51 is Lat = 41.27480969486553 [deg], Long = 1.987555019391514 [deg], Height= 76.15633653849363 [m]
+Dilution of Precision at 2013-Apr-04 06:24:51 is HDOP = 4.394320610015697 and VDOP = 2.500518551452918
+Position at 2013-Apr-04 06:24:52 is Lat = 41.27474179858518 [deg], Long = 1.987557242948427 [deg], Height= 40.39405304100364 [m]
+Dilution of Precision at 2013-Apr-04 06:24:52 is HDOP = 4.394323498679753 and VDOP = 2.500455252690734
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10098.671875 [Hz] CN0 = 49.42267608642578 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8521.2890625 [Hz] CN0 = 45.73470687866211 [dB-Hz]
+5629.529296875 [Hz] CN0 = 49.13594818115234 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6613.53466796875 [Hz] CN0 = 47.64265441894531 [dB-Hz]
+Current input signal time = 90 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7225.92138671875 [Hz] CN0 = 49.640869140625 [dB-Hz]
+Position at 2013-Apr-04 06:24:52 is Lat = 41.27487157846723 [deg], Long = 1.987593130101855 [deg], Height= 23.22094077896327 [m]
+Dilution of Precision at 2013-Apr-04 06:24:52 is HDOP = 4.394327990185122 and VDOP = 2.500390028857543
+Position at 2013-Apr-04 06:24:53 is Lat = 41.27486578119527 [deg], Long = 1.987570182244544 [deg], Height= 63.99997779261321 [m]
+Dilution of Precision at 2013-Apr-04 06:24:53 is HDOP = 4.394328940637972 and VDOP = 2.500323619095868
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6598.6826171875 [Hz] CN0 = 46.82076644897461 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8501.3798828125 [Hz] CN0 = 47.93429183959961 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10108.1435546875 [Hz] CN0 = 47.69104766845703 [dB-Hz]
+Current input signal time = 91 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7234.0244140625 [Hz] CN0 = 49.46175765991211 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5631.61376953125 [Hz] CN0 = 48.88363265991211 [dB-Hz]
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 1 (Block IIF)
+New UTC MODEL record has arrived 
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 32 (Block IIA)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 11 (Block IIR)
+New UTC MODEL record has arrived 
+NAVIGATION FSM: received subframe 4 for satellite GPS PRN 17 (Block IIR-M)
+New UTC MODEL record has arrived 
+Position at 2013-Apr-04 06:24:53 is Lat = 41.2747702568649 [deg], Long = 1.98744257067149 [deg], Height= 71.95038493908942 [m]
+Dilution of Precision at 2013-Apr-04 06:24:53 is HDOP = 4.394329835862082 and VDOP = 2.50025910946356
+Position at 2013-Apr-04 06:24:54 is Lat = 41.27490216657309 [deg], Long = 1.987626154058669 [deg], Height= 47.13102455437183 [m]
+Dilution of Precision at 2013-Apr-04 06:24:54 is HDOP = 4.394333652645106 and VDOP = 2.50019366761956
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8505.5810546875 [Hz] CN0 = 44.03325653076172 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5644.80517578125 [Hz] CN0 = 48.41994857788086 [dB-Hz]
+Current input signal time = 92 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7259.95458984375 [Hz] CN0 = 47.14701461791992 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6600.13916015625 [Hz] CN0 = Tracking CH 44.41838455200195 [dB-Hz]
+2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10093.5341796875 [Hz] CN0 = 46.17712783813477 [dB-Hz]
+Position at 2013-Apr-04 06:24:54 is Lat = 41.27483537759981 [deg], Long = 1.987535496033709 [deg], Height= 52.84352544136345 [m]
+Dilution of Precision at 2013-Apr-04 06:24:54 is HDOP = 4.394334296032464 and VDOP = 2.500128810325365
+Position at 2013-Apr-04 06:24:55 is Lat = 41.2748079095367 [deg], Long = 1.987499548750631 [deg], Height= 47.25681666936725 [m]
+Dilution of Precision at 2013-Apr-04 06:24:55 is HDOP = 4.394336457461336 and VDOP = 2.500064425951604
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10082.0068359375 [Hz] CN0 = 46.35940170288086 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6617.6982421875 [Hz] CN0 = 47.82912063598633 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5635.5634765625 [Hz] CN0 = 47.57694244384766 [dB-Hz]
+Current input signal time = 93 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7241.1318359375 [Hz] CN0 = 51.3028450012207 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8499.0927734375 [Hz] CN0 = 43.94952392578125 [dB-Hz]
+Position at 2013-Apr-04 06:24:55 is Lat = 41.27478667739771 [deg], Long = 1.987617396744392 [deg], Height= 48.50142412539572 [m]
+Dilution of Precision at 2013-Apr-04 06:24:55 is HDOP = 4.394338520137158 and VDOP = 2.49999962592692
+Position at 2013-Apr-04 06:24:56 is Lat = 41.27475259238054 [deg], Long = 1.987505666503531 [deg], Height= 57.73555532284081 [m]
+Dilution of Precision at 2013-Apr-04 06:24:56 is HDOP = 4.394339281133412 and VDOP = 2.49993455322572
+Current input signal time = 94 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7233.68505859375 [Hz] CN0 = 51.11762619018555 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10092.7265625 [Hz] CN0 = 50.0319709777832 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6617.2431640625 [Hz] CN0 = 49.52330017089844 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5657.32177734375 [Hz] CN0 = 47.68502807617188 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8492.9443359375 [Hz] CN0 = 43.85153579711914 [dB-Hz]
+Position at 2013-Apr-04 06:24:56 is Lat = 41.27474603817188 [deg], Long = 1.987539452700593 [deg], Height= 68.46718970872462 [m]
+Dilution of Precision at 2013-Apr-04 06:24:56 is HDOP = 4.394339989763226 and VDOP = 2.499868964736734
+Position at 2013-Apr-04 06:24:57 is Lat = 41.27483980658047 [deg], Long = 1.987633834697637 [deg], Height= 37.77625497896224 [m]
+Dilution of Precision at 2013-Apr-04 06:24:57 is HDOP = 4.39434281023988 and VDOP = 2.49980405324891
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10101.6630859375 [Hz] CN0 = 47.42208099365234 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6642.90576171875 [Hz] CN0 = 49.10251998901367 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5649.298828125 [Hz] CN0 = 49.6131591796875 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8534.0302734375 [Hz] CN0 = 44.13825607299805 [dB-Hz]
+Current input signal time = 95 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7246.22802734375 [Hz] CN0 = 50.74637603759766 [dB-Hz]
+Position at 2013-Apr-04 06:24:57 is Lat = 41.27470585317171 [deg], Long = 1.987436185953517 [deg], Height= 74.00734194833785 [m]
+Dilution of Precision at 2013-Apr-04 06:24:57 is HDOP = 4.394341663167797 and VDOP = 2.49973893984291
+Position at 2013-Apr-04 06:24:58 is Lat = 41.27490863299091 [deg], Long = 1.98757963904026 [deg], Height= 52.28277434036136 [m]
+Dilution of Precision at 2013-Apr-04 06:24:58 is HDOP = 4.394345536754904 and VDOP = 2.499673104821055
+Current input signal time = 96 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7241.34228515625 [Hz] CN0 = 50.96020889282227 [dB-Hz]
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6646.19482421875 [Hz] CN0 = 47.08660888671875 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5639.8310546875 [Hz] CN0 = 50.69534683227539 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8537.55078125 [Hz] CN0 = 43.18496322631836 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10135.4619140625 [Hz] CN0 = 48.15652465820312 [dB-Hz]
+Position at 2013-Apr-04 06:24:58 is Lat = 41.27475177948836 [deg], Long = 1.987505830993357 [deg], Height= 51.48438498750329 [m]
+Dilution of Precision at 2013-Apr-04 06:24:58 is HDOP = 4.394345571390127 and VDOP = 2.499609534244036
+Position at 2013-Apr-04 06:24:59 is Lat = 41.2749213151758 [deg], Long = 1.987692046773001 [deg], Height= 20.56007380690426 [m]
+Dilution of Precision at 2013-Apr-04 06:24:59 is HDOP = 4.394349021399834 and VDOP = 2.499544128715477
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10109.69921875 [Hz] CN0 = 48.41867828369141 [dB-Hz]
+Current input signal time = 97 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7259.59521484375 [Hz] CN0 = 48.96954727172852 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5656.35791015625 [Hz] CN0 = Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=6613.6640625 [Hz] CN0 = 47.0799560546875 [dB-Hz]
+8534.001953125 [Hz] CN0 = 44.68908309936523 [dB-Hz]
+49.13349533081055 [dB-Hz]
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 20 (Block IIR)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 1 (Block IIF)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 32 (Block IIA)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 17 (Block IIR-M)
+NAVIGATION FSM: received subframe 5 for satellite GPS PRN 11 (Block IIR)
+Position at 2013-Apr-04 06:24:59 is Lat = 41.27481820462157 [deg], Long = 1.98757327262743 [deg], Height= 63.06599717028439 [m]
+Dilution of Precision at 2013-Apr-04 06:24:59 is HDOP = 4.39434666532259 and VDOP = 2.499478062870642
+Position at 2013-Apr-04 06:25:00 is Lat = 41.27481382144678 [deg], Long = 1.987526311125162 [deg], Height= 60.14735420048237 [m]
+Dilution of Precision at 2013-Apr-04 06:25:00 is HDOP = 4.394347878450666 and VDOP = 2.499413440425578
+Current input signal time = Tracking CH 498: Satellite  [s]GPS PRN 32 (Block 
+IIA), Doppler=6628.9228515625 [Hz] CN0 = 48.73293685913086 [dB-Hz]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7265.0654296875 [Hz] CN0 = 50.03653717041016 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5654.9931640625 [Hz] CN0 = 48.0914192199707 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8525.4111328125 [Hz] CN0 = 44.90276336669922 [dB-Hz]
+Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=10113.8818359375 [Hz] CN0 = 47.76654815673828 [dB-Hz]
+Position at 2013-Apr-04 06:25:00 is Lat = 41.27485533636052 [deg], Long = 1.987576306774711 [deg], Height= 49.01640034187585 [m]
+Dilution of Precision at 2013-Apr-04 06:25:00 is HDOP = 4.394349452073024 and VDOP = 2.499348553234054
+Position at 2013-Apr-04 06:25:01 is Lat = 41.27482831435496 [deg], Long = 1.987449891465584 [deg], Height= 63.57679492048919 [m]
+Dilution of Precision at 2013-Apr-04 06:25:01 is HDOP = 4.394349303301422 and VDOP = 2.499283392776145
+Tracking CH 4: Satellite GPS PRN 32 (Block IIA), Doppler=Tracking CH 2: Satellite GPS PRN 17 (Block IIR-M), Doppler=6636.86181640625 [Hz] CN0 = 47.22602844238281 [dB-Hz]
+10133.294921875 [Hz] CN0 = 49.36321640014648 [dB-Hz]
+Tracking CH 1: Satellite GPS PRN 11 (Block IIR), Doppler=5661.63916015625 [Hz] CN0 = 47.72538757324219 [dB-Hz]
+Tracking CH 3: Satellite GPS PRN 20 (Block IIR), Doppler=8545.345703125 [Hz] CN0 = 44.23410797119141 [dB-Hz]
+Current input signal time = 99 [s]
+Tracking CH 0: Satellite GPS PRN 1 (Block IIF), Doppler=7266.548828125 [Hz] CN0 = 51.44135284423828 [dB-Hz]
+Position at 2013-Apr-04 06:25:01 is Lat = 41.27490193378662 [deg], Long = 1.987544572282603 [deg], Height= 8.594351125881076 [m]
+Dilution of Precision at 2013-Apr-04 06:25:01 is HDOP = 4.394352669620676 and VDOP = 2.499219946699253
+Position at 2013-Apr-04 06:25:02 is Lat = 41.27488744155892 [deg], Long = 1.987490965802034 [deg], Height= 42.92783044651151 [m]
+Dilution of Precision at 2013-Apr-04 06:25:02 is HDOP = 4.394350637409735 and VDOP = 2.499153350213306
+Stopping GNSS-SDR, please wait!
+Channel 0 in state 2
+Channel 1 in state 2
+Channel 2 in state 2
+Channel 3 in state 2
+Channel 4 in state 2
+Total GNSS-SDR run time 46.123965 [seconds]
+GNSS-SDR program ended.

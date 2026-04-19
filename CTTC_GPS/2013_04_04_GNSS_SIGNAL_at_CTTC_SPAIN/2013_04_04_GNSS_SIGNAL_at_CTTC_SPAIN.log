@@ -1,0 +1,47 @@
+Scheduled GNSS RAW signal capture:
+
+-Hardware: USRP 1.0 Rev 4.5 with DBSRX v2. Usung onboard local oscillator
+
+-Capture Date: Local computer time: jue 04 abr 2013 08:24:58 CEST
+-FIRST GPS PVT FIX TIME: 2013-Apr-04 06:23:50
+
+Capture settings:
+
+-Sample size: Baseband IQ Interleaved Short (ishort)
+-Sampling frequency: 4.0 MSPS
+-Signal time: 100 seconds
+-Location: Roof of CTTC building (aproximatted coordinates 40.396764 N, 3.713379 E)
+-Antenna: Novatel GPS-600 active antenna
+
+UHD capture log:
+
+linux; GNU C++ version 4.6.3; Boost_104800; UHD_003.005.001-29-g3cb515f7
+
+Creating the usrp device with: ...
+-- Opening a USRP1 device...
+-- Using FPGA clock rate of 64.000000MHz...
+Using Device: Single USRP:
+  Device: USRP1 Device
+  Mboard 0: USRP1
+  RX Channel: 0
+    RX DSP: 0
+    RX Dboard: B
+    RX Subdev: DBSRX
+  TX Channel: 0
+    TX DSP: 0
+    TX Dboard: A
+    TX Subdev: Unknown (0xffff) - 0
+
+Setting RX Rate: 4.000000 Msps...
+Actual RX Rate: 4.000000 Msps...
+
+Setting RX Freq: 1575.420000 MHz...
+Actual RX Freq: 1575.420000 MHz...
+
+Setting RX Gain: 60.000000 dB...
+Actual RX Gain: 58.000000 dB...
+
+Checking RX: LO: locked ...
+
+Done!
+

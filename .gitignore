@@ -1,0 +1,14 @@
+# Large binary/data files
+*.dat
+*.int16
+*.tar.gz
+*.nmea
+
+# macOS
+.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# Editor backup files
+*~
