@@ -4,14 +4,1277 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GNSS-SDR Dashboard</title>
+
+  <!-- CesiumJS -->
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+
+  <!-- D3 (skyplot) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+  <!-- Chart.js + annotation plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+
   <style>
-    body { font-family: sans-serif; margin: 2rem; background: #0d1117; color: #e6edf3; }
-    h1   { margin-bottom: 0.25rem; }
-    p    { color: #8b949e; margin-top: 0; }
+    /* ===== Reset & base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ===== Task 4: Loading overlay ===== */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0d1117;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.4s ease;
+    }
+    #loading-overlay .spinner {
+      width: 38px; height: 38px;
+      border: 3px solid #21262d;
+      border-top-color: #58a6ff;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    #loading-overlay p { color: #8b949e; font-size: 13px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== Header ===== */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 9px 20px;
+      background: #161b22;
+      border-bottom: 1px solid #21262d;
+      flex-shrink: 0;
+    }
+    header h1  { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+    header .pill {
+      background: #1f6feb33;
+      border: 1px solid #1f6feb66;
+      color: #58a6ff;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 11px;
+    }
+    header .subtitle { color: #8b949e; font-size: 12px; margin-left: auto; }
+
+    /* ===== Tab bar ===== */
+    .tab-bar {
+      display: flex;
+      padding: 0 20px;
+      background: #161b22;
+      border-bottom: 1px solid #21262d;
+      flex-shrink: 0;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #8b949e;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 9px 18px;
+      transition: color .15s, border-color .15s;
+    }
+    .tab-btn:hover  { color: #c9d1d9; }
+    .tab-btn.active { color: #e6edf3; border-bottom-color: #1f6feb; }
+
+    /* ===== Tab panels — base ===== */
+    .tab-panel        { display: none; flex: 1; overflow: hidden; min-height: 0; }
+    .tab-panel.active { display: flex; flex-direction: column; }
+
+    /* ===== Dashboard globe fills 100% of the panel =====
+     * #panel-dashboard is the flex child that grows to fill remaining viewport
+     * height.  Everything inside it is absolutely positioned so the Cesium
+     * canvas dimensions are stable across tab switches (prevents camera jumps).
+     */
+    #panel-dashboard          { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    #panel-dashboard.active   { display: block; }
+
+    #globe-container { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #cesiumContainer { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* ===== Task 3: Globe control buttons (top-left) ===== */
+    #globe-controls {
+      position: absolute;
+      top: 10px; left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 10;
+    }
+    .globe-btn {
+      background: #161b22cc;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      color: #c9d1d9;
+      cursor: pointer;
+      font-size: 11px;
+      padding: 5px 10px;
+      text-align: left;
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .globe-btn:hover     { background: #21262d; color: #e6edf3; }
+    .globe-btn.toggled-on {
+      background: #1f6feb22;
+      border-color: #1f6feb66;
+      color: #58a6ff;
+    }
+
+    /* ===== Task 2: Timeline scrubber overlay (bottom-centre) ===== */
+    #timeline-scrubber {
+      position: absolute;
+      bottom: 38px;
+      left: 344px; right: 344px;
+      min-width: 160px;
+      background: #0a0e14cc;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+    }
+    #scrubber-time {
+      color: #8b949e;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 10px;
+      min-width: 72px;
+      flex-shrink: 0;
+    }
+    #scrubber {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: #30363d;
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    #scrubber::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: #58a6ff;
+      cursor: pointer;
+    }
+    #scrubber::-moz-range-thumb {
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: #58a6ff;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ===== Task 3: Floating overlay panels (skyplot + CN0) ===== */
+    .globe-overlay {
+      position: absolute;
+      width: 316px; height: 272px;
+      background: #0a0e14cc;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10;
+    }
+    #skyplot-overlay { bottom: 38px; left: 16px; }
+    #cn0-overlay     { bottom: 38px; right: 16px; }
+
+    .overlay-hdr {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+    .overlay-inner { flex: 1; min-height: 0; position: relative; }
+
+    /* ===== Task 4: Info tooltips ===== */
+    .info-icon {
+      color: #8b949e;
+      font-size: 11px;
+      cursor: default;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .info-icon::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1c2128;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #c9d1d9;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 230px;
+      padding: 6px 10px;
+      white-space: normal;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 200;
+    }
+    .info-icon:hover::after { opacity: 1; }
+
+    /* ===== Shared panel-title ===== */
+    .panel-title {
+      color: #8b949e;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* Skyplot SVGs fill their containers */
+    #skyplot-svg,
+    #skyplot-full-svg { width: 100%; height: 100%; display: block; }
+
+    /* ===== Legend ===== */
+    .cn0-legend {
+      display: flex;
+      gap: 10px;
+      font-size: 10px;
+      color: #8b949e;
+      margin-bottom: 5px;
+      flex-shrink: 0;
+    }
+    .cn0-legend span { display: flex; align-items: center; gap: 3px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+    /* ===== Satellite Details tab ===== */
+    #panel-satellites { padding: 20px; }
+    #panel-satellites h2 { font-size: 15px; margin-bottom: 14px; flex-shrink: 0; }
+    #history-wrap { position: relative; flex: 1; min-height: 0; }
+
+    /* ===== Raw Data tab ===== */
+    #panel-raw { padding: 16px 20px; }
+    #panel-raw h2 { font-size: 15px; margin-bottom: 10px; flex-shrink: 0; }
+    #raw-feed {
+      flex: 1;
+      overflow-y: auto;
+      background: #010409;
+      border: 1px solid #21262d;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 11.5px;
+      line-height: 1.7;
+    }
+    .nmea-line  { white-space: nowrap; }
+    .nmea-gga   { color: #58a6ff; }
+    .nmea-gsv   { color: #3fb950; }
+    .nmea-gsa   { color: #d2a8ff; }
+    .nmea-rmc   { color: #ffa657; }
+    .nmea-other { color: #8b949e; }
+
+    /* ===== Task 3: Full-screen Sky Plot and CN0 tabs ===== */
+    .full-tab-hdr {
+      padding: 12px 20px 6px;
+      flex-shrink: 0;
+    }
+    .full-tab-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .panel-title-lg {
+      color: #8b949e;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .full-tab-inner {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      padding: 0 20px 16px;
+      overflow: hidden;
+    }
+
+    /* ===== Status bar ===== */
+    #status-bar {
+      display: flex;
+      gap: 24px;
+      padding: 4px 20px;
+      background: #010409;
+      border-top: 1px solid #21262d;
+      font-size: 11px;
+      color: #8b949e;
+      flex-shrink: 0;
+    }
+    #status-bar b { color: #e6edf3; font-weight: 500; }
   </style>
 </head>
 <body>
-  <h1>GNSS-SDR Dashboard</h1>
-  <p>Frontend placeholder — visualization panels (CesiumJS globe, D3 skyplot, Chart.js CN0) coming in step 2.</p>
+
+  <!-- ========== Task 4: Loading overlay ========== -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Loading GNSS data&hellip;</p>
+  </div>
+
+  <!-- ========== Header ========== -->
+  <header>
+    <h1>GNSS-SDR Dashboard</h1>
+    <span class="pill">Post-processed</span>
+    <span class="subtitle">CTTC Spain 2013 &middot; GPS L1 C/A &middot; IE 421</span>
+  </header>
+
+  <!-- ========== Tab bar (Task 3: two new full-screen tabs) ========== -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="satellites">Satellite Details</button>
+    <button class="tab-btn" data-tab="raw">Raw Data</button>
+    <button class="tab-btn" data-tab="skyplot">Sky Plot</button>
+    <button class="tab-btn" data-tab="cn0">CN0</button>
+  </div>
+
+  <!-- ============================================================
+       Tab 1: Dashboard
+       Globe fills 100% of panel height.  Skyplot and CN0 panels
+       float as glass-morphism overlays bottom-left / bottom-right.
+       ============================================================ -->
+  <div id="panel-dashboard" class="tab-panel active">
+    <div id="globe-container">
+      <div id="cesiumContainer"></div>
+
+      <!-- Task 3: overlay toggle buttons + reset (top-left) -->
+      <div id="globe-controls">
+        <button class="globe-btn" id="reset-camera">&#x2302; Reset view</button>
+        <button class="globe-btn toggled-on" id="toggle-skyplot-btn">&#x25D0; Sky Plot</button>
+        <button class="globe-btn toggled-on" id="toggle-cn0-btn">&#x25D0; CN0</button>
+      </div>
+
+      <!-- Task 2: satellite playback scrubber (bottom-centre) -->
+      <div id="timeline-scrubber">
+        <span id="scrubber-time" title="UTC timestamp">&#x2014;</span>
+        <input type="range" id="scrubber" min="0" max="1000" value="0" step="1" />
+        <button class="globe-btn" id="play-pause-btn"
+                style="padding:3px 9px;font-size:13px;flex-shrink:0;">&#x23F8;</button>
+      </div>
+
+      <!-- Task 3: skyplot overlay (bottom-left) -->
+      <div id="skyplot-overlay" class="globe-overlay">
+        <div class="overlay-hdr">
+          <span class="panel-title">Sky Plot</span>
+          <span class="info-icon"
+            data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
+        </div>
+        <div class="cn0-legend">
+          <span><i class="dot" style="background:#2da44e"></i>&thinsp;&ge; 45</span>
+          <span><i class="dot" style="background:#e3b341"></i>&thinsp;35&ndash;45</span>
+          <span><i class="dot" style="background:#f85149"></i>&thinsp;&lt; 35 dB-Hz</span>
+        </div>
+        <div class="overlay-inner">
+          <svg id="skyplot-svg"></svg>
+        </div>
+      </div>
+
+      <!-- Task 3: CN0 overlay (bottom-right) -->
+      <div id="cn0-overlay" class="globe-overlay">
+        <div class="overlay-hdr">
+          <span class="panel-title">Signal Strength (CN0)</span>
+          <span class="info-icon"
+            data-tooltip="Carrier-to-noise density ratio per satellite. &gt;45 dB-Hz = strong lock, 35&ndash;45 = marginal, &lt;35 = likely to lose tracking.">&#x24D8;</span>
+        </div>
+        <div class="overlay-inner">
+          <canvas id="cn0-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Tab 2: Satellite Details (unchanged)
+       ============================================================ -->
+  <div id="panel-satellites" class="tab-panel">
+    <h2>CN0 History by Satellite PRN</h2>
+    <div id="history-wrap">
+      <canvas id="history-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Tab 3: Raw Data (unchanged)
+       ============================================================ -->
+  <div id="panel-raw" class="tab-panel">
+    <h2>Raw NMEA Feed &mdash; last 50 sentences</h2>
+    <div id="raw-feed"><em style="color:#8b949e">Loading&hellip;</em></div>
+  </div>
+
+  <!-- ============================================================
+       Tab 4 (new): Sky Plot full-screen
+       Reuses drawSkyplot() targeting #skyplot-full-svg
+       ============================================================ -->
+  <div id="panel-skyplot" class="tab-panel">
+    <div class="full-tab-hdr">
+      <div class="full-tab-title-row">
+        <span class="panel-title-lg">Sky Plot</span>
+        <span class="info-icon"
+          data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
+      </div>
+      <div class="cn0-legend">
+        <span><i class="dot" style="background:#2da44e"></i> &ge; 45 dB-Hz</span>
+        <span><i class="dot" style="background:#e3b341"></i> 35&ndash;45 dB-Hz</span>
+        <span><i class="dot" style="background:#f85149"></i> &lt; 35 dB-Hz</span>
+      </div>
+    </div>
+    <div class="full-tab-inner">
+      <svg id="skyplot-full-svg"></svg>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Tab 5 (new): CN0 full-screen
+       Reuses renderCN0Chart() targeting #cn0-full-chart
+       ============================================================ -->
+  <div id="panel-cn0" class="tab-panel">
+    <div class="full-tab-hdr">
+      <div class="full-tab-title-row">
+        <span class="panel-title-lg">Signal Strength (CN0)</span>
+        <span class="info-icon"
+          data-tooltip="Carrier-to-noise density ratio per satellite. &gt;45 dB-Hz = strong lock, 35&ndash;45 = marginal, &lt;35 = likely to lose tracking.">&#x24D8;</span>
+      </div>
+    </div>
+    <div class="full-tab-inner">
+      <canvas id="cn0-full-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- ========== Status bar ========== -->
+  <div id="status-bar">
+    <div>Fixes: <b id="s-fixes">&mdash;</b></div>
+    <div>Satellites tracked: <b id="s-sats">&mdash;</b></div>
+    <div>Latest: <b id="s-pos">&mdash;</b></div>
+    <div>Mode: <b>Post-processed (REST)</b></div>
+  </div>
+
+
+  <script>
+  // ===========================================================================
+  // § 0  CESIUM ION TOKEN
+  //      Set CESIUM_ION_TOKEN to enable Cesium World Imagery if the team wants
+  //      it later. The current dashboard globe renders with OSM tiles and the
+  //      satellite visuals use native Cesium box entities only.
+  //      Get a free token at https://cesium.com/ion/tokens
+  // ===========================================================================
+  // TODO: replace the placeholder with your team's Cesium ion access token
+  const CESIUM_ION_TOKEN = 'YOUR_CESIUM_ION_ACCESS_TOKEN_HERE';
+  Cesium.Ion.defaultAccessToken = CESIUM_ION_TOKEN;
+
+
+  // ===========================================================================
+  // § 1  LIVE MODE HOOK
+  //      When the WebSocket endpoint (/ws) is ready, replace the REST fetch
+  //      in loadData() with a WebSocket connection:
+  //
+  //        const ws = new WebSocket('ws://' + location.host + '/ws');
+  //        ws.onmessage = (event) => {
+  //          const msg = JSON.parse(event.data);
+  //          // msg carries { type: 'position'|'satellite', data: ... }
+  //          // call updateGlobe(), drawSkyplot(), renderCN0Chart() etc.
+  //        };
+  //        ws.onerror = () =>
+  //          console.warn('WebSocket unavailable -- staying in REST mode');
+  // ===========================================================================
+
+
+  // ===========================================================================
+  // § 2  Module-level state
+  // ===========================================================================
+  let latestSatellites = {};   // kept for tab-switch / resize redraws
+  let lastReceiverPos  = null; // kept for the Reset View button
+
+  // Two CN0 chart instances: overlay (dashboard) and full-screen tab
+  let cn0Chart     = null;
+  let cn0FullChart = null;
+  let historyChart = null;
+
+
+  // ===========================================================================
+  // § 3  Tab switching — extended for the new Sky Plot and CN0 tabs
+  // ===========================================================================
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+
+      const tab = btn.dataset.tab;
+
+      // Re-render size-sensitive charts when their tab becomes visible.
+      // requestAnimationFrame ensures the browser commits layout before we
+      // read clientWidth / clientHeight.
+      if (tab === 'dashboard') {
+        // Resize the overlay CN0 chart.  Do NOT call viewer.resize() — that
+        // changes the Cesium canvas dimensions and causes a camera jump.
+        if (cn0Chart) cn0Chart.resize();
+        requestAnimationFrame(() => drawSkyplot(latestSatellites, 'skyplot-svg'));
+      }
+      if (tab === 'satellites' && historyChart) historyChart.resize();
+      if (tab === 'skyplot') {
+        requestAnimationFrame(() => drawSkyplot(latestSatellites, 'skyplot-full-svg'));
+      }
+      if (tab === 'cn0') {
+        if (cn0FullChart) {
+          cn0FullChart.resize();
+        } else if (Object.keys(latestSatellites).length > 0) {
+          requestAnimationFrame(() => renderCN0Chart(latestSatellites, 'cn0-full-chart'));
+        }
+      }
+    });
+  });
+
+
+  // ===========================================================================
+  // § 4  CN0 to colour helper
+  // ===========================================================================
+  function cn0Color(cn0) {
+    if (cn0 == null) return '#6e7681';
+    if (cn0 >= 45)   return '#2da44e';   // strong -- green
+    if (cn0 >= 35)   return '#e3b341';   // medium -- yellow
+    return '#f85149';                     // weak   -- red
+  }
+
+
+  // ===========================================================================
+  // § 5  CesiumJS viewer
+  // ===========================================================================
+  const viewer = new Cesium.Viewer('cesiumContainer', {
+    baseLayerPicker:      false,
+    timeline:             false,
+    animation:            false,
+    geocoder:             false,
+    homeButton:           false,
+    sceneModePicker:      false,
+    navigationHelpButton: false,
+    fullscreenButton:     false,
+    infoBox:              false,
+    selectionIndicator:   false,
+  });
+
+  // OpenStreetMap base tiles -- renders without a Cesium ion token
+  viewer.imageryLayers.removeAll();
+  viewer.imageryLayers.addImageryProvider(
+    new Cesium.OpenStreetMapImageryProvider({ url: 'https://tile.openstreetmap.org/' })
+  );
+  viewer.scene.backgroundColor = Cesium.Color.fromCssColorString('#0d1117');
+
+
+  // ===========================================================================
+  // § 6  initGlobe -- position track + latest-fix point (unchanged)
+  // ===========================================================================
+  function initGlobe(positions) {
+    if (!positions || positions.length === 0) return;
+
+    const cartesians = positions.map(p =>
+      Cesium.Cartesian3.fromDegrees(p.longitude, p.latitude, p.altitude)
+    );
+
+    viewer.entities.add({
+      polyline: {
+        positions: cartesians,
+        width: 3,
+        material: new Cesium.PolylineGlowMaterialProperty({
+          glowPower: 0.25,
+          color: Cesium.Color.fromCssColorString('#58a6ff'),
+        }),
+      }
+    });
+
+    const last = positions[positions.length - 1];
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(last.longitude, last.latitude, last.altitude + 50),
+      id: 'receiver-latest-fix',
+      point: {
+        pixelSize: 14,
+        color: Cesium.Color.fromCssColorString('#f85149'),
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2,
+      },
+      label: {
+        text: 'Latest Fix\n' + last.latitude.toFixed(5) + '\u00b0N  ' + last.longitude.toFixed(5) + '\u00b0E',
+        font: '12px sans-serif',
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        outlineWidth: 2,
+        outlineColor: Cesium.Color.fromCssColorString('#0d1117'),
+        fillColor: Cesium.Color.WHITE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        pixelOffset: new Cesium.Cartesian2(0, -18),
+        showBackground: true,
+        backgroundColor: Cesium.Color.fromCssColorString('#161b22cc'),
+      }
+    });
+  }
+
+
+  // ===========================================================================
+  // § 7  Time helpers -- CTTC dataset is 2013-04-04
+  // ===========================================================================
+  function tsToDaySec(ts) {
+    // ts format: "HHMMSS.ss"
+    return parseInt(ts.slice(0, 2), 10) * 3600
+         + parseInt(ts.slice(2, 4), 10) * 60
+         + parseFloat(ts.slice(4));
+  }
+
+  function tsToJulian(ts) {
+    const s   = tsToDaySec(ts);
+    const h   = Math.floor(s / 3600);
+    const m   = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    return Cesium.JulianDate.fromDate(new Date(Date.UTC(2013, 3, 4, h, m, sec)));
+  }
+
+
+  // ===========================================================================
+  // § 8  initSatellites -- animated 3-D satellite entities on the globe
+  //
+  //  Each GPS satellite is projected at 3 500 km above the receiver (scaled
+  //  display altitude -- true GPS MEO is ~20 200 km but that places entities
+  //  in deep space) using the standard ENU -> ECEF transform
+  //  (az/el -> unit vector -> scale by display radius -> rotate into world frame).
+  //
+  //  Positions are stored in a SampledPositionProperty so Cesium's clock
+  //  drives interpolation.  This dataset is post-processed so az/el are
+  //  static; live-mode can push new samples as geometry evolves.
+  //
+  //  Each satellite is rendered as a native Cesium composite: one box body
+  //  plus one perpendicular flat box for solar panels.  CN0-based colour is
+  //  updated every render frame via CallbackProperty.  A thin sight-line
+  //  (width 1, alpha 0.3) connects receiver to satellite, and PRN labels
+  //  float above each entity.
+  // ===========================================================================
+  async function initSatellites(satellites, history, receiverPos) {
+    const receiverEcef = Cesium.Cartesian3.fromDegrees(
+      receiverPos.longitude, receiverPos.latitude, receiverPos.altitude
+    );
+
+    // Collect and sort all timestamps across every PRN
+    const tsSet = new Set();
+    Object.values(history).forEach(pts => pts.forEach(p => tsSet.add(p.t)));
+    const sortedTs = [...tsSet].sort();
+    if (sortedTs.length === 0) return;
+
+    const startJD  = tsToJulian(sortedTs[0]);
+    const stopJD   = tsToJulian(sortedTs[sortedTs.length - 1]);
+    const startSec = tsToDaySec(sortedTs[0]);
+    const totalSec = tsToDaySec(sortedTs[sortedTs.length - 1]) - startSec;
+
+    // Configure Cesium clock.  animation:false hides the widget; clock still ticks.
+    viewer.clock.startTime     = startJD.clone();
+    viewer.clock.stopTime      = stopJD.clone();
+    viewer.clock.currentTime   = startJD.clone();
+    viewer.clock.clockRange    = Cesium.ClockRange.LOOP_STOP;
+    viewer.clock.multiplier    = 1;          // real-time speed by default
+    viewer.clock.shouldAnimate = true;
+
+    // Guard against anything re-acquiring camera tracking each frame.
+    // Without this, a SampledPositionProperty entity can pull the camera
+    // away from Earth on the next postUpdate cycle.
+    viewer.scene.postUpdate.addEventListener(() => {
+      if (viewer.trackedEntity) viewer.trackedEntity = undefined;
+    });
+
+    // Continuous rendering so CallbackProperty colours update every frame
+    viewer.scene.requestRenderMode = false;
+
+    // Wire up the HTML range scrubber
+    initScrubber(startJD, totalSec, sortedTs);
+
+    // ENU -> ECEF transformation matrix at the receiver ground position.
+    // Columns: [East, North, Up, origin].  Multiplying an ENU displacement
+    // vector by this matrix yields the corresponding ECEF world position.
+    const enuToEcef = Cesium.Transforms.eastNorthUpToFixedFrame(receiverEcef);
+    // Display altitude for visualization only — satellites are projected 3 500 km
+    // above the receiver so they appear within the Cesium scene.  True GPS MEO
+    // altitude is ~20 200 km; that value places entities in deep space and
+    // makes them invisible at typical globe zoom levels.
+    const R_ORBIT   = 3500000; // scaled display altitude (metres), NOT true orbital altitude
+
+    Object.values(satellites).forEach(sat => {
+      const azRad = Cesium.Math.toRadians(sat.azimuth   != null ? sat.azimuth   : 0);
+      const elRad = Cesium.Math.toRadians(sat.elevation != null ? sat.elevation : 45);
+
+      // Unit direction vector in ENU frame toward this satellite
+      const E = Math.sin(azRad) * Math.cos(elRad);
+      const N = Math.cos(azRad) * Math.cos(elRad);
+      const U = Math.sin(elRad);
+
+      // Scale to orbital altitude then rotate into ECEF
+      const enuDisp = new Cesium.Cartesian3(E * R_ORBIT, N * R_ORBIT, U * R_ORBIT);
+      const satEcef = Cesium.Matrix4.multiplyByPoint(
+        enuToEcef, enuDisp, new Cesium.Cartesian3()
+      );
+
+      // SampledPositionProperty -- static here; live-mode pushes new samples
+      const sampledPos = new Cesium.SampledPositionProperty();
+      sampledPos.addSample(startJD, satEcef);
+      sampledPos.addSample(stopJD,  satEcef);
+
+      const bodyOrientation = Cesium.Transforms.headingPitchRollQuaternion(
+        satEcef,
+        new Cesium.HeadingPitchRoll(0, 0, 0)
+      );
+      const panelOrientation = Cesium.Transforms.headingPitchRollQuaternion(
+        satEcef,
+        new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(90), 0, 0)
+      );
+
+      // Per-frame CN0 colour driven by the Cesium clock
+      const satHistory = history[String(sat.prn)] || [];
+      const colorCb = new Cesium.CallbackProperty(function(time) {
+        var d   = Cesium.JulianDate.toDate(time);
+        var cur = d.getUTCHours() * 3600 + d.getUTCMinutes() * 60
+                + d.getUTCSeconds() + d.getUTCMilliseconds() / 1000;
+        var frac = totalSec > 0
+          ? Math.max(0, Math.min(1, (cur - startSec) / totalSec))
+          : 0;
+        var idx = Math.round(frac * (satHistory.length - 1));
+        var cn0 = satHistory[idx] ? satHistory[idx].cn0 : sat.cn0;
+        return Cesium.Color.fromCssColorString(cn0Color(cn0));
+      }, false /* isConstant */);
+      const bodyMaterialCb = new Cesium.CallbackProperty(function(time) {
+        return colorCb.getValue(time).withAlpha(0.92);
+      }, false /* isConstant */);
+      const panelMaterialCb = new Cesium.CallbackProperty(function(time) {
+        return colorCb.getValue(time).withAlpha(0.72);
+      }, false /* isConstant */);
+
+      viewer.entities.add({
+        id: 'sat-body-' + sat.prn,
+        position: sampledPos,
+        viewFrom: undefined,
+        orientation: bodyOrientation,
+        box: {
+          dimensions: new Cesium.Cartesian3(280000, 140000, 140000),
+          material: new Cesium.ColorMaterialProperty(bodyMaterialCb),
+          outline: true,
+          outlineColor: Cesium.Color.WHITE.withAlpha(0.55),
+          outlineWidth: 2,
+        },
+        label: {
+          text: 'PRN ' + sat.prn,
+          font: 'bold 12px sans-serif',
+          fillColor: Cesium.Color.WHITE,
+          outlineColor: Cesium.Color.fromCssColorString('#0d1117'),
+          outlineWidth: 2,
+          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          pixelOffset: new Cesium.Cartesian2(0, -16),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 6e7),
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        },
+      });
+
+      viewer.entities.add({
+        id: 'sat-panels-' + sat.prn,
+        position: sampledPos,
+        viewFrom: undefined,
+        orientation: panelOrientation,
+        box: {
+          dimensions: new Cesium.Cartesian3(520000, 32000, 180000),
+          material: new Cesium.ColorMaterialProperty(panelMaterialCb),
+          outline: true,
+          outlineColor: Cesium.Color.WHITE.withAlpha(0.35),
+          outlineWidth: 1,
+        },
+      });
+
+      // Thin sight-line from receiver on the ground up to the satellite.
+      // width 1 px, alpha 0.3 -- subtle, not distracting.
+      viewer.entities.add({
+        polyline: {
+          positions: [receiverEcef, satEcef],
+          width: 1,
+          material: Cesium.Color.fromCssColorString(cn0Color(sat.cn0)).withAlpha(0.3),
+          arcType: Cesium.ArcType.NONE,
+        },
+      });
+    });
+
+    // Lock the camera to the globe after all satellite entities are added.
+    // SampledPositionProperty can cause Cesium to auto-frame entities; these
+    // two lines ensure the viewer never tracks any satellite entity.
+    viewer.trackedEntity = undefined;
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    viewer.zoomTo(
+      viewer.entities,
+      new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-30), 0)
+    );
+  }
+
+
+  // ===========================================================================
+  // § 9  initScrubber -- wire HTML range input to viewer.clock
+  // ===========================================================================
+  function initScrubber(startJD, totalSec, sortedTs) {
+    var scrubEl = document.getElementById('scrubber');
+    var timeEl  = document.getElementById('scrubber-time');
+    var ppBtn   = document.getElementById('play-pause-btn');
+
+    // Clock ticks -> move scrubber thumb and update timestamp label
+    viewer.clock.onTick.addEventListener(function(clock) {
+      var elapsed = Cesium.JulianDate.secondsDifference(clock.currentTime, clock.startTime);
+      var pct     = totalSec > 0 ? Math.max(0, Math.min(1, elapsed / totalSec)) : 0;
+      scrubEl.value = Math.round(pct * 1000);
+      var idx = Math.round(pct * (sortedTs.length - 1));
+      timeEl.textContent = sortedTs[idx] || '';
+    });
+
+    // User drags scrubber -> set clock position
+    scrubEl.addEventListener('input', function(e) {
+      var pct = e.target.value / 1000;
+      viewer.clock.currentTime = Cesium.JulianDate.addSeconds(
+        startJD, pct * totalSec, new Cesium.JulianDate()
+      );
+    });
+
+    // Play / pause toggle
+    ppBtn.addEventListener('click', function() {
+      viewer.clock.shouldAnimate = !viewer.clock.shouldAnimate;
+      ppBtn.textContent = viewer.clock.shouldAnimate ? '\u23F8' : '\u25B6';
+    });
+  }
+
+
+  // ===========================================================================
+  // § 10  D3 Skyplot
+  //  Accepts optional svgId so the same function drives both the dashboard
+  //  overlay (#skyplot-svg) and the full-screen tab (#skyplot-full-svg).
+  // ===========================================================================
+  function drawSkyplot(satellites, svgId) {
+    svgId = svgId || 'skyplot-svg';
+    var svgEl = document.getElementById(svgId);
+    if (!svgEl) return;
+    var W = svgEl.clientWidth;
+    var H = svgEl.clientHeight;
+    if (!W || !H) return;
+
+    var cx   = W / 2;
+    var cy   = H / 2;
+    var maxR = Math.min(W, H) / 2 - 28;
+
+    var svg = d3.select('#' + svgId);
+    svg.selectAll('*').remove();
+    svg.attr('viewBox', '0 0 ' + W + ' ' + H);
+
+    // Background disc
+    svg.append('circle')
+      .attr('cx', cx).attr('cy', cy).attr('r', maxR)
+      .attr('fill', '#0d1117').attr('stroke', '#30363d').attr('stroke-width', 1.5);
+
+    // Elevation rings at 0, 30, 60 degrees (90 = centre)
+    [0, 30, 60].forEach(function(el) {
+      var rr = (1 - el / 90) * maxR;
+      svg.append('circle')
+        .attr('cx', cx).attr('cy', cy).attr('r', rr)
+        .attr('fill', 'none').attr('stroke', '#21262d').attr('stroke-dasharray', '4 3');
+      svg.append('text')
+        .attr('x', cx + 3).attr('y', cy - rr + 11)
+        .attr('fill', '#484f58').attr('font-size', 9).attr('font-family', 'sans-serif')
+        .text(el + '\u00b0');
+    });
+
+    // Azimuth spokes every 45 degrees + N/NE/E/... compass labels
+    var compassLabels = ['N','NE','E','SE','S','SW','W','NW'];
+    for (var az = 0; az < 360; az += 45) {
+      var rad = (az - 90) * Math.PI / 180;
+      svg.append('line')
+        .attr('x1', cx).attr('y1', cy)
+        .attr('x2', cx + maxR * Math.cos(rad))
+        .attr('y2', cy + maxR * Math.sin(rad))
+        .attr('stroke', '#21262d').attr('stroke-dasharray', '4 3');
+
+      var lr         = maxR + 16;
+      var isCardinal = az % 90 === 0;
+      svg.append('text')
+        .attr('x', cx + lr * Math.cos(rad))
+        .attr('y', cy + lr * Math.sin(rad))
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+        .attr('fill', isCardinal ? '#8b949e' : '#484f58')
+        .attr('font-size', isCardinal ? 12 : 9)
+        .attr('font-weight', isCardinal ? '700' : '400')
+        .attr('font-family', 'sans-serif')
+        .text(compassLabels[az / 45]);
+    }
+
+    // Zenith dot
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 3).attr('fill', '#30363d');
+
+    // Satellite circles
+    Object.values(satellites).forEach(function(sat) {
+      var el  = sat.elevation != null ? sat.elevation : 0;
+      var az  = sat.azimuth  != null ? sat.azimuth  : 0;
+      var col = cn0Color(sat.cn0);
+
+      var satR = (1 - el / 90) * maxR;
+      var rad  = (az - 90) * Math.PI / 180;
+      var x    = cx + satR * Math.cos(rad);
+      var y    = cy + satR * Math.sin(rad);
+
+      svg.append('circle')
+        .attr('cx', x).attr('cy', y).attr('r', 14)
+        .attr('fill', col).attr('fill-opacity', 0.9)
+        .attr('stroke', '#ffffff55').attr('stroke-width', 1);
+
+      svg.append('text')
+        .attr('x', x).attr('y', y)
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+        .attr('fill', '#fff').attr('font-size', 10).attr('font-weight', '700')
+        .attr('font-family', 'sans-serif')
+        .text(sat.prn);
+
+      if (sat.cn0 != null) {
+        svg.append('text')
+          .attr('x', x).attr('y', y + 21)
+          .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+          .attr('fill', col).attr('font-size', 9).attr('font-family', 'sans-serif')
+          .text(sat.cn0.toFixed(0) + 'dB');
+      }
+    });
+  }
+
+
+  // ===========================================================================
+  // § 11  Chart.js CN0 Horizontal Bar Chart
+  //  Accepts optional canvasId: 'cn0-chart' (overlay) or 'cn0-full-chart'
+  //  (full-screen tab).  Stores instances in cn0Chart / cn0FullChart so both
+  //  can be independently resized.  Threshold lines at 35 and 45 dB-Hz.
+  // ===========================================================================
+  function renderCN0Chart(satellites, canvasId) {
+    canvasId = canvasId || 'cn0-chart';
+    var el = document.getElementById(canvasId);
+    if (!el) return;
+
+    if (canvasId === 'cn0-chart') {
+      if (cn0Chart) { cn0Chart.destroy(); cn0Chart = null; }
+    } else {
+      if (cn0FullChart) { cn0FullChart.destroy(); cn0FullChart = null; }
+    }
+
+    var sats   = Object.values(satellites).sort(function(a, b) { return a.prn - b.prn; });
+    var labels = sats.map(function(s) { return 'PRN ' + s.prn; });
+    var values = sats.map(function(s) { return s.cn0 != null ? s.cn0 : 0; });
+    var colors = sats.map(function(s) { return cn0Color(s.cn0); });
+
+    var chart = new Chart(el.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'CN0 (dB-Hz)',
+          data: values,
+          backgroundColor: colors.map(function(c) { return c + 'bb'; }),
+          borderColor: colors,
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 400 },
+        plugins: {
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              line35: {
+                type: 'line', xMin: 35, xMax: 35,
+                borderColor: '#e3b341', borderWidth: 1.5, borderDash: [6, 4],
+                label: {
+                  content: '35 dB-Hz', display: true, position: 'start',
+                  color: '#e3b341', font: { size: 10 },
+                  backgroundColor: 'transparent', yAdjust: -12,
+                },
+              },
+              line45: {
+                type: 'line', xMin: 45, xMax: 45,
+                borderColor: '#2da44e', borderWidth: 1.5, borderDash: [6, 4],
+                label: {
+                  content: '45 dB-Hz', display: true, position: 'start',
+                  color: '#2da44e', font: { size: 10 },
+                  backgroundColor: 'transparent', yAdjust: -12,
+                },
+              },
+            }
+          },
+          tooltip: {
+            callbacks: { label: function(ctx) { return '  ' + ctx.raw.toFixed(1) + ' dB-Hz'; } }
+          }
+        },
+        scales: {
+          x: {
+            min: 0, max: 60,
+            title: { display: true, text: 'dB-Hz', color: '#8b949e', font: { size: 11 } },
+            grid:  { color: '#21262d' },
+            ticks: { color: '#8b949e', font: { size: 11 } },
+          },
+          y: {
+            grid:  { color: '#1a1f27' },
+            ticks: { color: '#e6edf3', font: { size: 12 } },
+          }
+        }
+      }
+    });
+
+    if (canvasId === 'cn0-chart') cn0Chart     = chart;
+    else                          cn0FullChart = chart;
+  }
+
+
+  // ===========================================================================
+  // § 12  Chart.js Satellite CN0 History (Satellite Details tab) -- unchanged
+  // ===========================================================================
+  var PRN_PALETTE = ['#58a6ff','#3fb950','#f85149','#e3b341','#d2a8ff','#ffa657','#79c0ff'];
+
+  function renderHistoryChart(historyData) {
+    var ctx = document.getElementById('history-chart').getContext('2d');
+    if (historyChart) { historyChart.destroy(); historyChart = null; }
+
+    var prns = Object.keys(historyData).sort(function(a, b) { return +a - +b; });
+    if (prns.length === 0) return;
+
+    var labels   = historyData[prns[0]].map(function(d) { return d.t; });
+    var datasets = prns.map(function(prn, i) {
+      return {
+        label: 'PRN ' + prn,
+        data:  historyData[prn].map(function(d) { return d.cn0; }),
+        borderColor: PRN_PALETTE[i % PRN_PALETTE.length],
+        backgroundColor: PRN_PALETTE[i % PRN_PALETTE.length] + '18',
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 0,
+        fill: false,
+      };
+    });
+
+    historyChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels: labels, datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: { color: '#e6edf3', font: { size: 12 }, boxWidth: 16, padding: 16 }
+          },
+          tooltip: {
+            mode: 'index', intersect: false,
+            callbacks: {
+              label: function(ctx) {
+                return '  PRN ' + ctx.dataset.label.split(' ')[1] + ': ' + ctx.raw.toFixed(1) + ' dB-Hz';
+              }
+            }
+          }
+        },
+        interaction: { mode: 'nearest', axis: 'x', intersect: false },
+        scales: {
+          x: {
+            title: { display: true, text: 'UTC timestamp (HHMMSS.ss)', color: '#8b949e', font: { size: 11 } },
+            ticks: { color: '#8b949e', maxTicksLimit: 10, font: { size: 10 }, maxRotation: 0 },
+            grid: { color: '#21262d' },
+          },
+          y: {
+            title: { display: true, text: 'CN0 (dB-Hz)', color: '#8b949e', font: { size: 11 } },
+            min: 30, max: 55,
+            grid:  { color: '#21262d' },
+            ticks: { color: '#8b949e', font: { size: 11 } },
+          }
+        }
+      }
+    });
+  }
+
+
+  // ===========================================================================
+  // § 13  Raw Data Feed -- unchanged
+  // ===========================================================================
+  function renderRawFeed(sentences) {
+    var feed = document.getElementById('raw-feed');
+    feed.innerHTML = sentences.map(function(s) {
+      var cls = 'nmea-other';
+      if      (s.indexOf('$GPGGA') === 0) cls = 'nmea-gga';
+      else if (s.indexOf('$GPGSV') === 0) cls = 'nmea-gsv';
+      else if (s.indexOf('$GPGSA') === 0) cls = 'nmea-gsa';
+      else if (s.indexOf('$GPRMC') === 0) cls = 'nmea-rmc';
+      return '<div class="nmea-line ' + cls + '">' + esc(s) + '</div>';
+    }).join('');
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+
+  // ===========================================================================
+  // § 14  Status bar -- unchanged
+  // ===========================================================================
+  function updateStatus(positions, satellites) {
+    document.getElementById('s-fixes').textContent = positions.length.toLocaleString();
+    document.getElementById('s-sats').textContent  = Object.keys(satellites).length;
+    if (positions.length > 0) {
+      var last = positions[positions.length - 1];
+      document.getElementById('s-pos').textContent =
+        last.latitude.toFixed(5) + '\u00b0N  ' +
+        last.longitude.toFixed(5) + '\u00b0E  ' +
+        last.altitude.toFixed(1) + ' m';
+    }
+  }
+
+
+  // ===========================================================================
+  // § 15  Globe control button handlers
+  // ===========================================================================
+
+  // Reset View
+  document.getElementById('reset-camera').addEventListener('click', function() {
+    // Frame all entities (receiver + all satellites) in one view.
+    viewer.zoomTo(
+      viewer.entities,
+      new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-30), 0)
+    );
+  });
+
+  // Sky Plot overlay toggle
+  document.getElementById('toggle-skyplot-btn').addEventListener('click', function() {
+    var overlay  = document.getElementById('skyplot-overlay');
+    var nowShown = overlay.style.display === 'none';
+    overlay.style.display = nowShown ? '' : 'none';
+    this.classList.toggle('toggled-on', nowShown);
+    if (nowShown) requestAnimationFrame(function() { drawSkyplot(latestSatellites, 'skyplot-svg'); });
+  });
+
+  // CN0 overlay toggle
+  document.getElementById('toggle-cn0-btn').addEventListener('click', function() {
+    var overlay  = document.getElementById('cn0-overlay');
+    var nowShown = overlay.style.display === 'none';
+    overlay.style.display = nowShown ? '' : 'none';
+    this.classList.toggle('toggled-on', nowShown);
+    if (nowShown && cn0Chart) cn0Chart.resize();
+  });
+
+
+  // ===========================================================================
+  // § 16  Data loading -- post-processed mode (REST)
+  //
+  //  All four endpoints are fetched in parallel on page load.
+  //
+  //  LIVE MODE: replace this block with a WebSocket connection (see § 1).
+  // ===========================================================================
+  async function loadData() {
+    var loadingEl = document.getElementById('loading-overlay');
+    try {
+      var responses = await Promise.all([
+        fetch('/api/positions'),
+        fetch('/api/satellites'),
+        fetch('/api/raw'),
+        fetch('/api/satellite-history'),
+      ]);
+      var posRes  = responses[0];
+      var satRes  = responses[1];
+      var rawRes  = responses[2];
+      var histRes = responses[3];
+
+      if (!posRes.ok || !satRes.ok) throw new Error('Server returned error');
+
+      var positions  = await posRes.json();
+      var satellites = await satRes.json();
+      var rawData    = rawRes.ok  ? await rawRes.json()  : { sentences: [] };
+      var histData   = histRes.ok ? await histRes.json() : {};
+
+      latestSatellites = satellites;
+      lastReceiverPos  = positions.length > 0 ? positions[positions.length - 1] : null;
+
+      // Globe track + latest-fix marker
+      initGlobe(positions);
+
+      // Dashboard overlay skyplot (rAF so layout is committed first)
+      requestAnimationFrame(function() { drawSkyplot(satellites, 'skyplot-svg'); });
+
+      // Dashboard overlay CN0 bar chart
+      renderCN0Chart(satellites, 'cn0-chart');
+
+      // Satellite Details history line chart
+      renderHistoryChart(histData);
+
+      // Raw NMEA feed
+      renderRawFeed(rawData.sentences || []);
+
+      // Status bar
+      updateStatus(positions, satellites);
+
+      // Task 2: 3-D animated satellite entities (async -- may load ion model)
+      if (lastReceiverPos && Object.keys(histData).length > 0) {
+        await initSatellites(satellites, histData, lastReceiverPos);
+      }
+
+    } catch (err) {
+      console.error('Failed to load GNSS data:', err);
+      document.getElementById('raw-feed').innerHTML =
+        '<span style="color:#f85149">Error loading data: ' + esc(String(err)) + '</span>';
+    } finally {
+      // Task 4: fade out loading overlay regardless of success or failure
+      loadingEl.style.opacity = '0';
+      loadingEl.addEventListener('transitionend', function() { loadingEl.remove(); }, { once: true });
+    }
+  }
+
+  loadData();
+
+
+  // ===========================================================================
+  // § 17  Window resize -- redraw size-sensitive SVG charts
+  // ===========================================================================
+  window.addEventListener('resize', function() {
+    var dashActive    = document.getElementById('panel-dashboard').classList.contains('active');
+    var skyplotActive = document.getElementById('panel-skyplot').classList.contains('active');
+    if (dashActive)    drawSkyplot(latestSatellites, 'skyplot-svg');
+    if (skyplotActive) drawSkyplot(latestSatellites, 'skyplot-full-svg');
+
+    if (cn0Chart)     cn0Chart.resize();
+    if (cn0FullChart) cn0FullChart.resize();
+    if (historyChart) historyChart.resize();
+  });
+
+  </script>
 </body>
 </html>
