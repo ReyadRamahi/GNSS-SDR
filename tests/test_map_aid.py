@@ -10,11 +10,17 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+import numpy as np
+from shapely.geometry import Polygon
+
 from map_aid import (
     DEFAULT_FLOOR_HEIGHT_M,
     BuildingMask,
     _estimate_height,
     _latlon_to_enu,
+    get_wall_segments,
+    mirror_point_across_line,
+    wall_normal_2d,
 )
 
 # Reference receiver position (Chicago area)
@@ -181,3 +187,125 @@ def test_overpass_unavailable():
     for sat in result:
         assert sat["predicted_los"] is True
         assert "building data unavailable" in sat["nlos_note"]
+
+
+# ---------------------------------------------------------------------------
+# Specular multipath helper unit tests
+# ---------------------------------------------------------------------------
+
+def test_mirror_point_across_line_xaxis():
+    """Mirror (0, 1) across the x-axis → (0, -1)."""
+    pt = mirror_point_across_line((0.0, 1.0), (0.0, 0.0), (1.0, 0.0))
+    assert abs(pt[0] - 0.0) < 1e-9
+    assert abs(pt[1] - (-1.0)) < 1e-9
+
+
+def test_mirror_point_across_line_vertical():
+    """Mirror (3, 0) across the line x=1 → (-1, 0)."""
+    # Line x=1 passes through (1,0) and (1,1)
+    pt = mirror_point_across_line((3.0, 0.0), (1.0, 0.0), (1.0, 1.0))
+    assert abs(pt[0] - (-1.0)) < 1e-9
+    assert abs(pt[1] - 0.0) < 1e-9
+
+
+def test_wall_normal_outward():
+    """Wall normals for a unit square must all point away from the centroid."""
+    # Unit square centred at origin
+    sq = Polygon([(-1, -1), (1, -1), (1, 1), (-1, 1), (-1, -1)])
+    cx, cy = sq.centroid.x, sq.centroid.y
+    centroid = (cx, cy)
+
+    for ws, we in get_wall_segments(sq):
+        normal = wall_normal_2d(ws, we, centroid)
+        mx = (ws[0] + we[0]) / 2.0
+        my = (ws[1] + we[1]) / 2.0
+        # Normal must point away from centroid
+        to_centroid = np.array([cx - mx, cy - my])
+        assert np.dot(normal, to_centroid) <= 0.0, (
+            f"Normal {normal} points toward centroid for wall {ws}-{we}"
+        )
+
+
+def _mask_east(east_start: float = 50.0, width: float = 20.0) -> BuildingMask:
+    """
+    BuildingMask with one 30 m building placed east of receiver.
+    Building spans x=[east_start, east_start+width], y=[-10, 10].
+    """
+    lat_per_m = 1.0 / 111_000
+    cos_lat   = math.cos(math.radians(REF_LAT))
+    lon_per_m = 1.0 / (111_000 * cos_lat)
+
+    x0, x1 = east_start, east_start + width
+    y0, y1 = -10.0, 10.0
+    corners_enu = [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, y0)]
+    nodes = [
+        {"lat": REF_LAT + n * lat_per_m, "lon": REF_LON + e * lon_per_m}
+        for e, n in corners_enu
+    ]
+    element = {
+        "type": "way",
+        "tags": {"building": "yes", "height": "30"},
+        "geometry": nodes,
+    }
+    fake_resp = MagicMock()
+    fake_resp.raise_for_status = MagicMock()
+    fake_resp.json.return_value = {"elements": [element]}
+    with patch("map_aid.requests.post", return_value=fake_resp):
+        return BuildingMask(REF_LAT, REF_LON)
+
+
+def test_specular_reflection_found():
+    """Building east of receiver + satellite from east → at least one reflection."""
+    mask = _mask_east()
+    reflections = mask.find_specular_reflections(elevation_deg=20.0, azimuth_deg=90.0)
+    assert len(reflections) >= 1
+    assert reflections[0].extra_path_m > 0.0
+
+
+def test_no_reflection_clear_sky():
+    """Building north of receiver + satellite from south → no reflections (wrong facing)."""
+    mask = _mask_with(north_m=50.0)
+    reflections = mask.find_specular_reflections(elevation_deg=45.0, azimuth_deg=180.0)
+    assert len(reflections) == 0
+
+
+def test_reflection_path_blocked():
+    """
+    Reflecting building east, blocking building between it and receiver
+    → reflection is suppressed because path from wall to receiver is blocked.
+    """
+    lat_per_m = 1.0 / 111_000
+    cos_lat   = math.cos(math.radians(REF_LAT))
+    lon_per_m = 1.0 / (111_000 * cos_lat)
+
+    def _nodes(x0: float, x1: float, y0: float, y1: float) -> list[dict]:
+        corners = [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, y0)]
+        return [
+            {"lat": REF_LAT + n * lat_per_m, "lon": REF_LON + e * lon_per_m}
+            for e, n in corners
+        ]
+
+    elements = [
+        # Blocker between receiver and reflecting building
+        {
+            "type": "way",
+            "tags": {"building": "yes", "height": "30"},
+            "geometry": _nodes(10.0, 30.0, -10.0, 10.0),
+        },
+        # Reflecting building further east
+        {
+            "type": "way",
+            "tags": {"building": "yes", "height": "30"},
+            "geometry": _nodes(60.0, 80.0, -10.0, 10.0),
+        },
+    ]
+    fake_resp = MagicMock()
+    fake_resp.raise_for_status = MagicMock()
+    fake_resp.json.return_value = {"elements": elements}
+    with patch("map_aid.requests.post", return_value=fake_resp):
+        mask = BuildingMask(REF_LAT, REF_LON)
+
+    reflections = mask.find_specular_reflections(elevation_deg=20.0, azimuth_deg=90.0)
+    # The far-east reflecting building (idx=1) must produce no reflection — its
+    # reflected path to the receiver is blocked by the closer building (idx=0).
+    assert not any(r.building_idx == 1 for r in reflections)
