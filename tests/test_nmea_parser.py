@@ -24,7 +24,7 @@ NMEA_FILE = (
     Path(__file__).parent.parent
     / "CTTC_GPS"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN"
-    / "gnss_pvt.nmea"
+    / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"
 )
 
 # First $GPGGA line in the file (line 2):
@@ -205,7 +205,7 @@ class TestParseNmeaFile:
 
     def test_first_fix_timestamp(self, parsed):
         fixes, _ = parsed
-        assert fixes[0].timestamp == "062331.39"
+        assert fixes[0].timestamp == "062348.000"
 
     def test_first_fix_latitude_in_spain(self, parsed):
         # CTTC is in Castelldefels, Spain (~41.3°N, ~1.99°E)

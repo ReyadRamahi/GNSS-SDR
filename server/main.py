@@ -12,12 +12,14 @@ Static frontend files are served from frontend/ at the project root.
 """
 from __future__ import annotations
 
+import asyncio
 import sys
 from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
+from typing import Optional, Set
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 
 # ---------------------------------------------------------------------------
@@ -34,14 +36,67 @@ from nmea_parser import (  # noqa: E402
     _parse_gpgga,   # private helpers – stable for internal use
     _parse_gpgsv,
 )
+from map_aid import BuildingMask  # noqa: E402
 
 NMEA_PATH = (
     ROOT
     / "CTTC_GPS"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN"
-    / "gnss_pvt.nmea"
+    / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"
 )
+LIVE_NMEA_PATH = ROOT / "gnss_pvt.nmea"
 FRONTEND_DIR = ROOT / "frontend"
+
+
+# ---------------------------------------------------------------------------
+# WebSocket connection manager
+# ---------------------------------------------------------------------------
+
+class ConnectionManager:
+    def __init__(self) -> None:
+        self.active: Set[WebSocket] = set()
+
+    async def connect(self, ws: WebSocket) -> None:
+        await ws.accept()
+        self.active.add(ws)
+
+    def disconnect(self, ws: WebSocket) -> None:
+        self.active.discard(ws)
+
+    async def broadcast(self, message: str) -> None:
+        dead: Set[WebSocket] = set()
+        for ws in self.active:
+            try:
+                await ws.send_text(message)
+            except Exception:
+                dead.add(ws)
+        self.active -= dead
+
+
+manager = ConnectionManager()
+
+
+async def tail_nmea() -> None:
+    """Tail gnss_pvt.nmea and broadcast each new line to connected WebSocket clients."""
+    position = 0
+    while True:
+        try:
+            await asyncio.sleep(0.1)
+            if not LIVE_NMEA_PATH.exists():
+                position = 0
+                continue
+            with open(LIVE_NMEA_PATH, "r", errors="replace") as fh:
+                fh.seek(position)
+                lines = fh.readlines()
+                position = fh.tell()
+            for raw in lines:
+                line = raw.strip()
+                if line:
+                    await manager.broadcast(line)
+        except asyncio.CancelledError:
+            break
+        except Exception:
+            pass
 
 # ---------------------------------------------------------------------------
 # Application state — populated at startup
@@ -50,6 +105,7 @@ _fixes: list[PositionFix] = []
 _satellites: dict[int, SatelliteInfo] = {}
 _satellite_history: dict[int, list[dict]] = {}
 _raw_sentences: list[str] = []
+building_mask: Optional[BuildingMask] = None
 
 
 def _build_satellite_history(path: Path) -> dict[int, list[dict]]:
@@ -100,6 +156,14 @@ def _build_satellite_history(path: Path) -> dict[int, list[dict]]:
     return history
 
 
+async def _init_building_mask(lat: float, lon: float) -> None:
+    global building_mask
+    loop = asyncio.get_event_loop()
+    mask = await loop.run_in_executor(None, lambda: BuildingMask(lat, lon))
+    building_mask = mask
+    print(f"[startup] Building mask ready: {mask.building_count} buildings loaded")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global _fixes, _satellites, _satellite_history, _raw_sentences
@@ -113,11 +177,16 @@ async def lifespan(app: FastAPI):
             f"{len(_satellites)} satellites, "
             f"{len(_raw_sentences)} raw sentences from {NMEA_PATH.name}"
         )
+        if _fixes:
+            asyncio.create_task(
+                _init_building_mask(_fixes[0].latitude, _fixes[0].longitude)
+            )
     else:
         print(
             f"[startup] WARNING: NMEA file not found at {NMEA_PATH}. "
             "Download the CTTC GPS dataset to enable full endpoints."
         )
+    asyncio.create_task(tail_nmea())
     yield
 
 
@@ -146,10 +215,69 @@ def get_satellites() -> dict[str, dict]:
     Returns the latest SatelliteInfo per PRN parsed from $GPGSV sentences.
     Keys are PRN numbers (as strings, per JSON spec).
     Each record contains: prn, elevation, azimuth, cn0.
+    When building_mask is available, also includes: predicted_los,
+    blocking_building, nlos_note.
     """
     if not _satellites:
         raise HTTPException(status_code=503, detail="NMEA data not loaded")
-    return {str(prn): asdict(sat) for prn, sat in sorted(_satellites.items())}
+
+    result = {str(prn): asdict(sat) for prn, sat in sorted(_satellites.items())}
+
+    if building_mask is not None:
+        sat_list = [
+            {
+                "prn": sat["prn"],
+                "elevation_deg": sat["elevation"],
+                "azimuth_deg":   sat["azimuth"],
+                "cn0":           sat["cn0"],
+            }
+            for sat in result.values()
+            if sat["elevation"] is not None and sat["azimuth"] is not None
+        ]
+        classified = building_mask.classify_satellites(sat_list)
+        los_by_prn = {s["prn"]: s for s in classified}
+        for sat in result.values():
+            info = los_by_prn.get(sat["prn"])
+            if info:
+                sat["predicted_los"]     = info["predicted_los"]
+                sat["blocking_building"] = info["blocking_building"]
+                sat["nlos_note"]         = info["nlos_note"]
+
+    return result
+
+
+@app.get("/api/building_mask", summary="Building mask LOS/NLOS prediction per satellite")
+def get_building_mask() -> dict:
+    """
+    Returns LOS/NLOS classification for every satellite in view based on
+    OpenStreetMap building footprints near the receiver position.
+
+    Returns 503 while the background Overpass fetch is still in progress.
+    """
+    if building_mask is None:
+        raise HTTPException(status_code=503, detail="Building mask not available")
+    if not _fixes:
+        raise HTTPException(status_code=503, detail="NMEA data not loaded")
+
+    first_fix = _fixes[0]
+    sat_list = [
+        {
+            "prn":           sat.prn,
+            "elevation_deg": sat.elevation,
+            "azimuth_deg":   sat.azimuth,
+            "cn0":           sat.cn0,
+        }
+        for sat in _satellites.values()
+        if sat.elevation is not None and sat.azimuth is not None
+    ]
+    classified = building_mask.classify_satellites(sat_list)
+
+    return {
+        "receiver_lat":   first_fix.latitude,
+        "receiver_lon":   first_fix.longitude,
+        "building_count": building_mask.building_count,
+        "satellites":     classified,
+    }
 
 
 @app.get("/api/satellite-history", summary="Per-PRN CN0 time series for the details tab")
@@ -173,6 +301,22 @@ def get_raw() -> dict[str, list[str]]:
     if not _raw_sentences:
         raise HTTPException(status_code=503, detail="NMEA data not loaded")
     return {"sentences": _raw_sentences[-50:]}
+
+
+# ---------------------------------------------------------------------------
+# WebSocket endpoint — live NMEA push
+# ---------------------------------------------------------------------------
+
+@app.websocket("/ws")
+async def websocket_endpoint(ws: WebSocket) -> None:
+    await manager.connect(ws)
+    try:
+        while True:
+            await ws.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(ws)
+    except Exception:
+        manager.disconnect(ws)
 
 
 # ---------------------------------------------------------------------------
