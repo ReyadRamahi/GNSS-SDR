@@ -414,9 +414,9 @@
             data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
         </div>
         <div class="cn0-legend">
-          <span><i class="dot" style="background:#2da44e"></i>&thinsp;&ge; 45</span>
-          <span><i class="dot" style="background:#e3b341"></i>&thinsp;35&ndash;45</span>
-          <span><i class="dot" style="background:#f85149"></i>&thinsp;&lt; 35 dB-Hz</span>
+          <span><i class="dot" style="background:#1D9E75"></i>&thinsp;LOS</span>
+          <span><i class="dot" style="background:#EF9F27"></i>&thinsp;Multipath</span>
+          <span><i class="dot" style="background:#D85A30"></i>&thinsp;NLOS</span>
         </div>
         <div class="overlay-inner">
           <svg id="skyplot-svg"></svg>
@@ -467,9 +467,9 @@
           data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
       </div>
       <div class="cn0-legend">
-        <span><i class="dot" style="background:#2da44e"></i> &ge; 45 dB-Hz</span>
-        <span><i class="dot" style="background:#e3b341"></i> 35&ndash;45 dB-Hz</span>
-        <span><i class="dot" style="background:#f85149"></i> &lt; 35 dB-Hz</span>
+        <span><i class="dot" style="background:#1D9E75"></i> LOS</span>
+        <span><i class="dot" style="background:#EF9F27"></i> Multipath reflection</span>
+        <span><i class="dot" style="background:#D85A30"></i> NLOS</span>
       </div>
     </div>
     <div class="full-tab-inner">
@@ -767,13 +767,20 @@
 
 
   // ===========================================================================
-  // § 4  CN0 to colour helper
+  // § 4  Colour helpers
   // ===========================================================================
   function cn0Color(cn0) {
     if (cn0 == null) return '#6e7681';
     if (cn0 >= 45)   return '#2da44e';   // strong -- green
     if (cn0 >= 35)   return '#e3b341';   // medium -- yellow
     return '#f85149';                     // weak   -- red
+  }
+
+  // Skyplot fill colour: NLOS → coral, multipath → amber, clean LOS → teal
+  function skyplotColor(sat) {
+    if (sat.predicted_los === false)  return '#D85A30';
+    if (sat.has_reflection === true)  return '#EF9F27';
+    return '#1D9E75';
   }
 
 
@@ -1144,17 +1151,24 @@
     Object.values(satellites).forEach(function(sat) {
       var el  = sat.elevation != null ? sat.elevation : 0;
       var az  = sat.azimuth  != null ? sat.azimuth  : 0;
-      var col = cn0Color(sat.cn0);
+      var col = skyplotColor(sat);
 
       var satR = (1 - el / 90) * maxR;
       var rad  = (az - 90) * Math.PI / 180;
       var x    = cx + satR * Math.cos(rad);
       var y    = cy + satR * Math.sin(rad);
 
+      // Build tooltip text
+      var tipLines = ['PRN ' + sat.prn];
+      if (sat.cn0 != null)             tipLines.push('CN0: ' + sat.cn0.toFixed(1) + ' dB-Hz');
+      if (sat.predicted_los === false)  tipLines.push('NLOS');
+      if (sat.has_reflection)           tipLines.push('Reflection delay: ' + (sat.reflection_delay_m || 0).toFixed(1) + ' m');
+
       svg.append('circle')
         .attr('cx', x).attr('cy', y).attr('r', 14)
         .attr('fill', col).attr('fill-opacity', 0.9)
-        .attr('stroke', '#ffffff55').attr('stroke-width', 1);
+        .attr('stroke', '#ffffff55').attr('stroke-width', 1)
+        .append('title').text(tipLines.join('\n'));
 
       svg.append('text')
         .attr('x', x).attr('y', y)
