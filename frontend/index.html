@@ -75,6 +75,26 @@
     }
     header .subtitle { color: #8b949e; font-size: 12px; margin-left: auto; }
 
+    #mode-badge.live {
+      background: #2da44e22;
+      border-color: #2da44e66;
+      color: #3fb950;
+    }
+    @keyframes blink-dot {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+    #mode-badge.live::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #3fb950;
+      margin-right: 5px;
+      vertical-align: middle;
+      animation: blink-dot 1.4s ease-in-out infinite;
+    }
+
     /* ===== Tab bar ===== */
     .tab-bar {
       display: flex;
@@ -349,7 +369,7 @@
   <!-- ========== Header ========== -->
   <header>
     <h1>GNSS-SDR Dashboard</h1>
-    <span class="pill">Post-processed</span>
+    <span id="mode-badge" class="pill">REPLAY</span>
     <span class="subtitle">CTTC Spain 2013 &middot; GPS L1 C/A &middot; IE 421</span>
   </header>
 
@@ -394,9 +414,9 @@
             data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
         </div>
         <div class="cn0-legend">
-          <span><i class="dot" style="background:#2da44e"></i>&thinsp;&ge; 45</span>
-          <span><i class="dot" style="background:#e3b341"></i>&thinsp;35&ndash;45</span>
-          <span><i class="dot" style="background:#f85149"></i>&thinsp;&lt; 35 dB-Hz</span>
+          <span><i class="dot" style="background:#1D9E75"></i>&thinsp;LOS</span>
+          <span><i class="dot" style="background:#EF9F27"></i>&thinsp;Multipath</span>
+          <span><i class="dot" style="background:#D85A30"></i>&thinsp;NLOS</span>
         </div>
         <div class="overlay-inner">
           <svg id="skyplot-svg"></svg>
@@ -447,9 +467,9 @@
           data-tooltip="Polar view of the sky. Angle = azimuth (compass direction), distance from center = elevation (90&deg; overhead, 0&deg; horizon). Color = signal strength.">&#x24D8;</span>
       </div>
       <div class="cn0-legend">
-        <span><i class="dot" style="background:#2da44e"></i> &ge; 45 dB-Hz</span>
-        <span><i class="dot" style="background:#e3b341"></i> 35&ndash;45 dB-Hz</span>
-        <span><i class="dot" style="background:#f85149"></i> &lt; 35 dB-Hz</span>
+        <span><i class="dot" style="background:#1D9E75"></i> LOS</span>
+        <span><i class="dot" style="background:#EF9F27"></i> Multipath reflection</span>
+        <span><i class="dot" style="background:#D85A30"></i> NLOS</span>
       </div>
     </div>
     <div class="full-tab-inner">
@@ -479,7 +499,7 @@
     <div>Fixes: <b id="s-fixes">&mdash;</b></div>
     <div>Satellites tracked: <b id="s-sats">&mdash;</b></div>
     <div>Latest: <b id="s-pos">&mdash;</b></div>
-    <div>Mode: <b>Post-processed (REST)</b></div>
+    <div>Mode: <b id="s-mode">REPLAY (REST)</b></div>
   </div>
 
 
@@ -497,19 +517,204 @@
 
 
   // ===========================================================================
-  // § 1  LIVE MODE HOOK
-  //      When the WebSocket endpoint (/ws) is ready, replace the REST fetch
-  //      in loadData() with a WebSocket connection:
-  //
-  //        const ws = new WebSocket('ws://' + location.host + '/ws');
-  //        ws.onmessage = (event) => {
-  //          const msg = JSON.parse(event.data);
-  //          // msg carries { type: 'position'|'satellite', data: ... }
-  //          // call updateGlobe(), drawSkyplot(), renderCN0Chart() etc.
-  //        };
-  //        ws.onerror = () =>
-  //          console.warn('WebSocket unavailable -- staying in REST mode');
+  // § 1  LIVE MODE — WebSocket client + client-side NMEA parsing
   // ===========================================================================
+
+  // --- Badge helpers --------------------------------------------------------
+  function showLiveBadge() {
+    var badge = document.getElementById('mode-badge');
+    badge.textContent = 'LIVE';
+    badge.classList.add('live');
+    document.getElementById('s-mode').textContent = 'LIVE (WebSocket)';
+  }
+
+  function showReplayBadge() {
+    var badge = document.getElementById('mode-badge');
+    badge.textContent = 'REPLAY';
+    badge.classList.remove('live');
+    document.getElementById('s-mode').textContent = 'REPLAY (REST)';
+  }
+
+  // --- Client-side NMEA parsers (mirror of nmea_parser.py) -----------------
+  function _nmeaLat(raw, hemi) {
+    if (!raw) return NaN;
+    var deg = parseFloat(raw.slice(0, 2));
+    var min = parseFloat(raw.slice(2));
+    var dd  = deg + min / 60;
+    return hemi === 'S' ? -dd : dd;
+  }
+
+  function _nmeaLon(raw, hemi) {
+    if (!raw) return NaN;
+    var deg = parseFloat(raw.slice(0, 3));
+    var min = parseFloat(raw.slice(3));
+    var dd  = deg + min / 60;
+    return hemi === 'W' ? -dd : dd;
+  }
+
+  function _parseGGA(line) {
+    var body   = line.replace(/\*[0-9A-Fa-f]{2}$/, '');
+    var fields = body.split(',');
+    if (fields.length < 10) return null;
+    try {
+      var lat = _nmeaLat(fields[2], fields[3]);
+      var lon = _nmeaLon(fields[4], fields[5]);
+      var alt = parseFloat(fields[9]);
+      if (isNaN(lat) || isNaN(lon) || isNaN(alt)) return null;
+      return {
+        timestamp:      fields[1],
+        latitude:       lat,
+        longitude:      lon,
+        altitude:       alt,
+        fix_quality:    parseInt(fields[6], 10),
+        num_satellites: parseInt(fields[7], 10),
+      };
+    } catch (e) { return null; }
+  }
+
+  function _parseGSV(line) {
+    var body   = line.replace(/\*[0-9A-Fa-f]{2}$/, '');
+    var fields = body.split(',');
+    var sats   = [];
+    var i = 4;
+    while (i + 3 < fields.length) {
+      var prn = fields[i];
+      if (prn) {
+        sats.push({
+          prn:       parseInt(prn, 10),
+          elevation: fields[i + 1] ? parseFloat(fields[i + 1]) : null,
+          azimuth:   fields[i + 2] ? parseFloat(fields[i + 2]) : null,
+          cn0:       fields[i + 3] ? parseFloat(fields[i + 3]) : null,
+        });
+      }
+      i += 4;
+    }
+    return sats;
+  }
+
+  // --- Live state -----------------------------------------------------------
+  var livePositions = [];
+
+  function _updateGlobeReceiverMarker(fix) {
+    var pos    = Cesium.Cartesian3.fromDegrees(fix.longitude, fix.latitude, fix.altitude + 50);
+    var entity = viewer.entities.getById('receiver-latest-fix');
+    var label  = 'Live Fix\n' + fix.latitude.toFixed(5) + '°N  ' + fix.longitude.toFixed(5) + '°E';
+    if (entity) {
+      entity.position = pos;
+      if (entity.label) entity.label.text = new Cesium.ConstantProperty(label);
+    } else {
+      viewer.entities.add({
+        id: 'receiver-latest-fix',
+        position: pos,
+        point: {
+          pixelSize: 14,
+          color: Cesium.Color.fromCssColorString('#f85149'),
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+        },
+        label: {
+          text: label,
+          font: '12px sans-serif',
+          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+          outlineWidth: 2,
+          outlineColor: Cesium.Color.fromCssColorString('#0d1117'),
+          fillColor: Cesium.Color.WHITE,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          pixelOffset: new Cesium.Cartesian2(0, -18),
+          showBackground: true,
+          backgroundColor: Cesium.Color.fromCssColorString('#161b22cc'),
+        },
+      });
+    }
+    if (livePositions.length === 1) focusCameraOnReceiver(fix, 5000000);
+  }
+
+  function _appendRawLine(line) {
+    var feed = document.getElementById('raw-feed');
+    var cls  = 'nmea-other';
+    if      (line.indexOf('$GPGGA') === 0) cls = 'nmea-gga';
+    else if (line.indexOf('$GPGSV') === 0) cls = 'nmea-gsv';
+    else if (line.indexOf('$GPGSA') === 0) cls = 'nmea-gsa';
+    else if (line.indexOf('$GPRMC') === 0) cls = 'nmea-rmc';
+    var div = document.createElement('div');
+    div.className = 'nmea-line ' + cls;
+    div.textContent = line;
+    feed.appendChild(div);
+    // Keep feed to last 200 lines to avoid DOM bloat
+    while (feed.children.length > 200) feed.removeChild(feed.firstChild);
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  function handleNmeaLine(line) {
+    if (line.startsWith('$GPGGA')) {
+      var fix = _parseGGA(line);
+      if (fix) {
+        livePositions.push(fix);
+        lastReceiverPos = fix;
+        _updateGlobeReceiverMarker(fix);
+        updateStatus(livePositions, latestSatellites);
+        // Redraw satellite visuals once per GGA epoch (end-of-epoch marker)
+        requestAnimationFrame(function() { drawSkyplot(latestSatellites, 'skyplot-svg'); });
+        renderCN0Chart(latestSatellites, 'cn0-chart');
+      }
+    } else if (line.startsWith('$GPGSV')) {
+      _parseGSV(line).forEach(function(sat) {
+        latestSatellites[String(sat.prn)] = sat;
+      });
+    }
+    _appendRawLine(line);
+  }
+
+  // --- REST polling ---------------------------------------------------------
+  var _pollInterval = null;
+
+  function startPolling() {
+    if (_pollInterval !== null) return;
+    loadData();
+    _pollInterval = setInterval(loadData, 5000);
+  }
+
+  function stopPolling() {
+    if (_pollInterval !== null) {
+      clearInterval(_pollInterval);
+      _pollInterval = null;
+    }
+  }
+
+  // --- WebSocket client with exponential-backoff reconnect -----------------
+  var _ws         = null;
+  var _wsRetries  = 0;
+  var WS_MAX_RETRIES = 5;
+
+  function connectWebSocket() {
+    _ws = new WebSocket('ws://' + location.host + '/ws');
+
+    _ws.onopen = function() {
+      _wsRetries = 0;
+      stopPolling();
+      showLiveBadge();
+    };
+
+    _ws.onmessage = function(event) {
+      handleNmeaLine(event.data.trim());
+    };
+
+    _ws.onclose = function() {
+      showReplayBadge();
+      startPolling();
+      _reconnectWS();
+    };
+
+    _ws.onerror = function() {
+      _ws.close();
+    };
+  }
+
+  function _reconnectWS() {
+    if (_wsRetries < WS_MAX_RETRIES) {
+      setTimeout(connectWebSocket, Math.pow(2, _wsRetries++) * 1000);
+    }
+  }
 
 
   // ===========================================================================
@@ -517,6 +722,7 @@
   // ===========================================================================
   let latestSatellites = {};   // kept for tab-switch / resize redraws
   let lastReceiverPos  = null; // kept for the Reset View button
+  let _globeReady      = false; // guards one-time initGlobe / initSatellites
 
   // Two CN0 chart instances: overlay (dashboard) and full-screen tab
   let cn0Chart     = null;
@@ -561,13 +767,20 @@
 
 
   // ===========================================================================
-  // § 4  CN0 to colour helper
+  // § 4  Colour helpers
   // ===========================================================================
   function cn0Color(cn0) {
     if (cn0 == null) return '#6e7681';
     if (cn0 >= 45)   return '#2da44e';   // strong -- green
     if (cn0 >= 35)   return '#e3b341';   // medium -- yellow
     return '#f85149';                     // weak   -- red
+  }
+
+  // Skyplot fill colour: NLOS → coral, multipath → amber, clean LOS → teal
+  function skyplotColor(sat) {
+    if (sat.predicted_los === false)  return '#D85A30';
+    if (sat.has_reflection === true)  return '#EF9F27';
+    return '#1D9E75';
   }
 
 
@@ -938,17 +1151,24 @@
     Object.values(satellites).forEach(function(sat) {
       var el  = sat.elevation != null ? sat.elevation : 0;
       var az  = sat.azimuth  != null ? sat.azimuth  : 0;
-      var col = cn0Color(sat.cn0);
+      var col = skyplotColor(sat);
 
       var satR = (1 - el / 90) * maxR;
       var rad  = (az - 90) * Math.PI / 180;
       var x    = cx + satR * Math.cos(rad);
       var y    = cy + satR * Math.sin(rad);
 
+      // Build tooltip text
+      var tipLines = ['PRN ' + sat.prn];
+      if (sat.cn0 != null)             tipLines.push('CN0: ' + sat.cn0.toFixed(1) + ' dB-Hz');
+      if (sat.predicted_los === false)  tipLines.push('NLOS');
+      if (sat.has_reflection)           tipLines.push('Reflection delay: ' + (sat.reflection_delay_m || 0).toFixed(1) + ' m');
+
       svg.append('circle')
         .attr('cx', x).attr('cy', y).attr('r', 14)
         .attr('fill', col).attr('fill-opacity', 0.9)
-        .attr('stroke', '#ffffff55').attr('stroke-width', 1);
+        .attr('stroke', '#ffffff55').attr('stroke-width', 1)
+        .append('title').text(tipLines.join('\n'));
 
       svg.append('text')
         .attr('x', x).attr('y', y)
@@ -1190,71 +1410,69 @@
 
 
   // ===========================================================================
-  // § 16  Data loading -- post-processed mode (REST)
+  // § 16  Data loading
   //
-  //  All four endpoints are fetched in parallel on page load.
-  //
-  //  LIVE MODE: replace this block with a WebSocket connection (see § 1).
+  //  First call: full init (globe, 3-D satellites, history chart, raw feed).
+  //  Subsequent calls (REST poll): lightweight — skyplot + CN0 + status only.
+  //  Live mode: WebSocket pushes individual NMEA lines to handleNmeaLine().
   // ===========================================================================
   async function loadData() {
-    var loadingEl = document.getElementById('loading-overlay');
+    var loadingEl   = document.getElementById('loading-overlay');
+    var isFirstLoad = !_globeReady;
     try {
-      var responses = await Promise.all([
-        fetch('/api/positions'),
-        fetch('/api/satellites'),
-        fetch('/api/raw'),
-        fetch('/api/satellite-history'),
-      ]);
-      var posRes  = responses[0];
-      var satRes  = responses[1];
-      var rawRes  = responses[2];
-      var histRes = responses[3];
+      var fetches = [fetch('/api/positions'), fetch('/api/satellites')];
+      if (isFirstLoad) {
+        fetches.push(fetch('/api/raw'), fetch('/api/satellite-history'));
+      }
+      var responses = await Promise.all(fetches);
+      var posRes    = responses[0];
+      var satRes    = responses[1];
 
       if (!posRes.ok || !satRes.ok) throw new Error('Server returned error');
 
       var positions  = await posRes.json();
       var satellites = await satRes.json();
-      var rawData    = rawRes.ok  ? await rawRes.json()  : { sentences: [] };
-      var histData   = histRes.ok ? await histRes.json() : {};
 
       latestSatellites = satellites;
       lastReceiverPos  = positions.length > 0 ? positions[positions.length - 1] : null;
 
-      // Globe track + latest-fix marker
-      initGlobe(positions);
+      if (isFirstLoad) {
+        var rawData  = responses[2].ok ? await responses[2].json()  : { sentences: [] };
+        var histData = responses[3].ok ? await responses[3].json() : {};
 
-      // Dashboard overlay skyplot (rAF so layout is committed first)
-      requestAnimationFrame(function() { drawSkyplot(satellites, 'skyplot-svg'); });
+        initGlobe(positions);
+        renderHistoryChart(histData);
+        renderRawFeed(rawData.sentences || []);
 
-      // Dashboard overlay CN0 bar chart
-      renderCN0Chart(satellites, 'cn0-chart');
-
-      // Satellite Details history line chart
-      renderHistoryChart(histData);
-
-      // Raw NMEA feed
-      renderRawFeed(rawData.sentences || []);
-
-      // Status bar
-      updateStatus(positions, satellites);
-
-      // Task 2: 3-D animated satellite entities (async -- may load ion model)
-      if (lastReceiverPos && Object.keys(histData).length > 0) {
-        await initSatellites(satellites, histData, lastReceiverPos);
+        if (lastReceiverPos && Object.keys(histData).length > 0) {
+          await initSatellites(satellites, histData, lastReceiverPos);
+        }
+        _globeReady = true;
       }
+
+      // Always refresh 2-D visuals and status bar
+      requestAnimationFrame(function() { drawSkyplot(satellites, 'skyplot-svg'); });
+      renderCN0Chart(satellites, 'cn0-chart');
+      updateStatus(positions, satellites);
 
     } catch (err) {
       console.error('Failed to load GNSS data:', err);
-      document.getElementById('raw-feed').innerHTML =
-        '<span style="color:#f85149">Error loading data: ' + esc(String(err)) + '</span>';
+      if (isFirstLoad) {
+        document.getElementById('raw-feed').innerHTML =
+          '<span style="color:#f85149">Error loading data: ' + esc(String(err)) + '</span>';
+      }
     } finally {
-      // Fade out loading overlay regardless of success or failure
-      loadingEl.style.opacity = '0';
-      setTimeout(function() { loadingEl.style.display = 'none'; }, 450);
+      if (isFirstLoad) {
+        loadingEl.style.opacity = '0';
+        setTimeout(function() { loadingEl.style.display = 'none'; }, 450);
+      }
     }
   }
 
-  loadData();
+  // Start REST polling for post-processed data, then attempt live WebSocket.
+  // If the WebSocket connects, polling stops.  If it drops, polling resumes.
+  startPolling();
+  connectWebSocket();
 
 
   // ===========================================================================
