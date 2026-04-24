@@ -20,3 +20,10 @@ __pycache__/
 # AI agent instructions
 AGENTS.md
 CLAUDE.md
+
+# Kaggle dataset files (large; download via README instructions)
+kaggle_data/
+*.zip
+
+# Validation output
+validation_report.json
