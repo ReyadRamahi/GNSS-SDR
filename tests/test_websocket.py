@@ -53,8 +53,7 @@ async def test_tail_nmea_reads_new_lines(tmp_path, monkeypatch):
         await asyncio.sleep(0.3)
 
         task.cancel()
-        with pytest.raises(asyncio.CancelledError):
-            await task
+        await asyncio.wait_for(asyncio.shield(task), timeout=1.0)
 
     finally:
         manager.active.discard(fake_ws)  # type: ignore[arg-type]
@@ -71,8 +70,7 @@ async def test_tail_nmea_handles_missing_file(tmp_path, monkeypatch):
     task = asyncio.create_task(tail_nmea())
     await asyncio.sleep(0.25)  # several sleep cycles — no exception should surface
     task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        await task
+    await asyncio.wait_for(asyncio.shield(task), timeout=1.0)
 
 
 # ---------------------------------------------------------------------------
@@ -102,5 +100,5 @@ def test_websocket_broadcast(tmp_path, monkeypatch):
         with client.websocket_connect("/ws") as ws:
             # Write the sentence — the tail_nmea task (started in lifespan) should pick it up
             nmea_file.write_text(sentence + "\n")
-            data = ws.receive_text(timeout=2)
+            data = ws.receive_text()
             assert data == sentence

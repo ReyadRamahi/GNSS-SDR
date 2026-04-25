@@ -1,0 +1,42 @@
+===== track10_g42 =====
+Log: /home/alexgu2/gnss/research_runs_2026-04-24_2028/logs/track10_g42_console.log
+Tracking starts: 10
+Bit sync locks: 0
+NAV messages: 0
+Losses of lock: 8
+Position lines: 0
+Decoded subframes:
+
+===== track10_g45 =====
+Log: /home/alexgu2/gnss/research_runs_2026-04-24_2028/logs/track10_g45_console.log
+Tracking starts: 249
+Bit sync locks: 4
+NAV messages: 227
+Losses of lock: 246
+Position lines: 0
+Decoded subframes:
+PRN 12 SF1
+PRN 12 SF2
+PRN 12 SF3
+PRN 12 SF4
+PRN 12 SF5
+PRN 15 SF1
+PRN 15 SF2
+PRN 15 SF3
+PRN 15 SF4
+PRN 15 SF5
+PRN 20 SF1
+PRN 20 SF2
+PRN 20 SF3
+PRN 20 SF4
+PRN 20 SF5
+
+===== track10_g49 =====
+Log: /home/alexgu2/gnss/research_runs_2026-04-24_2028/logs/track10_g49_console.log
+Tracking starts: 37
+Bit sync locks: 0
+NAV messages: 0
+Losses of lock: 36
+Position lines: 0
+Decoded subframes:
+
