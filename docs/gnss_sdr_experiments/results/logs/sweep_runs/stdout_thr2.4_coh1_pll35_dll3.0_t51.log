@@ -1,0 +1,44 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+OsmoSdr arguments: soapy=0,driver=lime,serial=0009061C01502715,antenna=LNAW
+gr-osmosdr 0.2.0.0 (0.2.0) gnuradio 3.10.1.1
+built-in source types: file fcd rtl rtl_tcp uhd hackrf bladerf rfspace airspy airspyhf soapy redpitaya freesrp 
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+  duplicate entry for lime (/usr/lib/x86_64-linux-gnu/SoapySDR/modules0.8/libLMS7Support.so)[0m
+[INFO] Make connection: 'LimeSDR-USB [USB 3.0] 9061C01502715'
+[1m[33m[WARNING] Gateware version mismatch!
+  Expected gateware version 2, revision 23
+  But found version 2, revision 12
+  Follow the FW and FPGA upgrade instructions:
+  http://wiki.myriadrf.org/Lime_Suite#Flashing_images
+  Or run update on the command line: LimeUtil --update
+[0m
+[INFO] Reference clock 30.72 MHz
+[INFO] Device name: LimeSDR-USB
+[INFO] Reference: 30.72 MHz
+[INFO] LMS7002M register cache: Disabled
+[INFO] RX LPF configured
+[INFO] Rx calibration finished
+Actual RX Rate: 2e+06 [SPS]...
+Actual RX Freq: 1.57542e+09 [Hz]...
+PLL Frequency tune error: 0 [Hz]...
+AGC enabled
+Actual Bandwidth: -1 [Hz]...
+RF Channels: 1
+Current receiver time: 1 s
+Current receiver time: 2 s
+Current receiver time: 3 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 25 (Block IIF)
+Current receiver time: 4 s
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Current receiver time: 8 s
+Current receiver time: 9 s
+Current receiver time: 10 s
+Current receiver time: 11 s
+Quit keystroke order received, stopping GNSS-SDR !!
+Stopping GNSS-SDR, please wait!
+Total GNSS-SDR run time: 11.0412 [seconds]
+GNSS-SDR program ended.
