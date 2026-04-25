@@ -1,0 +1,127 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+OsmoSdr arguments: soapy=0,driver=lime,serial=0009061C01502715,antenna=LNAW
+gr-osmosdr 0.2.0.0 (0.2.0) gnuradio 3.10.1.1
+built-in source types: file fcd rtl rtl_tcp uhd hackrf bladerf rfspace airspy airspyhf soapy redpitaya freesrp 
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+  duplicate entry for lime (/usr/lib/x86_64-linux-gnu/SoapySDR/modules0.8/libLMS7Support.so)[0m
+[INFO] Make connection: 'LimeSDR-USB [USB 3.0] 9061C01502715'
+[1m[33m[WARNING] Gateware version mismatch!
+  Expected gateware version 2, revision 23
+  But found version 2, revision 12
+  Follow the FW and FPGA upgrade instructions:
+  http://wiki.myriadrf.org/Lime_Suite#Flashing_images
+  Or run update on the command line: LimeUtil --update
+[0m
+[INFO] Reference clock 30.72 MHz
+[INFO] Device name: LimeSDR-USB
+[INFO] Reference: 30.72 MHz
+[INFO] LMS7002M register cache: Disabled
+[INFO] RX LPF configured
+[INFO] Rx calibration finished
+Actual RX Rate: 2e+06 [SPS]...
+Actual RX Freq: 1.57542e+09 [Hz]...
+PLL Frequency tune error: 0 [Hz]...
+Actual RX Gain: 61 dB...
+Actual Bandwidth: -1 [Hz]...
+RF Channels: 1
+Trying to read GNSS ephemeris from XML file(s)...
+From XML file: Read NAV ephemeris for satellite GPS PRN 28 (Block IIR)
+From XML file: Read NAV ephemeris for satellite GPS PRN 31 (Block IIR-M)
+From XML file: Read GPS UTC model parameters.
+From XML file: Read GPS ionosphere model parameters.
+GNSS assistance data loaded from local XML file(s).
+Get visible satellites at 25/04/2026 04:29:10 UTC, assuming RX position 41.883 [deg], -87.643 [deg], 0 [m]
+Using GPS Ephemeris: Sat 28 Az: 301.727 El: 87.6382
+Using GPS Ephemeris: Sat 31 Az: 230.978 El: 56.4302
+Current receiver time: 1 s
+Current receiver time: 2 s
+Current receiver time: 3 s
+Current receiver time: 4 s
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Current receiver time: 8 s
+Current receiver time: 9 s
+Current receiver time: 10 s
+Current receiver time: 11 s
+Current receiver time: 12 s
+Current receiver time: 13 s
+Current receiver time: 14 s
+Current receiver time: 15 s
+Current receiver time: 16 s
+Current receiver time: 17 s
+Current receiver time: 18 s
+Current receiver time: 19 s
+Current receiver time: 20 s
+Current receiver time: 21 s
+Current receiver time: 22 s
+Current receiver time: 23 s
+Current receiver time: 24 s
+Current receiver time: 25 s
+Current receiver time: 26 s
+Current receiver time: 27 s
+Current receiver time: 28 s
+Current receiver time: 29 s
+Current receiver time: 30 s
+Current receiver time: 31 s
+Current receiver time: 32 s
+Current receiver time: 33 s
+Current receiver time: 34 s
+Current receiver time: 35 s
+Current receiver time: 36 s
+Current receiver time: 37 s
+Current receiver time: 38 s
+Current receiver time: 39 s
+Current receiver time: 40 s
+Current receiver time: 41 s
+Current receiver time: 42 s
+Current receiver time: 43 s
+Current receiver time: 44 s
+Current receiver time: 45 s
+Current receiver time: 46 s
+Current receiver time: 47 s
+Current receiver time: 48 s
+Current receiver time: 49 s
+Current receiver time: 50 s
+Current receiver time: 51 s
+Current receiver time: 52 s
+Current receiver time: 53 s
+Current receiver time: 54 s
+Current receiver time: 55 s
+Current receiver time: 56 s
+Current receiver time: 57 s
+Current receiver time: 58 s
+Current receiver time: 59 s
+Current receiver time: 1 min 0 s
+Current receiver time: 1 min 1 s
+Current receiver time: 1 min 2 s
+Current receiver time: 1 min 3 s
+Current receiver time: 1 min 4 s
+Current receiver time: 1 min 5 s
+Current receiver time: 1 min 6 s
+Current receiver time: 1 min 7 s
+Current receiver time: 1 min 8 s
+Current receiver time: 1 min 9 s
+Current receiver time: 1 min 10 s
+Current receiver time: 1 min 11 s
+Current receiver time: 1 min 12 s
+Current receiver time: 1 min 13 s
+Current receiver time: 1 min 14 s
+Current receiver time: 1 min 15 s
+Current receiver time: 1 min 16 s
+Current receiver time: 1 min 17 s
+Current receiver time: 1 min 18 s
+Current receiver time: 1 min 19 s
+Current receiver time: 1 min 20 s
+Current receiver time: 1 min 21 s
+Current receiver time: 1 min 22 s
+Current receiver time: 1 min 23 s
+Current receiver time: 1 min 24 s
+Current receiver time: 1 min 25 s
+Current receiver time: 1 min 26 s
+Quit keystroke order received, stopping GNSS-SDR !!
+Stopping GNSS-SDR, please wait!
+Total GNSS-SDR run time: 85.2624 [seconds]
+GNSS-SDR program ended.

@@ -1,0 +1,28 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+OsmoSdr arguments: soapy=0,driver=lime,serial=0009061C01502715,antenna=LNAW
+gr-osmosdr 0.2.0.0 (0.2.0) gnuradio 3.10.1.1
+built-in source types: file fcd rtl rtl_tcp uhd hackrf bladerf rfspace airspy airspyhf soapy redpitaya freesrp 
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+  duplicate entry for lime (/usr/lib/x86_64-linux-gnu/SoapySDR/modules0.8/libLMS7Support.so)[0m
+[INFO] Make connection: 'LimeSDR-USB [USB 3.0] 9061C01502715'
+[1m[33m[WARNING] Gateware version mismatch!
+  Expected gateware version 2, revision 23
+  But found version 2, revision 12
+  Follow the FW and FPGA upgrade instructions:
+  http://wiki.myriadrf.org/Lime_Suite#Flashing_images
+  Or run update on the command line: LimeUtil --update
+[0m
+[INFO] Reference clock 30.72 MHz
+[INFO] Device name: LimeSDR-USB
+[INFO] Reference: 30.72 MHz
+[INFO] LMS7002M register cache: Disabled
+[INFO] RX LPF configured
+[1m[31m[ERROR] Rx calibration: MCU error 4 (SXT tune failed)[0m
+Actual RX Rate: 5e+06 [SPS]...
+Actual RX Freq: 1.57542e+09 [Hz]...
+PLL Frequency tune error: 0 [Hz]...
+AGC enabled
+Actual Bandwidth: -1 [Hz]...
+RF Channels: 1
