@@ -1,0 +1,425 @@
+=== COUNTS ===
+0
+108
+114
+28637
+
+=== TRACKING HEAD ===
+
+=== LOSS HEAD ===
+32190:I0423 06:10:33.491868 66759 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+33525:I0423 06:10:33.881543 66756 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+35215:I0423 06:10:34.375200 66771 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+37740:I0423 06:10:35.109524 66774 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+40372:I0423 06:10:35.876561 66768 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 20)
+41071:I0423 06:10:36.080506 66777 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+53203:I0423 06:10:39.599681 66765 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 11)
+57346:I0423 06:10:40.799181 66762 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+75400:I0423 06:10:49.979115 66756 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+81988:I0423 06:10:53.341188 66777 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+86830:I0423 06:10:54.746510 66774 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+88898:I0423 06:10:55.346185 66771 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+93411:I0423 06:10:58.204434 66768 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+99030:I0423 06:11:00.927881 66765 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+99148:I0423 06:11:00.964428 66759 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+102598:I0423 06:11:01.968091 66762 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+122938:I0423 06:11:07.869908 66756 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+134538:I0423 06:11:11.242153 66774 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+138618:I0423 06:11:12.429216 66771 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+139255:I0423 06:11:12.619022 66777 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+150232:I0423 06:11:15.819718 66768 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+162972:I0423 06:11:21.270741 66765 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+163489:I0423 06:11:21.423679 66762 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+171519:I0423 06:11:23.767726 66759 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 6 (carrier_lock_fail_counter:1828 code_lock_fail_counter : 51)
+191099:I0423 06:11:29.793826 66771 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+193593:I0423 06:11:30.711882 66774 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+196924:I0423 06:11:31.666693 66777 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+202099:I0423 06:11:33.180303 66768 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+209133:I0423 06:11:35.495733 66756 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+218617:I0423 06:11:38.249673 66765 dll_pll_veml_tracking.cc:1006] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+
+=== ACQ HEAD ===
+259:I0423 06:10:15.696027 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 1, sample_stamp 4512, test statistics value 1.00113, test statistics threshold 2.5, code phase 1717, doppler 5500, magnitude 0, input signal power 0
+280:I0423 06:10:15.701772 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 9, sample_stamp 12703, test statistics value 1.00046, test statistics threshold 2.5, code phase 1428, doppler -8500, magnitude 0, input signal power 0
+301:I0423 06:10:15.707684 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 24990, test statistics value 1.02483, test statistics threshold 2.5, code phase 447, doppler 9500, magnitude 0, input signal power 0
+322:I0423 06:10:15.713040 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 11, sample_stamp 37277, test statistics value 1.74999, test statistics threshold 2.5, code phase 1692, doppler -7000, magnitude 0, input signal power 0
+343:I0423 06:10:15.719852 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 12, sample_stamp 49564, test statistics value 1.44616, test statistics threshold 2.5, code phase 88, doppler 8250, magnitude 0, input signal power 0
+364:I0423 06:10:15.725960 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 13, sample_stamp 61851, test statistics value 2.03869, test statistics threshold 2.5, code phase 1858, doppler 7750, magnitude 0, input signal power 0
+385:I0423 06:10:15.732046 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 14, sample_stamp 74138, test statistics value 1.62274, test statistics threshold 2.5, code phase 1100, doppler 3500, magnitude 0, input signal power 0
+406:I0423 06:10:15.738183 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 15, sample_stamp 86425, test statistics value 1.62519, test statistics threshold 2.5, code phase 620, doppler -2250, magnitude 0, input signal power 0
+427:I0423 06:10:15.744249 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 16, sample_stamp 98712, test statistics value 1.7513, test statistics threshold 2.5, code phase 308, doppler 8500, magnitude 0, input signal power 0
+448:I0423 06:10:15.750569 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 17, sample_stamp 110999, test statistics value 1.31849, test statistics threshold 2.5, code phase 52, doppler 7750, magnitude 0, input signal power 0
+469:I0423 06:10:15.756399 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 18, sample_stamp 123286, test statistics value 1.43255, test statistics threshold 2.5, code phase 425, doppler -6500, magnitude 0, input signal power 0
+490:I0423 06:10:15.762475 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 19, sample_stamp 135573, test statistics value 1.66099, test statistics threshold 2.5, code phase 1928, doppler -8500, magnitude 0, input signal power 0
+511:I0423 06:10:15.768623 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 20, sample_stamp 147859, test statistics value 1.23863, test statistics threshold 2.5, code phase 1999, doppler 4750, magnitude 0, input signal power 0
+532:I0423 06:10:15.774652 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 21, sample_stamp 160146, test statistics value 1.61544, test statistics threshold 2.5, code phase 394, doppler 3000, magnitude 0, input signal power 0
+553:I0423 06:10:15.780915 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 22, sample_stamp 172433, test statistics value 1.66793, test statistics threshold 2.5, code phase 1871, doppler -7750, magnitude 0, input signal power 0
+574:I0423 06:10:15.786988 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 23, sample_stamp 184719, test statistics value 1.39765, test statistics threshold 2.5, code phase 1610, doppler 2500, magnitude 0, input signal power 0
+595:I0423 06:10:15.793092 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 24, sample_stamp 197006, test statistics value 1.48743, test statistics threshold 2.5, code phase 693, doppler 5500, magnitude 0, input signal power 0
+616:I0423 06:10:15.799345 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 25, sample_stamp 209292, test statistics value 2.21495, test statistics threshold 2.5, code phase 442, doppler 4250, magnitude 0, input signal power 0
+637:I0423 06:10:15.805414 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 26, sample_stamp 221579, test statistics value 1.30828, test statistics threshold 2.5, code phase 964, doppler 2750, magnitude 0, input signal power 0
+658:I0423 06:10:15.811537 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 27, sample_stamp 233866, test statistics value 1.66897, test statistics threshold 2.5, code phase 1896, doppler -250, magnitude 0, input signal power 0
+679:I0423 06:10:15.817240 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 28, sample_stamp 246153, test statistics value 1.84866, test statistics threshold 2.5, code phase 1271, doppler -9500, magnitude 0, input signal power 0
+700:I0423 06:10:15.823561 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 29, sample_stamp 258439, test statistics value 1.4337, test statistics threshold 2.5, code phase 1941, doppler 7500, magnitude 0, input signal power 0
+721:I0423 06:10:15.829887 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 30, sample_stamp 270726, test statistics value 1.48069, test statistics threshold 2.5, code phase 1564, doppler -8250, magnitude 0, input signal power 0
+742:I0423 06:10:15.836071 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 31, sample_stamp 284243, test statistics value 1.632, test statistics threshold 2.5, code phase 1867, doppler 4250, magnitude 0, input signal power 0
+763:I0423 06:10:15.842132 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 32, sample_stamp 295299, test statistics value 1.52466, test statistics threshold 2.5, code phase 799, doppler -9000, magnitude 0, input signal power 0
+784:I0423 06:10:15.848351 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 2, sample_stamp 307586, test statistics value 1.65605, test statistics threshold 2.5, code phase 637, doppler -7750, magnitude 0, input signal power 0
+805:I0423 06:10:15.854288 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 3, sample_stamp 319872, test statistics value 1.47894, test statistics threshold 2.5, code phase 1437, doppler -7500, magnitude 0, input signal power 0
+826:I0423 06:10:15.860450 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 4, sample_stamp 332159, test statistics value 1.15466, test statistics threshold 2.5, code phase 1399, doppler -9250, magnitude 0, input signal power 0
+847:I0423 06:10:15.866564 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 5, sample_stamp 344446, test statistics value 1.77917, test statistics threshold 2.5, code phase 1751, doppler 6750, magnitude 0, input signal power 0
+868:I0423 06:10:15.872563 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 6, sample_stamp 356733, test statistics value 1.65318, test statistics threshold 2.5, code phase 862, doppler 8500, magnitude 0, input signal power 0
+889:I0423 06:10:15.878795 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 7, sample_stamp 369020, test statistics value 1.58427, test statistics threshold 2.5, code phase 1681, doppler 3250, magnitude 0, input signal power 0
+910:I0423 06:10:15.885003 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 8, sample_stamp 381306, test statistics value 1.73883, test statistics threshold 2.5, code phase 1355, doppler 8250, magnitude 0, input signal power 0
+931:I0423 06:10:15.890965 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 1, sample_stamp 393593, test statistics value 1.16363, test statistics threshold 2.5, code phase 169, doppler 6000, magnitude 0, input signal power 0
+952:I0423 06:10:15.897271 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 9, sample_stamp 405879, test statistics value 1.40962, test statistics threshold 2.5, code phase 1596, doppler -750, magnitude 0, input signal power 0
+973:I0423 06:10:15.903244 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 418166, test statistics value 1.72856, test statistics threshold 2.5, code phase 1691, doppler 6000, magnitude 0, input signal power 0
+994:I0423 06:10:15.909431 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 11, sample_stamp 430453, test statistics value 1.82431, test statistics threshold 2.5, code phase 529, doppler 750, magnitude 0, input signal power 0
+1015:I0423 06:10:15.915350 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 12, sample_stamp 442740, test statistics value 2.12533, test statistics threshold 2.5, code phase 1161, doppler -6250, magnitude 0, input signal power 0
+1036:I0423 06:10:15.921720 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 13, sample_stamp 455026, test statistics value 1.91184, test statistics threshold 2.5, code phase 938, doppler 2750, magnitude 0, input signal power 0
+1057:I0423 06:10:15.927817 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 14, sample_stamp 467313, test statistics value 1.89408, test statistics threshold 2.5, code phase 1053, doppler 2750, magnitude 0, input signal power 0
+1078:I0423 06:10:15.933945 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 15, sample_stamp 479600, test statistics value 1.45656, test statistics threshold 2.5, code phase 109, doppler -250, magnitude 0, input signal power 0
+
+=== ACQ TAIL ===
+611355:I0423 06:14:44.041200 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 8, sample_stamp 536694476, test statistics value 1.30403, test statistics threshold 2.5, code phase 278, doppler 5250, magnitude 0, input signal power 0
+611376:I0423 06:14:44.047210 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 27, sample_stamp 536708019, test statistics value 1.35445, test statistics threshold 2.5, code phase 1100, doppler 250, magnitude 0, input signal power 0
+611397:I0423 06:14:44.053436 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 13, sample_stamp 536719050, test statistics value 1.14772, test statistics threshold 2.5, code phase 1072, doppler 9000, magnitude 0, input signal power 0
+611418:I0423 06:14:44.059518 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 29, sample_stamp 536731337, test statistics value 1.09388, test statistics threshold 2.5, code phase 546, doppler 7500, magnitude 0, input signal power 0
+611439:I0423 06:14:44.065716 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 16, sample_stamp 536744880, test statistics value 1.55537, test statistics threshold 2.5, code phase 405, doppler -6750, magnitude 0, input signal power 0
+611460:I0423 06:14:44.071820 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 6, sample_stamp 536757167, test statistics value 1.71753, test statistics threshold 2.5, code phase 1546, doppler -5500, magnitude 0, input signal power 0
+611481:I0423 06:14:44.077945 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 536769454, test statistics value 1.76486, test statistics threshold 2.5, code phase 133, doppler -9750, magnitude 0, input signal power 0
+611502:I0423 06:14:44.084090 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 21, sample_stamp 536780485, test statistics value 1.47632, test statistics threshold 2.5, code phase 1596, doppler 1000, magnitude 0, input signal power 0
+611523:I0423 06:14:44.090214 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 7, sample_stamp 536794028, test statistics value 1.61565, test statistics threshold 2.5, code phase 1474, doppler 750, magnitude 0, input signal power 0
+611544:I0423 06:14:44.096195 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 28, sample_stamp 536805059, test statistics value 1.08854, test statistics threshold 2.5, code phase 1319, doppler -7750, magnitude 0, input signal power 0
+611565:I0423 06:14:44.102373 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 12, sample_stamp 536818602, test statistics value 1.44075, test statistics threshold 2.5, code phase 1002, doppler 3750, magnitude 0, input signal power 0
+611586:I0423 06:14:44.108520 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 25, sample_stamp 536829633, test statistics value 1.59297, test statistics threshold 2.5, code phase 1097, doppler -500, magnitude 0, input signal power 0
+611607:I0423 06:14:44.114562 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 23, sample_stamp 536841920, test statistics value 1.00596, test statistics threshold 2.5, code phase 1330, doppler 9000, magnitude 0, input signal power 0
+611634:I0423 06:14:44.120582 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 20, sample_stamp 536854207, test statistics value 1.81223, test statistics threshold 2.5, code phase 997, doppler -3750, magnitude 0, input signal power 0
+611655:I0423 06:14:44.126828 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 14, sample_stamp 536866494, test statistics value 1.63826, test statistics threshold 2.5, code phase 183, doppler -2000, magnitude 0, input signal power 0
+611676:I0423 06:14:44.132871 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 5, sample_stamp 536878781, test statistics value 1.44166, test statistics threshold 2.5, code phase 1733, doppler 3250, magnitude 0, input signal power 0
+611697:I0423 06:14:44.139117 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 26, sample_stamp 536892324, test statistics value 1.56375, test statistics threshold 2.5, code phase 334, doppler -9000, magnitude 0, input signal power 0
+611718:I0423 06:14:44.145242 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 17, sample_stamp 536903355, test statistics value 1.27012, test statistics threshold 2.5, code phase 199, doppler 250, magnitude 0, input signal power 0
+611739:I0423 06:14:44.151297 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 24, sample_stamp 536915642, test statistics value 1.32419, test statistics threshold 2.5, code phase 1321, doppler 9250, magnitude 0, input signal power 0
+611760:I0423 06:14:44.157377 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 2, sample_stamp 536927929, test statistics value 1.66616, test statistics threshold 2.5, code phase 987, doppler 9500, magnitude 0, input signal power 0
+611781:I0423 06:14:44.163615 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 32, sample_stamp 536940216, test statistics value 1.65747, test statistics threshold 2.5, code phase 1603, doppler -5500, magnitude 0, input signal power 0
+611802:I0423 06:14:44.169766 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 22, sample_stamp 536952503, test statistics value 1.61245, test statistics threshold 2.5, code phase 1341, doppler -4250, magnitude 0, input signal power 0
+611823:I0423 06:14:44.175863 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 19, sample_stamp 536966046, test statistics value 1.35413, test statistics threshold 2.5, code phase 272, doppler 500, magnitude 0, input signal power 0
+611844:I0423 06:14:44.181988 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 11, sample_stamp 536977077, test statistics value 1.37157, test statistics threshold 2.5, code phase 331, doppler -2500, magnitude 0, input signal power 0
+611865:I0423 06:14:44.188125 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 4, sample_stamp 536989364, test statistics value 1.53405, test statistics threshold 2.5, code phase 1853, doppler -4000, magnitude 0, input signal power 0
+611886:I0423 06:14:44.194124 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 8, sample_stamp 537001651, test statistics value 1.54942, test statistics threshold 2.5, code phase 87, doppler -5000, magnitude 0, input signal power 0
+611907:I0423 06:14:44.200459 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 27, sample_stamp 537013938, test statistics value 1.13372, test statistics threshold 2.5, code phase 1405, doppler -8500, magnitude 0, input signal power 0
+611928:I0423 06:14:44.206312 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 13, sample_stamp 537026225, test statistics value 1.7287, test statistics threshold 2.5, code phase 1869, doppler -1000, magnitude 0, input signal power 0
+611949:I0423 06:14:44.212594 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 29, sample_stamp 537038512, test statistics value 1.7835, test statistics threshold 2.5, code phase 75, doppler -6500, magnitude 0, input signal power 0
+611970:I0423 06:14:44.218394 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 16, sample_stamp 537050799, test statistics value 2.15733, test statistics threshold 2.5, code phase 1035, doppler -1250, magnitude 0, input signal power 0
+611991:I0423 06:14:44.224747 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 6, sample_stamp 537058990, test statistics value 1.74853, test statistics threshold 2.5, code phase 377, doppler -3000, magnitude 0, input signal power 0
+612012:I0423 06:14:44.230749 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 537071277, test statistics value 1.46708, test statistics threshold 2.5, code phase 1880, doppler -2750, magnitude 0, input signal power 0
+612033:I0423 06:14:44.237113 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 21, sample_stamp 537083564, test statistics value 1.32966, test statistics threshold 2.5, code phase 345, doppler -8750, magnitude 0, input signal power 0
+612054:I0423 06:14:44.243047 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 7, sample_stamp 537095851, test statistics value 1.10501, test statistics threshold 2.5, code phase 562, doppler -4750, magnitude 0, input signal power 0
+612075:I0423 06:14:44.249313 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 28, sample_stamp 537108138, test statistics value 1.60585, test statistics threshold 2.5, code phase 1599, doppler -10000, magnitude 0, input signal power 0
+612096:I0423 06:14:44.255329 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 12, sample_stamp 537120425, test statistics value 1.82048, test statistics threshold 2.5, code phase 1111, doppler 2750, magnitude 0, input signal power 0
+612117:I0423 06:14:44.261689 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 25, sample_stamp 537133968, test statistics value 1.21827, test statistics threshold 2.5, code phase 72, doppler -9000, magnitude 0, input signal power 0
+612138:I0423 06:14:44.267550 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 23, sample_stamp 537144999, test statistics value 2.143, test statistics threshold 2.5, code phase 1350, doppler 1250, magnitude 0, input signal power 0
+612159:I0423 06:14:44.273876 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 18, sample_stamp 537157286, test statistics value 1.66243, test statistics threshold 2.5, code phase 1792, doppler 500, magnitude 0, input signal power 0
+612180:I0423 06:14:44.279824 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 20, sample_stamp 537169573, test statistics value 1.43232, test statistics threshold 2.5, code phase 1049, doppler 9750, magnitude 0, input signal power 0
+
+=== POWER/CN0/NAV ===
+30:I0423 06:10:15.445091 66620 gnss_block_factory.cc:407] Instantiating Channel 0 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+35:I0423 06:10:15.451058 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+39:I0423 06:10:15.451198 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+40:I0423 06:10:15.451205 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(12)
+42:I0423 06:10:15.451226 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 0
+43:I0423 06:10:15.451242 66620 channel.cc:79] Channel 0 Doppler_step = 250
+45:I0423 06:10:15.454414 66620 gnss_block_factory.cc:407] Instantiating Channel 1 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+50:I0423 06:10:15.458679 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+54:I0423 06:10:15.458804 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+55:I0423 06:10:15.458811 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(16)
+57:I0423 06:10:15.458830 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 1
+58:I0423 06:10:15.458843 66620 channel.cc:79] Channel 1 Doppler_step = 250
+60:I0423 06:10:15.461975 66620 gnss_block_factory.cc:407] Instantiating Channel 2 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+65:I0423 06:10:15.466172 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+69:I0423 06:10:15.466300 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+70:I0423 06:10:15.466307 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(20)
+72:I0423 06:10:15.466325 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 2
+73:I0423 06:10:15.466338 66620 channel.cc:79] Channel 2 Doppler_step = 250
+75:I0423 06:10:15.469480 66620 gnss_block_factory.cc:407] Instantiating Channel 3 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+80:I0423 06:10:15.473630 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+84:I0423 06:10:15.473760 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+85:I0423 06:10:15.473766 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(24)
+87:I0423 06:10:15.473786 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 3
+88:I0423 06:10:15.473799 66620 channel.cc:79] Channel 3 Doppler_step = 250
+90:I0423 06:10:15.476953 66620 gnss_block_factory.cc:407] Instantiating Channel 4 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+95:I0423 06:10:15.481099 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+99:I0423 06:10:15.481230 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+100:I0423 06:10:15.481236 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(28)
+102:I0423 06:10:15.481253 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 4
+103:I0423 06:10:15.481266 66620 channel.cc:79] Channel 4 Doppler_step = 250
+105:I0423 06:10:15.484212 66620 gnss_block_factory.cc:407] Instantiating Channel 5 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+110:I0423 06:10:15.487787 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+114:I0423 06:10:15.487910 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+115:I0423 06:10:15.487915 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(32)
+117:I0423 06:10:15.487931 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 5
+118:I0423 06:10:15.487943 66620 channel.cc:79] Channel 5 Doppler_step = 250
+120:I0423 06:10:15.490600 66620 gnss_block_factory.cc:407] Instantiating Channel 6 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+125:I0423 06:10:15.493871 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+129:I0423 06:10:15.493978 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+130:I0423 06:10:15.493983 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(36)
+132:I0423 06:10:15.494017 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 6
+133:I0423 06:10:15.494028 66620 channel.cc:79] Channel 6 Doppler_step = 250
+135:I0423 06:10:15.496507 66620 gnss_block_factory.cc:407] Instantiating Channel 7 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+140:I0423 06:10:15.499501 66620 gps_l1_ca_telemetry_decoder.cc:32] role TelemetryDecoder_1C
+144:I0423 06:10:15.499609 66620 gps_l1_ca_telemetry_decoder_gs.cc:107] Initializing GPS L1 TELEMETRY DECODER
+145:I0423 06:10:15.499614 66620 gps_l1_ca_telemetry_decoder.cc:36] telemetry_decoder(40)
+147:I0423 06:10:15.499629 66620 gps_l1_ca_telemetry_decoder_gs.cc:220] Navigation channel set to 7
+148:I0423 06:10:15.499637 66620 channel.cc:79] Channel 7 Doppler_step = 250
+152:I0423 06:10:15.501927 66620 gnss_block_factory.cc:512] Getting 0 GALILEO E1 B (I/NAV OS) channels
+153:I0423 06:10:15.501930 66620 gnss_block_factory.cc:525] Getting 0 GALILEO E5a I (F/NAV OS) channels
+159:I0423 06:10:15.501951 66620 gnss_block_factory.cc:603] Getting 0 GALILEO E5b I (I/NAV OS) channels
+177:I0423 06:10:15.502316 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+178:I0423 06:10:15.502372 66620 channel.cc:131] tracking -> telemetry_decoder
+179:I0423 06:10:15.502399 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+180:I0423 06:10:15.502419 66620 channel.cc:131] tracking -> telemetry_decoder
+181:I0423 06:10:15.502444 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+182:I0423 06:10:15.502462 66620 channel.cc:131] tracking -> telemetry_decoder
+183:I0423 06:10:15.502490 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+184:I0423 06:10:15.502508 66620 channel.cc:131] tracking -> telemetry_decoder
+185:I0423 06:10:15.502530 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+186:I0423 06:10:15.502548 66620 channel.cc:131] tracking -> telemetry_decoder
+187:I0423 06:10:15.502569 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+188:I0423 06:10:15.502586 66620 channel.cc:131] tracking -> telemetry_decoder
+189:I0423 06:10:15.502615 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+190:I0423 06:10:15.502633 66620 channel.cc:131] tracking -> telemetry_decoder
+191:I0423 06:10:15.502655 66620 gps_l1_ca_telemetry_decoder.cc:63] nothing to connect internally
+192:I0423 06:10:15.502672 66620 channel.cc:131] tracking -> telemetry_decoder
+210:I0423 06:10:15.503355 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 01 (Block IIF)
+211:I0423 06:10:15.503363 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 01 (Block IIF)
+212:I0423 06:10:15.503367 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 01 (Block IIF)
+213:I0423 06:10:15.503513 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 02 (Block IIR)
+214:I0423 06:10:15.503518 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 02 (Block IIR)
+215:I0423 06:10:15.503522 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 02 (Block IIR)
+216:I0423 06:10:15.503670 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 03 (Block IIF)
+217:I0423 06:10:15.503675 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 03 (Block IIF)
+218:I0423 06:10:15.503695 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 03 (Block IIF)
+219:I0423 06:10:15.503844 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 04 (Block III)
+220:I0423 06:10:15.503849 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 04 (Block III)
+221:I0423 06:10:15.503854 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 04 (Block III)
+222:I0423 06:10:15.503988 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 05 (Block IIR-M)
+223:I0423 06:10:15.503991 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 05 (Block IIR-M)
+224:I0423 06:10:15.503995 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 05 (Block IIR-M)
+225:I0423 06:10:15.504144 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 06 (Block IIF)
+226:I0423 06:10:15.504150 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 06 (Block IIF)
+227:I0423 06:10:15.504153 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 06 (Block IIF)
+228:I0423 06:10:15.504316 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 07 (Block IIR-M)
+229:I0423 06:10:15.504321 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 07 (Block IIR-M)
+230:I0423 06:10:15.504324 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 07 (Block IIR-M)
+231:I0423 06:10:15.504451 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 08 (Block IIF)
+232:I0423 06:10:15.504454 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 08 (Block IIF)
+233:I0423 06:10:15.504458 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 08 (Block IIF)
+236:I0423 06:10:15.504649 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 01 (Block IIF)
+258:I0423 06:10:15.694538 66781 pcps_acquisition.cc:626] Channel: 0 , doing acquisition of satellite: G 1 ,sample stamp: 4512, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+259:I0423 06:10:15.696027 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 1, sample_stamp 4512, test statistics value 1.00113, test statistics threshold 2.5, code phase 1717, doppler 5500, magnitude 0, input signal power 0
+264:I0423 06:10:15.696496 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 09 (Block IIF)
+265:I0423 06:10:15.696504 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 09 (Block IIF)
+266:I0423 06:10:15.696511 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 09 (Block IIF)
+268:I0423 06:10:15.696557 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 09 (Block IIF)
+279:I0423 06:10:15.698922 66776 pcps_acquisition.cc:626] Channel: 1 , doing acquisition of satellite: G 9 ,sample stamp: 12703, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+280:I0423 06:10:15.701772 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 9, sample_stamp 12703, test statistics value 1.00046, test statistics threshold 2.5, code phase 1428, doppler -8500, magnitude 0, input signal power 0
+285:I0423 06:10:15.702180 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 10 (Block IIF)
+286:I0423 06:10:15.702188 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 10 (Block IIF)
+287:I0423 06:10:15.702193 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 10 (Block IIF)
+289:I0423 06:10:15.702214 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 10 (Block IIF)
+300:I0423 06:10:15.705027 66773 pcps_acquisition.cc:626] Channel: 2 , doing acquisition of satellite: G 10 ,sample stamp: 24990, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+301:I0423 06:10:15.707684 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 24990, test statistics value 1.02483, test statistics threshold 2.5, code phase 447, doppler 9500, magnitude 0, input signal power 0
+306:I0423 06:10:15.708048 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 11 (Block III)
+307:I0423 06:10:15.708058 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 11 (Block III)
+308:I0423 06:10:15.708063 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 11 (Block III)
+310:I0423 06:10:15.708086 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 11 (Block III)
+321:I0423 06:10:15.711126 66770 pcps_acquisition.cc:626] Channel: 3 , doing acquisition of satellite: G 11 ,sample stamp: 37277, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+322:I0423 06:10:15.713040 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 11, sample_stamp 37277, test statistics value 1.74999, test statistics threshold 2.5, code phase 1692, doppler -7000, magnitude 0, input signal power 0
+327:I0423 06:10:15.713445 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 12 (Block IIR-M)
+328:I0423 06:10:15.713454 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 12 (Block IIR-M)
+329:I0423 06:10:15.713460 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 12 (Block IIR-M)
+331:I0423 06:10:15.713508 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 12 (Block IIR-M)
+342:I0423 06:10:15.717214 66767 pcps_acquisition.cc:626] Channel: 4 , doing acquisition of satellite: G 12 ,sample stamp: 49564, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+343:I0423 06:10:15.719852 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 12, sample_stamp 49564, test statistics value 1.44616, test statistics threshold 2.5, code phase 88, doppler 8250, magnitude 0, input signal power 0
+348:I0423 06:10:15.720232 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 13 (Block IIR)
+349:I0423 06:10:15.720240 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 13 (Block IIR)
+350:I0423 06:10:15.720245 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 13 (Block IIR)
+352:I0423 06:10:15.720269 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 13 (Block IIR)
+363:I0423 06:10:15.723361 66764 pcps_acquisition.cc:626] Channel: 5 , doing acquisition of satellite: G 13 ,sample stamp: 61851, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+364:I0423 06:10:15.725960 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 13, sample_stamp 61851, test statistics value 2.03869, test statistics threshold 2.5, code phase 1858, doppler 7750, magnitude 0, input signal power 0
+369:I0423 06:10:15.726281 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 14 (Block III)
+370:I0423 06:10:15.726285 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 14 (Block III)
+371:I0423 06:10:15.726302 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 14 (Block III)
+373:I0423 06:10:15.726315 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 14 (Block III)
+384:I0423 06:10:15.729410 66761 pcps_acquisition.cc:626] Channel: 6 , doing acquisition of satellite: G 14 ,sample stamp: 74138, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+385:I0423 06:10:15.732046 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 14, sample_stamp 74138, test statistics value 1.62274, test statistics threshold 2.5, code phase 1100, doppler 3500, magnitude 0, input signal power 0
+390:I0423 06:10:15.732420 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 15 (Block IIR-M)
+391:I0423 06:10:15.732429 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 15 (Block IIR-M)
+392:I0423 06:10:15.732434 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 15 (Block IIR-M)
+394:I0423 06:10:15.732458 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 15 (Block IIR-M)
+405:I0423 06:10:15.735486 66758 pcps_acquisition.cc:626] Channel: 7 , doing acquisition of satellite: G 15 ,sample stamp: 86425, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+406:I0423 06:10:15.738183 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 15, sample_stamp 86425, test statistics value 1.62519, test statistics threshold 2.5, code phase 620, doppler -2250, magnitude 0, input signal power 0
+411:I0423 06:10:15.738585 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 16 (Block IIR)
+412:I0423 06:10:15.738595 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 16 (Block IIR)
+413:I0423 06:10:15.738600 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 16 (Block IIR)
+415:I0423 06:10:15.738622 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 16 (Block IIR)
+426:I0423 06:10:15.741616 66781 pcps_acquisition.cc:626] Channel: 0 , doing acquisition of satellite: G 16 ,sample stamp: 98712, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+427:I0423 06:10:15.744249 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 16, sample_stamp 98712, test statistics value 1.7513, test statistics threshold 2.5, code phase 308, doppler 8500, magnitude 0, input signal power 0
+432:I0423 06:10:15.744578 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 17 (Block IIR-M)
+433:I0423 06:10:15.744585 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 17 (Block IIR-M)
+434:I0423 06:10:15.744590 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 17 (Block IIR-M)
+436:I0423 06:10:15.744611 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 17 (Block IIR-M)
+447:I0423 06:10:15.747778 66776 pcps_acquisition.cc:626] Channel: 1 , doing acquisition of satellite: G 17 ,sample stamp: 110999, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+448:I0423 06:10:15.750569 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 17, sample_stamp 110999, test statistics value 1.31849, test statistics threshold 2.5, code phase 52, doppler 7750, magnitude 0, input signal power 0
+453:I0423 06:10:15.750974 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 18 (Block III)
+454:I0423 06:10:15.750982 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 18 (Block III)
+455:I0423 06:10:15.750988 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 18 (Block III)
+457:I0423 06:10:15.751008 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 18 (Block III)
+468:I0423 06:10:15.753822 66773 pcps_acquisition.cc:626] Channel: 2 , doing acquisition of satellite: G 18 ,sample stamp: 123286, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+469:I0423 06:10:15.756399 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 18, sample_stamp 123286, test statistics value 1.43255, test statistics threshold 2.5, code phase 425, doppler -6500, magnitude 0, input signal power 0
+474:I0423 06:10:15.756740 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 19 (Block IIR)
+475:I0423 06:10:15.756747 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 19 (Block IIR)
+476:I0423 06:10:15.756753 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 19 (Block IIR)
+478:I0423 06:10:15.756774 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 19 (Block IIR)
+489:I0423 06:10:15.759881 66770 pcps_acquisition.cc:626] Channel: 3 , doing acquisition of satellite: G 19 ,sample stamp: 135573, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+490:I0423 06:10:15.762475 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 19, sample_stamp 135573, test statistics value 1.66099, test statistics threshold 2.5, code phase 1928, doppler -8500, magnitude 0, input signal power 0
+495:I0423 06:10:15.763213 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 20 (Block IIR)
+496:I0423 06:10:15.763221 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 20 (Block IIR)
+497:I0423 06:10:15.763226 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 20 (Block IIR)
+499:I0423 06:10:15.763247 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 20 (Block IIR)
+510:I0423 06:10:15.766003 66767 pcps_acquisition.cc:626] Channel: 4 , doing acquisition of satellite: G 20 ,sample stamp: 147859, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+511:I0423 06:10:15.768623 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 20, sample_stamp 147859, test statistics value 1.23863, test statistics threshold 2.5, code phase 1999, doppler 4750, magnitude 0, input signal power 0
+516:I0423 06:10:15.768945 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 21 (Block IIR)
+517:I0423 06:10:15.768952 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 21 (Block IIR)
+518:I0423 06:10:15.768957 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 21 (Block IIR)
+520:I0423 06:10:15.768978 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 21 (Block IIR)
+531:I0423 06:10:15.772142 66764 pcps_acquisition.cc:626] Channel: 5 , doing acquisition of satellite: G 21 ,sample stamp: 160146, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+532:I0423 06:10:15.774652 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 21, sample_stamp 160146, test statistics value 1.61544, test statistics threshold 2.5, code phase 394, doppler 3000, magnitude 0, input signal power 0
+537:I0423 06:10:15.775018 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 22 (Block IIR)
+538:I0423 06:10:15.775027 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 22 (Block IIR)
+539:I0423 06:10:15.775031 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 22 (Block IIR)
+541:I0423 06:10:15.775053 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 22 (Block IIR)
+552:I0423 06:10:15.778347 66761 pcps_acquisition.cc:626] Channel: 6 , doing acquisition of satellite: G 22 ,sample stamp: 172433, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+553:I0423 06:10:15.780915 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 22, sample_stamp 172433, test statistics value 1.66793, test statistics threshold 2.5, code phase 1871, doppler -7750, magnitude 0, input signal power 0
+558:I0423 06:10:15.781275 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 23 (Block III)
+559:I0423 06:10:15.781283 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 23 (Block III)
+560:I0423 06:10:15.781289 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 23 (Block III)
+562:I0423 06:10:15.781312 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 23 (Block III)
+573:I0423 06:10:15.784403 66758 pcps_acquisition.cc:626] Channel: 7 , doing acquisition of satellite: G 23 ,sample stamp: 184719, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+574:I0423 06:10:15.786988 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 23, sample_stamp 184719, test statistics value 1.39765, test statistics threshold 2.5, code phase 1610, doppler 2500, magnitude 0, input signal power 0
+579:I0423 06:10:15.787320 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 24 (Block IIF)
+580:I0423 06:10:15.787328 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 24 (Block IIF)
+581:I0423 06:10:15.787333 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 24 (Block IIF)
+583:I0423 06:10:15.787354 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 24 (Block IIF)
+594:I0423 06:10:15.790465 66781 pcps_acquisition.cc:626] Channel: 0 , doing acquisition of satellite: G 24 ,sample stamp: 197006, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+595:I0423 06:10:15.793092 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 24, sample_stamp 197006, test statistics value 1.48743, test statistics threshold 2.5, code phase 693, doppler 5500, magnitude 0, input signal power 0
+600:I0423 06:10:15.793422 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 25 (Block IIF)
+601:I0423 06:10:15.793429 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 25 (Block IIF)
+602:I0423 06:10:15.793434 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 25 (Block IIF)
+604:I0423 06:10:15.793455 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 25 (Block IIF)
+615:I0423 06:10:15.796610 66776 pcps_acquisition.cc:626] Channel: 1 , doing acquisition of satellite: G 25 ,sample stamp: 209292, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+616:I0423 06:10:15.799345 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 25, sample_stamp 209292, test statistics value 2.21495, test statistics threshold 2.5, code phase 442, doppler 4250, magnitude 0, input signal power 0
+621:I0423 06:10:15.799691 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 26 (Block IIF)
+622:I0423 06:10:15.799700 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 26 (Block IIF)
+623:I0423 06:10:15.799705 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 26 (Block IIF)
+625:I0423 06:10:15.799726 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 26 (Block IIF)
+636:I0423 06:10:15.802872 66773 pcps_acquisition.cc:626] Channel: 2 , doing acquisition of satellite: G 26 ,sample stamp: 221579, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+637:I0423 06:10:15.805414 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 26, sample_stamp 221579, test statistics value 1.30828, test statistics threshold 2.5, code phase 964, doppler 2750, magnitude 0, input signal power 0
+642:I0423 06:10:15.805740 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 27 (Block IIF)
+643:I0423 06:10:15.805748 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 27 (Block IIF)
+644:I0423 06:10:15.805753 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 27 (Block IIF)
+646:I0423 06:10:15.805773 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 27 (Block IIF)
+657:I0423 06:10:15.808938 66770 pcps_acquisition.cc:626] Channel: 3 , doing acquisition of satellite: G 27 ,sample stamp: 233866, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+658:I0423 06:10:15.811537 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 27, sample_stamp 233866, test statistics value 1.66897, test statistics threshold 2.5, code phase 1896, doppler -250, magnitude 0, input signal power 0
+663:I0423 06:10:15.811875 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 28 (Block IIR)
+664:I0423 06:10:15.811883 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 28 (Block IIR)
+665:I0423 06:10:15.811888 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 28 (Block IIR)
+667:I0423 06:10:15.811908 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 28 (Block IIR)
+678:I0423 06:10:15.815012 66767 pcps_acquisition.cc:626] Channel: 4 , doing acquisition of satellite: G 28 ,sample stamp: 246153, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+679:I0423 06:10:15.817240 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 28, sample_stamp 246153, test statistics value 1.84866, test statistics threshold 2.5, code phase 1271, doppler -9500, magnitude 0, input signal power 0
+684:I0423 06:10:15.817564 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 29 (Block IIR-M)
+685:I0423 06:10:15.817571 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 29 (Block IIR-M)
+686:I0423 06:10:15.817576 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 29 (Block IIR-M)
+688:I0423 06:10:15.817624 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 29 (Block IIR-M)
+699:I0423 06:10:15.821091 66764 pcps_acquisition.cc:626] Channel: 5 , doing acquisition of satellite: G 29 ,sample stamp: 258439, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+700:I0423 06:10:15.823561 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 29, sample_stamp 258439, test statistics value 1.4337, test statistics threshold 2.5, code phase 1941, doppler 7500, magnitude 0, input signal power 0
+705:I0423 06:10:15.823894 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 30 (Block IIF)
+706:I0423 06:10:15.823901 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 30 (Block IIF)
+707:I0423 06:10:15.823905 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 30 (Block IIF)
+709:I0423 06:10:15.823923 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 30 (Block IIF)
+720:I0423 06:10:15.827308 66761 pcps_acquisition.cc:626] Channel: 6 , doing acquisition of satellite: G 30 ,sample stamp: 270726, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+721:I0423 06:10:15.829887 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 30, sample_stamp 270726, test statistics value 1.48069, test statistics threshold 2.5, code phase 1564, doppler -8250, magnitude 0, input signal power 0
+726:I0423 06:10:15.830246 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 31 (Block IIR-M)
+727:I0423 06:10:15.830287 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 31 (Block IIR-M)
+728:I0423 06:10:15.830293 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 31 (Block IIR-M)
+730:I0423 06:10:15.830318 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 31 (Block IIR-M)
+741:I0423 06:10:15.833441 66758 pcps_acquisition.cc:626] Channel: 7 , doing acquisition of satellite: G 31 ,sample stamp: 284243, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+742:I0423 06:10:15.836071 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 31, sample_stamp 284243, test statistics value 1.632, test statistics threshold 2.5, code phase 1867, doppler 4250, magnitude 0, input signal power 0
+747:I0423 06:10:15.836407 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 32 (Block IIF)
+748:I0423 06:10:15.836416 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 32 (Block IIF)
+749:I0423 06:10:15.836421 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 32 (Block IIF)
+751:I0423 06:10:15.836441 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 32 (Block IIF)
+762:I0423 06:10:15.839507 66781 pcps_acquisition.cc:626] Channel: 0 , doing acquisition of satellite: G 32 ,sample stamp: 295299, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+763:I0423 06:10:15.842132 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 32, sample_stamp 295299, test statistics value 1.52466, test statistics threshold 2.5, code phase 799, doppler -9000, magnitude 0, input signal power 0
+768:I0423 06:10:15.842494 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 02 (Block IIR)
+769:I0423 06:10:15.842501 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 02 (Block IIR)
+770:I0423 06:10:15.842506 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 02 (Block IIR)
+772:I0423 06:10:15.842527 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 02 (Block IIR)
+783:I0423 06:10:15.845608 66776 pcps_acquisition.cc:626] Channel: 1 , doing acquisition of satellite: G 2 ,sample stamp: 307586, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+784:I0423 06:10:15.848351 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 2, sample_stamp 307586, test statistics value 1.65605, test statistics threshold 2.5, code phase 637, doppler -7750, magnitude 0, input signal power 0
+789:I0423 06:10:15.848722 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 03 (Block IIF)
+790:I0423 06:10:15.848729 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 03 (Block IIF)
+791:I0423 06:10:15.848735 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 03 (Block IIF)
+793:I0423 06:10:15.848757 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 03 (Block IIF)
+804:I0423 06:10:15.851727 66773 pcps_acquisition.cc:626] Channel: 2 , doing acquisition of satellite: G 3 ,sample stamp: 319872, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+805:I0423 06:10:15.854288 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 3, sample_stamp 319872, test statistics value 1.47894, test statistics threshold 2.5, code phase 1437, doppler -7500, magnitude 0, input signal power 0
+810:I0423 06:10:15.854651 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 04 (Block III)
+811:I0423 06:10:15.854660 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 04 (Block III)
+812:I0423 06:10:15.854664 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 04 (Block III)
+814:I0423 06:10:15.854684 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 04 (Block III)
+825:I0423 06:10:15.857851 66770 pcps_acquisition.cc:626] Channel: 3 , doing acquisition of satellite: G 4 ,sample stamp: 332159, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+826:I0423 06:10:15.860450 66770 pcps_acquisition.cc:380] negative acquisition, satellite G 4, sample_stamp 332159, test statistics value 1.15466, test statistics threshold 2.5, code phase 1399, doppler -9250, magnitude 0, input signal power 0
+831:I0423 06:10:15.860810 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 05 (Block IIR-M)
+832:I0423 06:10:15.860818 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 05 (Block IIR-M)
+833:I0423 06:10:15.860823 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 05 (Block IIR-M)
+835:I0423 06:10:15.860844 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 05 (Block IIR-M)
+846:I0423 06:10:15.863934 66767 pcps_acquisition.cc:626] Channel: 4 , doing acquisition of satellite: G 5 ,sample stamp: 344446, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+847:I0423 06:10:15.866564 66767 pcps_acquisition.cc:380] negative acquisition, satellite G 5, sample_stamp 344446, test statistics value 1.77917, test statistics threshold 2.5, code phase 1751, doppler 6750, magnitude 0, input signal power 0
+852:I0423 06:10:15.866888 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 06 (Block IIF)
+853:I0423 06:10:15.866896 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 06 (Block IIF)
+854:I0423 06:10:15.866901 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 06 (Block IIF)
+856:I0423 06:10:15.866922 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 06 (Block IIF)
+867:I0423 06:10:15.870054 66764 pcps_acquisition.cc:626] Channel: 5 , doing acquisition of satellite: G 6 ,sample stamp: 356733, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+868:I0423 06:10:15.872563 66764 pcps_acquisition.cc:380] negative acquisition, satellite G 6, sample_stamp 356733, test statistics value 1.65318, test statistics threshold 2.5, code phase 862, doppler 8500, magnitude 0, input signal power 0
+873:I0423 06:10:15.872898 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 07 (Block IIR-M)
+874:I0423 06:10:15.872906 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 07 (Block IIR-M)
+875:I0423 06:10:15.872911 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 07 (Block IIR-M)
+877:I0423 06:10:15.872933 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 07 (Block IIR-M)
+888:I0423 06:10:15.876250 66761 pcps_acquisition.cc:626] Channel: 6 , doing acquisition of satellite: G 7 ,sample stamp: 369020, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+889:I0423 06:10:15.878795 66761 pcps_acquisition.cc:380] negative acquisition, satellite G 7, sample_stamp 369020, test statistics value 1.58427, test statistics threshold 2.5, code phase 1681, doppler 3250, magnitude 0, input signal power 0
+894:I0423 06:10:15.879117 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 08 (Block IIF)
+895:I0423 06:10:15.879124 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 08 (Block IIF)
+896:I0423 06:10:15.879129 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 08 (Block IIF)
+898:I0423 06:10:15.879150 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 08 (Block IIF)
+909:I0423 06:10:15.882396 66758 pcps_acquisition.cc:626] Channel: 7 , doing acquisition of satellite: G 8 ,sample stamp: 381306, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+910:I0423 06:10:15.885003 66758 pcps_acquisition.cc:380] negative acquisition, satellite G 8, sample_stamp 381306, test statistics value 1.73883, test statistics threshold 2.5, code phase 1355, doppler 8250, magnitude 0, input signal power 0
+915:I0423 06:10:15.885318 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 01 (Block IIF)
+916:I0423 06:10:15.885325 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 01 (Block IIF)
+917:I0423 06:10:15.885330 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 01 (Block IIF)
+919:I0423 06:10:15.885351 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 01 (Block IIF)
+930:I0423 06:10:15.888371 66781 pcps_acquisition.cc:626] Channel: 0 , doing acquisition of satellite: G 1 ,sample stamp: 393593, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+931:I0423 06:10:15.890965 66781 pcps_acquisition.cc:380] negative acquisition, satellite G 1, sample_stamp 393593, test statistics value 1.16363, test statistics threshold 2.5, code phase 169, doppler 6000, magnitude 0, input signal power 0
+936:I0423 06:10:15.891291 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 09 (Block IIF)
+937:I0423 06:10:15.891299 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 09 (Block IIF)
+938:I0423 06:10:15.891304 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 09 (Block IIF)
+940:I0423 06:10:15.891325 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 09 (Block IIF)
+951:I0423 06:10:15.894518 66776 pcps_acquisition.cc:626] Channel: 1 , doing acquisition of satellite: G 9 ,sample stamp: 405879, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+952:I0423 06:10:15.897271 66776 pcps_acquisition.cc:380] negative acquisition, satellite G 9, sample_stamp 405879, test statistics value 1.40962, test statistics threshold 2.5, code phase 1596, doppler -750, magnitude 0, input signal power 0
+957:I0423 06:10:15.897687 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 10 (Block IIF)
+958:I0423 06:10:15.897696 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 10 (Block IIF)
+959:I0423 06:10:15.897701 66620 gps_l1_ca_telemetry_decoder.cc:53] TELEMETRY DECODER: satellite set to GPS PRN 10 (Block IIF)
+961:I0423 06:10:15.897724 66620 gps_l1_ca_telemetry_decoder_gs.cc:412] Telemetry decoder reset for satellite GPS PRN 10 (Block IIF)
+972:I0423 06:10:15.900719 66773 pcps_acquisition.cc:626] Channel: 2 , doing acquisition of satellite: G 10 ,sample stamp: 418166, threshold: 2.5, doppler_max: 10000, doppler_step: 250, use_CFAR_algorithm_flag: false
+973:I0423 06:10:15.903244 66773 pcps_acquisition.cc:380] negative acquisition, satellite G 10, sample_stamp 418166, test statistics value 1.72856, test statistics threshold 2.5, code phase 1691, doppler 6000, magnitude 0, input signal power 0
+978:I0423 06:10:15.903570 66620 gps_l1_ca_telemetry_decoder_gs.cc:210] Setting decoder Finite State Machine to satellite GPS PRN 11 (Block III)
+979:I0423 06:10:15.903578 66620 gps_l1_ca_telemetry_decoder_gs.cc:212] Navigation Satellite set to GPS PRN 11 (Block III)
