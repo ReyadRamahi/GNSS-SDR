@@ -1,0 +1,35 @@
+======================================================
+F9T XML refresh run
+RUN_ID: 20260426_042603
+UTC start: Sun Apr 26 04:26:03 AM UTC 2026
+Duration: 600s
+Minimum bytes: 50000
+Source: raw TCP 10.30.200.59:50012
+Output BIN: /home/rrama28/gnss/f9t/tcp/hft09_tcp_20260426_042603_600s.bin
+======================================================
+
+=== 1. Capturing raw TCP stream with nc ===
+04:26:03 UTC captured 0 bytes
+04:26:18 UTC captured 6496 bytes
+04:26:33 UTC captured 11847 bytes
+04:26:48 UTC captured 13402 bytes
+04:27:03 UTC captured 45678 bytes
+04:27:18 UTC captured 0 bytes
+04:27:33 UTC captured 0 bytes
+04:27:48 UTC captured 0 bytes
+04:28:03 UTC captured 0 bytes
+04:28:18 UTC captured 0 bytes
+04:28:33 UTC captured 0 bytes
+04:28:48 UTC captured 0 bytes
+04:29:03 UTC captured 0 bytes
+04:29:18 UTC captured 0 bytes
+04:29:33 UTC captured 0 bytes
+04:29:48 UTC captured 0 bytes
+04:30:03 UTC captured 0 bytes
+04:30:18 UTC captured 0 bytes
+04:30:33 UTC captured 0 bytes
+04:30:48 UTC captured 0 bytes
+04:31:03 UTC captured 0 bytes
+04:31:18 UTC captured 0 bytes
+04:31:33 UTC captured 0 bytes
+04:31:48 UTC captured 0 bytes
