@@ -93,3 +93,16 @@ Earlier RTL-SDR-harvested XML only had PRN 28 and PRN 31. The F9T/TCP pipeline g
 - The stream currently behaves like raw TCP.
 - If the capture is too small, the script exits without overwriting the latest XML.
 - Large raw `.bin` captures are not committed to GitLab.
+
+## Failed Refresh Attempt: 2026-04-26 04:26 UTC
+
+A later refresh attempt against `10.30.200.59:50012` did not produce usable XML.
+
+Observed behavior:
+
+```text
+04:26:18 UTC captured 6496 bytes
+04:26:33 UTC captured 11847 bytes
+04:27:03 UTC captured 45678 bytes
+then repeated 0-byte progress until timeout
+final capture size: 0 bytes
