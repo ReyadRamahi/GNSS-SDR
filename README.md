@@ -114,3 +114,16 @@ Test behavior:
 For the standard GitLab starter README/checklist, see:
 
 - https://docs.gitlab.com/user/project/repository/files/gitlab_readme/
+
+## External Clock Progress
+
+We also began testing an external 10 MHz clock reference for the LimeSDR setup. The goal is to improve clock stability during GNSS-SDR runs, since frequency drift can make GPS acquisition, tracking, and navigation decoding less reliable.
+
+For this setup, we used a Silicon Labs / Skyworks Si5386A clock generator board configured through ClockBuilder Pro. The board was configured to provide a 10 MHz reference output for the LimeSDR. This gives us a way to test whether a cleaner external clock improves LimeSDR GNSS performance compared to relying only on the LimeSDR’s onboard clock.
+
+The main outcome is that the external clock generator board is now connected and usable again, so we can include external-clock testing in our GNSS-SDR experiment workflow. This gives us another variable to compare alongside antenna placement, gain settings, filtering, and assisted-GNSS ephemeris data.
+
+Reference documentation for the LimeSDR-USB hardware is here:
+
+```text
+https://wiki.myriadrf.org/LimeSDR-USB_hardware_description
