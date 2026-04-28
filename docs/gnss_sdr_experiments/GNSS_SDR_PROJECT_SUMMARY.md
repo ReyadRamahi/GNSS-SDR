@@ -2,221 +2,204 @@
 
 ## Goal
 
-The project goal is to receive live GPS L1 C/A signals using SDR hardware on hft02, process them through GNSS-SDR, and eventually feed receiver/satellite/status information into the project dashboard.
+Receive live GPS L1 C/A with GNSS-SDR on `hft02`, using SDR hardware and fresh assistance data, then carry receiver/satellite/status information forward into the broader project dashboard work.
+
+## Hardware And Software In Scope
 
 Hardware tested:
+
 - RTL-SDR path through SoapyRemote
 - LimeSDR-USB on LNAW
-- Shared GNSS antenna feed through splitter
-- Antenna bias supplied externally, not by the LimeSDR
-- Local u-blox F9T receiver on hft02 for fresh ephemeris assistance
-- External 10 MHz clock path for LimeSDR testing
+- shared GNSS antenna feed through splitter
+- external antenna bias, not Lime bias
+- local u-blox F9T on `hft02` for fresh assistance XML
+- external 10 MHz clock path for Lime testing
 
-Software:
-- GNSS-SDR v0.0.16
-- GNU Radio 3.10.1.1
-- gr-osmosdr / SoapySDR path
-- RTKLIB convbin
-- rinex2assist
-- pyubx2 for F9T UBX configuration
-- LimeSDR dedicated GNSS-SDR source block is not available in this installed build
+Software used:
 
----
+- GNSS-SDR `v0.0.16`
+- GNU Radio `3.10.1.1`
+- `gr-osmosdr` / `SoapySDR`
+- RTKLIB `convbin`
+- `rinex2assist`
+- `pyubx2` for F9T UBX configuration
 
-## Main Findings
+Important environment constraint:
 
-### 1. RTL-SDR is still the healthier receiver path
+- this GNSS-SDR build does not have the dedicated Lime source block, so Lime runs go through `gr-osmosdr` / `SoapySDR`
 
-The RTL-SDR successfully decoded real GPS navigation messages. It was able to receive repeated NAV subframes and was good enough to generate GNSS-SDR assistance XML files.
+## Current Workflow
 
-Generated assistance files:
-- gps_ephemeris.xml
-- gps_iono.xml
-- gps_utc_model.xml
+1. Refresh GPS assistance XML from the local F9T on `hft02`.
+2. Point GNSS-SDR at the refreshed XML.
+3. Run LimeSDR-USB on GPS L1 C/A with focused PRNs from the current ephemeris.
+4. Watch for the progression:
+   - receiver time advancing
+   - acquisition
+   - tracking starts
+   - bit sync
+   - NAV decode
+   - position fix
 
-Earlier harvested ephemeris XML contained:
-- GPS PRN 28
-- GPS PRN 31
+As of 2026-04-28, the pipeline reaches acquisition and tracking starts, but repeatedly loses lock before bit sync.
 
-This proves the antenna feed and GNSS-SDR pipeline can receive and decode real GPS data, at least through the RTL-SDR path.
+## What Is Proven
 
----
+### 1. The antenna + GNSS-SDR pipeline can decode real GPS
 
-### 2. LimeSDR RF is alive, but tracking is unstable
+The RTL-SDR reference path is healthy enough to decode real navigation data.
 
-The LimeSDR is not dead. Recent RF sanity tests confirmed:
-- GNSS-SDR can open the LimeSDR.
-- The Lime receives nonzero IQ samples.
-- RF power changes when gain changes.
-- GNSS-SDR can start GPS L1 C/A tracking.
-- Current receiver time advances during working runs.
+Evidence:
 
-Observed live RF signs:
-- Current receiver time advances.
-- Tracking starts occur.
-- Multiple PRNs are attempted.
-- Loss of lock occurs frequently.
+- `results/logs/rtl_track/run_summary.txt`
+- `results/assist/rtl_harvested/`
 
-Current remaining problem:
-- No stable bit synchronization yet.
-- No GPS NAV messages from Lime yet.
-- No Lime position fix yet.
+Most important reference result:
+
+- `track10_g45` produced `4` bit-sync locks and `227` NAV messages
+- decoded subframes were seen for PRNs `12`, `15`, and `20`
+
+That means the shared antenna path and GNSS-SDR processing chain are capable of real GPS decode.
+
+### 2. The LimeSDR path is alive
+
+The Lime is not failing at device-open or dead-RF stage.
+
+Observed signs:
+
+- GNSS-SDR opens the Lime through `gr-osmosdr` / `SoapySDR`
+- receiver time advances during live runs
+- acquisition succeeds
+- tracking starts occur on expected PRNs
+- gain changes measurably affect RF sanity runs
+
+This rules out the simplest failure modes such as no device, no samples, or no ephemeris load.
+
+### 3. F9T XML refresh works
+
+The current F9T path is the local serial receiver on `hft02`, not the older `hft09` TCP stream.
+
+Current evidence:
+
+- `scripts_used/f9t_lime_current/refresh_f9t_xml_local.sh`
+- `results/assist/f9t_latest/README_CURRENT_XML.txt`
+- `results/logs/f9t_lime_current/latest_f9t_refresh.log`
+
+The 2026-04-28 local refresh recorded six GPS satellites:
+
+- `G03`
+- `G07`
+- `G08`
+- `G09`
+- `G16`
+- `G27`
+
+### 4. Assistance loading works, but assistance alone does not solve Lime tracking
+
+GNSS-SDR successfully reads the XML assistance data, but live Lime runs still fail later in the chain.
+
+Important interpretation:
+
+- XML loading proves the assistance input path works
+- receiver time advancing proves GNSS-SDR entered the live processing loop
+- only bit sync, NAV messages, and fixes prove stable end-to-end tracking
+
+## What Is Not Solved
+
+The remaining blocker is repeated loss of lock before:
+
+- tracking bit synchronization
+- GPS NAV decode
+- position fix
 
 Typical Lime pattern:
-- acquisition/tracking starts
+
+- acquisition
+- tracking start
 - quick loss of lock
-- tracking starts again
-- no bit synchronization
-- no GPS NAV message
-- no position fix
+- reacquisition
+- another tracking start
+- no bit sync
+- no NAV message
+- no fix
 
-Conclusion:
-The Lime issue is not simply “no signal.” It is more likely a tracking stability, RF frontend, gain, filtering, clock, or sample-quality problem.
+This points to a tracking-stability problem rather than a missing-ephemeris problem.
 
----
+## Best Current Technical Interpretation
 
-### 3. Old/default Lime config was bad
+The Lime issue is now most likely in one or more of these areas:
 
-The old/default Lime config was not useful.
+- loop bandwidth choice
+- gain setting
+- front-end filtering
+- external clock interaction
+- sample quality or RF cleanliness
 
-Important bad settings:
-- SignalSource.AGC_enabled=true
-- acquisition threshold around 3.5
-- InputFilter.number_of_taps=51
-- narrow filter setting around band1_end=0.45
+The evidence does not support the claim that Lime is simply seeing no signal.
 
-That config produced weak acquisition behavior and basically no useful tracking.
+## Parameter Findings So Far
 
----
+### Older/default Lime settings were poor
 
-### 4. Better Lime config came from sweep testing
+Weak settings from the earlier direction:
 
-The better Lime config came from sweep results.
+- `SignalSource.AGC_enabled=true`
+- acquisition threshold around `3.5`
+- `InputFilter.number_of_taps=51`
+- narrow filter around `band1_end=0.45`
 
-Best balanced direction:
-- sample rate: 2 Msps
-- AGC disabled
-- InputFilter.number_of_taps=101
-- InputFilter.band1_end=0.70
+Those settings produced little useful tracking.
+
+### Sweep work improved the Lime starting point
+
+Best general direction from earlier sweep work:
+
+- sample rate: `2 Msps`
+- AGC: disabled
+- `InputFilter.number_of_taps=101`
+- `InputFilter.band1_end=0.70`
 - lower acquisition threshold
-- based on cfg_sr2M_taps101_band70_agcF.conf
 
-This config restored tracking starts, but still did not produce stable lock or NAV decode.
+That direction restored useful tracking starts but still did not reach stable lock.
 
----
+### Current threshold finding
 
-### 5. F9T local XML refresh path was added
+Current useful threshold range is:
 
-The original hft09 TCP stream was unreliable:
+- `2.6` to `2.8`
 
-- 10.30.200.59:50012
+Observed outcomes from `results/logs/f9t_lime_current/`:
 
-It worked once, but later attempts had connection refusals, zero-byte captures, or stalled streams.
+- `2.5` was too loose in earlier work
+- `2.6` produced active acquisitions and repeated tracking starts
+- `2.8` still produced some tracking but noticeably less
+- `3.0` and `3.5` were too strict and produced no tracking starts in the focused tests
 
-We switched to the local F9T receiver on hft02:
+### Sticky/gentle tracking did not solve the core problem
 
-- /dev/ttyUSB0
+The `t26` sticky-tracking run still lost lock repeatedly and produced:
 
-At first, the local F9T stream was NMEA-only:
-- NMEA count was nonzero.
-- UBX sync count was 0.
-- RTCM count was 0.
+- `0` bit-sync locks
+- `0` NAV messages
+- `0` fixes
 
-That could not generate ephemeris because NMEA does not contain the raw navigation subframes needed for GPS ephemeris extraction.
+## Recommended Next Experiments
 
-Fix:
-- Enable UBX protocol on UART1.
-- Enable UBX-RXM-SFRBX.
-- Enable UBX-RXM-RAWX.
-- Keep NMEA output enabled.
+Run these one variable at a time:
 
-Important UBX messages:
-- UBX-RXM-SFRBX gives raw satellite navigation subframes needed for ephemeris.
-- UBX-RXM-RAWX gives raw measurements useful for RINEX observation output.
+1. Wider tracking loops using the current best focused F9T+Lime setup as the base.
+2. Gain A/B testing around the current gain-20 setup.
+3. External `10 MHz` `LOAD_CONFIG` on versus off.
+4. GPS L1 filter on versus off.
+5. Only after tracking stabilizes, consider relaxing PRN focus or increasing channel count.
 
-Useful F9T config keys:
-- CFG_UART1INPROT_UBX
-- CFG_UART1OUTPROT_UBX
-- CFG_UART1OUTPROT_NMEA
-- CFG_MSGOUT_UBX_RXM_SFRBX_UART1
-- CFG_MSGOUT_UBX_RXM_RAWX_UART1
+## Where To Look Next
 
-Scripts added:
-- ~/gnss/scripts/enable_f9t_ubx_uart1.py
-- ~/gnss/scripts/refresh_f9t_xml_local.sh
-- ~/gnss/scripts/start_f9t_refresh_local_tmux.sh
-
-Latest XML path used by GNSS-SDR:
-- /home/rrama28/gnss/assist/f9t_tcp_latest/gps_ephemeris.xml
-- /home/rrama28/gnss/assist/f9t_tcp_latest/gps_utc_model.xml
-
-The refresh script should only update the latest XML folder after a valid ephemeris generation. Failed captures should not overwrite known-good XML.
-
----
-
-### 6. AGNSS XML loading works, but does not solve Lime by itself
-
-GNSS-SDR successfully loads the refreshed F9T assistance XML.
-
-Recent refreshed XML included ephemeris for:
-- GPS PRN 31
-- GPS PRN 10
-- GPS PRN 02
-- GPS PRN 28
-- GPS PRN 01
-- GPS PRN 26
-
-Good XML signs:
-- From XML file: Read NAV ephemeris ...
-- From XML file: Read GPS UTC model parameters.
-- From XML file: Read GPS ionosphere model parameters.
-- GNSS assistance data loaded from local XML file(s).
-- Using GPS Ephemeris: Sat ...
-
-Important lesson:
-XML loading only proves assistance data was loaded. It does not prove live RF tracking is working.
-
-Good live RF signs:
-- Current receiver time: 1 s
-- Current receiver time: 2 s
-- Tracking of GPS L1 C/A signal started ...
-
-If Current receiver time never appears, GNSS-SDR has not really entered the live processing loop.
-
-Conclusion:
-AGNSS loading works, but the LimeSDR still needs stable tracking before it can decode NAV or produce a position fix.
-
----
-
-### 7. Raw IQ dump caused confusion and should stay off for position attempts
-
-GNSS-SDR raw IQ dumping works, but it creates huge files and made debugging much harder.
-
-Example:
-- A short dump produced hundreds of MB of IQ data.
-- Reusing dump filenames caused confusing behavior.
-- Runs with dump enabled were harder to interpret.
-
-For live position attempts, use:
-- SignalSource.dump=false
-
-Raw IQ should be captured separately after live-position tests, not during the main position attempt.
-
----
-
-### 8. Background launching was tricky
-
-Some tmux/nohup runs appeared to stall after ephemeris loading. Foreground/direct runs reached Current receiver time and tracking more reliably.
-
-Working signs from direct/terminal-like runs:
-- Current receiver time advances.
-- Tracking starts appear.
-- Loss of lock events appear.
-
-For future runs:
-- Always run inside a clean run folder.
-- Avoid piping through complicated tmux/tee setups if GNSS-SDR stalls.
-- If backgrounding is needed, consider using script to provide a terminal-like environment.
+- Start here: `README.md`
+- Current handoff: `LIMESDR_F9T_HANDOFF_20260428.md`
+- Operator workflow: `WORKFLOW.md`
+- Short history of what was tried: `EXPERIMENT_LOG.md`
+- Config map: `configs_used/CONFIG_INDEX.md`
 
 Every GNSS-SDR run should be started from its own run folder because GNSS-SDR writes output files into the current working directory.
 
