@@ -41,12 +41,14 @@ Important operational notes:
 
 ## Step 2: Verify The XML Before Running Lime
 
+**Important:** always verify against `f9t_latest/`, not `f9t_tcp_latest/`. The TCP path is the old unreliable source. Older configs (pre-2026-04-28) may still point to the wrong directory — check before using them.
+
 Useful checks:
 
 ```bash
-ls -lh /home/rrama28/gnss/assist/f9t_tcp_latest/
-grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/f9t_tcp_latest/gps_ephemeris.xml
-grep -o 'G[0-9][0-9]' /home/rrama28/gnss/assist/f9t_tcp_latest/gps_ephemeris.xml | sort -u
+ls -lh /home/rrama28/gnss/assist/f9t_latest/
+grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/f9t_latest/gps_ephemeris.xml
+grep -o 'G[0-9][0-9]' /home/rrama28/gnss/assist/f9t_latest/gps_ephemeris.xml | sort -u
 ```
 
 Repo-side reference artifacts:
@@ -73,7 +75,9 @@ Most relevant config groups:
 
 Current best starting point for new Lime tracking tests:
 
-- `configs_used/f9t_lime_current/lime_gain20_10mhz_ephem_6ch_t26_clean.conf`
+- `configs_used/f9t_lime_current/lime_gain20_noclockini_ephem_6ch_t26.conf`
+
+Note: the older `t26_clean` config has the wrong XML path (`f9t_tcp_latest/`). Use the `noclockini` version as the new base — it has the correct path and LOAD_CONFIG has been confirmed neutral.
 
 ## Step 4: Set Focused PRNs Correctly
 
@@ -106,9 +110,15 @@ Typical pattern:
 
 ```bash
 RUN_ID=$(date -u +%Y%m%d_%H%M%S)
-RUN_DIR=/home/rrama28/gnss/output/position_attempts/example_${RUN_ID}
+RUN_DIR=/home/alexgu2/gnss/runs/example_${RUN_ID}
 SESSION=example_${RUN_ID}
 CONF=/path/to/config.conf
+
+echo "RUN_ID:  $RUN_ID"
+echo "RUN_DIR: $RUN_DIR"
+echo "SESSION: $SESSION"
+echo "CONF:    $CONF"
+
 mkdir -p "$RUN_DIR"
 tmux new-session -d -s "$SESSION" "cd '$RUN_DIR' && timeout --signal=INT 30m gnss-sdr --config_file='$CONF'"
 tmux pipe-pane -o -t "$SESSION" "cat >> '$RUN_DIR/run.log'"
@@ -117,11 +127,34 @@ tmux attach -t "$SESSION"
 
 Run rules:
 
+- print all four variables before launching so you have the exact RUN_DIR for monitoring
 - keep `SignalSource.dump=false` during position attempts
 - use a fresh run directory every time
 - if tmux/nohup piping behaves strangely, try a more direct terminal-like run
+- do not launch GNSS-SDR from the home directory — it will dump GSDR*, pvt_dat_*, GPX, KML, and NMEA files there
 
-## Step 6: Check The Right Signals In The Log
+## Step 6: Monitor From A Second SSH Session
+
+Set LOG explicitly using the printed RUN_DIR — do not rely on shell variables from the launch session:
+
+```bash
+LOG=/home/alexgu2/gnss/runs/example_YYYYMMDD_HHMMSS/run.log
+
+watch -n 30 "
+echo 'receiver time:' && grep -c 'Current receiver time' $LOG
+echo 'tracking starts:' && grep -c 'Tracking of GPS' $LOG
+echo 'losses of lock:' && grep -c 'Loss of lock' $LOG
+echo 'bit sync:' && grep -c 'tracking bit synchronization locked' $LOG
+echo 'NAV messages:' && grep -c 'New GPS NAV message received' $LOG
+"
+```
+
+Early kill guidance:
+
+- if bit sync is still zero at 10 minutes with active tracking starts and losses, the run has enough data — kill it and move to the next experiment
+- if tracking starts are zero at 2 minutes, something is wrong — check the log tail for errors
+
+## Step 7: Check The Right Signals In The Log
 
 Useful commands:
 
@@ -133,6 +166,7 @@ grep -c "Loss of lock" "$LOG"
 grep -c "tracking bit synchronization locked" "$LOG"
 grep -c "New GPS NAV message received" "$LOG"
 grep -c "Position at" "$LOG"
+grep "Actual RX Gain" "$LOG" | head -3
 grep "Tracking of GPS" "$LOG" | sed -E 's/.*PRN ([0-9]+).*/PRN \1/' | sort | uniq -c | sort -nr
 ```
 
@@ -142,20 +176,21 @@ Interpretation:
 - receiver time advancing: GNSS-SDR entered live processing
 - tracking starts: acquisition is producing candidates
 - repeated loss of lock with zero bit sync: current blocker is tracking stability
+- bit sync locked: first real breakthrough — let the run continue to full 30 minutes
 - NAV messages or a fix: the main Lime problem is finally breaking
 
-## Step 7: Change One Variable Per Run
+## Step 8: Change One Variable Per Run
 
-Good controlled variables:
+Confirmed ruled-out variables (do not re-test without a new hypothesis):
 
-- acquisition threshold
-- tracking loop bandwidth
-- gain
-- external `10 MHz` `LOAD_CONFIG` on versus off
-- GPS L1 filter on versus off
-- antenna/feed path
+- loop bandwidth — both tighter and wider directions tested, no effect
+- LOAD_CONFIG / clock INI — neutral, confirmed 2026-04-28
+- gain — tested across 52–61 dB actual range, no effect
+- LO offset / DC spike — 250 kHz offset tested, no effect
 
-Do not change XML, gain, clock, threshold, and tracking behavior all at once.
+Remaining untested variables:
+
+- hardware GPS L1 bandpass filter before the LimeSDR input
 
 ## Legacy Reference: Older hft09 TCP Refresh Path
 
