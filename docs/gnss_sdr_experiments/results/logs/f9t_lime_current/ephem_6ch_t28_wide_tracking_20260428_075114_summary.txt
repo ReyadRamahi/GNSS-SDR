@@ -1,0 +1,81 @@
+Source log: /home/rrama28/gnss/output/position_attempts/ephem_6ch_t28_wide_tracking_20260428_075114/run.log
+
+Counts:
+receiver time: 42
+tracking starts: 7
+loss of lock: 4
+bit sync locks: 0
+NAV messages: 0
+position fixes: 0
+
+PRNs attempted:
+      2 PRN 08
+      1 PRN 27
+      1 PRN 16
+      1 PRN 09
+      1 PRN 07
+      1 PRN 03
+
+Last important lines:
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+[1m[33m[WARNING] Gateware version mismatch!
+Actual RX Gain: 58 dB...
+Using GPS Ephemeris: Sat 3 Az: 215.221 El: 21.2818
+Using GPS Ephemeris: Sat 7 Az: 280.785 El: 15.4863
+Using GPS Ephemeris: Sat 8 Az: 172.44 El: 14.017
+Using GPS Ephemeris: Sat 9 Az: 309.362 El: 42.308
+Using GPS Ephemeris: Sat 16 Az: 71.112 El: 76.2093
+Using GPS Ephemeris: Sat 27 Az: 143.86 El: 31.4713
+Current receiver time: 1 s
+Current receiver time: 2 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 07 (Block IIR-M)
+Current receiver time: 3 s
+Current receiver time: 4 s
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Current receiver time: 8 s
+Current receiver time: 9 s
+Current receiver time: 10 s
+Current receiver time: 11 s
+Current receiver time: 12 s
+Tracking of GPS L1 C/A signal started on channel 5 for satellite GPS PRN 08 (Block IIF)
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 27 (Block IIF)
+Current receiver time: 13 s
+Current receiver time: 14 s
+Current receiver time: 15 s
+Current receiver time: 16 s
+Current receiver time: 17 s
+Current receiver time: 18 s
+Loss of lock in channel 4!
+Current receiver time: 19 s
+Current receiver time: 20 s
+Current receiver time: 21 s
+Current receiver time: 22 s
+Current receiver time: 23 s
+Current receiver time: 24 s
+Current receiver time: 25 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 26 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 27 s
+Current receiver time: 28 s
+Loss of lock in channel 5!
+Loss of lock in channel 3!
+Current receiver time: 29 s
+Current receiver time: 30 s
+Current receiver time: 31 s
+Current receiver time: 32 s
+Current receiver time: 33 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 09 (Block IIF)
+Current receiver time: 34 s
+Current receiver time: 35 s
+Current receiver time: 36 s
+Current receiver time: 37 s
+Current receiver time: 38 s
+Current receiver time: 39 s
+Current receiver time: 40 s
+Current receiver time: 41 s
+Tracking of GPS L1 C/A signal started on channel 5 for satellite GPS PRN 08 (Block IIF)
+Loss of lock in channel 0!
+Current receiver time: 42 s

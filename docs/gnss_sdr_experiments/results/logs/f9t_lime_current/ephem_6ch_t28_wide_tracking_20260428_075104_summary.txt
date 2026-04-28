@@ -1,0 +1,32 @@
+Source log: /home/rrama28/gnss/output/position_attempts/ephem_6ch_t28_wide_tracking_20260428_075104/run.log
+
+Counts:
+receiver time: 8
+tracking starts: 1
+loss of lock: 0
+bit sync locks: 0
+NAV messages: 0
+position fixes: 0
+
+PRNs attempted:
+      1 PRN 27
+
+Last important lines:
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+[1m[33m[WARNING] Gateware version mismatch!
+Actual RX Gain: 58 dB...
+Using GPS Ephemeris: Sat 3 Az: 215.262 El: 21.3483
+Using GPS Ephemeris: Sat 7 Az: 280.737 El: 15.4351
+Using GPS Ephemeris: Sat 8 Az: 172.464 El: 13.9488
+Using GPS Ephemeris: Sat 9 Az: 309.39 El: 42.2385
+Using GPS Ephemeris: Sat 16 Az: 71.3559 El: 76.271
+Using GPS Ephemeris: Sat 27 Az: 143.911 El: 31.4038
+Current receiver time: 1 s
+Current receiver time: 2 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 27 (Block IIF)
+Current receiver time: 3 s
+Current receiver time: 4 s
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Current receiver time: 8 s
