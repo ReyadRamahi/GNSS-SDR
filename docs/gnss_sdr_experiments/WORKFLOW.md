@@ -42,14 +42,13 @@ Important operational notes:
 ## Step 2: Verify The XML Before Running Lime
 
 **Important:** the current hft02 workflow does not use `/home/rrama28/gnss/assist/f9t_latest/`.
+**Important:** always verify against `f9t_latest/`, not `f9t_tcp_latest/`. The TCP path is the old unreliable source. Older configs (pre-2026-04-28) may still point to the wrong directory — check before using them.
 That folder may appear in older docs, but it does not exist in the current runtime directory.
 
 The active/current XML files are usually in:
 
-```bash
 /home/rrama28/gnss/assist/
 
-**Important:** always verify against `f9t_latest/`, not `f9t_tcp_latest/`. The TCP path is the old unreliable source. Older configs (pre-2026-04-28) may still point to the wrong directory — check before using them.
 
 Useful checks:
 
