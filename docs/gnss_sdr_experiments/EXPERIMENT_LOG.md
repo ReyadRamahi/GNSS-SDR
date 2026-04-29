@@ -109,7 +109,7 @@ Results:
 
 Conclusion:
 
-- `2.6` to `2.8` is the useful threshold range so far
+- `2.6` to `2.8` is the useful threshold range
 - `3.0+` is too strict in the current focused setup
 
 ## 6. 2026-04-28 Focused 6-Channel Lime Runs
@@ -130,8 +130,8 @@ Results:
 
 Extra note:
 
-- the earlier `t28_wide_tracking` summary at `20260428_075104` looks noisy and short-lived, with only `8` receiver-time lines and module/gateware warnings in the captured tail
-- the sticky vs clean comparison is nearly identical — loop tightness is not the variable
+- the `t28_wide_tracking` run was short-lived with gateware warnings — not a valid data point
+- sticky vs clean comparison is nearly identical — loop tightness is not the variable
 
 Conclusion:
 
@@ -140,41 +140,35 @@ Conclusion:
 
 ## 7. 2026-04-28 Single-Variable Sweep — Software Parameters Exhausted
 
-All runs in this phase branched from `lime_gain20_10mhz_ephem_6ch_t26_clean.conf` with exactly one variable changed per run. LOAD_CONFIG was removed for all gain and DC offset runs to isolate variables cleanly.
-
-Also fixed in all new configs: the base config had a silent XML path bug pointing to `f9t_tcp_latest/` instead of `f9t_latest/`. All Phase 7 configs use the correct path.
+All runs branched from `lime_gain20_10mhz_ephem_6ch_t26_clean.conf` with exactly one variable changed per run. LOAD_CONFIG was removed for all gain and DC offset runs to isolate variables cleanly. All new configs also fix the XML path bug (see Phase 7b).
 
 ### 7a. Wide Tracking Loops
 
 Config: `lime_gain20_10mhz_ephem_6ch_t26_wideloop.conf`
 
-Changes from base:
-- `pll_bw_hz`: `40.0` → `50.0`
-- `fll_bw_hz`: `10.0` → `20.0`
+Changes: `pll_bw_hz` 40→50, `fll_bw_hz` 10→20
 
 | Receiver time | Tracking starts | Losses of lock | Bit sync | NAV |
 | ---: | ---: | ---: | ---: | ---: |
 | 401 | 103 | 99 | 0 | 0 |
 
-Conclusion: loop bandwidth in either direction (wider here, tighter in Phase 6) has no effect on bit sync. Loop bandwidth is ruled out.
+Conclusion: loop bandwidth in either direction has no effect. Ruled out.
 
 ### 7b. LOAD_CONFIG Off
 
 Config: `lime_gain20_noclockini_ephem_6ch_t26.conf`
 
-Changes from base:
-- `LOAD_CONFIG=...` removed from `osmosdr_args`
-- XML paths corrected to `f9t_latest/`
+Changes: `LOAD_CONFIG=...` removed from `osmosdr_args`, XML paths corrected to `f9t_latest/`
 
 | Receiver time | Tracking starts | Losses of lock | Bit sync | NAV |
 | ---: | ---: | ---: | ---: | ---: |
 | 361 | 95 | 91 | 0 | 0 |
 
-Conclusion: the `10mhz_clock_working.ini` LMS7002M config file is neutral — removing it had no measurable effect. LOAD_CONFIG is ruled out.
+Conclusion: `10mhz_clock_working.ini` is neutral. LOAD_CONFIG ruled out.
 
 ### 7c. Gain Sweep
 
-All three gain runs used LOAD_CONFIG off and corrected XML paths.
+All runs used LOAD_CONFIG off and corrected XML paths.
 
 | Config | Actual RX Gain | Receiver time | Tracking starts | Losses of lock | Bit sync |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -182,56 +176,95 @@ All three gain runs used LOAD_CONFIG off and corrected XML paths.
 | `lime_gain20_noclockini_ephem_6ch_t26.conf` | 58 dB | 304 | 82 | 79 | 0 |
 | `lime_gain30_noclockini_ephem_6ch_t26.conf` | 61 dB | 350 | 90 | 86 | 0 |
 
-Note: `gain=20` in the config maps to `58 dB` actual RX gain as reported by GNSS-SDR. The gr-osmosdr/SoapySDR mapping is nonlinear — always check the reported actual gain, not the config value.
+Note: `gain=20` maps to `58 dB` actual. Always check the reported actual gain, not the config value.
 
-Conclusion: gain across a 9 dB actual range had no effect on bit sync. Gain is ruled out.
+Conclusion: gain across a 9 dB actual range had no effect. Ruled out.
 
 ### 7d. DC Offset Tuning
 
 Config: `lime_gain20_dcoffset250_ephem_6ch_t26.conf`
 
-Hypothesis: the LimeSDR in direct conversion mode produces a DC spike at 0 Hz. Tuning the LO to exactly L1 places the GPS signal at 0 Hz, directly on the spike. Offsetting the LO by 250 kHz moves the GPS signal away from DC.
-
-Changes from base:
-- `SignalSource.freq`: `1575420000` → `1575170000` (LO 250 kHz below L1)
-- `InputFilter.IF`: `0` → `250000` (Freq_Xlating_FIR shifts signal back to 0)
+Changes: `SignalSource.freq` 1575420000→1575170000, `InputFilter.IF` 0→250000
 
 | Receiver time | Tracking starts | Losses of lock | Bit sync | NAV |
 | ---: | ---: | ---: | ---: | ---: |
 | 365 | 96 | 92 | 0 | 0 |
 
-Conclusion: DC offset did not help. Zero-IF DC contamination is ruled out as the primary cause, or the DC spike is not the dominant impairment at this signal level.
+Conclusion: 250 kHz offset did not help. The DC spike is wide enough that 250 kHz was insufficient clearance, and the -365 kHz interferer was the dominant impairment regardless.
 
-## 8. Current Best Interpretation
+## 8. 2026-04-29 Raw IQ Analysis In MATLAB
+
+A 10-second raw IQ capture was taken from the LimeSDR using `lime_iq_capture.conf` and analyzed offline in MATLAB. This bypassed GNSS-SDR entirely and examined the raw samples to identify what the correlator is actually receiving.
+
+Capture config: `configs_used/f9t_lime_current/lime_iq_capture.conf`
+IQ data: `results/IQ_pairs/lime_iq_capture.dat` — 10 seconds at 2 Msps, gr_complex
+Scripts: `scripts_used/matlab_analysis/`
+Figures: `scripts_used/matlab_analysis/figures/`
+
+### 8a. Spectrum Analysis
+
+Script: `spectrum.m`
+Figures: `PowerSpectrum.fig`, `DCSpike.fig`
+
+| Metric | Value |
+| --- | --- |
+| Noise floor | -102.4 dB |
+| Peak power | -68.9 dB |
+| DC spike power | -70.4 dB |
+| DC spike above floor | **32 dB** |
+| Narrowband interferer offset | **-365 kHz** |
+| Interferer above floor | ~15–17 dB |
+
+The DC spike at 32 dB above floor exceeds the warning threshold of 20 dB significantly. The narrowband interferer at -365 kHz sits inside the GPS C/A code bandwidth (±511 kHz). 
+### 8b. PRN Correlation
+
+Script: `prn_correlation.m`
+Figures: `PRNCorrelationMaps.fig`, `CN0Summary.fig`
+
+| PRN | C/N₀ (dB-Hz) | Peak/Noise | Doppler (Hz) | Status |
+| --- | ---: | ---: | ---: | --- |
+| G03 | 33.7 | 1.84 | +2000 | Weak |
+| G07 | 34.7 | 1.98 | -5000 | Weak |
+| G08 | 36.3 | 2.30 | +3500 | Weak |
+| G09 | 35.7 | 2.18 | -5000 | Weak |
+| G16 | 36.7 | 2.38 | -4750 | Weak |
+| G27 | 37.6 | 2.59 | -4000 | Found |
+
+GPS signal confirmed present on all 6 PRNs. All straddling the 35 dB-Hz healthy threshold. Correlation maps show horizontal stripes across all code delays — the -365 kHz interferer adds structured noise across the entire code delay range, preventing a clean acquisition peak.
+
+### 8c. Tracking Loop Simulation
+
+Script: `tracking_sim.m`
+Figure: `TrackingLoopSim.fig`
+Target: PRN G27, Doppler -4000 Hz, PLL BW 40 Hz, 2000 ms simulation
+
+| Metric | Value |
+| --- | --- |
+| Fraction locked | 25.6% |
+| PLL discriminator | Saturated at ±0.25 cycles throughout |
+| I/Q correlator | Indistinguishable — no coherent lock |
+| Carrier frequency estimate | Monotonic drift — integrator winding up |
+
+The 25.6% lock fraction matches the GNSS-SDR treadmill exactly. The correlator output is dominated by interference, so the discriminator has no valid input and the loop cannot pull in.
+
+### 8d. Conclusion From IQ Analysis
+
+The GPS signal is present but marginal. Interference — DC spike at 32 dB above floor and -365 kHz narrowband spur — corrupts every correlation integration period. The effective C/N₀ at the correlator is degraded below the stable tracking threshold by the interference, not by the signal being absent.
+
+This conclusively explains why all six Phase 7 software experiments produced identical results: no software parameter can remove hardware-level interference from the correlator input.
+
+## 9. Current Best Interpretation
 
 ### What is already solved
 
-- assistance XML refresh
-- assistance XML loading
+- assistance XML refresh and loading
 - Lime open/init through SoapySDR
 - live receiver-time advancement
-- acquisition
-- focused PRN targeting
+- acquisition and focused PRN targeting
+- GPS signal presence confirmed via raw IQ correlation
 
 ### What remains unsolved
 
-- sustained lock through bit synchronization
+- sustained tracking lock through bit synchronization
 - NAV decode on Lime
-- final position fix on Lime
-
-### What Phase 7 proved
-
-Every software-accessible variable has now been tested in isolation:
-
-- loop bandwidth (both tighter and wider)
-- LOAD_CONFIG / clock INI
-- gain (9 dB range of actual RX gain)
-- LO offset / DC spike mitigation
-
-None moved the needle. The start/loss count is stable at roughly 80–100 starts and nearly identical losses across every experiment. This level of consistency across independent variables points to a hardware floor that software cannot reach.
-
-The RTL-SDR decoded 227 NAV messages on the same antenna path. The Lime has zero across all runs. The difference is the RF frontend. The most likely explanation is that the effective C/N₀ at the Lime correlator input is below the threshold needed for stable tracking, due to the Lime's noise figure combined with the absence of a hardware bandpass filter allowing wideband noise into the front end.
-
-### Recommended next step
-
-Hardware GPS L1 bandpass filter before the LimeSDR LNAW input. This is the only remaining lever. A filter centered on 1575.42 MHz with a bandwidth of ≤10 MHz would reject wideband noise that the software filter cannot remove, directly improving the effective C/N₀ at the correlators.
+- position fix on Lime

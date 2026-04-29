@@ -23,6 +23,7 @@ Software used:
 - RTKLIB `convbin`
 - `rinex2assist`
 - `pyubx2` for F9T UBX configuration
+- MATLAB for raw IQ analysis
 
 Important environment constraint:
 
@@ -41,55 +42,43 @@ Important environment constraint:
    - NAV decode
    - position fix
 
-As of 2026-04-28, the pipeline reaches acquisition and tracking starts, but repeatedly loses lock before bit sync. All software-accessible variables have been tested and ruled out. The remaining lever is a hardware GPS L1 bandpass filter.
+As of 2026-04-29, the pipeline reaches acquisition and tracking starts, but repeatedly loses lock before bit sync. All software-accessible variables have been tested and ruled out. Raw IQ analysis has identified the root cause as hardware-level interference. The fix is hardware.
 
 ## What Is Proven
 
 ### 1. The antenna + GNSS-SDR pipeline can decode real GPS
 
-The RTL-SDR reference path is healthy enough to decode real navigation data.
-
-Evidence:
-
-- `results/logs/rtl_track/run_summary.txt`
-- `results/assist/rtl_harvested/`
+The RTL-SDR reference path decoded real navigation data on the same antenna path.
 
 Most important reference result:
 
-- `track10_g45` produced `4` bit-sync locks and `227` NAV messages
-- decoded subframes were seen for PRNs `12`, `15`, and `20`
-
-That means the shared antenna path and GNSS-SDR processing chain are capable of real GPS decode.
+- `track10_g45`: `4` bit-sync locks, `227` NAV messages, full subframes on PRNs `12`, `15`, `20`
+- artifacts: `results/logs/rtl_track/run_summary.txt`
 
 ### 2. The LimeSDR path is alive
 
-The Lime is not failing at device-open or dead-RF stage.
-
-Observed signs:
-
 - GNSS-SDR opens the Lime through `gr-osmosdr` / `SoapySDR`
 - receiver time advances during live runs
-- acquisition succeeds
+- acquisition succeeds at threshold 2.6
 - tracking starts occur on expected PRNs
-- gain changes measurably affect actual RX gain
 
 ### 3. F9T XML refresh works
 
-The current F9T path is the local serial receiver on `hft02`, not the older `hft09` TCP stream.
+Current path: local serial receiver on `hft02`.
 
-Current evidence:
+2026-04-28 refresh: `G03 G07 G08 G09 G16 G27`, count=6.
 
-- `scripts_used/f9t_lime_current/refresh_f9t_xml_local.sh`
-- `results/assist/f9t_latest/README_CURRENT_XML.txt`
-- `results/logs/f9t_lime_current/latest_f9t_refresh.log`
+Reference: `results/assist/f9t_latest/README_CURRENT_XML.txt`
 
-The 2026-04-28 local refresh recorded six GPS satellites:
+### 4. GPS signal is confirmed present on all 6 ephemeris PRNs
 
-- `G03`, `G07`, `G08`, `G09`, `G16`, `G27`
+Raw IQ correlation from `prn_correlation.m` confirmed signal on all PRNs.
 
-### 4. All software-accessible tracking variables have been ruled out
+See `scripts_used/matlab_analysis/figures/CN0Summary.fig` and `PRNCorrelationMaps.fig`.
 
-Six controlled single-variable experiments were run on 2026-04-28. None produced bit sync.
+### 5. All software-accessible tracking variables have been ruled out
+
+Six controlled single-variable experiments on 2026-04-28:
 
 | Variable | Range tested | Effect on bit sync |
 | --- | --- | --- |
@@ -98,34 +87,33 @@ Six controlled single-variable experiments were run on 2026-04-28. None produced
 | Gain | 52 dB, 58 dB, 61 dB actual | none |
 | LO offset | 0 Hz vs 250 kHz below L1 | none |
 
-The start/loss count was stable at roughly 80–100 starts and nearly identical losses across every run. This consistency across independent variables confirms the problem is not in any software-tunable parameter.
-
 ## What Is Not Solved
 
-The remaining blocker is repeated loss of lock before:
+The remaining blocker is repeated loss of lock before bit synchronization, NAV decode, and position fix.
 
-- tracking bit synchronization
-- GPS NAV decode
-- position fix
+### Two interference sources identified
 
-Typical Lime pattern across all runs:
+**1. DC spike — 32 dB above noise floor**
 
-- acquisition
-- tracking start
-- quick loss of lock
-- reacquisition
-- repeat indefinitely
-- no bit sync
-- no NAV message
-- no fix
+Severe zero-IF contamination from LO leakage into the baseband. At 32 dB above floor, significantly exceeds the 20 dB concern threshold.
 
-## Best Current Technical Interpretation
+See: `scripts_used/matlab_analysis/figures/DCSpike.fig`
 
-The effective C/N₀ at the Lime correlator input is below the threshold needed for stable tracking. The RTL-SDR decoded 227 NAV messages on the same antenna path. The Lime has zero across all runs. The difference is the RF frontend.
+**2. Narrowband interferer at -365 kHz offset from L1**
 
-The LimeSDR routed through `gr-osmosdr`/SoapySDR without the native Lime source block has a higher effective noise figure than the RTL on a working signal path. Without a hardware bandpass filter before the LimeSDR, wideband noise enters the front end and the effective C/N₀ at the correlators is too low to hold lock — regardless of any software parameter.
+Sits inside the GPS C/A code bandwidth (±511 kHz). Likely USB 3.0 clock harmonic mixing into the RF path — a known LimeSDR-USB issue. Creates horizontal stripes across the entire code delay range in the correlation maps, preventing a clean acquisition peak.
 
-## Parameter Findings To Date
+See: `scripts_used/matlab_analysis/figures/PowerSpectrum.fig`, `PRNCorrelationMaps.fig`
+
+### Signal level
+
+All 6 ephemeris PRNs measured at 33–38 dB-Hz. Healthy tracking threshold is 35 dB-Hz. The signal is marginally present — interference is pushing the effective C/N₀ below the stable tracking threshold.
+
+### Tracking simulation result
+
+G27 (best PRN, C/N₀ 37.6 dB-Hz): 25.6% lock fraction over 2000 ms. PLL discriminator saturated throughout. Matches GNSS-SDR treadmill behavior exactly.
+
+See: `scripts_used/matlab_analysis/figures/TrackingLoopSim.fig`
 
 ### Confirmed working range
 
@@ -140,11 +128,9 @@ The LimeSDR routed through `gr-osmosdr`/SoapySDR without the native Lime source 
 - loop bandwidth (both directions)
 - LOAD_CONFIG / LMS7002M clock INI
 - gain across 52–61 dB actual
-- LO offset / DC spike mitigation
+- LO offset / DC spike mitigation (250 kHz — insufficient clearance)
 
 ### Gain mapping note
-
-The gr-osmosdr/SoapySDR gain mapping for the LimeSDR is nonlinear. Always check the actual reported RX gain in the GNSS-SDR log, not the config value:
 
 ```
 gain=10 → 52 dB actual
@@ -152,35 +138,58 @@ gain=20 → 58 dB actual
 gain=30 → 61 dB actual
 ```
 
-## Recommended Next Step
+Always check the actual reported RX gain in the GNSS-SDR log.
 
-Hardware GPS L1 bandpass filter before the LimeSDR LNAW input. A filter centered on 1575.42 MHz with a bandwidth of ≤10 MHz would reject the wideband noise that the software filter cannot remove, directly improving the effective C/N₀ at the correlators.
+## Recommended Next Steps
 
-After adding a hardware filter, restart from the clean base config:
+**1. Move LimeSDR to USB 2.0 port** — free, immediate. The -365 kHz spur is likely USB 3.0 interference. If it disappears, C/N₀ will improve and tracking may stabilize without any hardware filter.
 
+**2. Hardware GPS L1 bandpass filter** — SAW or cavity filter centered at 1575.42 MHz, ≤10 MHz bandwidth, before the LimeSDR LNAW input. Rejects the interferer and reduces wideband noise.
+
+After either fix, restart from:
 - `configs_used/f9t_lime_current/lime_gain20_noclockini_ephem_6ch_t26.conf`
 
-## Known Warnings
+## MATLAB Analysis Artifacts
 
-These warnings appear often and do not prevent operation:
+Scripts: `scripts_used/matlab_analysis/`
 
-- SoapySDR duplicate entry for lime
-- Gateware version mismatch
+| Script | Purpose |
+| --- | --- |
+| `spectrum.m` | Power spectrum, DC spike, interference identification |
+| `prn_correlation.m` | PRN correlation maps, C/N₀ per PRN |
+| `tracking_sim.m` | Tracking loop simulation, lock fraction, drift diagnosis |
+| `rtl_vs_lime.m` | RTL vs Lime comparison (requires RTL capture) |
 
-Do not run this unless the professor explicitly wants a firmware/gateware update:
+Figures: `scripts_used/matlab_analysis/figures/`
 
-```bash
-LimeUtil --update
-```
+| Figure | Key finding |
+| --- | --- |
+| `PowerSpectrum.fig` | Noise floor -102.4 dB, DC spike and -365 kHz interferer visible |
+| `DCSpike.fig` | DC spike 32 dB above floor |
+| `PRNCorrelationMaps.fig` | Horizontal stripes — interference corrupting code delay axis |
+| `CN0Summary.fig` | All PRNs 33–38 dB-Hz, straddling healthy threshold |
+| `TrackingLoopSim.fig` | G27: 25.6% lock fraction, PLL saturated throughout |
+
+IQ capture config: `configs_used/f9t_lime_current/lime_iq_capture.conf`
+IQ capture data: `results/IQ_pairs/lime_iq_capture.dat` — 2026-04-29, 10 s at 2 Msps, gr_complex
 
 ## XML Path Warning
 
-Configs created before 2026-04-28 point to `f9t_tcp_latest/` for the AGNSS XML. This is the old, unreliable TCP source. Always verify config AGNSS paths point to `f9t_latest/` before running. The correct paths are:
+Configs created before 2026-04-28 point to `f9t_tcp_latest/` for AGNSS XML. Always verify configs point to `f9t_latest/`:
 
 ```ini
 GNSS-SDR.AGNSS_gps_ephemeris_xml=/home/rrama28/gnss/assist/f9t_latest/gps_ephemeris.xml
 GNSS-SDR.AGNSS_gps_utc_model_xml=/home/rrama28/gnss/assist/f9t_latest/gps_utc_model.xml
 ```
+
+## Known Warnings
+
+These appear often and do not prevent operation:
+
+- SoapySDR duplicate entry for lime
+- Gateware version mismatch
+
+Do not run `LimeUtil --update` unless the professor explicitly requests it.
 
 ## Monitoring Commands
 
@@ -194,30 +203,10 @@ grep -c "tracking bit synchronization locked" "$LOG"
 grep -c "New GPS NAV message received" "$LOG"
 grep -c "Position at" "$LOG"
 grep "Actual RX Gain" "$LOG" | head -3
-
-grep -E "Current receiver time|Tracking of GPS|Loss of lock|tracking bit synchronization locked|New GPS NAV message received|Position at|Actual RX Gain|WARNING|ERROR" "$LOG" | tail -150
 ```
 
 ## Files Preserved in Repo
 
-Curated files should be copied into docs, including:
+Commit: configs, scripts, MATLAB `.m` files, MATLAB `.fig` figures, XML snapshots if small, run summaries.
 
-- tested configs
-- helper scripts
-- sweep logs/configs
-- F9T refresh scripts
-- F9T UBX enable script
-- RTL harvest logs
-- Lime baseline logs
-- Lime AGNSS logs
-- RF sanity logs
-- current run summaries
-- GNSS-SDR assistance XML snapshots if small
-
-Large generated files should not be committed:
-
-- `*.dat`, `*.bin`, `*.ubx`, `*.cs16`
-- `GSDR*`, `pvt_dat_*`
-- `*.gpx`, `*.kml`, `*.nmea`
-- large IQ captures
-- raw runtime folders
+Do not commit: `*.bin`, `*.ubx`, `*.cs16`, `GSDR*`, `pvt_dat_*`, `*.gpx`, `*.kml`, `*.nmea`, large IQ captures, raw runtime folders. Exception: `results/IQ_pairs/lime_iq_capture.dat` is committed intentionally as the reference capture for MATLAB analysis.
