@@ -47,7 +47,7 @@ That folder may appear in older docs, but it does not exist in the current runti
 
 The active/current XML files are usually in:
 
-/home/rrama28/gnss/assist/
+'/home/rrama28/gnss/assist/'
 
 
 Useful checks:
