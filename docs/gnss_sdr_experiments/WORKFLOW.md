@@ -7,6 +7,7 @@ This is the current operator workflow for the GNSS-SDR GPS L1 C/A experiments. T
 ```text
 local F9T on hft02
 → refresh assistance XML
+→ copy/verify XML in the active assist folder
 → load XML into GNSS-SDR
 → run LimeSDR-USB on GPS L1 C/A
 → watch acquisition, tracking, bit sync, NAV decode, and fix
@@ -16,11 +17,11 @@ The older `hft09` TCP F9T path is kept only as a reference workflow now.
 
 ## Step 1: Refresh Local F9T XML
 
-Current helper scripts:
+Current helper scripts on `hft02`:
 
-- `scripts_used/f9t_lime_current/enable_f9t_ubx_uart1.py`
-- `scripts_used/f9t_lime_current/refresh_f9t_xml_local.sh`
-- `scripts_used/f9t_lime_current/start_f9t_refresh_local_tmux.sh`
+- `/home/rrama28/gnss/scripts/enable_f9t_ubx_uart1.py`
+- `/home/rrama28/gnss/scripts/refresh_f9t_xml_local.sh`
+- `/home/rrama28/gnss/scripts/start_f9t_refresh_local_tmux.sh`
 
 Typical long refresh:
 
@@ -41,34 +42,118 @@ Important operational notes:
 
 ## Step 2: Verify The XML Before Running Lime
 
-**Important:** the current hft02 workflow does not use `/home/rrama28/gnss/assist/f9t_latest/`.
-**Important:** always verify against `f9t_latest/`, not `f9t_tcp_latest/`. The TCP path is the old unreliable source. Older configs (pre-2026-04-28) may still point to the wrong directory — check before using them.
-That folder may appear in older docs, but it does not exist in the current runtime directory.
+**Important:** do not use `/home/rrama28/gnss/assist/f9t_latest/`.
 
-The active/current XML files are usually in:
+That folder appears in older notes, but it does not exist in the current `hft02` runtime tree.
 
-'/home/rrama28/gnss/assist/'
+There are two relevant XML locations on `hft02`:
 
+```text
+Generated F9T run snapshots:
+  /home/rrama28/gnss/f9t/assist_runs/
 
-Useful checks:
-
-```bash
-ls -lh /home/rrama28/gnss/assist/f9t_latest/
-grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/gps_ephemeris.xml
-grep -o 'G[0-9][0-9]' /home/rrama28/gnss/assist/gps_ephemeris.xml | sort -u
+Active GNSS-SDR assist folder:
+  /home/rrama28/gnss/assist/
 ```
 
-Repo-side reference artifacts:
+The refresh script may generate a good XML snapshot under:
 
-- current local snapshot: `results/assist/f9t_latest/`
-- metadata for the current snapshot: `results/assist/f9t_latest/README_CURRENT_XML.txt`
-- older TCP reference snapshot: `results/assist/f9t_tcp_reference/`
+```text
+/home/rrama28/gnss/f9t/assist_runs/<run_name>/
+```
+
+But GNSS-SDR configs usually read from the active assist folder:
+
+```text
+/home/rrama28/gnss/assist/gps_ephemeris.xml
+/home/rrama28/gnss/assist/gps_iono.xml
+/home/rrama28/gnss/assist/gps_utc_model.xml
+```
+
+So before running Lime, verify that the active XML is actually current.
+
+### Find Available Ephemeris Snapshots
+
+```bash
+find /home/rrama28/gnss -type f -name "gps_ephemeris.xml" -ls 2>/dev/null
+```
+
+Pick the snapshot closest to the GNSS-SDR run or IQ capture time.
+
+### Verify A Candidate Snapshot
+
+Replace `FILE` with the XML snapshot you want to check:
+
+```bash
+FILE=/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_070133/gps_ephemeris.xml
+
+ls -lh "$FILE"
+grep -o '<count>[0-9]*</count>' "$FILE"
+grep -o '<PRN>[0-9]*</PRN>' "$FILE"
+```
+
+For the useful six-PRN Lime/F9T snapshot, the expected output is:
+
+```text
+<count>6</count>
+<PRN>16</PRN>
+<PRN>3</PRN>
+<PRN>27</PRN>
+<PRN>7</PRN>
+<PRN>8</PRN>
+<PRN>9</PRN>
+```
+
+### Copy The Good Snapshot Into The Active Assist Folder
+
+Only do this after choosing the correct generated snapshot.
+
+```bash
+GOOD=/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_070133
+ACTIVE=/home/rrama28/gnss/assist
+BACKUP="$ACTIVE/backups/manual_fix_$(date -u +%Y%m%d_%H%M%S)"
+
+mkdir -p "$BACKUP"
+cp "$ACTIVE"/gps_*.xml "$BACKUP"/ 2>/dev/null || true
+
+cp "$GOOD/gps_ephemeris.xml" "$ACTIVE/gps_ephemeris.xml"
+cp "$GOOD/gps_iono.xml" "$ACTIVE/gps_iono.xml" 2>/dev/null || true
+cp "$GOOD/gps_utc_model.xml" "$ACTIVE/gps_utc_model.xml" 2>/dev/null || true
+```
+
+### Verify The Active XML
+
+```bash
+ls -lh /home/rrama28/gnss/assist/gps_ephemeris.xml
+grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/gps_ephemeris.xml
+grep -o '<PRN>[0-9]*</PRN>' /home/rrama28/gnss/assist/gps_ephemeris.xml
+```
 
 Good signs:
 
-- XML count is nonzero
-- expected PRNs are present
+- XML file exists
+- XML timestamp is close to the run or IQ capture time
+- `<count>` is nonzero
+- expected PRNs appear as `<PRN>...</PRN>`
 - GNSS-SDR later prints the usual XML-load messages
+
+Do not use this command as the main PRN check:
+
+```bash
+grep -o 'G[0-9][0-9]' gps_ephemeris.xml
+```
+
+The XML stores satellites as:
+
+```xml
+<PRN>3</PRN>
+```
+
+not as:
+
+```text
+G03
+```
 
 ## Step 3: Pick The Right Config
 
@@ -84,7 +169,21 @@ Current best starting point for new Lime tracking tests:
 
 - `configs_used/f9t_lime_current/lime_gain20_noclockini_ephem_6ch_t26.conf`
 
-Note: the older `t26_clean` config has the wrong XML path (`f9t_tcp_latest/`). Use the `noclockini` version as the new base — it has the correct path and LOAD_CONFIG has been confirmed neutral.
+Before running, make sure the config points to the active XML files:
+
+```ini
+GNSS-SDR.AGNSS_gps_ephemeris_xml=/home/rrama28/gnss/assist/gps_ephemeris.xml
+GNSS-SDR.AGNSS_gps_iono_xml=/home/rrama28/gnss/assist/gps_iono.xml
+GNSS-SDR.AGNSS_gps_utc_model_xml=/home/rrama28/gnss/assist/gps_utc_model.xml
+```
+
+Do not use configs that still point to:
+
+```text
+/home/rrama28/gnss/assist/f9t_latest/
+```
+
+because that folder does not exist in the current `hft02` runtime tree.
 
 ## Step 4: Set Focused PRNs Correctly
 
@@ -95,7 +194,7 @@ When testing only the current ephemeris satellites, all of these settings matter
 - `Channels.in_acquisition`
 - each `ChannelN.satellite`
 
-Example shape:
+Example for the useful six-PRN snapshot:
 
 ```ini
 Channels_1C.count=6
@@ -103,10 +202,16 @@ Channel.signal=1C
 Channels.in_acquisition=6
 Channel0.satellite=16
 Channel1.satellite=3
-Channel2.satellite=9
-Channel3.satellite=27
-Channel4.satellite=7
-Channel5.satellite=8
+Channel2.satellite=27
+Channel3.satellite=7
+Channel4.satellite=8
+Channel5.satellite=9
+```
+
+Same PRNs sorted:
+
+```text
+3, 7, 8, 9, 16, 27
 ```
 
 That PRN restriction is now known to work when all four pieces are set together.
@@ -134,14 +239,14 @@ tmux attach -t "$SESSION"
 
 Run rules:
 
-- print all four variables before launching so you have the exact RUN_DIR for monitoring
+- print all four variables before launching so you have the exact `RUN_DIR` for monitoring
 - keep `SignalSource.dump=false` during position attempts
 - use a fresh run directory every time
-- do not launch GNSS-SDR from the home directory — it will dump GSDR*, pvt_dat_*, GPX, KML, and NMEA files there
+- do not launch GNSS-SDR from the home directory because it will dump `GSDR*`, `pvt_dat_*`, GPX, KML, and NMEA files there
 
 ## Step 6: Monitor From A Second SSH Session
 
-Set LOG explicitly using the printed RUN_DIR — do not rely on shell variables from the launch session:
+Set `LOG` explicitly using the printed `RUN_DIR`. Do not rely on shell variables from the launch session.
 
 ```bash
 LOG=/home/alexgu2/gnss/runs/example_YYYYMMDD_HHMMSS/run.log
@@ -166,6 +271,7 @@ Useful commands:
 
 ```bash
 LOG=/path/to/run.log
+
 grep -c "Current receiver time" "$LOG"
 grep -c "Tracking of GPS" "$LOG"
 grep -c "Loss of lock" "$LOG"
@@ -185,10 +291,9 @@ Interpretation:
 - bit sync locked: first real breakthrough — let the run continue to full 30 minutes
 - NAV messages or a fix: the main Lime problem is finally breaking
 
-
 ## Step 8: Raw IQ Capture And MATLAB Analysis
 
-Use this workflow to bypass GNSS-SDR and analyze what the LimeSDR is actually receiving at the sample level. All scripts and saved figures are in `scripts_used/matlab_analysis/`.
+Use this workflow to bypass GNSS-SDR tracking and analyze what the LimeSDR is actually receiving at the sample level. All scripts and saved figures are in `scripts_used/matlab_analysis/`.
 
 ### Capture IQ On hft02
 
@@ -200,20 +305,65 @@ cd "$RUN_DIR"
 gnss-sdr --config_file=/home/alexgu2/gnss/configs/lime_iq_capture.conf
 ```
 
-Config: `configs_used/f9t_lime_current/lime_iq_capture.conf`
+Config:
 
-GNSS-SDR runs for 10 seconds and exits automatically. Output: `lime_iq_capture.dat` (~160 MB, gr_complex, 2 Msps). The 2026-04-29 capture is committed to the repo at `results/IQ_pairs/lime_iq_capture.dat`. Future captures should be downloaded locally — do not commit large `.dat` files.
+- `configs_used/f9t_lime_current/lime_iq_capture.conf`
+
+GNSS-SDR runs for 10 seconds and exits automatically.
+
+Expected output:
+
+- `lime_iq_capture.dat`
+- about 160 MB
+- `gr_complex`
+- 2 Msps
+
+The 2026-04-29 useful capture was:
+
+```text
+/home/alexgu2/gnss/runs/iq_capture_20260429_045742/lime_iq_capture.dat
+```
+
+The earlier capture was 0 MB and should not be used:
+
+```text
+/home/alexgu2/gnss/runs/iq_capture_20260429_045321/lime_iq_capture.dat
+```
+
+Future captures should be downloaded locally for MATLAB analysis. Do not commit large `.dat` files unless the team explicitly wants that.
+
+### Copy IQ File From Alex Folder If Needed
+
+```bash
+mkdir -p /home/rrama28/gnss/iq_from_alex
+
+sudo cp -r /home/alexgu2/gnss/runs/iq_capture_20260429_045742 /home/rrama28/gnss/iq_from_alex/
+
+sudo chown -R rrama28:rrama28 /home/rrama28/gnss/iq_from_alex
+```
+
+Verify:
+
+```bash
+ls -lh /home/rrama28/gnss/iq_from_alex/iq_capture_20260429_045742/
+```
 
 ### Run MATLAB Scripts In Order
 
-Put all four `.m` files and `lime_iq_capture.dat` in the same folder:
+Put all four `.m` files and `lime_iq_capture.dat` in the same local folder on the computer running MATLAB.
 
 | Step | Script | What to do |
 | --- | --- | --- |
 | 1 | `spectrum.m` | Run as-is. Check DC spike dB above floor and any narrowband spikes inside ±511 kHz. |
-| 2 | `prn_correlation.m` | Update `PRNS_TO_TEST` to match current ephemeris PRNs. Note best PRN and its Doppler. |
+| 2 | `prn_correlation.m` | Update `PRNS_TO_TEST` to match the verified ephemeris PRNs. |
 | 3 | `tracking_sim.m` | Update `PRN` and `DOPPLER_HZ` from step 2 results before running. |
 | 4 | `rtl_vs_lime.m` | Requires a separate RTL capture. Run only if RTL `.dat` is available. |
+
+For the useful six-PRN snapshot, use:
+
+```matlab
+PRNS_TO_TEST = [3 7 8 9 16 27];
+```
 
 ### Saved Figures From 2026-04-29 Analysis
 
@@ -230,10 +380,10 @@ In `scripts_used/matlab_analysis/figures/`:
 ### What To Look For
 
 - DC spike above noise floor: warn at 20 dB, serious at 30+ dB
-- Narrowband spikes inside ±511 kHz: interference inside the GPS band
+- narrowband spikes inside ±511 kHz: interference inside the GPS C/A code band
 - C/N₀ per PRN: healthy >35 dB-Hz, marginal 28–35, too weak <28
-- Correlation maps: should show one sharp bright dot — horizontal stripes mean interference
-- Tracking sim lock fraction: >80% healthy, 40–80% marginal, <40% cannot hold lock
+- correlation maps: should show one sharp bright dot; horizontal stripes mean interference
+- tracking sim lock fraction: >80% healthy, 40–80% marginal, <40% cannot hold lock
 
 ## Legacy Reference: Older hft09 TCP Refresh Path
 
