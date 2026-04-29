@@ -130,7 +130,6 @@ Run rules:
 - print all four variables before launching so you have the exact RUN_DIR for monitoring
 - keep `SignalSource.dump=false` during position attempts
 - use a fresh run directory every time
-- if tmux/nohup piping behaves strangely, try a more direct terminal-like run
 - do not launch GNSS-SDR from the home directory — it will dump GSDR*, pvt_dat_*, GPX, KML, and NMEA files there
 
 ## Step 6: Monitor From A Second SSH Session
@@ -179,18 +178,55 @@ Interpretation:
 - bit sync locked: first real breakthrough — let the run continue to full 30 minutes
 - NAV messages or a fix: the main Lime problem is finally breaking
 
-## Step 8: Change One Variable Per Run
 
-Confirmed ruled-out variables (do not re-test without a new hypothesis):
+## Step 8: Raw IQ Capture And MATLAB Analysis
 
-- loop bandwidth — both tighter and wider directions tested, no effect
-- LOAD_CONFIG / clock INI — neutral, confirmed 2026-04-28
-- gain — tested across 52–61 dB actual range, no effect
-- LO offset / DC spike — 250 kHz offset tested, no effect
+Use this workflow to bypass GNSS-SDR and analyze what the LimeSDR is actually receiving at the sample level. All scripts and saved figures are in `scripts_used/matlab_analysis/`.
 
-Remaining untested variables:
+### Capture IQ On hft02
 
-- hardware GPS L1 bandpass filter before the LimeSDR input
+```bash
+RUN_ID=$(date -u +%Y%m%d_%H%M%S)
+RUN_DIR=/home/alexgu2/gnss/runs/iq_capture_${RUN_ID}
+mkdir -p "$RUN_DIR"
+cd "$RUN_DIR"
+gnss-sdr --config_file=/home/alexgu2/gnss/configs/lime_iq_capture.conf
+```
+
+Config: `configs_used/f9t_lime_current/lime_iq_capture.conf`
+
+GNSS-SDR runs for 10 seconds and exits automatically. Output: `lime_iq_capture.dat` (~160 MB, gr_complex, 2 Msps). The 2026-04-29 capture is committed to the repo at `results/IQ_pairs/lime_iq_capture.dat`. Future captures should be downloaded locally — do not commit large `.dat` files.
+
+### Run MATLAB Scripts In Order
+
+Put all four `.m` files and `lime_iq_capture.dat` in the same folder:
+
+| Step | Script | What to do |
+| --- | --- | --- |
+| 1 | `spectrum.m` | Run as-is. Check DC spike dB above floor and any narrowband spikes inside ±511 kHz. |
+| 2 | `prn_correlation.m` | Update `PRNS_TO_TEST` to match current ephemeris PRNs. Note best PRN and its Doppler. |
+| 3 | `tracking_sim.m` | Update `PRN` and `DOPPLER_HZ` from step 2 results before running. |
+| 4 | `rtl_vs_lime.m` | Requires a separate RTL capture. Run only if RTL `.dat` is available. |
+
+### Saved Figures From 2026-04-29 Analysis
+
+In `scripts_used/matlab_analysis/figures/`:
+
+| Figure | Key finding |
+| --- | --- |
+| `PowerSpectrum.fig` | Noise floor -102.4 dB, DC spike and -365 kHz interferer both visible inside GPS band |
+| `DCSpike.fig` | DC spike 32 dB above noise floor — severe zero-IF contamination |
+| `PRNCorrelationMaps.fig` | All 6 PRNs show horizontal stripe pattern — interference corrupting code delay axis |
+| `CN0Summary.fig` | G03–G27 C/N₀ range 33.7–37.6 dB-Hz — all marginal, G27 best |
+| `TrackingLoopSim.fig` | G27 lock fraction 25.6% — PLL discriminator saturated, loop never achieved coherent lock |
+
+### What To Look For
+
+- DC spike above noise floor: warn at 20 dB, serious at 30+ dB
+- Narrowband spikes inside ±511 kHz: interference inside the GPS band
+- C/N₀ per PRN: healthy >35 dB-Hz, marginal 28–35, too weak <28
+- Correlation maps: should show one sharp bright dot — horizontal stripes mean interference
+- Tracking sim lock fraction: >80% healthy, 40–80% marginal, <40% cannot hold lock
 
 ## Legacy Reference: Older hft09 TCP Refresh Path
 
