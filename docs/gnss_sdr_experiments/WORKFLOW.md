@@ -46,23 +46,27 @@ Important operational notes:
 
 That folder appears in older notes, but it does not exist in the current `hft02` runtime tree.
 
-There are two relevant XML locations on `hft02`:
+The local F9T refresh writes generated XML into a run/session folder under:
 
 ```text
-Generated F9T run snapshots:
-  /home/rrama28/gnss/f9t/assist_runs/
-
-Active GNSS-SDR assist folder:
-  /home/rrama28/gnss/assist/
+/home/rrama28/gnss/f9t/assist_runs/
 ```
 
-The refresh script may generate a good XML snapshot under:
+The output folder name matches the refresh run format:
 
 ```text
-/home/rrama28/gnss/f9t/assist_runs/<run_name>/
+hft02_YYYYMMDD_HHMMSS
 ```
 
-But GNSS-SDR configs usually read from the active assist folder:
+Examples from current `hft02`:
+
+```text
+/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_040552/
+/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_070133/
+/home/rrama28/gnss/f9t/assist_runs/hft02_20260429_071857/
+```
+
+GNSS-SDR configs usually read from the active assist folder:
 
 ```text
 /home/rrama28/gnss/assist/gps_ephemeris.xml
@@ -70,29 +74,53 @@ But GNSS-SDR configs usually read from the active assist folder:
 /home/rrama28/gnss/assist/gps_utc_model.xml
 ```
 
-So before running Lime, verify that the active XML is actually current.
+So the correct workflow is:
 
-### Find Available Ephemeris Snapshots
-
-```bash
-find /home/rrama28/gnss -type f -name "gps_ephemeris.xml" -ls 2>/dev/null
+```text
+run F9T refresh
+→ find the generated hft02_* output folder for that refresh
+→ verify its XML count and PRNs
+→ copy that XML into /home/rrama28/gnss/assist/
+→ verify /home/rrama28/gnss/assist/
+→ run Lime
 ```
 
-Pick the snapshot closest to the GNSS-SDR run or IQ capture time.
+### Find F9T Refresh Output Folders
 
-### Verify A Candidate Snapshot
-
-Replace `FILE` with the XML snapshot you want to check:
+List the newest generated refresh folders first:
 
 ```bash
-FILE=/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_070133/gps_ephemeris.xml
-
-ls -lh "$FILE"
-grep -o '<count>[0-9]*</count>' "$FILE"
-grep -o '<PRN>[0-9]*</PRN>' "$FILE"
+ls -lht /home/rrama28/gnss/f9t/assist_runs/
 ```
 
-For the useful six-PRN Lime/F9T snapshot, the expected output is:
+Or show every generated ephemeris XML:
+
+```bash
+find /home/rrama28/gnss/f9t/assist_runs -type f -name "gps_ephemeris.xml" -ls 2>/dev/null
+```
+
+### Pick The Correct Refresh Output Folder
+
+Use the `hft02_*` folder that matches the refresh you just ran or the GNSS-SDR/IQ capture time.
+
+For example:
+
+```bash
+SESSION_DIR=/home/rrama28/gnss/f9t/assist_runs/hft02_20260429_071857
+```
+
+Do **not** blindly use the newest folder if it does not match the run you are testing.
+
+### Verify The Generated XML
+
+```bash
+ls -lh "$SESSION_DIR"/gps_*.xml
+
+grep -o '<count>[0-9]*</count>' "$SESSION_DIR/gps_ephemeris.xml"
+grep -o '<PRN>[0-9]*</PRN>' "$SESSION_DIR/gps_ephemeris.xml"
+```
+
+Good example output:
 
 ```text
 <count>6</count>
@@ -104,24 +132,23 @@ For the useful six-PRN Lime/F9T snapshot, the expected output is:
 <PRN>9</PRN>
 ```
 
-### Copy The Good Snapshot Into The Active Assist Folder
+### Copy The Verified XML Into The Active Assist Folder
 
-Only do this after choosing the correct generated snapshot.
+Only do this after confirming the generated XML has a useful nonzero count.
 
 ```bash
-GOOD=/home/rrama28/gnss/f9t/assist_runs/hft02_20260428_070133
 ACTIVE=/home/rrama28/gnss/assist
 BACKUP="$ACTIVE/backups/manual_fix_$(date -u +%Y%m%d_%H%M%S)"
 
 mkdir -p "$BACKUP"
 cp "$ACTIVE"/gps_*.xml "$BACKUP"/ 2>/dev/null || true
 
-cp "$GOOD/gps_ephemeris.xml" "$ACTIVE/gps_ephemeris.xml"
-cp "$GOOD/gps_iono.xml" "$ACTIVE/gps_iono.xml" 2>/dev/null || true
-cp "$GOOD/gps_utc_model.xml" "$ACTIVE/gps_utc_model.xml" 2>/dev/null || true
+cp "$SESSION_DIR/gps_ephemeris.xml" "$ACTIVE/gps_ephemeris.xml"
+cp "$SESSION_DIR/gps_iono.xml" "$ACTIVE/gps_iono.xml" 2>/dev/null || true
+cp "$SESSION_DIR/gps_utc_model.xml" "$ACTIVE/gps_utc_model.xml" 2>/dev/null || true
 ```
 
-### Verify The Active XML
+### Verify The Active Assist Folder
 
 ```bash
 ls -lh /home/rrama28/gnss/assist/gps_ephemeris.xml
@@ -131,13 +158,14 @@ grep -o '<PRN>[0-9]*</PRN>' /home/rrama28/gnss/assist/gps_ephemeris.xml
 
 Good signs:
 
-- XML file exists
-- XML timestamp is close to the run or IQ capture time
+- the selected `hft02_*` output folder exists
+- the selected folder contains `gps_ephemeris.xml`
 - `<count>` is nonzero
 - expected PRNs appear as `<PRN>...</PRN>`
+- the active assist XML now matches the verified generated XML
 - GNSS-SDR later prints the usual XML-load messages
 
-Do not use this command as the main PRN check:
+Do not use this as the main PRN check:
 
 ```bash
 grep -o 'G[0-9][0-9]' gps_ephemeris.xml
