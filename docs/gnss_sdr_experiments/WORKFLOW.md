@@ -41,14 +41,22 @@ Important operational notes:
 
 ## Step 2: Verify The XML Before Running Lime
 
+**Important:** the current hft02 workflow does not use `/home/rrama28/gnss/assist/f9t_latest/`.
+That folder may appear in older docs, but it does not exist in the current runtime directory.
+
+The active/current XML files are usually in:
+
+```bash
+/home/rrama28/gnss/assist/
+
 **Important:** always verify against `f9t_latest/`, not `f9t_tcp_latest/`. The TCP path is the old unreliable source. Older configs (pre-2026-04-28) may still point to the wrong directory — check before using them.
 
 Useful checks:
 
 ```bash
 ls -lh /home/rrama28/gnss/assist/f9t_latest/
-grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/f9t_latest/gps_ephemeris.xml
-grep -o 'G[0-9][0-9]' /home/rrama28/gnss/assist/f9t_latest/gps_ephemeris.xml | sort -u
+grep -o '<count>[0-9]*</count>' /home/rrama28/gnss/assist/gps_ephemeris.xml
+grep -o 'G[0-9][0-9]' /home/rrama28/gnss/assist/gps_ephemeris.xml | sort -u
 ```
 
 Repo-side reference artifacts:
