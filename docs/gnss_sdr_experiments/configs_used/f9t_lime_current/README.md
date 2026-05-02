@@ -23,8 +23,15 @@ These are the configs most relevant to the current unresolved Lime tracking issu
 - `lime_rf_sanity_gain61.conf`
   - RF sanity check at gain `61`
 
+- `lime_iq_corrected_file_source.conf`
+  - feeds the offline IQ-corrected `.dat` file into GNSS-SDR via `File_Signal_Source`
+  - IQ correction (DC removal + Q scaling by 0.409) is baked into the `.dat` file — no in-config correction needed
+  - update `SignalSource.filename` to point at the corrected capture before each run
+  - update AGNSS XML paths to `results/assist/f9t_latest/` before running
+
 ## How To Use This Folder
 
-- branch new Lime tracking tests from `lime_gain20_10mhz_ephem_6ch_t26_clean.conf`
+- for file-source tracking experiments, start from `lime_iq_corrected_file_source.conf`
+- for live LimeSDR experiments, branch from `lime_gain20_10mhz_ephem_6ch_t26_clean.conf`
 - compare against the threshold and tracking-variant configs one variable at a time
 - use the RF sanity configs only to confirm front-end behavior, not as final position-attempt configs

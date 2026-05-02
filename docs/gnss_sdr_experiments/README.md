@@ -16,11 +16,13 @@ Start here. This folder now groups the GNSS-SDR GPS L1 C/A work by purpose:
 - Acquisition works.
 - Focused PRN restriction works when `Channels_1C.count`, `Channel.signal`, `Channels.in_acquisition`, and `ChannelN.satellite` are all set together.
 - Tracking starts on the correct ephemeris PRNs.
-- Remaining blocker: repeated loss of lock before bit sync, NAV decode, or position fix.
+- **Root cause identified: LimeSDR has severe IQ amplitude imbalance (Q channel 4.6x stronger than I, -13 dB power ratio).** This was corrupting the PLL discriminator on every 1ms integration period and explains why no software parameter change ever held lock.
+- **IQ correction confirmed working:** offline MATLAB correction (`iq_correct.m`) reduced imbalance from 123% to 0.00%. Corrected file fed into GNSS-SDR via `File_Signal_Source` — tracking started on PRN 03 and PRN 07.
+- Remaining blocker: corrected capture was only 9.9 seconds — too short for bit sync or NAV decode. Need a 2–3 minute corrected capture.
 
 ## Read In This Order
 
-1. [LIMESDR_F9T_HANDOFF_20260428.md](LIMESDR_F9T_HANDOFF_20260428.md)
+1. [LIMESDR_IQ_CORRECTED_FILE_SOURCE_HANDOFF_20260502.md](LIMESDR_IQ_CORRECTED_FILE_SOURCE_HANDOFF_20260502.md) ← most recent
 2. [WORKFLOW.md](WORKFLOW.md)
 3. [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md)
 4. [configs_used/CONFIG_INDEX.md](configs_used/CONFIG_INDEX.md)
@@ -39,6 +41,8 @@ Start here. This folder now groups the GNSS-SDR GPS L1 C/A work by purpose:
 
 ## Most Relevant Current Artifacts
 
+- **IQ correction script:** `scripts_used/matlab_analysis/iq_correct.m`
+- **IQ-corrected file source config:** `configs_used/f9t_lime_current/lime_iq_corrected_file_source.conf`
 - Current local F9T XML snapshot:
   - `results/assist/f9t_latest/`
   - generation metadata is in `results/assist/f9t_latest/README_CURRENT_XML.txt`

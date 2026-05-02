@@ -253,7 +253,7 @@ The GPS signal is present but marginal. Interference — DC spike at 32 dB above
 
 This conclusively explains why all six Phase 7 software experiments produced identical results: no software parameter can remove hardware-level interference from the correlator input.
 
-## 9. Current Best Interpretation
+## 9. Current Best Interpretation (updated after Phase 10)
 
 ### What is already solved
 
@@ -262,9 +262,74 @@ This conclusively explains why all six Phase 7 software experiments produced ide
 - live receiver-time advancement
 - acquisition and focused PRN targeting
 - GPS signal presence confirmed via raw IQ correlation
+- root cause of tracking failure identified: IQ amplitude imbalance in LimeSDR hardware
+- offline IQ correction confirmed working (0.00% imbalance after correction)
+- tracking on corrected IQ file confirmed (PRN 03 and PRN 07 started tracking)
 
 ### What remains unsolved
 
 - sustained tracking lock through bit synchronization
 - NAV decode on Lime
 - position fix on Lime
+- longer corrected IQ capture (9.9 s is too short; need 2–3 min)
+
+---
+
+## 10. 2026-05-02 IQ Correction And File Source Tracking
+
+Artifacts:
+
+- Script: `scripts_used/matlab_analysis/iq_correct.m`
+- Config: `configs_used/f9t_lime_current/lime_iq_corrected_file_source.conf`
+- Corrected IQ file: `/home/alexgu2/gnss/captures/lime_iq_corrected.dat` (on hft02)
+
+### 10a. IQ Imbalance Root Cause
+
+Further analysis of the raw IQ capture revealed the dominant interference source is a **severe IQ amplitude imbalance** in the LimeSDR hardware:
+
+| Metric | Value |
+| --- | --- |
+| IQ imbalance | 123% |
+| Power ratio I/Q | -13 dB |
+| Q/I amplitude ratio | 4.6× |
+| DC spike above floor | 32 dB |
+
+The Q channel carries 4.6× more power than I. This corrupts the PLL discriminator output on every 1ms integration period — the loop sees noise regardless of the signal level or any software parameter, which explains why all Phase 7 experiments produced identical zero bit-sync results.
+
+### 10b. Offline IQ Correction In MATLAB
+
+Script: `iq_correct.m` (in `scripts_used/matlab_analysis/`)
+
+Steps applied:
+1. Remove DC offset from both I and Q channels
+2. Scale Q channel by factor `0.409` to match I amplitude
+
+Result:
+
+| Metric | Before | After |
+| --- | --- | --- |
+| IQ imbalance | 123% | **0.00%** |
+| Power ratio I/Q | -13 dB | 0 dB |
+
+The corrected samples were written to `lime_iq_corrected.dat`.
+
+### 10c. File Source Tracking Run
+
+The corrected `.dat` file was fed into GNSS-SDR using `File_Signal_Source` instead of the live LimeSDR. Key config parameters:
+
+```ini
+SignalSource.implementation=File_Signal_Source
+SignalSource.filename=/home/alexgu2/gnss/captures/lime_iq_corrected.dat
+SignalSource.item_type=gr_complex
+SignalSource.sampling_frequency=2000000
+```
+
+PRNs targeted: G03 G07 G08 G09 G16 G27. Acquisition threshold: 2.6.
+
+Result: **GNSS-SDR started tracking on PRN 03 and PRN 07.** This is the first confirmed tracking on corrected IQ data from the LimeSDR chain.
+
+Limitation: the capture was only 9.9 seconds. No assistance XML was loaded. The run ended before bit sync or NAV decode could occur.
+
+### 10d. Conclusion
+
+The IQ imbalance was the root cause of all prior tracking failures. With the imbalance removed, the correlator forms a valid input and tracking starts. The next step is a longer capture (2–3 min) to allow bit sync and NAV decode.
