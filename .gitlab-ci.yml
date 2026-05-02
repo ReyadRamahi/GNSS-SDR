@@ -1,0 +1,50 @@
+# GitLab CI for the GNSS-SDR dashboard.
+#
+# Runs the pytest suite on every push and merge request across the supported
+# Python versions. Integration tests that depend on the CTTC dataset skip
+# cleanly when the file isn't present (handled by the test suite itself), so
+# no large data download is required in CI.
+
+stages:
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+.test-template:
+  stage: test
+  before_script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install -r server/requirements.txt
+    - pip install pytest
+  script:
+    - pytest -q --junitxml=report.xml
+  cache:
+    key:
+      files:
+        - server/requirements.txt
+    paths:
+      - .cache/pip
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null
+
+test:py310:
+  extends: .test-template
+  image: python:3.10-slim
+
+test:py311:
+  extends: .test-template
+  image: python:3.11-slim
+
+test:py312:
+  extends: .test-template
+  image: python:3.12-slim
