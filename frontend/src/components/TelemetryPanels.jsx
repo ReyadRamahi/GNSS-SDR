@@ -14,11 +14,11 @@ export function SkyPlot({ satellites, selected, onSelect }) {
           cy="125"
           r={r}
           fill="none"
-          stroke="#53647f"
+          stroke="var(--chart-grid)"
           strokeDasharray="3 5"
         />
       ))}
-      <path d="M130 29V221 M34 125H226" stroke="#53647f" />
+      <path d="M130 29V221 M34 125H226" stroke="var(--chart-grid)" />
       {[
         [130, 16, "N"],
         [242, 129, "E"],
@@ -30,7 +30,7 @@ export function SkyPlot({ satellites, selected, onSelect }) {
           x={x}
           y={y}
           textAnchor="middle"
-          fill="#b5c5db"
+          fill="var(--muted)"
           fontSize="10"
         >
           {t}
@@ -126,14 +126,14 @@ export function HistoryChart({ history, selected }) {
               y1={240 - v * 3.5}
               x2="780"
               y2={240 - v * 3.5}
-              stroke="#53647f"
+              stroke="var(--chart-grid)"
               strokeDasharray="3 5"
             />
             <text
               x="24"
               y={244 - v * 3.5}
               textAnchor="end"
-              fill="#b5c5db"
+              fill="var(--muted)"
               fontSize="10"
             >
               {v}
@@ -155,10 +155,16 @@ export function HistoryChart({ history, selected }) {
               .join(" ")}
           />
         ))}
-        <text x="38" y="270" fill="#b5c5db" fontSize="11">
+        <text x="38" y="270" fill="var(--muted)" fontSize="11">
           {clockLabel(stamps[0])} UTC
         </text>
-        <text x="780" y="270" textAnchor="end" fill="#b5c5db" fontSize="11">
+        <text
+          x="780"
+          y="270"
+          textAnchor="end"
+          fill="var(--muted)"
+          fontSize="11"
+        >
           {clockLabel(stamps.at(-1))} UTC
         </text>
       </svg>

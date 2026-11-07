@@ -204,9 +204,8 @@ export default function GlobeScene({
       <Canvas
         camera={{ position: [6, 3.8, 3], fov: 43, near: 0.1, far: 150 }}
         dpr={[1, 1.75]}
-        gl={{ antialias: true }}
+        gl={{ antialias: true, alpha: true }}
       >
-        <color attach="background" args={["#15263b"]} />
         <ambientLight intensity={0.85} />
         <directionalLight
           position={[6, 4, 5]}

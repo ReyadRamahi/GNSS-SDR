@@ -4,6 +4,8 @@ import {
   LayoutDashboard,
   PanelLeftOpen,
   PanelLeftClose,
+  Sun,
+  Moon,
   Radio,
   Layers,
   Crosshair,
@@ -56,11 +58,26 @@ export default function App() {
         : frameAt(data, playback.stamps, playback.index),
     [data, live, playback.stamps, playback.index],
   );
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem("gnss-theme") === "light" ? "light" : "dark";
+    } catch {
+      return "dark";
+    }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("gnss-theme", theme);
+    } catch {
+      /* Theme still works without storage. */
+    }
+  }, [theme]);
   const [selection, setSelection] = useState(null);
   const [tab, setTab] = useState("home");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // The overview is the entry point. Opening a tool reveals navigation;
-  // returning to the overview restores its uncluttered window layout.
+  // returning to the overview restores the full-page dashboard.
   function navigate(next) {
     setTab(next);
     setSidebarOpen(next !== "home");
@@ -127,6 +144,21 @@ export default function App() {
             }[status]
           }
         </div>
+        <button
+          className="theme-toggle"
+          aria-label={
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
+          title={
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
+          onClick={() =>
+            setTheme((current) => (current === "dark" ? "light" : "dark"))
+          }
+        >
+          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+        </button>
         <button className="source-button" onClick={() => setDemo((v) => !v)}>
           {demo ? "Connect receiver" : "Explore demo"}
           <ArrowUpRight size={14} />

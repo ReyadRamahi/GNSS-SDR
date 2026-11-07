@@ -6,7 +6,6 @@ import {
   Orbit,
   Activity,
   Terminal,
-  Radio,
 } from "lucide-react";
 import { SkyPlot, SignalBars } from "./TelemetryPanels.jsx";
 import CloudStatus from "./CloudStatus.jsx";
@@ -57,33 +56,14 @@ export default function FeatureHub({
   cloudLayer,
   onToggleClouds,
   mean,
-  status,
   fixes,
 }) {
   return (
     <section className="feature-hub" aria-label="Feature overview">
-      <div className="hub-titlebar">
-        <div className="window-dots">
-          <i />
-          <i />
-          <i />
-        </div>
-        <span>GNSS WORKSPACE</span>
-        <span className="hub-ready">
-          <Radio size={12} />
-          {status === "live"
-            ? "Receiver connected"
-            : status === "demo"
-              ? "Demo session"
-              : status === "replay"
-                ? "Recording loaded"
-                : "Awaiting receiver"}
-        </span>
-      </div>
       <div className="hub-content">
         <div className="hub-intro">
           <div>
-            <p className="eyebrow">YOUR TOOLS, IN ONE PLACE</p>
+            <p className="eyebrow">RECEIVER WORKSPACE / GPS L1 C/A</p>
             <h1>Workspace overview</h1>
             <p className="hub-description">
               Check the receiver, then open a tool to explore.

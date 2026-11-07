@@ -40,10 +40,16 @@ Satellite geometry is schematic. The API exposes the latest azimuth/elevation, n
 
 ## Workspace overview and clouds
 
-The first screen is now `FeatureHub.jsx`: a compact home window with a small globe, sky visibility, signal summary, and links to all five tools. The full globe is a separate view. The palette uses navy for the shell, slate for panels, and brighter blue-gray for controls.
+The first screen is `FeatureHub.jsx`: a full-page dashboard with a globe, sky visibility, signal summary, and links to all five tools. Its sections expand across the available viewport; there is no nested desktop-window frame. The full globe remains a separate tool view.
 
 `useClouds.js` fetches the public, CORS-enabled Live Cloud Maps transparent PNG (modified EUMETSAT data), decodes it into a Three.js texture, and refreshes every 30 minutes. The source publishes about every three hours. No API key or backend changes are needed. A separate sphere at radius 2.014 renders the clouds above a cloud-free NASA Earth texture. Cloud geography is fixed; the app does not animate invented cloud movement.
 
 The timestamp is explicitly **retrieval time**, not observation time. The source does not provide an observation timestamp and does not guarantee image freshness. Current clouds remain independent of demo/recording time. Toggle them off to inspect the base globe. If a refresh fails, the prior layer is labeled cached; if initial loading fails, the globe remains available without the weather layer. The hook aborts requests and disposes textures on cleanup.
 
 The sidebar is hidden on the initial workspace overview. Opening a tool reveals it; returning to Workspace hides it again. The header button can show or hide navigation at any time. The Clouds on/off switch shares its state between the mini globe and full globe during the session.
+
+## Theme and space background
+
+The header toggle switches between dark and light modes. React state in `App.jsx` sets `data-theme` on the document root and saves the choice as `gnss-theme` in localStorage. If storage is unavailable, the switch still works for the session. Dark mode is the default.
+
+`styles.css` defines shared color roles for each mode, including chart text, grid lines, panels, and controls. Light mode keeps a dark space backdrop inside the globe panels for contrast. CSS radial gradients and sparse fixed stars create the subtle nebula background; the Three.js canvas is transparent so this backdrop remains visible. No external background-image request is needed.
