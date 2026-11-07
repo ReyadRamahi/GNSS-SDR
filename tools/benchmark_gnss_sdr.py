@@ -4,7 +4,7 @@ Parse a GNSS-SDR run log (and optionally its NMEA output) and append one row
 to a benchmark table comparing sample-rate / transport configurations.
 
 Usage:
-    py -3 benchmark_gnss_sdr.py \\
+    python -m tools.benchmark_gnss_sdr \\
         --label     "10Msps_usb3" \\
         --rate-msps 10 \\
         --transport usb3 \\
@@ -28,9 +28,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Optional
 
-sys.path.insert(0, str(Path(__file__).parent))
-
-from nmea_parser import parse_nmea_file
+from gnss_sdr.nmea_parser import parse_nmea_file
 
 
 # Glog default format: I0426 04:26:18.123456 ...

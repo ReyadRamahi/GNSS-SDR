@@ -1,5 +1,7 @@
 # GNSS-SDR / LimeSDR / F9T Experiment Docs
 
+For the current application, Python tools, and dataset paths, see the [repository map](../STRUCTURE.md) and [documentation index](../README.md). Paths below are relative to this experiment archive unless an original machine path is shown.
+
 Start here. This folder now groups the GNSS-SDR GPS L1 C/A work by purpose:
 
 - what the project is trying to do

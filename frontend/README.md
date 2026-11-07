@@ -36,7 +36,7 @@ Satellite geometry is schematic. The API exposes the latest azimuth/elevation, n
 
 ## Visual assets
 
-`public/ASSETS.md` records the Earth texture source. Satellite meshes are built from boxes so you can edit them in React. The old `satellite.glb` is retained as a possible future exercise in loading GLTF models.
+`public/ASSETS.md` records the Earth texture source. Satellite meshes are built from boxes so you can edit them in React. The optional `reference/satellite.glb` is retained as a possible future exercise in loading GLTF models.
 
 ## Workspace overview and clouds
 
@@ -53,3 +53,7 @@ The sidebar is hidden on the initial workspace overview. Opening a tool reveals 
 The header toggle switches between dark and light modes. React state in `App.jsx` sets `data-theme` on the document root and saves the choice as `gnss-theme` in localStorage. If storage is unavailable, the switch still works for the session. Dark mode is the default.
 
 `styles.css` defines shared color roles for each mode, including chart text, grid lines, panels, and controls. Light mode keeps a dark space backdrop inside the globe panels for contrast. CSS radial gradients and sparse fixed stars create the subtle nebula background; the Three.js canvas is transparent so this backdrop remains visible. No external background-image request is needed.
+
+## Repository layout
+
+This directory owns the browser app and its dependencies. The Python API is in `server/`, shared Python code is in `gnss_sdr/`, command-line analysis is in `tools/`, and reference/local datasets are in `data/`. See [the repository map](../docs/STRUCTURE.md) and [documentation index](../docs/README.md) for all paths. The optional GLB model is in `reference/` and is not copied into the Vite build.

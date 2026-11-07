@@ -1,6 +1,6 @@
 """
 tests/test_kaggle_adapter.py
-Offline tests for kaggle_adapter.py using synthetic fixture files.
+Offline tests for gnss_sdr/kaggle_adapter.py using synthetic fixture files.
 No network access, no real Kaggle data.
 """
 from __future__ import annotations
@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pytest
 
-from kaggle_adapter import KaggleGnssAdapter
+from gnss_sdr.kaggle_adapter import KaggleGnssAdapter
 
 
 # ---------------------------------------------------------------------------
@@ -169,12 +169,12 @@ def test_pseudoranges_parsed(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# Math helpers (imported from validate_multipath after it exists)
+# Math helpers from the multipath validation tool
 # ---------------------------------------------------------------------------
 
-# Import lazily so the test file can still be collected before validate_multipath exists
+# Import only the pure math helpers; no dataset loading occurs on import
 def _import_helpers():
-    from validate_multipath import pearson_correlation, rmse  # noqa: PLC0415
+    from tools.validate_multipath import pearson_correlation, rmse  # noqa: PLC0415
     return pearson_correlation, rmse
 
 

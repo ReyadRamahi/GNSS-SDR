@@ -3,16 +3,12 @@ tests/test_websocket.py
 WebSocket endpoint and tail_nmea background task tests.
 """
 import asyncio
-import sys
 from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "server"))
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from server.main import app, manager, tail_nmea  # noqa: E402
+from server.main import app, manager, tail_nmea
 
 
 # ---------------------------------------------------------------------------
