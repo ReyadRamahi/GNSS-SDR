@@ -14,7 +14,9 @@ GNSS-SDR post-processing dashboard. Parses a GNSS-SDR NMEA output file, exposes 
 │   ├── main.py             # FastAPI server — REST endpoints + static file serving
 │   └── requirements.txt    # Python dependencies
 └── frontend/
-    └── index.html          # Single-file SPA (vanilla JS, no build step)
+    ├── src/                # React components, hooks, and telemetry helpers
+    ├── public/             # Earth texture
+    └── package.json        # Vite dev server and build scripts
 ```
 
 ---
@@ -36,18 +38,37 @@ Install with:
 pip install -r server/requirements.txt
 ```
 
-### Frontend — CDN (no install needed)
+### Frontend — React + Three.js
 
-All frontend libraries are loaded from public CDNs. No `npm install` or build step required — open `frontend/index.html` via the FastAPI static server.
+Requires Node.js 20.19+ or 22.12+ (Vite 7 requirements).
 
-| Library | Version | CDN | Purpose |
-|---|---|---|---|
-| **CesiumJS** | 1.117 | `cesium.com/downloads/…` | 3-D globe, satellite entity rendering |
-| **D3** | 7 | `cdn.jsdelivr.net/npm/d3@7` | Sky-plot polar chart (SVG) |
-| **Chart.js** | 4 | `cdn.jsdelivr.net/npm/chart.js@4` | CN0 bar chart + history line chart |
-| **chartjs-plugin-annotation** | 3 | `cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3` | Threshold lines on CN0 chart |
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-> **Cesium Ion token (optional):** The globe renders without a token using OpenStreetMap tiles. A free token from [cesium.com/ion/tokens](https://cesium.com/ion/tokens) can be pasted into the `CESIUM_ION_TOKEN` constant at the top of `frontend/index.html` to enable Cesium World Imagery.
+Open http://127.0.0.1:5173. Vite proxies `/api` and `/ws` to FastAPI on port 8000. Run the backend in a second terminal. Use **Explore demo** to try the interface without a recording; demo data is explicitly simulated. The app never substitutes demo data for missing receiver data.
+
+For one-server deployment:
+
+```bash
+cd frontend
+npm ci
+npm run build
+cd ..
+uvicorn server.main:app --reload
+```
+
+FastAPI serves `frontend/dist/`. Restart the server after the first build. `/api/*` and `/ws` are unchanged. A connected but idle WebSocket does not mark the interface as live; valid incoming GGA/GSV sentences do. Replay polling resumes after six seconds without valid telemetry.
+
+The app opens to a full-page overview with a globe, sky plot, signal summary, and shortcuts to all tools. The header includes a saved light/dark mode toggle; both modes use a subtle space theme with a star-and-nebula backdrop behind the globe. A toggleable current-cloud layer uses the public Live Cloud Maps feed (modified EUMETSAT data), refreshed by the app every 30 minutes; the source updates about every three hours. Retrieval time is shown because observation time is not provided. Clouds remain independent of telemetry replay.
+
+The dashboard includes satellite selection, per-satellite CN₀ bars and history, sky plot, raw NMEA feed, camera reset, beam visibility, and timestamp-based replay with speed controls. Sky plot and beams require azimuth/elevation. Satellite locations are schematic projections from azimuth/elevation at a compressed 3,500 km display distance, not ephemeris-derived orbits. Replay history supplies CN₀; recorded azimuth/elevation are the latest available values because the API has no geometry history. Raw data is the endpoint's latest 50-sentence snapshot.
+
+#### Learning the React code
+
+Read [the frontend guide](frontend/README.md) for the component map and suggested learning exercises.
 
 ### Dev / testing
 

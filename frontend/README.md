@@ -1,0 +1,55 @@
+# Learning React through the signal observatory
+
+This is a React app. Three.js renders the 3D scene, and React Three Fiber lets you describe that scene with JSX. Drei supplies camera controls, lines, and labels. Vite runs development and builds the app. No Cesium or ion token is required.
+
+## Start here
+
+1. `src/main.jsx` mounts the app. StrictMode helps expose effects that do not clean up correctly.
+2. `src/App.jsx` composes the workspace. `useState` stores selected satellite, active view, and beam visibility. Props pass these values and event handlers to children.
+3. `src/components/TelemetryPanels.jsx` turns data into regular React UI and SVG charts.
+4. `src/components/GlobeScene.jsx` describes the Three.js scene. A `<mesh>` combines geometry and material. `useFrame` moves the signal particles without updating React state every frame.
+5. `src/hooks/useTelemetry.js` owns polling, WebSocket reconnection, and cleanup. `usePlayback.js` advances playback according to actual timestamp intervals.
+6. `src/lib/` contains pure functions for parsing, coordinate conversion, and selecting a replay frame. These can be tested without a browser.
+7. `src/styles.css` defines the visual system and responsive layout.
+
+## Commands
+
+- `npm run dev` — development server, backend proxy to port 8000.
+- `npm run build` — production files in `dist/`.
+- `npm run preview` — preview production files; use the backend-served build for real API data (preview has no proxy).
+- `npm test` — data parsing, replay, and geometry checks.
+
+Use **Explore demo**, or `?demo=1`, to explore with explicitly simulated data. **Connect receiver** returns to the real backend. You can run the demo without Python.
+
+## Try these small changes
+
+- Change the accent color in `styles.css`.
+- Add a label to a selected satellite in `GlobeScene.jsx`.
+- Add a checkbox in `App.jsx` and pass its state to a child component.
+- Change the satellite solar panel material to learn how geometry and lighting interact.
+
+## Display conventions
+
+Earth has radius 2 in scene units. `geographic()` maps latitude/longitude to a Y-up sphere. `satellitePosition()` constructs east/north/up vectors at the receiver and projects azimuth/elevation at the original 3,500 km compressed distance. It omits satellites with unknown geometry rather than inventing positions.
+
+Satellite geometry is schematic. The API exposes the latest azimuth/elevation, not an orbit history. CN₀ replay uses only observations available at or before the selected timestamp. Raw NMEA uses the backend's latest snapshot. Propagation classifications are used only when present in the data. Valid live data replaces replay state, and stale telemetry falls back to polling; demo data is never automatic.
+
+## Visual assets
+
+`public/ASSETS.md` records the Earth texture source. Satellite meshes are built from boxes so you can edit them in React. The old `satellite.glb` is retained as a possible future exercise in loading GLTF models.
+
+## Workspace overview and clouds
+
+The first screen is `FeatureHub.jsx`: a full-page dashboard with a globe, sky visibility, signal summary, and links to all five tools. Its sections expand across the available viewport; there is no nested desktop-window frame. The full globe remains a separate tool view.
+
+`useClouds.js` fetches the public, CORS-enabled Live Cloud Maps transparent PNG (modified EUMETSAT data), decodes it into a Three.js texture, and refreshes every 30 minutes. The source publishes about every three hours. No API key or backend changes are needed. A separate sphere at radius 2.014 renders the clouds above a cloud-free NASA Earth texture. Cloud geography is fixed; the app does not animate invented cloud movement.
+
+The timestamp is explicitly **retrieval time**, not observation time. The source does not provide an observation timestamp and does not guarantee image freshness. Current clouds remain independent of demo/recording time. Toggle them off to inspect the base globe. If a refresh fails, the prior layer is labeled cached; if initial loading fails, the globe remains available without the weather layer. The hook aborts requests and disposes textures on cleanup.
+
+The sidebar is hidden on the initial workspace overview. Opening a tool reveals it; returning to Workspace hides it again. The header button can show or hide navigation at any time. The Clouds on/off switch shares its state between the mini globe and full globe during the session.
+
+## Theme and space background
+
+The header toggle switches between dark and light modes. React state in `App.jsx` sets `data-theme` on the document root and saves the choice as `gnss-theme` in localStorage. If storage is unavailable, the switch still works for the session. Dark mode is the default.
+
+`styles.css` defines shared color roles for each mode, including chart text, grid lines, panels, and controls. Light mode keeps a dark space backdrop inside the globe panels for contrast. CSS radial gradients and sparse fixed stars create the subtle nebula background; the Three.js canvas is transparent so this backdrop remains visible. No external background-image request is needed.
