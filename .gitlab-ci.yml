@@ -20,7 +20,7 @@ variables:
     - pip install -r server/requirements.txt
     - pip install pytest
   script:
-    - pytest -q --junitxml=report.xml
+    - python -m pytest -q --junitxml=report.xml
   cache:
     key:
       files:

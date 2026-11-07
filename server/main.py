@@ -8,12 +8,11 @@ Loads parsed NMEA data at startup and exposes four REST endpoints:
   GET /api/satellite-history  — per-PRN CN0 time series for the details tab
   GET /api/raw                — last 50 raw NMEA sentences for the raw-data tab
 
-Static frontend files are served from frontend/ at the project root.
+Built frontend files are served from frontend/dist/ at the project root.
 """
 from __future__ import annotations
 
 import asyncio
-import sys
 from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
@@ -22,24 +21,24 @@ from typing import Optional, Set
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 
-# ---------------------------------------------------------------------------
-# Resolve project root and add it to sys.path so nmea_parser is importable
-# regardless of where uvicorn is launched from.
-# ---------------------------------------------------------------------------
-ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(ROOT))
-
-from nmea_parser import (  # noqa: E402
+from gnss_sdr.nmea_parser import (
     PositionFix,
     SatelliteInfo,
     parse_nmea_file,
     _parse_gpgga,   # private helpers – stable for internal use
     _parse_gpgsv,
 )
-from map_aid import BuildingMask  # noqa: E402
+from gnss_sdr.map_aid import BuildingMask
+
+# ---------------------------------------------------------------------------
+# Resolve filesystem paths independently of the process working directory.
+# Launch from the repository root with uvicorn server.main:app.
+# ---------------------------------------------------------------------------
+ROOT = Path(__file__).parent.parent
 
 NMEA_PATH = (
     ROOT
+    / "data"
     / "CTTC_GPS"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"

@@ -1,150 +1,117 @@
-# IE 421 Group 16 Project
+# GNSS-SDR Signal Observatory
 
-GNSS-SDR post-processing dashboard. Parses a GNSS-SDR NMEA output file, exposes it over a FastAPI REST server, and renders an interactive 3-D globe with satellite visualization in a single-page browser frontend.
+React + Three.js dashboard and Python analysis tools for GNSS-SDR recordings and live NMEA telemetry. The project includes the IE 421 Group 16 receiver experiments and reference results.
 
----
+## Repository layout
 
-## Project structure
-
-```
-.
-├── nmea_parser.py          # NMEA sentence parser (GGA + GSV)
-├── test_nmea_parser.py     # pytest suite (41 tests)
-├── server/
-│   ├── main.py             # FastAPI server — REST endpoints + static file serving
-│   └── requirements.txt    # Python dependencies
-└── frontend/
-    ├── src/                # React components, hooks, and telemetry helpers
-    ├── public/             # Earth texture
-    └── package.json        # Vite dev server and build scripts
+```text
+frontend/       React app, globe, charts, and browser data hooks
+server/         FastAPI REST endpoints, WebSocket stream, and dependencies
+gnss_sdr/       Shared Python parsers, dataset adapter, and propagation model
+tools/          Command-line benchmark and multipath validation tools
+tests/          Python unit and integration tests
+data/           CTTC/LimeSDR reference files and local dataset locations
+docs/           Repository guide and GNSS-SDR experiment archive
 ```
 
----
+See [the repository map](docs/STRUCTURE.md) for the detailed tree, file moves, and path conventions. Start with [the documentation index](docs/README.md) or [the frontend learning guide](frontend/README.md).
 
-## Dependencies
+## Requirements
 
-### Backend — Python
+- Python 3.10+ for the server and analysis tools.
+- Node.js 20.19+ or 22.12+ for the Vite 7 frontend.
+- GNSS-SDR and receiver hardware are needed only for actual receiver runs; the frontend has an explicitly labeled simulated demo.
 
-Requires **Python 3.10+**.
+Run Python commands from the repository root, where this README lives.
 
-| Package | Version | Purpose |
-|---|---|---|
-| `fastapi` | ≥ 0.110.0 | REST API framework |
-| `uvicorn[standard]` | ≥ 0.29.0 | ASGI server |
+## Local development
 
-Install with:
+Install the backend dependencies in a virtual environment:
 
 ```bash
-pip install -r server/requirements.txt
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r server/requirements.txt
+uvicorn server.main:app --reload
 ```
 
-### Frontend — React + Three.js
+On Windows, activate with `.venv\Scripts\activate` instead.
 
-Requires Node.js 20.19+ or 22.12+ (Vite 7 requirements).
+In another terminal:
 
 ```bash
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. Vite proxies `/api` and `/ws` to FastAPI on port 8000. Run the backend in a second terminal. Use **Explore demo** to try the interface without a recording; demo data is explicitly simulated. The app never substitutes demo data for missing receiver data.
+Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Vite forwards `/api/*` and `/ws` to FastAPI on port 8000. Choose **Explore demo** to use simulated data without a recording.
 
-For one-server deployment:
+For a production build served entirely by FastAPI:
 
 ```bash
 cd frontend
 npm ci
 npm run build
 cd ..
-uvicorn server.main:app --reload
+uvicorn server.main:app
 ```
 
-FastAPI serves `frontend/dist/`. Restart the server after the first build. `/api/*` and `/ws` are unchanged. A connected but idle WebSocket does not mark the interface as live; valid incoming GGA/GSV sentences do. Replay polling resumes after six seconds without valid telemetry.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). FastAPI serves `frontend/dist/`; restart the server after the first build. The API can run and be tested before building the frontend.
 
-The app opens to a full-page overview with a globe, sky plot, signal summary, and shortcuts to all tools. The header includes a saved light/dark mode toggle; both modes use a subtle space theme with a star-and-nebula backdrop behind the globe. A toggleable current-cloud layer uses the public Live Cloud Maps feed (modified EUMETSAT data), refreshed by the app every 30 minutes; the source updates about every three hours. Retrieval time is shown because observation time is not provided. Clouds remain independent of telemetry replay.
+## Recordings and live data
 
-The dashboard includes satellite selection, per-satellite CN₀ bars and history, sky plot, raw NMEA feed, camera reset, beam visibility, and timestamp-based replay with speed controls. Sky plot and beams require azimuth/elevation. Satellite locations are schematic projections from azimuth/elevation at a compressed 3,500 km display distance, not ephemeris-derived orbits. Replay history supplies CN₀; recorded azimuth/elevation are the latest available values because the API has no geometry history. Raw data is the endpoint's latest 50-sentence snapshot.
+The large raw files are local downloads, excluded from Git. See [data setup](data/README.md) for download links and the exact expected paths.
 
-#### Learning the React code
+- Replay NMEA: `data/CTTC_GPS/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea`.
+- Live NMEA: `gnss_pvt.nmea` at the repository root, matching the receiver configs' output path. The backend tails this file and broadcasts new sentences on `/ws`.
+- Original LimeSDR IQ data: `data/LimeSDR_GPS/LimeSDR_Bands-L1.int16`.
 
-Read [the frontend guide](frontend/README.md) for the component map and suggested learning exercises.
+The default CTTC and LimeSDR file-source configs use repository-relative input paths. Launch those GNSS-SDR configs from the repository root. The dated experiment archive also contains historical configs for specific machines; consult its workflow notes before running them.
 
-### Dev / testing
+## Dashboard behavior
 
-| Package | Purpose |
-|---|---|
-| `pytest` | Test runner |
+The app opens to a full-page overview with a globe, sky plot, signal summary, and shortcuts to all tools. Opening a tool reveals the sidebar; the header can show or hide it. The light/dark toggle remembers your choice. Both themes give the globe a subtle star-and-nebula background.
 
----
+Features include satellite selection, CN₀ bars and history, sky visibility, raw NMEA, receiver track, camera reset, beam/cloud visibility, and timestamp-based replay with speed controls. Valid incoming GGA/GSV sentences switch the frontend to live mode; an idle WebSocket alone does not. Replay polling resumes after six seconds without valid telemetry. The raw feed is the latest 50-sentence snapshot.
 
-## Running the server
+Satellite positions are schematic azimuth/elevation projections at a compressed 3,500 km distance, not ephemeris-derived orbits. Replay CN₀ uses recorded samples, while geometry uses the latest angles exposed by the API.
+
+Clouds use the public Live Cloud Maps feed, with modified EUMETSAT data. The app checks every 30 minutes; the source publishes about every three hours. Retrieval time is shown because observation time is unavailable. Clouds represent current weather context, independent of receiver replay. Source details and attribution are in [the asset notes](frontend/public/ASSETS.md).
+
+## Analysis tools
+
+Both tools run as Python modules from the repository root:
 
 ```bash
-# from the repo root
-uvicorn server.main:app --reload
+python -m tools.benchmark_gnss_sdr --help
+python -m tools.validate_multipath --help
 ```
 
-Then open [http://localhost:8000](http://localhost:8000) in a browser.
+See [the tools guide](tools/README.md) for examples and inputs. Shared code lives in `gnss_sdr/`, including the NMEA parser, building-mask/multipath model, and Kaggle dataset adapter.
 
----
-
-## Large Dataset Setup
-
-This repo does not store the GNSS data files in Git because they are too large for GitLab. Each teammate needs to download them locally before running the parser integration tests.
-
-Datasets:
-
-- CTTC Spain GPS L1 C/A: https://sourceforge.net/projects/gnss-sdr/files/data/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz/download
-- LimeSDR GPS L1: https://sdr.ion.org/LimeSDR/LimeSDR_Bands-L1.int16
-
-Expected local paths after download and extraction:
-
-- `CTTC_GPS/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/gnss_pvt.nmea`
-- `LimeSDR_GPS/LimeSDR_Bands-L1.int16`
-
-The `.gitignore` intentionally excludes `.nmea`, `.dat`, `.int16`, and archive files so these datasets stay local.
-
----
-
-## Parser Tests
-
-The NMEA parser lives in `nmea_parser.py`.
-
-Run the test suite with:
+## Tests
 
 ```bash
-pytest -q
+python -m pip install -r server/requirements.txt pytest
+python -m pytest -q
 ```
 
-Test behavior:
+Python tests live in `tests/`. Dataset integration tests skip when the replay recording is unavailable; parser/model tests use synthetic data and mocked network requests.
 
-- Unit tests for coordinate conversion and sentence parsing always run.
-- Full-file integration tests run only if `CTTC_GPS/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/gnss_pvt.nmea` exists locally.
-- If that file is missing, pytest skips the integration tests with a clear message instead of failing.
+Frontend data and geometry checks:
 
----
+```bash
+cd frontend
+npm ci
+npm test
+npm run build
+```
 
-## Repository Notes
+The existing [GitLab CI configuration](.gitlab-ci.yml) remains available for the original mirror.
 
-- Large raw GNSS data files are local-only dependencies.
-- Generated Python cache files should not be committed.
+## Receiver experiments
 
-## GitLab Reference
+[The experiment archive](docs/gnss_sdr_experiments/README.md) contains receiver configuration families, capture/refresh/MATLAB scripts, run logs, assistance data, and handoffs. Start with its [workflow](docs/gnss_sdr_experiments/WORKFLOW.md) and [project summary](docs/gnss_sdr_experiments/GNSS_SDR_PROJECT_SUMMARY.md).
 
-For the standard GitLab starter README/checklist, see:
-
-- https://docs.gitlab.com/user/project/repository/files/gitlab_readme/
-
-## External Clock Progress
-
-We also began testing an external 10 MHz clock reference for the LimeSDR setup. The goal is to improve clock stability during GNSS-SDR runs, since frequency drift can make GPS acquisition, tracking, and navigation decoding less reliable.
-
-For this setup, we used a Silicon Labs / Skyworks Si5386A clock generator board configured through ClockBuilder Pro. The board was configured to provide a 10 MHz reference output for the LimeSDR. This gives us a way to test whether a cleaner external clock improves LimeSDR GNSS performance compared to relying only on the LimeSDR’s onboard clock.
-
-The main outcome is that the external clock generator board is now connected and usable again, so we can include external-clock testing in our GNSS-SDR experiment workflow. This gives us another variable to compare alongside antenna placement, gain settings, filtering, and assisted-GNSS ephemeris data.
-
-Reference documentation for the LimeSDR-USB hardware is here:
-
-```text
-https://wiki.myriadrf.org/LimeSDR-USB_hardware_description
+The work includes an external Si5386A 10 MHz reference for LimeSDR clock stability, alongside antenna, gain, filtering, IQ correction, and assisted-GNSS experiments. Historical paths in captured logs refer to the machines used for those runs; the current checkout layout is documented in [STRUCTURE.md](docs/STRUCTURE.md).

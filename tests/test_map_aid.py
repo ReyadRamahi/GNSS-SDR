@@ -1,6 +1,6 @@
 """
 test_map_aid.py
-pytest suite for map_aid.BuildingMask — no internet required.
+pytest suite for gnss_sdr.map_aid.BuildingMask — no internet required.
 All Overpass API calls are mocked.
 """
 from __future__ import annotations
@@ -13,7 +13,7 @@ import pytest
 import numpy as np
 from shapely.geometry import Polygon
 
-from map_aid import (
+from gnss_sdr.map_aid import (
     DEFAULT_FLOOR_HEIGHT_M,
     BuildingMask,
     _estimate_height,
@@ -67,7 +67,7 @@ def _mask_with(north_m: float, width_m: float = 20.0, height_str: str = "30") ->
     fake_resp.json.return_value = {
         "elements": [_enu_building(north_m, width_m, height_str)]
     }
-    with patch("map_aid.requests.post", return_value=fake_resp):
+    with patch("gnss_sdr.map_aid.requests.post", return_value=fake_resp):
         return BuildingMask(REF_LAT, REF_LON)
 
 
@@ -176,7 +176,7 @@ def test_passes_over_short_building():
 
 def test_overpass_unavailable():
     """ConnectionError → all satellites LOS with 'building data unavailable' note."""
-    with patch("map_aid.requests.post", side_effect=ConnectionError("timeout")):
+    with patch("gnss_sdr.map_aid.requests.post", side_effect=ConnectionError("timeout")):
         mask = BuildingMask(REF_LAT, REF_LON)
 
     sats = [
@@ -250,7 +250,7 @@ def _mask_east(east_start: float = 50.0, width: float = 20.0) -> BuildingMask:
     fake_resp = MagicMock()
     fake_resp.raise_for_status = MagicMock()
     fake_resp.json.return_value = {"elements": [element]}
-    with patch("map_aid.requests.post", return_value=fake_resp):
+    with patch("gnss_sdr.map_aid.requests.post", return_value=fake_resp):
         return BuildingMask(REF_LAT, REF_LON)
 
 
@@ -302,7 +302,7 @@ def test_reflection_path_blocked():
     fake_resp = MagicMock()
     fake_resp.raise_for_status = MagicMock()
     fake_resp.json.return_value = {"elements": elements}
-    with patch("map_aid.requests.post", return_value=fake_resp):
+    with patch("gnss_sdr.map_aid.requests.post", return_value=fake_resp):
         mask = BuildingMask(REF_LAT, REF_LON)
 
     reflections = mask.find_specular_reflections(elevation_deg=20.0, azimuth_deg=90.0)

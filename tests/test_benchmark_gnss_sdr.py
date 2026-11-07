@@ -1,6 +1,6 @@
 """
 tests/test_benchmark_gnss_sdr.py
-Offline tests for benchmark_gnss_sdr.py — uses synthetic log + NMEA fixtures.
+Offline tests for tools/benchmark_gnss_sdr.py — uses synthetic log + NMEA fixtures.
 """
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from benchmark_gnss_sdr import (
+from tools.benchmark_gnss_sdr import (
     BenchmarkRow,
     _scan_logs,
     _scan_nmea,
