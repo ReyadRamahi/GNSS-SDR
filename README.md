@@ -1,4 +1,4 @@
-# IE 421 Group 16 Project
+# UIUC FINTECH LAB GNSS-SDR Project
 
 GNSS-SDR post-processing dashboard. Parses a GNSS-SDR NMEA output file, exposes it over a FastAPI REST server, and renders an interactive 3-D globe with satellite visualization in a single-page browser frontend.
 
