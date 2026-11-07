@@ -45,7 +45,7 @@ NMEA_PATH = (
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"
 )
 LIVE_NMEA_PATH = ROOT / "gnss_pvt.nmea"
-FRONTEND_DIR = ROOT / "frontend"
+FRONTEND_DIR = ROOT / "frontend" / "dist"
 
 
 # ---------------------------------------------------------------------------
@@ -322,4 +322,10 @@ async def websocket_endpoint(ws: WebSocket) -> None:
 # ---------------------------------------------------------------------------
 # Static frontend — catch-all, must come after API routes
 # ---------------------------------------------------------------------------
-app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+# API development and tests work before the frontend is built.
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+else:
+    @app.get("/", include_in_schema=False)
+    def frontend_not_built():
+        return {"message": "Run npm install and npm run build in frontend/, then restart the server. For development, use npm run dev."}

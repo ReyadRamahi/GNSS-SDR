@@ -27,3 +27,8 @@ kaggle_data/
 
 # Validation output
 validation_report.json
+
+# React frontend
+node_modules/
+frontend/dist/
+.venv/
