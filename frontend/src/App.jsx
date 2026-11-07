@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Globe2,
   LayoutDashboard,
+  PanelLeftOpen,
+  PanelLeftClose,
   Radio,
   Layers,
   Crosshair,
@@ -56,6 +58,13 @@ export default function App() {
   );
   const [selection, setSelection] = useState(null);
   const [tab, setTab] = useState("home");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // The overview is the entry point. Opening a tool reveals navigation;
+  // returning to the overview restores its uncluttered window layout.
+  function navigate(next) {
+    setTab(next);
+    setSidebarOpen(next !== "home");
+  }
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [tab]);
@@ -78,10 +87,24 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
+        <button
+          className="sidebar-toggle"
+          aria-label={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+          title={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+          aria-expanded={sidebarOpen}
+          aria-controls="main-navigation"
+          onClick={() => setSidebarOpen((open) => !open)}
+        >
+          {sidebarOpen ? (
+            <PanelLeftClose size={18} />
+          ) : (
+            <PanelLeftOpen size={18} />
+          )}
+        </button>
         <a
           className="brand"
           href="#"
-          onClick={() => setTab("home")}
+          onClick={() => navigate("home")}
           aria-label="GNSS workspace"
         >
           <span className="brand-mark">
@@ -110,7 +133,12 @@ export default function App() {
         </button>
       </header>
       <div className="workspace">
-        <nav className="nav-rail" aria-label="Main navigation">
+        <nav
+          id="main-navigation"
+          className="nav-rail"
+          aria-label="Main navigation"
+          hidden={!sidebarOpen}
+        >
           {tabs.map(([key, label, Icon]) => (
             <button
               key={key}
@@ -118,7 +146,7 @@ export default function App() {
               aria-label={label}
               title={label}
               aria-current={tab === key ? "page" : undefined}
-              onClick={() => setTab(key)}
+              onClick={() => navigate(key)}
             >
               <Icon size={19} />
               <span>{label}</span>
@@ -192,7 +220,7 @@ export default function App() {
               fixes={data.positions.length}
               selected={selected?.prn}
               onSelect={setSelection}
-              onNavigate={setTab}
+              onNavigate={navigate}
               onToggleClouds={() => setClouds((v) => !v)}
             />
           ) : (

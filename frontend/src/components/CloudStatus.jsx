@@ -16,11 +16,12 @@ export default function CloudStatus({
       <button
         className={enabled ? "on" : ""}
         onClick={onToggle}
-        aria-pressed={enabled}
-        aria-label="Toggle latest cloud layer"
+        role="switch"
+        aria-checked={enabled}
+        aria-label="Cloud layer"
       >
         {enabled ? <Cloud size={14} /> : <CloudOff size={14} />}
-        <span>{enabled ? "Latest clouds" : "Clouds off"}</span>
+        <span>{enabled ? "Clouds on" : "Clouds off"}</span>
         <i className={`cloud-indicator ${layer.status}`} />
       </button>
       {enabled && (
