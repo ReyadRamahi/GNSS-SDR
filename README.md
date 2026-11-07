@@ -62,6 +62,8 @@ uvicorn server.main:app --reload
 
 FastAPI serves `frontend/dist/`. Restart the server after the first build. `/api/*` and `/ws` are unchanged. A connected but idle WebSocket does not mark the interface as live; valid incoming GGA/GSV sentences do. Replay polling resumes after six seconds without valid telemetry.
 
+The app opens to a compact feature overview with a mini globe, sky plot, signal summary, and shortcuts to all tools. A toggleable current-cloud layer uses the public Live Cloud Maps feed (modified EUMETSAT data), refreshed by the app every 30 minutes; the source updates about every three hours. Retrieval time is shown because observation time is not provided. Clouds remain independent of telemetry replay.
+
 The dashboard includes satellite selection, per-satellite CN₀ bars and history, sky plot, raw NMEA feed, camera reset, beam visibility, and timestamp-based replay with speed controls. Sky plot and beams require azimuth/elevation. Satellite locations are schematic projections from azimuth/elevation at a compressed 3,500 km display distance, not ephemeris-derived orbits. Replay history supplies CN₀; recorded azimuth/elevation are the latest available values because the API has no geometry history. Raw data is the endpoint's latest 50-sentence snapshot.
 
 #### Learning the React code

@@ -854,3 +854,681 @@ dd {
     transition: none !important;
   }
 }
+
+/* Navy shell, slate panels, and blue-gray controls give dark mode depth. */
+:root {
+  background: #101b2d;
+  --surface: #1e2d45;
+  --line: #34455f;
+  --muted: #a3b2c8;
+  --accent: #8ee3cc;
+  color: #edf2fb;
+}
+body {
+  background: radial-gradient(
+    ellipse at 55% 0%,
+    #293454 0%,
+    #17243a 48%,
+    #111d30 100%
+  );
+}
+.topbar {
+  background: #142035;
+  border-bottom-color: #35425d;
+}
+.nav-rail {
+  background: #16243a;
+  border-color: #34445d;
+}
+.nav-rail button {
+  color: #a0b0c9;
+}
+.nav-rail button.active {
+  background: #84daca18;
+  color: #a8f2dc;
+  box-shadow: inset 2px 0 #8ee3cc;
+}
+.source-button {
+  background: #253551;
+  border-color: #4b5b76;
+}
+.main-workspace {
+  background: transparent;
+}
+.visual-workspace {
+  border-color: #40536f;
+  box-shadow: 0 20px 65px #070f2033;
+}
+.globe-stage {
+  background: #15263b;
+}
+.inspector {
+  background: #22324b;
+}
+.expanded-panel {
+  background: #1b2a42;
+}
+.playback-dock {
+  background: #293b56;
+  border-color: #405570;
+}
+.speed-select select {
+  background: #20314b;
+  border-color: #51627e;
+}
+.globe-toolbar button,
+.icon-button {
+  background: #293e57e8;
+  color: #c0d4e4;
+  border-color: #5a708c;
+}
+.signal-row.active {
+  background: #82dac418;
+}
+.bar-track {
+  background: #384a63;
+}
+.raw-feed {
+  background: #152338;
+  border-color: #40506c;
+  color: #b5dfcd;
+}
+.receiver-strip {
+  color: #a1b3cc;
+}
+.notice {
+  background: #3b3541;
+  color: #e9cc9e;
+  border-color: #73604d;
+}
+.muted,
+.summary-stats span,
+.playback-time > span {
+  color: #a3b2c8;
+}
+.bar-labels,
+.hub-panel-foot {
+  color: #a0b2cb;
+}
+.eyebrow {
+  color: #b1c1da;
+}
+.demo-note {
+  color: #edca8a;
+}
+.demo-note span {
+  color: #a2b1ca;
+}
+.globe-footnote {
+  color: #b2c5db;
+}
+.home-workspace {
+  padding: 35px 32px 0;
+}
+.home-workspace > .notice,
+.home-workspace > .demo-note,
+.home-workspace > .receiver-strip {
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-workspace > .demo-note {
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+.feature-hub {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  border: 1px solid #50617c;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #1b2b43;
+  box-shadow:
+    0 30px 80px #070e244d,
+    0 1px 0 #8a9abb18 inset;
+}
+.hub-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #2a3854;
+  border-bottom: 1px solid #455571;
+  padding: 12px 20px;
+  font:
+    9px "IBM Plex Mono",
+    monospace;
+  color: #bfcae0;
+  letter-spacing: 1.5px;
+}
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+.window-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #657795;
+}
+.window-dots i:first-child {
+  background: #d99c95;
+}
+.window-dots i:nth-child(2) {
+  background: #d8bd7d;
+}
+.window-dots i:last-child {
+  background: #8dbfae;
+}
+.hub-ready {
+  margin-left: auto;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: #b6d9d0;
+  letter-spacing: 0;
+  font:
+    10px "DM Sans",
+    sans-serif;
+}
+.hub-content {
+  padding: 26px;
+}
+.hub-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 23px;
+}
+.hub-intro .eyebrow {
+  font-size: 8px;
+  margin-bottom: 7px;
+  color: #9cb2d4;
+}
+.hub-intro h1 {
+  font-size: 27px;
+  letter-spacing: -0.8px;
+  font-weight: 500;
+}
+.hub-description {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #b6c4db;
+  margin-top: 6px;
+}
+.hub-counters {
+  display: flex;
+  gap: 27px;
+}
+.hub-counters > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hub-counters strong {
+  font:
+    23px "DM Sans",
+    sans-serif;
+  color: #e7f3ff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+.hub-counters small {
+  font-size: 9px;
+  color: #a6b8d0;
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+.hub-counters span {
+  color: #a5b6ce;
+  font-size: 9px;
+}
+.hub-preview-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.05fr;
+  gap: 14px;
+}
+.hub-preview-grid > section {
+  border: 1px solid #3d5272;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 0;
+  position: relative;
+}
+.hub-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 14px;
+  position: relative;
+  z-index: 1;
+}
+.hub-panel-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.hub-panel-heading h2 svg {
+  color: #a7c3e0;
+}
+.hub-panel-heading button {
+  display: flex;
+  padding: 4px;
+  min-height: 24px;
+  color: #c5d1e4;
+}
+.hub-globe {
+  background: #15263b;
+  min-height: 320px;
+}
+.hub-scene {
+  height: 223px;
+}
+.hub-globe .cloud-status {
+  padding: 0 14px 13px;
+  position: relative;
+}
+.hub-sky {
+  background: #24334f;
+  display: flex;
+  flex-direction: column;
+}
+.hub-sky .skyplot {
+  max-height: 235px;
+  padding: 0 12px;
+}
+.hub-signals {
+  background: #283c52;
+  display: flex;
+  flex-direction: column;
+}
+.hub-signals .signal-list {
+  padding: 0 10px;
+  flex: 1;
+  max-height: 248px;
+  overflow: auto;
+}
+.hub-signals .signal-row {
+  padding: 8px 5px;
+  gap: 8px;
+  font-size: 9px;
+}
+.hub-signals .bar-track {
+  background: #465a70;
+}
+.hub-signals .signal-row > :last-child {
+  color: #d5e0ec;
+}
+.hub-panel-foot {
+  font-size: 8px;
+  padding: 10px 15px;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.hub-tools-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 23px 0 12px;
+}
+.hub-tools-heading h2 {
+  font-size: 12px;
+}
+.hub-tools-heading span {
+  color: #9eafcc;
+  font-size: 10px;
+}
+.feature-links {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.feature-link {
+  text-align: left;
+  position: relative;
+  padding: 15px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #435674;
+  background: #283752;
+  border-radius: 7px;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
+}
+.feature-link:hover {
+  background: #334762;
+  border-color: #8097b8;
+  transform: translateY(-2px);
+}
+.feature-link > svg:last-child {
+  position: absolute;
+  top: 17px;
+  right: 12px;
+  color: #9baecc;
+}
+.feature-link strong {
+  color: #e8f0fd;
+  font-size: 10px;
+  font-weight: 550;
+}
+.feature-link p {
+  margin-top: 6px;
+  line-height: 1.6;
+  font-size: 9px;
+  color: #afbed5;
+}
+.feature-icon {
+  display: flex;
+  width: 31px;
+  height: 31px;
+  border-radius: 7px;
+  align-items: center;
+  justify-content: center;
+}
+.teal .feature-icon {
+  background: #366155;
+  color: #a7f0d6;
+}
+.blue .feature-icon {
+  background: #3c577d;
+  color: #bbd5ff;
+}
+.violet .feature-icon {
+  background: #52496e;
+  color: #d4c6ff;
+}
+.amber .feature-icon {
+  background: #685a43;
+  color: #f3d696;
+}
+.slate .feature-icon {
+  background: #43526b;
+  color: #cdd6e8;
+}
+.hub-bottom {
+  background: #22324b;
+  border-top: 1px solid #405371;
+  padding: 13px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: #acbdd7;
+  font-size: 9px;
+}
+.hub-bottom > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.hub-bottom > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a8ecd7;
+  white-space: nowrap;
+  font-size: 10px;
+}
+.cloud-status button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #61788e;
+  border-radius: 5px;
+  background: #2b4559;
+  color: #d0eceb;
+  font-size: 10px;
+  padding: 7px 9px;
+}
+.cloud-status button.on {
+  border-color: #72acaa;
+}
+.cloud-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #91a2bd;
+}
+.cloud-indicator.ready {
+  background: #8ee3cc;
+}
+.cloud-indicator.cached,
+.cloud-indicator.unavailable {
+  background: #e9bd78;
+}
+.cloud-meta {
+  font-size: 9px;
+  color: #c0d0e0;
+  line-height: 1.65;
+  margin-top: 6px;
+}
+.cloud-meta > span {
+  display: block;
+  max-width: 340px;
+  color: #a1b8d0;
+}
+.cloud-attribution {
+  display: block;
+  font-size: 8px;
+  margin-top: 4px;
+  color: #aec5dc;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cloud-status.compact .cloud-meta {
+  font-size: 8px;
+}
+.cloud-status.compact .cloud-attribution {
+  font-size: 7px;
+}
+.globe-cloud-controls {
+  position: absolute;
+  left: 25px;
+  bottom: 65px;
+  max-width: calc(100% - 65px);
+  background: #16283de8;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #42607a;
+}
+@media (min-width: 1600px) {
+  .home-workspace {
+    padding-top: 55px;
+  }
+}
+@media (max-width: 1050px) {
+  .home-workspace {
+    padding: 25px 20px 0;
+  }
+  .hub-content {
+    padding: 20px;
+  }
+  .hub-preview-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .hub-signals {
+    display: none;
+  }
+  .hub-counters {
+    gap: 18px;
+  }
+  .hub-counters > div:last-child {
+    display: none;
+  }
+  .feature-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hub-bottom {
+    padding: 13px 20px;
+  }
+}
+@media (max-width: 720px) {
+  .home-workspace {
+    padding: 22px 13px 0;
+  }
+  .hub-content {
+    padding: 17px;
+  }
+  .hub-titlebar {
+    padding: 11px 14px;
+    font-size: 8px;
+    gap: 10px;
+  }
+  .hub-ready {
+    font-size: 8px;
+  }
+  .window-dots {
+    gap: 4px;
+  }
+  .window-dots i {
+    width: 5px;
+    height: 5px;
+  }
+  .hub-intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .hub-intro h1 {
+    font-size: 25px;
+  }
+  .hub-counters {
+    gap: 33px;
+  }
+  .hub-counters > div:last-child {
+    display: flex;
+  }
+  .hub-counters strong {
+    font-size: 20px;
+  }
+  .hub-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  .hub-globe {
+    min-height: 310px;
+  }
+  .hub-sky {
+    min-height: 260px;
+  }
+  .hub-sky .skyplot {
+    height: 220px;
+  }
+  .hub-signals {
+    display: flex;
+    min-height: 290px;
+  }
+  .hub-signals .signal-list {
+    max-height: 300px;
+  }
+  .feature-links {
+    grid-template-columns: 1fr 1fr;
+  }
+  .feature-link:last-child {
+    grid-column: 1/-1;
+  }
+  .feature-link {
+    padding: 13px;
+  }
+  .feature-link strong {
+    font-size: 11px;
+  }
+  .feature-link p {
+    font-size: 10px;
+  }
+  .hub-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.7;
+    padding: 14px 17px;
+  }
+  .hub-bottom > span {
+    align-items: flex-start;
+  }
+  .hub-bottom svg {
+    flex-shrink: 0;
+  }
+  .globe-cloud-controls {
+    left: 16px;
+    bottom: 64px;
+    max-width: calc(100% - 32px);
+    padding: 7px 9px;
+  }
+  .cloud-meta {
+    font-size: 8px;
+  }
+  .nav-rail button {
+    width: 52px;
+    font-size: 7px;
+  }
+  .hub-description {
+    font-size: 10px;
+  }
+}
+@media (min-width: 1051px) {
+  .home-workspace {
+    padding-top: 22px;
+  }
+  .hub-content {
+    padding: 20px;
+  }
+  .hub-titlebar {
+    padding: 9px 20px;
+  }
+  .hub-intro {
+    margin-bottom: 16px;
+  }
+  .hub-intro h1 {
+    font-size: 25px;
+  }
+  .hub-intro .eyebrow {
+    margin-bottom: 4px;
+  }
+  .hub-description {
+    margin-top: 3px;
+  }
+  .hub-globe {
+    min-height: 280px;
+  }
+  .hub-scene {
+    height: 165px;
+  }
+  .hub-sky .skyplot {
+    max-height: 205px;
+  }
+  .hub-signals .signal-row {
+    padding: 6px 5px;
+  }
+  .hub-signals .signal-list {
+    max-height: 210px;
+  }
+  .hub-panel-heading {
+    padding: 12px 14px;
+  }
+  .hub-tools-heading {
+    margin: 17px 0 10px;
+  }
+  .feature-link {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  .feature-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .feature-link p {
+    font-size: 9px;
+    line-height: 1.45;
+    margin-top: 4px;
+  }
+  .hub-bottom {
+    padding: 10px 20px;
+  }
+}

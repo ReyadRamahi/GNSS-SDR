@@ -81,7 +81,7 @@ function SatelliteLabel({ prn, selected }) {
     </sprite>
   );
 }
-function Satellite({ sat, receiver, selected, onSelect, beams }) {
+function Satellite({ sat, receiver, selected, onSelect, beams, showLabel }) {
   const position = satellitePosition(receiver, sat);
   const origin = geographic(receiver.latitude, receiver.longitude, 2.025);
   const pulse = useRef();
@@ -152,7 +152,7 @@ function Satellite({ sat, receiver, selected, onSelect, beams }) {
             />
           </mesh>
         ))}
-        <SatelliteLabel prn={sat.prn} selected={isSelected} />
+        {showLabel && <SatelliteLabel prn={sat.prn} selected={isSelected} />}
       </group>
     </group>
   );
@@ -192,6 +192,8 @@ export default function GlobeScene({
   onSelect,
   beams,
   reset,
+  cloudTexture,
+  compact = false,
 }) {
   const track = useMemo(
     () => positions.map((p) => geographic(p.latitude, p.longitude, 2.008)),
@@ -204,7 +206,7 @@ export default function GlobeScene({
         dpr={[1, 1.75]}
         gl={{ antialias: true }}
       >
-        <color attach="background" args={["#080e12"]} />
+        <color attach="background" args={["#15263b"]} />
         <ambientLight intensity={0.85} />
         <directionalLight
           position={[6, 4, 5]}
@@ -223,6 +225,18 @@ export default function GlobeScene({
         <Suspense fallback={null}>
           <Earth />
         </Suspense>
+        {cloudTexture && (
+          <mesh>
+            <sphereGeometry args={[2.014, 96, 64]} />
+            <meshStandardMaterial
+              map={cloudTexture}
+              transparent
+              depthWrite={false}
+              opacity={0.92}
+              roughness={1}
+            />
+          </mesh>
+        )}
         {track.length > 1 && (
           <Line
             points={track}
@@ -248,6 +262,7 @@ export default function GlobeScene({
               <Satellite
                 key={sat.prn}
                 {...{ sat, receiver, selected, onSelect, beams }}
+                showLabel={!compact}
               />
             ))}
           </>
