@@ -32,3 +32,10 @@ validation_report.json
 node_modules/
 frontend/dist/
 .venv/
+
+# Local caches and test artifacts
+.pytest_cache/
+.cache/
+report.xml
+data/kaggle/
+/outputs/

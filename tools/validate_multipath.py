@@ -1,15 +1,15 @@
 """
 validate_multipath.py
-Standalone validation script for the specular multipath model in map_aid.py.
+Standalone validation tool for the model in gnss_sdr/map_aid.py.
 
 Uses the Google Smartphone Decimeter Challenge 2022 dataset to test whether
 predicted reflection_delay_m correlates with real-world pseudorange errors.
 
 Usage:
-    py -3 validate_multipath.py \\
-        --gnss-log     kaggle_data/gnss_log.txt \\
-        --ground-truth kaggle_data/ground_truth.csv \\
-        --device-gnss  kaggle_data/device_gnss.csv \\
+    python -m tools.validate_multipath \\
+        --gnss-log     data/kaggle/gnss_log.txt \\
+        --ground-truth data/kaggle/ground_truth.csv \\
+        --device-gnss  data/kaggle/device_gnss.csv \\
         --output       validation_report.json \\
         --max-epochs   200
 
@@ -21,15 +21,11 @@ import argparse
 import json
 import math
 import statistics
-import sys
 from pathlib import Path
 from typing import Optional
 
-# Ensure project root is importable when script is run directly
-sys.path.insert(0, str(Path(__file__).parent))
-
-from kaggle_adapter import KaggleGnssAdapter
-from map_aid import BuildingMask, _SAT_DIST_M
+from gnss_sdr.kaggle_adapter import KaggleGnssAdapter
+from gnss_sdr.map_aid import BuildingMask, _SAT_DIST_M
 
 
 # ---------------------------------------------------------------------------

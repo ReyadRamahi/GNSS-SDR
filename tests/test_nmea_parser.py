@@ -1,13 +1,13 @@
 """
 tests/test_nmea_parser.py
-Unit tests for nmea_parser.py, run against the real gnss_pvt.nmea file.
+Unit tests for gnss_sdr/nmea_parser.py, run against the real gnss_pvt.nmea file.
 """
 import math
 from pathlib import Path
 
 import pytest
 
-from nmea_parser import (
+from gnss_sdr.nmea_parser import (
     PositionFix,
     SatelliteInfo,
     _nmea_lat,
@@ -22,6 +22,7 @@ from nmea_parser import (
 # ---------------------------------------------------------------------------
 NMEA_FILE = (
     Path(__file__).parent.parent
+    / "data"
     / "CTTC_GPS"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"

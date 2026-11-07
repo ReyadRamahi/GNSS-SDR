@@ -7,4 +7,4 @@ Service and license: https://github.com/matteason/live-cloud-maps
 Contains modified EUMETSAT data.
 Images are published approximately every three hours. The service does not guarantee freshness or quality, and polar coverage is synthesized by mirroring nearby data. Occasional gaps are possible. The app displays retrieval time, not an observation timestamp, because the image response does not supply one. The layer is current weather context, independent of receiver replay. Attribution is also shown in the app.
 
-Satellite meshes are procedural. satellite.glb remains in the repository for future experiments.
+Satellite meshes are procedural. ../reference/satellite.glb remains in the repository for future experiments.
