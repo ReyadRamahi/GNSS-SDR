@@ -1,0 +1,14 @@
+{
+  "exit_status": 0,
+  "completed": false,
+  "failure_reason": "Flowgraph did not connect: sandbox blocked GNU Radio FFT wisdom lock creation in the home directory.",
+  "last_reported_receiver_time": null,
+  "tracking_starts": 0,
+  "lock_losses": 0,
+  "bit_sync_events": 0,
+  "nav_messages": 0,
+  "position_messages": 0,
+  "positive_acquisitions": 0,
+  "cfar_enabled_seen_in_log": false,
+  "nmea_bytes": 0
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "channel": 1,
+    "prn": 22,
+    "start_s": 17.258,
+    "end_s": 43.198,
+    "duration_s": 25.94,
+    "last_10s_cn0_median_db_hz": 36.14
+  },
+  {
+    "channel": 11,
+    "prn": 22,
+    "start_s": 64.806,
+    "end_s": 89.879,
+    "duration_s": 25.072,
+    "last_10s_cn0_median_db_hz": 35.99
+  },
+  {
+    "channel": 7,
+    "prn": 5,
+    "start_s": 1.244,
+    "end_s": 89.883,
+    "duration_s": 88.639,
+    "last_10s_cn0_median_db_hz": 41.52
+  },
+  {
+    "channel": 8,
+    "prn": 12,
+    "start_s": 1.594,
+    "end_s": 22.554,
+    "duration_s": 20.96,
+    "last_10s_cn0_median_db_hz": 36.54
+  },
+  {
+    "channel": 8,
+    "prn": 12,
+    "start_s": 22.606,
+    "end_s": 89.888,
+    "duration_s": 67.282,
+    "last_10s_cn0_median_db_hz": 37.45
+  },
+  {
+    "channel": 9,
+    "prn": 21,
+    "start_s": 0.495,
+    "end_s": 89.874,
+    "duration_s": 89.379,
+    "last_10s_cn0_median_db_hz": 40.02
+  }
+]

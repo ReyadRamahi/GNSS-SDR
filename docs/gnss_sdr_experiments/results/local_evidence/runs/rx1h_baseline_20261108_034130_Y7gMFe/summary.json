@@ -1,0 +1,28 @@
+{
+  "path_and_sample_checks_passed": true,
+  "iq_bytes": 480000000,
+  "sampled_windows": [
+    {
+      "offset_samples": 0,
+      "finite": true,
+      "std_i": 0.009858992882072926,
+      "std_q": 0.009780669584870338,
+      "rms": 0.013888334855437279
+    },
+    {
+      "offset_samples": 29967232,
+      "finite": true,
+      "std_i": 0.00953194685280323,
+      "std_q": 0.009519662708044052,
+      "rms": 0.013481125235557556
+    },
+    {
+      "offset_samples": 59934464,
+      "finite": true,
+      "std_i": 0.009844890795648098,
+      "std_q": 0.009795480407774448,
+      "rms": 0.013892117887735367
+    }
+  ],
+  "limitation": "Readback and nonzero IQ do not establish GNSS reception, stream continuity, or external-reference lock. Inspect run.log for driver errors."
+}

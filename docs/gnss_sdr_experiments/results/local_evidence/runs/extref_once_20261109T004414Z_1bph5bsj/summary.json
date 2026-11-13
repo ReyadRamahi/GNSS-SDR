@@ -1,0 +1,105 @@
+{
+  "measurement_utc": "2026-11-09T00:46:13Z",
+  "measurement_phase": "after FX3 constructor, before clean close; no untouched prior-state measurement",
+  "connection_count": 1,
+  "closed_cleanly": true,
+  "pre_open_guard": {
+    "owners": [],
+    "scan_failures": [],
+    "completed_utc": "2026-11-09T00:46:13.108703+00:00"
+  },
+  "library": {
+    "utc": "2026-11-09T00:46:13Z",
+    "elapsed_s": 0.000146142,
+    "event": "library",
+    "version": "22.09.0-ge829d3ed",
+    "abi": "22.09-1"
+  },
+  "identity": {
+    "utc": "2026-11-09T00:46:13Z",
+    "elapsed_s": 0.0158318,
+    "event": "identity_after_open",
+    "device_name": "LimeSDR-USB",
+    "hardware_version": "4",
+    "firmware_version": "4",
+    "protocol_version": "1",
+    "gateware_version": "2",
+    "gateware_revision": "23",
+    "gateware_target": "LimeSDR-USB",
+    "board_serial_hex": "0x0009061c01502715"
+  },
+  "raw_registers": [
+    {
+      "utc": "2026-11-09T00:46:13Z",
+      "elapsed_s": 0.0160413,
+      "event": "register_after_open",
+      "address": "0x0000",
+      "status": 0,
+      "raw": "0x000e"
+    },
+    {
+      "utc": "2026-11-09T00:46:13Z",
+      "elapsed_s": 0.0162532,
+      "event": "register_after_open",
+      "address": "0x0001",
+      "status": 0,
+      "raw": "0x0002"
+    },
+    {
+      "utc": "2026-11-09T00:46:13Z",
+      "elapsed_s": 0.0164929,
+      "event": "register_after_open",
+      "address": "0x0002",
+      "status": 0,
+      "raw": "0x0017"
+    },
+    {
+      "utc": "2026-11-09T00:46:13Z",
+      "elapsed_s": 0.0167121,
+      "event": "register_after_open",
+      "address": "0x0003",
+      "status": 0,
+      "raw": "0x0004"
+    },
+    {
+      "utc": "2026-11-09T00:46:13Z",
+      "elapsed_s": 0.016903,
+      "event": "register_after_open",
+      "address": "0x00c8",
+      "status": 0,
+      "raw": "0x0002",
+      "bit1_raw": 1,
+      "interpretation": "inconclusive; gateware map and MUXOUT configuration require separate evidence"
+    }
+  ],
+  "post_open_tx_command_counts": {
+    "0x00": 1,
+    "0x56": 6
+  },
+  "post_open_packet_errors": false,
+  "initialization_effects": {
+    "FX3_USB_bulk_endpoint_reset": "Built-in open-path CMD_USB_FIFO_RST payload 0x01; inferred from inspected implementation and bulk-control availability, not directly captured during construction.",
+    "legacy_Si5351C_initialization": "Not selected for reported hardware 4 (branch requires hardware <4).",
+    "native_reference_detector": "Not called: low-level registry connection; no LMS_Open or LMS7_Device constructor.",
+    "RFIC_initialization": "Not called: no LMS_Init, Soapy construction, RF configuration or capture."
+  },
+  "interpretation": {
+    "official_gateware_2_23_has_muxout_mapping": true,
+    "current_adf_muxout_configuration_established": false,
+    "external_reference_lock": "inconclusive",
+    "untouched_prior_state": "not measured",
+    "sustained_lock_during_receiving": "not measured; no stream started"
+  },
+  "post_close_check": {
+    "utc": "2026-11-09T00:47:34.719975+00:00",
+    "usb_fd_holders": [],
+    "scan_failures": []
+  },
+  "evidence_sha256": {
+    "guard.json": "7bf89793000fb16318b9a300b21bbacfb3763d5c1ba2c0157a9cffa229599f2c",
+    "diagnostic.jsonl": "c9a38ff7403e9b36803fa2e31dd215fbfd8c1274ebc1ab5a7d75d49797378a80",
+    "diagnostic.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ownership_after.json": "cd0a51da7645b19c0217a7f8bb3dbd91068ee5c127f4252704817393ecf47146",
+    "build_manifest.json": "dcce002e0cb112a4d3504149da9eb7b539e9c711fb658fc8d07eac14dda4d335"
+  }
+}

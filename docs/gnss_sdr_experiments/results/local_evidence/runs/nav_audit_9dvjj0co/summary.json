@@ -1,0 +1,94 @@
+{
+  "exit_status": 0,
+  "nav_messages": 43,
+  "satellites": {
+    "5": {
+      "subframe": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "iodc": [
+        49
+      ],
+      "iode_sf2": [
+        49
+      ],
+      "iode_sf3": [
+        49
+      ],
+      "health": [
+        0
+      ],
+      "messages": 12
+    },
+    "12": {
+      "subframe": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "iodc": [
+        48
+      ],
+      "iode_sf2": [
+        48
+      ],
+      "iode_sf3": [
+        48
+      ],
+      "health": [
+        0
+      ],
+      "messages": 10
+    },
+    "21": {
+      "subframe": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "iodc": [
+        983
+      ],
+      "iode_sf2": [
+        215
+      ],
+      "iode_sf3": [
+        215
+      ],
+      "health": [
+        0
+      ],
+      "messages": 12
+    },
+    "22": {
+      "subframe": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "iodc": [
+        23
+      ],
+      "iode_sf2": [
+        23
+      ],
+      "iode_sf3": [
+        23
+      ],
+      "health": [
+        0
+      ],
+      "messages": 9
+    }
+  }
+}

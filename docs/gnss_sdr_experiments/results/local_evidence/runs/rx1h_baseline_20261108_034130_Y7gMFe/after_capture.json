@@ -1,0 +1,14 @@
+{
+  "source_channels": 1,
+  "rx_channel_index": 0,
+  "antenna": "LNAH",
+  "sample_rate_sps": 1999999.9809265137,
+  "center_frequency_hz": 1574919990.234375,
+  "gain_db": 45.0,
+  "gain_stages_db": {
+    "TIA": 12.0,
+    "LNA": 27.0,
+    "PGA": 6.0
+  },
+  "bandwidth_hz": -1.0
+}

@@ -1,0 +1,37 @@
+{
+  "protobuf": {
+    "command": [
+      "c++",
+      "-x",
+      "c++",
+      "-E",
+      "-"
+    ],
+    "header": "google/protobuf/message.h",
+    "returncode": 1,
+    "stderr": "<stdin>:1:10: fatal error: google/protobuf/message.h: No such file or directory\ncompilation terminated.\n"
+  },
+  "pugixml": {
+    "command": [
+      "c++",
+      "-x",
+      "c++",
+      "-E",
+      "-"
+    ],
+    "header": "pugixml.hpp",
+    "returncode": 1,
+    "stderr": "<stdin>:1:10: fatal error: pugixml.hpp: No such file or directory\ncompilation terminated.\n"
+  },
+  "protoc": {
+    "path": null
+  },
+  "cached_protobuf_source": {
+    "directory": "/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/protobuf",
+    "regular_files": []
+  },
+  "cached_pugixml_source": {
+    "directory": "/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/pugixml",
+    "regular_files": []
+  }
+}

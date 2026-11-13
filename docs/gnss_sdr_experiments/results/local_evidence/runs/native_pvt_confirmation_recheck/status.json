@@ -1,0 +1,9 @@
+{
+  "configuration_returncode": 1,
+  "source_copy": "/home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source",
+  "receiver_built": false,
+  "receiver_executed": false,
+  "solver_behavior_changed": false,
+  "error_copy_patch_applied": false,
+  "original_inputs_unchanged": true
+}

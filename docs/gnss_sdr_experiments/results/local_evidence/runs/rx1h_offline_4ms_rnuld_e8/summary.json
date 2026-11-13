@@ -1,0 +1,13 @@
+{
+  "completed": true,
+  "last_receiver_time": [
+    "30 s"
+  ],
+  "tracking_starts": 22,
+  "lock_losses": 10,
+  "bit_sync_events": 2,
+  "nav_messages": 4,
+  "acquisition_attempts": 54,
+  "max_acquisition_statistic": 129.299,
+  "acquisition_threshold": 49.8354
+}

@@ -1,0 +1,43 @@
+{
+  "completed": true,
+  "last_reported_receiver_time": "1 min 30 s",
+  "tracking_starts": 56,
+  "lock_losses": 44,
+  "bit_sync_events": 6,
+  "nav_messages": 36,
+  "position_messages": 0,
+  "nav_subframes_by_prn": {
+    "5": {
+      "4": 3,
+      "5": 3,
+      "1": 2,
+      "2": 2,
+      "3": 2
+    },
+    "12": {
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "1": 1
+    },
+    "21": {
+      "4": 3,
+      "5": 3,
+      "1": 2,
+      "2": 2,
+      "3": 2
+    },
+    "22": {
+      "2": 1,
+      "4": 1,
+      "5": 1
+    }
+  },
+  "ephemeris_prns": [
+    5,
+    12
+  ],
+  "nmea_bytes": 0,
+  "parsed_nav_messages": 36
+}

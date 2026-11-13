@@ -1,0 +1,12 @@
+{
+  "samples": 180000000,
+  "nonfinite_samples": 0,
+  "nominal_duration_s": 90.0,
+  "zero_fraction": 0.0005084833333333334,
+  "mean_i": -0.0002405500626780093,
+  "mean_q": -0.00023982108535394075,
+  "rms": 0.013161837518597109,
+  "max_magnitude": 0.13177302479743958,
+  "noncircularity_abs": 0.0024665836047846994,
+  "dc_power_fraction": 0.0006660269214063367
+}

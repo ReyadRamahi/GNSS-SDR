@@ -1,0 +1,22 @@
+{
+  "samples": 60000000,
+  "nominal_duration_s": 30.0,
+  "nonfinite_samples": 0,
+  "zero_fraction": 0.00046575,
+  "mean_i": -0.0002410323961906135,
+  "mean_q": -0.00024183079295083881,
+  "rms": 0.013713965995396671,
+  "max_magnitude": 0.10870704799890518,
+  "noncircularity_abs": 0.003815360534458152,
+  "dc_power_fraction": 0.0006198594862272611,
+  "welch_peak_hz": 73730.46875,
+  "welch_peak_over_median_db": 20.94198242151185,
+  "welch_bin_hz": 244.140625,
+  "welch_band_power_fractions": {
+    "-1000000:-500000": 0.21650639176368713,
+    "-500000:0": 0.25658056139945984,
+    "0:500000": 0.30867692828178406,
+    "500000:1000000": 0.21823613345623016
+  },
+  "limitation": "Digital statistics and PSD do not identify GPS or prove hardware sample continuity."
+}

@@ -1,0 +1,16 @@
+{
+  "native_path_trace.log": {
+    "expected_result_present": true,
+    "expected_count_present": true
+  },
+  "existing_3deg_trace.log": {
+    "expected_result_present": true,
+    "expected_count_present": true
+  },
+  "existing_3deg_seeded_diagnostic.log": {
+    "expected_result_present": true,
+    "expected_count_present": true
+  },
+  "xml_semantics": true,
+  "input_hashes_unchanged": true
+}

@@ -1,0 +1,20 @@
+{
+  "compile_command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-isystem",
+    "/usr/local/include/lime",
+    "/home/rrama28/gnss/scripts/read_lime_reference_once.cc",
+    "/usr/local/lib/libLimeSuite.so.22.09.0",
+    "-Wl,-rpath,/usr/local/lib",
+    "-o",
+    "/home/rrama28/gnss/runs/extref_once_20261109T004414Z_1bph5bsj/read_lime_reference_once"
+  ],
+  "binary_sha256": "e28a62bafd66f485ee5c5ec9d460a0cc44787d6c7ff6a03e8094846062cc7840",
+  "source_sha256": "e635c2485c016f89a6cb352856aa8c603759f8bff5424c4bc05b3582dab414dd",
+  "runner_sha256": "87a604ce6e2299fba978394140c774571b524a58cf250427642590fbe398066f"
+}

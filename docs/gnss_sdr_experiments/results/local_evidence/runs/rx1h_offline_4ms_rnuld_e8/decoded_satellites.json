@@ -1,0 +1,18 @@
+[
+  {
+    "prn": 21,
+    "tracking_start_sample_time_s": 0.4928645,
+    "tracking_end_sample_time_s": 29.8797965,
+    "no_loss_logged_for_this_channel": true,
+    "cn0_median_last_10s_db_hz": 38.82611083984375,
+    "doppler_median_last_10s_hz": 3610.57861328125
+  },
+  {
+    "prn": 22,
+    "tracking_start_sample_time_s": 0.541117,
+    "tracking_end_sample_time_s": 29.8811785,
+    "no_loss_logged_for_this_channel": true,
+    "cn0_median_last_10s_db_hz": 36.69258499145508,
+    "doppler_median_last_10s_hz": -3337.0517578125
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "exit_status": 0,
+  "completed": true,
+  "last_reported_receiver_time": "30 s",
+  "tracking_starts": 0,
+  "lock_losses": 0,
+  "bit_sync_events": 0,
+  "nav_messages": 0,
+  "position_messages": 0,
+  "positive_acquisitions": 0,
+  "cfar_enabled_seen_in_log": true,
+  "nmea_bytes": 0
+}

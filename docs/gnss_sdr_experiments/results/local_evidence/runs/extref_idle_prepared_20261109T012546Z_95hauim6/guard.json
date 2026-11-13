@@ -1,0 +1,55 @@
+{
+  "utc": "2026-11-13T01:11:57.248630+00:00",
+  "diagnostic_started": true,
+  "owners": [],
+  "scan_failures": [],
+  "one_connection": true,
+  "return_baseline": "pretest reported DAC code in DAC-control mode; not exact unknown prior state",
+  "usb_devices": [
+    {
+      "sysfs": "/sys/bus/usb/devices/2-1.1.2",
+      "serial": "0009061C01502715",
+      "node": "/dev/bus/usb/002/007",
+      "speed_mbps": "5000",
+      "node_is_character_device": true,
+      "device_number": [
+        189,
+        134
+      ]
+    }
+  ],
+  "usb_errors": [],
+  "kernel_interface_drivers": [],
+  "ownership_scan_completed_utc": "2026-11-13T01:11:57.266958+00:00",
+  "returncode": 4,
+  "forwarded_signals": [],
+  "finished_utc": "2026-11-13T01:17:28.539867+00:00",
+  "owners_after_close": [],
+  "scan_failures_after_close": [],
+  "summary": {
+    "event": "summary",
+    "utc": "2026-11-13T01:17:28.288757Z",
+    "process_monotonic_s": 331.01800191,
+    "program_attempted": true,
+    "window_started": true,
+    "error": "",
+    "all_scheduled_window_samples_high": false,
+    "program_status": 0,
+    "expected_window_samples": 301,
+    "window_samples": 301,
+    "window_read_errors": 0,
+    "window_unlocked_samples": 301,
+    "window_missing_slots": 0,
+    "late_requests_over_250ms_all_phases": 0,
+    "completion_gaps_over_1_5s_all_phases": 0,
+    "observed_low_to_high_transitions": 0,
+    "first_high_after_program_s": null,
+    "first_three_consecutive_high_confirmed_s": null,
+    "interrupted": false,
+    "baseline_attempted": true,
+    "baseline_consistent": true,
+    "continuous_lock_between_samples_proven": false,
+    "receiver_streaming_tested": false
+  },
+  "close_recorded": true
+}

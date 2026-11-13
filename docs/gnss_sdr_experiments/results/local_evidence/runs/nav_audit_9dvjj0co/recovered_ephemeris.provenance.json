@@ -1,0 +1,20 @@
+{
+  "nav_audit_directory": "/home/rrama28/gnss/runs/nav_audit_9dvjj0co",
+  "field_definition_source": "/home/rrama28/src/gnss-sdr-0.0.16/src/core/system_parameters/GPS_L1_CA.h",
+  "native_prns_cross_validated": {
+    "5": 37,
+    "12": 37,
+    "22": 37
+  },
+  "added_prns": [
+    21
+  ],
+  "added_issue_of_data": {
+    "21": {
+      "IODC": 983,
+      "IODE_SF2": 215,
+      "IODE_SF3": 215
+    }
+  },
+  "note": "Experimental data-only workaround from decoded NAV in this recording; no receiver software or hardware changes."
+}

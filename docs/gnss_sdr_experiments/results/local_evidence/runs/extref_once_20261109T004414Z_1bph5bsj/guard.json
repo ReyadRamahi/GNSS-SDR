@@ -1,0 +1,52 @@
+{
+  "utc": "2026-11-09T00:46:13.089275+00:00",
+  "plan": {
+    "connection": "one FX3 ConnectionRegistry::makeConnection; no retries",
+    "library": "/usr/local/lib/libLimeSuite.so.22.09.0",
+    "serial": "0009061C01502715",
+    "unavoidable_effects": [
+      "Factory discovery temporarily opens/closes USB descriptor handles before the one claimed FX3 connection.",
+      "FX3 Open can send CMD_USB_FIFO_RST with payload 0x01 to reset bulk endpoints.",
+      "Constructor reads identity and checks gateware versions; mismatch messages do not trigger an update.",
+      "On legacy LimeSDR hardware <4 the installed constructor automatically initializes Si5351C; historical target hardware is 4. Actual hardware identity is recorded after open."
+    ],
+    "constructor_packet_logging": "Unavailable until the constructor returns; constructor effects are identified from inspected source/runtime identity, not a complete bus trace.",
+    "post_open_reads": [
+      "device identity",
+      "BBIC 0x0000, 0x0001, 0x0002, 0x0003",
+      "raw BBIC 0x00c8"
+    ],
+    "exclusions": [
+      "LMS_Init",
+      "LMS_Open/DetectRefClk",
+      "Soapy device creation",
+      "clock selection",
+      "ADF4002 programming",
+      "RF settings",
+      "capture/stream start",
+      "firmware update"
+    ],
+    "interpretation": "post-open raw observation only; no claim about untouched state or external lock without map/MUXOUT evidence"
+  },
+  "owners": [],
+  "scan_failures": [],
+  "diagnostic_started": true,
+  "usb_devices": [
+    {
+      "sysfs": "/sys/bus/usb/devices/2-1.1.2",
+      "serial": "0009061C01502715",
+      "node": "/dev/bus/usb/002/007",
+      "speed_mbps": "5000",
+      "node_is_character_device": true,
+      "device_number": [
+        189,
+        134
+      ]
+    }
+  ],
+  "usb_errors": [],
+  "kernel_interface_drivers": [],
+  "ownership_scan_completed_utc": "2026-11-09T00:46:13.108703+00:00",
+  "returncode": 0,
+  "finished_utc": "2026-11-09T00:46:13.379747+00:00"
+}

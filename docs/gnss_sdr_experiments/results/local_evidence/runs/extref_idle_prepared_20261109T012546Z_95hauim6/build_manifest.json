@@ -1,0 +1,27 @@
+{
+  "compile_command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-isystem",
+    "/usr/local/include/lime",
+    "/home/rrama28/gnss/scripts/lime_external_reference_test.cc",
+    "/usr/local/lib/libLimeSuite.so.22.09.0",
+    "-Wl,-rpath,/usr/local/lib",
+    "-o",
+    "/home/rrama28/gnss/runs/extref_idle_prepared_20261109T012546Z_95hauim6/lime_external_reference_test"
+  ],
+  "files_sha256": {
+    "/home/rrama28/gnss/scripts/lime_external_reference_test.cc": "1f63221d4a8526a55a91fa2b12a4aa49cd897f036d10ef635168a11ee1774388",
+    "/home/rrama28/gnss/runs/extref_idle_prepared_20261109T012546Z_95hauim6/lime_external_reference_test": "1c77c88d6e8807f93ef8608e15c292f49ce0e020013023effdbc625272b7829c",
+    "/home/rrama28/gnss/scripts/run_lime_external_reference_test.py": "e92d7eec5e32c9d682f8b9e8102e6dedcaba914ab766cea4ea247401ed78c586",
+    "/home/rrama28/gnss/scripts/run_lime_reference_once.py": "87a604ce6e2299fba978394140c774571b524a58cf250427642590fbe398066f",
+    "/home/rrama28/gnss/scripts/inspect_lime_owner.py": "3d6c568e455def3d3e737b5008ee62420f329d1e44e9b2b0c73ac520aa056983",
+    "/usr/local/lib/libLimeSuite.so.22.09.0": "0afd2a9b2d8afe2823ce316683a3d40c36a116adf1648f6ad86a99da770c10be"
+  },
+  "hardware_execution_approved": false,
+  "hardware_connections_during_preparation": 0
+}

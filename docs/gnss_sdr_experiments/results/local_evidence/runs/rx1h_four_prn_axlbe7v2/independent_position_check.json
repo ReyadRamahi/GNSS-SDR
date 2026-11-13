@@ -1,0 +1,104 @@
+{
+  "method": "Independent four-satellite least-squares check using decoded ephemeris, satellite clock/relativity and Earth-rotation correction; no receiver-position prior",
+  "limitation": "Four measurements provide no redundancy; not an accuracy validation or a GNSS-SDR PVT result. No atmospheric corrections applied.",
+  "epochs": [
+    {
+      "receiver_tow_s": 14064.0,
+      "latitude_deg": 41.88077677449905,
+      "longitude_deg": -87.64382637537237,
+      "ellipsoidal_height_m": 309.21850310917944,
+      "clock_bias_ms": -81.65617257892339,
+      "gdop": 7.078573665004747,
+      "satellite_elevation_deg": {
+        "5": 4.27,
+        "12": 57.88,
+        "21": 30.15,
+        "22": 17.15
+      }
+    },
+    {
+      "receiver_tow_s": 14070.1,
+      "latitude_deg": 41.88049426597934,
+      "longitude_deg": -87.64383116495044,
+      "ellipsoidal_height_m": 327.13519628252834,
+      "clock_bias_ms": -81.65617531899224,
+      "gdop": 7.070607092373657,
+      "satellite_elevation_deg": {
+        "5": 4.31,
+        "12": 57.9,
+        "21": 30.2,
+        "22": 17.11
+      }
+    },
+    {
+      "receiver_tow_s": 14076.22,
+      "latitude_deg": 41.88054744538568,
+      "longitude_deg": -87.64352968400534,
+      "ellipsoidal_height_m": 297.4558820715174,
+      "clock_bias_ms": -81.65621472201873,
+      "gdop": 7.062671110344595,
+      "satellite_elevation_deg": {
+        "5": 4.35,
+        "12": 57.93,
+        "21": 30.24,
+        "22": 17.06
+      }
+    },
+    {
+      "receiver_tow_s": 14082.34,
+      "latitude_deg": 41.88131059672146,
+      "longitude_deg": -87.64356436175206,
+      "ellipsoidal_height_m": 230.4714568266645,
+      "clock_bias_ms": -81.65659889293246,
+      "gdop": 7.054806005413552,
+      "satellite_elevation_deg": {
+        "5": 4.39,
+        "12": 57.96,
+        "21": 30.29,
+        "22": 17.02
+      }
+    },
+    {
+      "receiver_tow_s": 14088.44,
+      "latitude_deg": 41.8804626984579,
+      "longitude_deg": -87.64414489857673,
+      "ellipsoidal_height_m": 348.9235867280513,
+      "clock_bias_ms": -81.65629020823067,
+      "gdop": 7.046862305689119,
+      "satellite_elevation_deg": {
+        "5": 4.43,
+        "12": 57.98,
+        "21": 30.34,
+        "22": 16.98
+      }
+    },
+    {
+      "receiver_tow_s": 14094.56,
+      "latitude_deg": 41.88047576473927,
+      "longitude_deg": -87.64396601478657,
+      "ellipsoidal_height_m": 314.1111403685063,
+      "clock_bias_ms": -81.6563723815541,
+      "gdop": 7.039005287635175,
+      "satellite_elevation_deg": {
+        "5": 4.47,
+        "12": 58.01,
+        "21": 30.39,
+        "22": 16.93
+      }
+    },
+    {
+      "receiver_tow_s": 14100.68,
+      "latitude_deg": 41.88029700838114,
+      "longitude_deg": -87.6436684607448,
+      "ellipsoidal_height_m": 375.2934258142486,
+      "clock_bias_ms": -81.6563431542081,
+      "gdop": 7.0311380836278365,
+      "satellite_elevation_deg": {
+        "5": 4.51,
+        "12": 58.03,
+        "21": 30.43,
+        "22": 16.89
+      }
+    }
+  ]
+}
