@@ -1,0 +1,51 @@
+{
+  "native_info_log": "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal/gnss-sdr.hft02.rrama28.log.INFO.20261113-052827.132453",
+  "first_failure_line": 463,
+  "first_failure_text": "I1113 05:28:30.854101 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.00: point pos error ()",
+  "gps_tow_s": 14052.0,
+  "observation_epoch_index": 2050,
+  "observation_byte_offset": 459200,
+  "valid_observation_PRNs": [
+    5,
+    12,
+    21,
+    22
+  ],
+  "native_computed_elevations_deg": {
+    "5": null,
+    "12": null,
+    "21": null,
+    "22": null
+  },
+  "native_mask_pass_by_PRN": {
+    "5": null,
+    "12": null,
+    "21": null,
+    "22": null
+  },
+  "native_filtered_satellite_count": null,
+  "native_lsq_equation_count": null,
+  "diagnostic_marker_counts": {
+    "estpos": 0,
+    "resprng": 0,
+    "satazel error": 0,
+    "lack of valid sats": 0,
+    "lsq error": 0,
+    "iteration divergent": 0,
+    "gdop error": 0,
+    "chi-square error": 0,
+    "RTKLIB TRACE": 0,
+    "PVT_EPOCH_INPUT": 0,
+    "PVT_RTK_INPUT": 0
+  },
+  "solver_input_inference": "Local source calls rtkpos only with >3 converted observations; with four GPS-only channels, that implies these four at point-solver input if the installed implementation matches. The native log does not directly dump that array.",
+  "full_ephemeris_at_epoch_not_dumped": true,
+  "last_PRN5_ephemeris_update_before_failure": {
+    "line": 462,
+    "text": "I1113 05:28:30.839432 132506 rtklib_pvt_gs.cc:1155] Ephemeris record has arrived from SAT ID 5 (Block IIR-M)inserted with Toe=14400 and GPS Week=396"
+  },
+  "local_source_equivalence_to_installed_binary_proven": false,
+  "source_copy_contains_prior_logging_only_instrumentation": true,
+  "prior_standalone_epoch_tow_s": 14064.0,
+  "prior_values_are_not_native_elevations_for_14052": true
+}

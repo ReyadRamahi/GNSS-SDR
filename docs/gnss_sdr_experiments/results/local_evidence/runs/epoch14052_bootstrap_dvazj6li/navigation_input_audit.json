@@ -1,0 +1,80 @@
+{
+  "original_prns": [
+    5,
+    12,
+    22
+  ],
+  "experimental_prns": [
+    5,
+    12,
+    22,
+    21
+  ],
+  "added_prns": [
+    21
+  ],
+  "changed_existing_fields": {
+    "5": {},
+    "12": {},
+    "22": {}
+  },
+  "stock_end_values_numerically_equal_experimental": true,
+  "ephemerides": {
+    "5": {
+      "PRN": "5",
+      "WN": "396",
+      "toe": "14400",
+      "toc": "14400",
+      "tow": "14088",
+      "IODE_SF2": "49",
+      "IODE_SF3": "49",
+      "IODC": "49",
+      "SV_health": "0",
+      "SV_accuracy": "0",
+      "fit_interval_flag": "0"
+    },
+    "12": {
+      "PRN": "12",
+      "WN": "396",
+      "toe": "14400",
+      "toc": "14400",
+      "tow": "14088",
+      "IODE_SF2": "48",
+      "IODE_SF3": "48",
+      "IODC": "48",
+      "SV_health": "0",
+      "SV_accuracy": "0",
+      "fit_interval_flag": "0"
+    },
+    "22": {
+      "PRN": "22",
+      "WN": "396",
+      "toe": "14400",
+      "toc": "14400",
+      "tow": "14088",
+      "IODE_SF2": "23",
+      "IODE_SF3": "23",
+      "IODC": "23",
+      "SV_health": "0",
+      "SV_accuracy": "0",
+      "fit_interval_flag": "0"
+    },
+    "21": {
+      "PRN": "21",
+      "WN": "396",
+      "toe": "14400",
+      "toc": "14400",
+      "tow": "14088",
+      "IODE_SF2": "215",
+      "IODE_SF3": "215",
+      "IODC": "983",
+      "SV_health": "0",
+      "SV_accuracy": "0",
+      "fit_interval_flag": "0"
+    }
+  },
+  "epoch_tow": 14052,
+  "toe_age_s": -348,
+  "full_week_via_current_host_adjustment": 2444,
+  "missing_native_first_epoch_ephemeris_snapshot": true
+}

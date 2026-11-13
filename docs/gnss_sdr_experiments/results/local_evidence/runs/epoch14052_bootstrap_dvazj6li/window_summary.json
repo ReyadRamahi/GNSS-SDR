@@ -1,0 +1,160 @@
+{
+  "candidate_cold_3deg": {
+    "epochs": 2435,
+    "successes": 2435,
+    "first_tow": 14052,
+    "last_tow": 14100.68,
+    "statuses": {
+      "5": 2435
+    },
+    "reasons": {
+      "": 2435
+    },
+    "all_final_mask_ok": true,
+    "gaps": 0,
+    "lat_range_deg": [
+      41.879806454775405,
+      41.881536467937416
+    ],
+    "lon_range_deg": [
+      -87.64458511980197,
+      -87.6432493856903
+    ],
+    "height_range_m": [
+      144.55454573500901,
+      360.8671504724771
+    ],
+    "gdop_range": [
+      7.031148297529834,
+      7.094293507437476
+    ],
+    "residual_rms_m_range": [
+      1.3906393718485171e-08,
+      3.595901627026609e-08
+    ],
+    "max_abs_residual_m_range": [
+      2.6891939342021942e-08,
+      6.833579391241074e-08
+    ],
+    "used_counts": {
+      "4": 2435
+    },
+    "min_elevation_deg": 4.18481745214232,
+    "mean_ecef_m": [
+      195520.1774397298,
+      -4752025.3032053225,
+      4235917.598604684
+    ],
+    "ecef_rms_about_mean_m": 55.522628002075386,
+    "max_epoch_step_m": 16.827416208306456
+  },
+  "baseline_cold_3deg": {
+    "epochs": 2435,
+    "successes": 0,
+    "first_tow": 14052,
+    "last_tow": 14100.68,
+    "statuses": {
+      "0": 2435
+    },
+    "reasons": {
+      "lack of valid sats ns=6": 2435
+    },
+    "all_final_mask_ok": null,
+    "gaps": 0
+  },
+  "baseline_sequential_3deg": {
+    "epochs": 2435,
+    "successes": 0,
+    "first_tow": 14052,
+    "last_tow": 14100.68,
+    "statuses": {
+      "0": 2435
+    },
+    "reasons": {
+      "lack of valid sats ns=6": 2435
+    },
+    "all_final_mask_ok": null,
+    "gaps": 0
+  },
+  "candidate_sequential_3deg": {
+    "epochs": 2435,
+    "successes": 2435,
+    "first_tow": 14052,
+    "last_tow": 14100.68,
+    "statuses": {
+      "5": 2435
+    },
+    "reasons": {
+      "": 2435
+    },
+    "all_final_mask_ok": true,
+    "gaps": 0,
+    "lat_range_deg": [
+      41.8798064547755,
+      41.881536467937416
+    ],
+    "lon_range_deg": [
+      -87.64458511980207,
+      -87.64324938569034
+    ],
+    "height_range_m": [
+      144.55454574059695,
+      360.8671501716599
+    ],
+    "gdop_range": [
+      7.031148297529447,
+      7.094293507437476
+    ],
+    "residual_rms_m_range": [
+      3.371400834895627e-08,
+      2.707503656242599e-05
+    ],
+    "max_abs_residual_m_range": [
+      6.414484232664108e-08,
+      5.1493640057742596e-05
+    ],
+    "used_counts": {
+      "4": 2435
+    },
+    "min_elevation_deg": 4.18481745214232,
+    "mean_ecef_m": [
+      195520.17743972814,
+      -4752025.30320532,
+      4235917.59860468
+    ],
+    "ecef_rms_about_mean_m": 55.522627998435965,
+    "max_epoch_step_m": 16.82741620225264
+  },
+  "candidate_first_15deg": {
+    "epochs": 1,
+    "successes": 0,
+    "first_tow": 14052,
+    "last_tow": 14052,
+    "statuses": {
+      "0": 1
+    },
+    "reasons": {
+      "lack of valid sats ns=6": 1
+    },
+    "all_final_mask_ok": null,
+    "gaps": 0
+  },
+  "reference_consistency_only": {
+    "reference_config": "/home/rrama28/gnss/configs/limesdr_focused.conf",
+    "latitude_deg": 41.880662482,
+    "longitude_deg": -87.643929543,
+    "surveyed": false,
+    "height_available": false,
+    "first_horizontal_difference_m": 12.552378323320822,
+    "horizontal_difference_range_m": [
+      1.0470874790972347,
+      109.04800092315959
+    ],
+    "horizontal_difference_rms_m": 40.40988689987293,
+    "ENU_std_about_solution_mean_m": [
+      22.386508606083137,
+      33.42124286239775,
+      38.27044522624604
+    ]
+  }
+}

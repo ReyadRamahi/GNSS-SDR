@@ -1,0 +1,135 @@
+INPUT ch=0 prn=5 RX=14064 tx_tag=14063.9967984254 P=959807.91861560557 week=2444 toe=14400 XML_health=0 XML_IODC=49 XML_IODE=49 RTK_svh=0 RTK_iode=0 RTK_iodc=0
+INPUT ch=1 prn=12 RX=14064 tx_tag=14064.011909037403 P=-3570239.5951294433 week=2444 toe=14400 XML_health=0 XML_IODC=48 XML_IODE=48 RTK_svh=0 RTK_iode=0 RTK_iodc=0
+INPUT ch=2 prn=21 RX=14064 tx_tag=14064.006113308871 P=-1832723.8929997359 week=2444 toe=14400 XML_health=0 XML_IODC=983 XML_IODE=215 RTK_svh=0 RTK_iode=0 RTK_iodc=0
+INPUT ch=3 prn=22 RX=14064 tx_tag=14064.001548798635 P=-464318.1499141691 week=2444 toe=14400 XML_health=0 XML_IODC=23 XML_IODE=23 RTK_svh=0 RTK_iode=0 RTK_iodc=0
+NATIVE_POINT_POSITION_BEGIN initial_ECEF=195529.0905227543,-4752058.8903536545,4235960.0491059162 mask_deg=3 seeded_from_independent=1
+I1108 04:27:54.495616    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:pntpos  : tobs=2026/11/08 03:54:24.000 n=4
+I1108 04:27:54.495659    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:satposs : teph=2026/11/08 03:54:24.000 n=4 ephopt=0
+I1108 04:27:54.495679    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephclk  : time=2026/11/08 03:54:23.997 sat= 5
+I1108 04:27:54.495697    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat= 5 iode=-1
+I1108 04:27:54.495714    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2clk : time=2026/11/08 03:54:23.997 sat= 5
+I1108 04:27:54.495733    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:satpos  : time=2026/11/08 03:54:23.997 sat= 5 ephopt=0
+I1108 04:27:54.495749    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephpos  : time=2026/11/08 03:54:23.997 sat= 5 iode=-1
+I1108 04:27:54.495767    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat= 5 iode=-1
+I1108 04:27:54.495790    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:23.997 sat= 5
+I1108 04:27:54.495813    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat= 5 e= 0.00517 n= 3 del= 0.000e+00
+I1108 04:27:54.495832    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:23.998 sat= 5
+I1108 04:27:54.495847    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat= 5 e= 0.00517 n= 3 del= 4.441e-16
+I1108 04:27:54.495867    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephclk  : time=2026/11/08 03:54:24.012 sat=12
+I1108 04:27:54.495882    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=12 iode=-1
+I1108 04:27:54.495898    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2clk : time=2026/11/08 03:54:24.012 sat=12
+I1108 04:27:54.495915    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:satpos  : time=2026/11/08 03:54:24.013 sat=12 ephopt=0
+I1108 04:27:54.495931    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephpos  : time=2026/11/08 03:54:24.013 sat=12 iode=-1
+I1108 04:27:54.495949    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=12 iode=-1
+I1108 04:27:54.495965    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.013 sat=12
+I1108 04:27:54.495978    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=12 e= 0.00901 n= 3 del= 5.551e-17
+I1108 04:27:54.495995    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.014 sat=12
+I1108 04:27:54.496009    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=12 e= 0.00901 n= 3 del= 0.000e+00
+I1108 04:27:54.496027    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephclk  : time=2026/11/08 03:54:24.006 sat=21
+I1108 04:27:54.496044    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=21 iode=-1
+I1108 04:27:54.496060    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2clk : time=2026/11/08 03:54:24.006 sat=21
+I1108 04:27:54.496079    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:satpos  : time=2026/11/08 03:54:24.006 sat=21 ephopt=0
+I1108 04:27:54.496096    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephpos  : time=2026/11/08 03:54:24.006 sat=21 iode=-1
+I1108 04:27:54.496114    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=21 iode=-1
+I1108 04:27:54.496130    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.006 sat=21
+I1108 04:27:54.496165    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=21 e= 0.00100 n= 3 del=-2.776e-17
+I1108 04:27:54.496184    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.007 sat=21
+I1108 04:27:54.496198    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=21 e= 0.00100 n= 3 del=-2.776e-17
+I1108 04:27:54.496215    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephclk  : time=2026/11/08 03:54:24.002 sat=22
+I1108 04:27:54.496233    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=22 iode=-1
+I1108 04:27:54.496250    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2clk : time=2026/11/08 03:54:24.002 sat=22
+I1108 04:27:54.496268    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:satpos  : time=2026/11/08 03:54:24.001 sat=22 ephopt=0
+I1108 04:27:54.496284    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ephpos  : time=2026/11/08 03:54:24.001 sat=22 iode=-1
+I1108 04:27:54.496300    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:seleph  : time=2026/11/08 03:54:24.000 sat=22 iode=-1
+I1108 04:27:54.496316    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.001 sat=22
+I1108 04:27:54.496331    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=22 e= 0.01133 n= 3 del= 2.220e-15
+I1108 04:27:54.496349    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:eph2pos : time=2026/11/08 03:54:24.002 sat=22
+I1108 04:27:54.496363    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:kepler: sat=22 e= 0.01133 n= 3 del= 1.998e-15
+I1108 04:27:54.496387    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:2026/11/08 03:54:23.997036 sat= 5 rs= -6091227.788 -22656402.806 -12600550.608 dts= -237776.496 var=  5.760 svh=00
+I1108 04:27:54.496418    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:2026/11/08 03:54:24.012507 sat=12 rs= -9815942.413 -15929079.032  18539776.775 dts= -597531.069 var=  5.760 svh=00
+I1108 04:27:54.496441    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:2026/11/08 03:54:24.005798 sat=21 rs=  2462161.022 -26276974.257  -2744718.553 dts=  315601.204 var=  5.760 svh=00
+I1108 04:27:54.496464    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:2026/11/08 03:54:24.001427 sat=22 rs= 10480958.336 -23595706.204  -6609881.147 dts=  121876.632 var=  5.760 svh=00
+I1108 04:27:54.496477    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:estpos  : n=4
+I1108 04:27:54.496490    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resprng : n=4
+EPOCH iter=0 x=195529.090522754 -4752058.890353655 4235960.049105916 clock_m=0.000000000
+FILTER iter=0 sat=5 el_deg=4.265717186 mask_deg=3.000000000
+I1108 04:27:54.496650    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat= 5 pos=41.881 -87.644 azel=196.105 4.266
+I1108 04:27:54.496680    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=196.105 4.266
+I1108 04:27:54.496697    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat= 5 azel=196.1  4.3 res=-24479940.637 sig=3.928
+FILTER iter=0 sat=12 el_deg=57.878767313 mask_deg=3.000000000
+I1108 04:27:54.496732    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=12 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.496754    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.496770    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=12 azel=288.3 57.9 res=-24479909.157 sig=2.624
+FILTER iter=0 sat=21 el_deg=30.147937024 mask_deg=3.000000000
+I1108 04:27:54.496804    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=21 pos=41.881 -87.644 azel=175.977 30.148
+I1108 04:27:54.496826    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=175.977 30.148
+I1108 04:27:54.496845    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=21 azel=176.0 30.1 res=-24479911.971 sig=2.848
+FILTER iter=0 sat=22 el_deg=17.149689891 mask_deg=3.000000000
+I1108 04:27:54.496878    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=22 pos=41.881 -87.644 azel=155.579 17.150
+I1108 04:27:54.496917    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=155.579 17.150
+I1108 04:27:54.496934    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=22 azel=155.6 17.1 res=-24479916.063 sig=3.136
+COUNT iter=0 ns=4 nv=7 required=7
+I1108 04:27:54.497010    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resprng : n=4
+EPOCH iter=1 x=195507.432080400 -4752018.478332268 4235928.057700847 clock_m=-24479942.559218280
+FILTER iter=1 sat=5 el_deg=4.265852253 mask_deg=3.000000000
+I1108 04:27:54.497076    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat= 5 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497095    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497112    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat= 5 azel=196.1  4.3 res= -0.215 sig=3.928
+FILTER iter=1 sat=12 el_deg=57.879071652 mask_deg=3.000000000
+I1108 04:27:54.497148    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=12 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497169    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497186    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=12 azel=288.3 57.9 res= -0.019 sig=2.624
+FILTER iter=1 sat=21 el_deg=30.147997925 mask_deg=3.000000000
+I1108 04:27:54.497219    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=21 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497241    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497257    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=21 azel=176.0 30.1 res= -0.032 sig=2.848
+FILTER iter=1 sat=22 el_deg=17.149695580 mask_deg=3.000000000
+I1108 04:27:54.497290    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=22 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.497311    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.497327    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=22 azel=155.6 17.1 res= -0.055 sig=3.136
+COUNT iter=1 ns=4 nv=7 required=7
+I1108 04:27:54.497359    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resprng : n=4
+EPOCH iter=2 x=195507.286804567 -4752018.225160288 4235927.856208663 clock_m=-24479942.783446420
+FILTER iter=2 sat=5 el_deg=4.265853131 mask_deg=3.000000000
+I1108 04:27:54.497406    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat= 5 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497427    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497444    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat= 5 azel=196.1  4.3 res= -0.001 sig=3.928
+FILTER iter=2 sat=12 el_deg=57.879073662 mask_deg=3.000000000
+I1108 04:27:54.497478    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=12 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497499    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497517    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=12 azel=288.3 57.9 res= -0.000 sig=2.624
+FILTER iter=2 sat=21 el_deg=30.147998308 mask_deg=3.000000000
+I1108 04:27:54.497550    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=21 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497572    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497588    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=21 azel=176.0 30.1 res= -0.000 sig=2.848
+FILTER iter=2 sat=22 el_deg=17.149695584 mask_deg=3.000000000
+I1108 04:27:54.497640    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=22 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.497661    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.497679    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=22 azel=155.6 17.1 res= -0.000 sig=3.136
+COUNT iter=2 ns=4 nv=7 required=7
+I1108 04:27:54.497710    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resprng : n=4
+EPOCH iter=3 x=195507.285888798 -4752018.223564121 4235927.854938412 clock_m=-24479942.784859803
+FILTER iter=3 sat=5 el_deg=4.265853136 mask_deg=3.000000000
+I1108 04:27:54.497758    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat= 5 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497779    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=196.104 4.266
+I1108 04:27:54.497797    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat= 5 azel=196.1  4.3 res= -0.000 sig=3.928
+FILTER iter=3 sat=12 el_deg=57.879073674 mask_deg=3.000000000
+I1108 04:27:54.497830    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=12 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497851    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=288.345 57.879
+I1108 04:27:54.497869    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=12 azel=288.3 57.9 res= -0.000 sig=2.624
+FILTER iter=3 sat=21 el_deg=30.147998310 mask_deg=3.000000000
+I1108 04:27:54.497901    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=21 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497922    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=175.976 30.148
+I1108 04:27:54.497938    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=21 azel=176.0 30.1 res= -0.000 sig=2.848
+FILTER iter=3 sat=22 el_deg=17.149695584 mask_deg=3.000000000
+I1108 04:27:54.497973    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:ionocorr: time=2026/11/08 03:54:24.000 opt=1 sat=22 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.497995    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:tropcorr: time=2026/11/08 03:54:24.000 opt=1 pos=41.881 -87.644 azel=155.578 17.150
+I1108 04:27:54.498011    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[4]:sat=22 azel=155.6 17.1 res= -0.000 sig=3.136
+COUNT iter=3 ns=4 nv=7 required=7
+I1108 04:27:54.498041    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:valsol  : n=4 nv=7
+I1108 04:27:54.498066    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:estvel  : n=4
+I1108 04:27:54.498080    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resdop  : n=4
+I1108 04:27:54.498104    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resdop  : n=4
+I1108 04:27:54.498126    71 rtklib_rtkcmn.cc:4082] RTKLIB TRACE[3]:resdop  : n=4
+NATIVE_POINT_POSITION_END result=1 status=5 caller_error='' ECEF=195507.28588301552,-4752018.2235540869,4235927.8549304036
+RESULT_LLH=41.88081057315037,-87.644068691878786,256.80656136386096 clock_bias_s=-0.081656299655372536 ns=4

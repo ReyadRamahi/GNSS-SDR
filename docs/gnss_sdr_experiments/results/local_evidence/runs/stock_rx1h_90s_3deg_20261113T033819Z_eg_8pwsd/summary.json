@@ -1,0 +1,97 @@
+{
+  "host": "hft02",
+  "receiver_version": "gnss-sdr version 0.0.16",
+  "receiver_package": "gnss-sdr 0.0.16-1 amd64",
+  "started_utc": "2026-11-13T05:28:27.057524+00:00",
+  "finished_utc": "2026-11-13T05:28:34.692131+00:00",
+  "exit_status": 0,
+  "elapsed_seconds": 7.634608359076083,
+  "command": [
+    "/usr/bin/timeout",
+    "--signal=INT",
+    "--kill-after=10s",
+    "180s",
+    "/usr/bin/gnss-sdr",
+    "--config_file=/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf",
+    "--log_dir=/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal"
+  ],
+  "cwd": "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd",
+  "config_path": "/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf",
+  "iq_path": "/home/rrama28/gnss/runs/rx1h_baseline_20261108_035309_7qbMJ8/rx1h.cf32",
+  "nominal_iq_seconds": 90,
+  "receiver_source_reported_seconds": 89.9,
+  "last_console_receiver_seconds": 90,
+  "elevation_mask_deg": 3.0,
+  "experimental_PRN21_XML_loaded": true,
+  "receiver_position_prior_supplied": false,
+  "nav_subframe_messages": 45,
+  "nav_by_prn": {
+    "5": {
+      "messages": 13,
+      "subframes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "12": {
+      "messages": 9,
+      "subframes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "21": {
+      "messages": 12,
+      "subframes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "22": {
+      "messages": 11,
+      "subframes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  "tracking_starts": 5,
+  "loss_of_lock_events": 1,
+  "bit_sync_events": 4,
+  "total_observation_epochs": 4485,
+  "four_valid_observation_epochs": 2435,
+  "first_four_valid_tow_s": 14052.0,
+  "last_four_valid_tow_s": 14100.68,
+  "four_valid_nominal_epoch_duration_s": 48.7,
+  "first_four_valid_index": 2050,
+  "first_four_valid_byte_offset": 459200,
+  "native_point_position_errors": 2435,
+  "first_native_error": {
+    "line": 463,
+    "time_of_day_s": 14052.0,
+    "reason": "",
+    "text": "I1113 05:28:30.854101 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.00: point pos error ()"
+  },
+  "every_four_valid_epoch_has_matching_native_point_position_error": true,
+  "all_native_error_reasons_empty": true,
+  "native_position_messages": 0,
+  "native_fix_reported_or_saved": false,
+  "nmea_path": "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gnss_pvt.nmea",
+  "nmea_exists_after_exit": false,
+  "optional_almanac_warning": "unrecognized XML syntaxFile: ./gps_almanac.xml",
+  "native_confirmation_limit": "Stock receiver reports a point-position failure at each four-valid epoch but supplies an empty reason; it does not directly confirm the standalone elevation-filtering cause.",
+  "first_epoch_limit": "This replay first reaches four valid pseudorange flags at TOW 14052.000, not the prior focused replay first epoch 14064.000. Both are saved separately; four valid flags do not establish four measurements surviving PVT filters.",
+  "original_config_inputs_and_installed_binary_hashes_unchanged": true
+}

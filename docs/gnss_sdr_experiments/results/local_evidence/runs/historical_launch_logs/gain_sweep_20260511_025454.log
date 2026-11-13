@@ -1,0 +1,29 @@
+============================================================
+GAIN SWEEP
+SWEEP_DIR: /home/rrama28/gnss/runs/gain_sweep_20260511_025454
+Total combos: 45
+Duration per run: 180s
+Estimated total: 135 minutes (~2 hours)
+PRNs: 28 31 2 1
+============================================================
+
+=== Locking ADF4002 to external 10 MHz reference ===
+Attempt 1:   ADF4002 Lock State: 1
+ADF4002 locked.
+
+============================================
+Run 1 / 45 — g1_if0_bb0
+Elapsed: 0s   Remaining: ~8100s
+Started: 02:54:55
+============================================
+/home/rrama28/gnss/scripts/gain_sweep.sh: line 220: 0
+0: syntax error in expression (error token is "0")
+============================================================
+SWEEP COMPLETE
+============================================================
+
+Top 10 results by score:
+gain  if_gain  bb_gain  actual_rx_gain_db  tracking_starts  losses_of_lock  bit_sync  nav_messages  position_fixes  score
+
+Full results: /home/rrama28/gnss/runs/gain_sweep_20260511_025454/results.csv
+Per-run logs: /home/rrama28/gnss/runs/gain_sweep_20260511_025454/<combo>/run.log

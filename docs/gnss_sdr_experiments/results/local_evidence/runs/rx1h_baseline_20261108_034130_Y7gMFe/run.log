@@ -1,0 +1,38 @@
+gr-osmosdr 0.2.0.0 (0.2.0) gnuradio 3.10.1.1
+built-in source types: file fcd rtl rtl_tcp uhd hackrf bladerf rfspace airspy airspyhf soapy redpitaya freesrp 
+[INFO] Make connection: 'LimeSDR-USB [USB 3.0] 9061C01502715'
+[INFO] Reference clock 30.72 MHz
+[INFO] Device name: LimeSDR-USB
+[INFO] Reference: 30.72 MHz
+[INFO] LMS7002M register cache: Disabled
+[INFO] RX LPF configured
+Readback before capture: {"source_channels": 1, "rx_channel_index": 0, "antenna": "LNAH", "sample_rate_sps": 1999999.9809265137, "center_frequency_hz": 1574919990.234375, "gain_db": 45.0, "gain_stages_db": {"TIA": 12.0, "LNA": 27.0, "PGA": 6.0}, "bandwidth_hz": -1.0}
+[INFO] Rx calibration finished
+{
+  "path_and_sample_checks_passed": true,
+  "iq_bytes": 480000000,
+  "sampled_windows": [
+    {
+      "offset_samples": 0,
+      "finite": true,
+      "std_i": 0.009858992882072926,
+      "std_q": 0.009780669584870338,
+      "rms": 0.013888334855437279
+    },
+    {
+      "offset_samples": 29967232,
+      "finite": true,
+      "std_i": 0.00953194685280323,
+      "std_q": 0.009519662708044052,
+      "rms": 0.013481125235557556
+    },
+    {
+      "offset_samples": 59934464,
+      "finite": true,
+      "std_i": 0.009844890795648098,
+      "std_q": 0.009795480407774448,
+      "rms": 0.013892117887735367
+    }
+  ],
+  "limitation": "Readback and nonzero IQ do not establish GNSS reception, stream continuity, or external-reference lock. Inspect run.log for driver errors."
+}

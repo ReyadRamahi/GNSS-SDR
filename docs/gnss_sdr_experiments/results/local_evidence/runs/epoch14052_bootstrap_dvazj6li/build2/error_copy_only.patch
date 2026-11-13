@@ -1,0 +1,11 @@
+--- a/rtklib_pntpos.cc
++++ b/rtklib_pntpos.cc
+@@ -704,7 +704,7 @@
+     free(v);
+     free(H);
+     free(var);
+-    msg = msg_aux;
++    std::snprintf(msg, 128, "%s", msg_aux);
+ 
+     return 0;
+ }

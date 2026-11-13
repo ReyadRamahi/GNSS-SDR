@@ -1,0 +1,29 @@
+{
+  "host": "hft02",
+  "checked_utc": "2026-11-13T05:59:41.926098+00:00",
+  "status": "blocked_before_configuration_or_build",
+  "usable_native_diagnostic_binary_found": false,
+  "standalone_binaries_found": 2,
+  "source_copy_created": false,
+  "bounded_error_copy_applied": false,
+  "target_14052_logging_applied": false,
+  "build_attempted": false,
+  "receiver_replayed": false,
+  "stock_binary_hash_matches_previous_baseline": true,
+  "missing_required_headers": [
+    "/usr/include/pugixml.hpp",
+    "/usr/include/pugiconfig.hpp",
+    "/usr/include/google/protobuf/message.h",
+    "/usr/include/google/protobuf/stubs/common.h"
+  ],
+  "missing_compiler": [
+    "/usr/bin/protoc",
+    "/usr/local/bin/protoc (alternative location)"
+  ],
+  "compatible_header_versions": {
+    "pugixml": "1.12.1 matching existing runtime",
+    "protobuf": "3.12.4 matching existing runtime"
+  },
+  "native_failure_path_at_14052": "not established; no new native diagnostics",
+  "stop_reason": "Required development files unavailable locally; no usable diagnostic receiver or complete dependency cache found in searched locations."
+}

@@ -1,0 +1,372 @@
+{
+  "host": "hft02",
+  "checked_utc": "2026-11-13T05:59:41.926098+00:00",
+  "search_roots": [
+    "/home/rrama28",
+    "/usr/local",
+    "/opt",
+    "/tmp"
+  ],
+  "excluded_directory_names": [
+    ".aws",
+    ".cache",
+    ".codex",
+    ".git",
+    ".npm",
+    ".ssh",
+    ".vscode-server",
+    "__pycache__",
+    "node_modules"
+  ],
+  "scan_errors": [
+    {
+      "path": "/opt/containerd",
+      "error": "[Errno 13] Permission denied: '/opt/containerd'"
+    },
+    {
+      "path": "/tmp/systemd-private-98fb7f962b61408b83a3217250358844-upower.service-8YpwDY",
+      "error": "[Errno 13] Permission denied: '/tmp/systemd-private-98fb7f962b61408b83a3217250358844-upower.service-8YpwDY'"
+    },
+    {
+      "path": "/tmp/systemd-private-98fb7f962b61408b83a3217250358844-ModemManager.service-AfocuD",
+      "error": "[Errno 13] Permission denied: '/tmp/systemd-private-98fb7f962b61408b83a3217250358844-ModemManager.service-AfocuD'"
+    },
+    {
+      "path": "/tmp/systemd-private-98fb7f962b61408b83a3217250358844-ntp.service-pbeLxJ",
+      "error": "[Errno 13] Permission denied: '/tmp/systemd-private-98fb7f962b61408b83a3217250358844-ntp.service-pbeLxJ'"
+    },
+    {
+      "path": "/tmp/systemd-private-98fb7f962b61408b83a3217250358844-systemd-logind.service-KBggFU",
+      "error": "[Errno 13] Permission denied: '/tmp/systemd-private-98fb7f962b61408b83a3217250358844-systemd-logind.service-KBggFU'"
+    },
+    {
+      "path": "/tmp/tmux-1310394",
+      "error": "[Errno 13] Permission denied: '/tmp/tmux-1310394'"
+    },
+    {
+      "path": "/tmp/snap-private-tmp",
+      "error": "[Errno 13] Permission denied: '/tmp/snap-private-tmp'"
+    },
+    {
+      "path": "/tmp/systemd-private-98fb7f962b61408b83a3217250358844-systemd-resolved.service-BdHd1B",
+      "error": "[Errno 13] Permission denied: '/tmp/systemd-private-98fb7f962b61408b83a3217250358844-systemd-resolved.service-BdHd1B'"
+    },
+    {
+      "path": "/tmp/pulse-oFnDhLLNyKS8",
+      "error": "[Errno 13] Permission denied: '/tmp/pulse-oFnDhLLNyKS8'"
+    }
+  ],
+  "standard_paths": {
+    "/usr/include/pugixml.hpp": false,
+    "/usr/include/pugiconfig.hpp": false,
+    "/usr/include/google/protobuf/message.h": false,
+    "/usr/include/google/protobuf/stubs/common.h": false,
+    "/usr/bin/protoc": false,
+    "/usr/local/bin/protoc": false,
+    "/usr/lib/x86_64-linux-gnu/libpugixml.so": false,
+    "/usr/lib/x86_64-linux-gnu/libpugixml.so.1.12": true,
+    "/usr/lib/x86_64-linux-gnu/libprotobuf.so": false,
+    "/usr/lib/x86_64-linux-gnu/libprotobuf.so.23.0.4": true,
+    "/usr/lib/x86_64-linux-gnu/libprotoc.so.23": false
+  },
+  "compiler_probes": {
+    "pugixml": {
+      "header": "pugixml.hpp",
+      "command": [
+        "c++",
+        "-x",
+        "c++",
+        "-E",
+        "-"
+      ],
+      "returncode": 1,
+      "stderr": "<stdin>:1:10: fatal error: pugixml.hpp: No such file or directory\ncompilation terminated.\n"
+    },
+    "pugiconfig": {
+      "header": "pugiconfig.hpp",
+      "command": [
+        "c++",
+        "-x",
+        "c++",
+        "-E",
+        "-"
+      ],
+      "returncode": 1,
+      "stderr": "<stdin>:1:10: fatal error: pugiconfig.hpp: No such file or directory\ncompilation terminated.\n"
+    },
+    "protobuf_message": {
+      "header": "google/protobuf/message.h",
+      "command": [
+        "c++",
+        "-x",
+        "c++",
+        "-E",
+        "-"
+      ],
+      "returncode": 1,
+      "stderr": "<stdin>:1:10: fatal error: google/protobuf/message.h: No such file or directory\ncompilation terminated.\n"
+    },
+    "protobuf_common": {
+      "header": "google/protobuf/stubs/common.h",
+      "command": [
+        "c++",
+        "-x",
+        "c++",
+        "-E",
+        "-"
+      ],
+      "returncode": 1,
+      "stderr": "<stdin>:1:10: fatal error: google/protobuf/stubs/common.h: No such file or directory\ncompilation terminated.\n"
+    }
+  },
+  "PATH_protoc": null,
+  "local_dependency_files": [],
+  "local_protoc_candidates": [],
+  "receiver_and_standalone_candidates": [
+    {
+      "path": "/home/rrama28/gnss/runs/first_epoch_pvt_20261108_3/first_pvt_epoch",
+      "bytes": 277072,
+      "executable": true,
+      "classification": "standalone epoch harness, not native receiver"
+    },
+    {
+      "path": "/home/rrama28/gnss/runs/first_epoch_pvt_20261108_4/first_pvt_epoch",
+      "bytes": 277568,
+      "executable": true,
+      "classification": "standalone epoch harness, not native receiver"
+    }
+  ],
+  "build_caches": [
+    {
+      "path": "/home/rrama28/gnss/runs/native_pvt_confirmation_recheck/build/CMakeCache.txt",
+      "dependency_entries": [
+        "PUGIXML_INCLUDE_DIR:PATH=PUGIXML_INCLUDE_DIR-NOTFOUND",
+        "PUGIXML_LIBRARY:FILEPATH=PUGIXML_LIBRARY-NOTFOUND",
+        "VOLK_GNSSSDR_INCLUDE_DIRS:PATH=VOLK_GNSSSDR_INCLUDE_DIRS-NOTFOUND",
+        "VOLK_GNSSSDR_LIBRARIES:FILEPATH=VOLK_GNSSSDR_LIBRARIES-NOTFOUND",
+        "CMAKE_HOME_DIRECTORY:INTERNAL=/home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source",
+        "PC_PUGIXML_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_FOUND:INTERNAL=",
+        "PC_PUGIXML_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_LIBS:INTERNAL=",
+        "PC_PUGIXML_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_MODULE_NAME:INTERNAL=",
+        "PC_PUGIXML_PREFIX:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_VERSION:INTERNAL=",
+        "PC_PUGIXML_pugixml_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_PREFIX:INTERNAL=",
+        "PC_PUGIXML_pugixml_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_FOUND:INTERNAL=",
+        "PC_VOLK_GNSSSDR_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_MODULE_NAME:INTERNAL=",
+        "PC_VOLK_GNSSSDR_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_VERSION:INTERNAL=",
+        "PUGIXML_INCLUDE_DIR-ADVANCED:INTERNAL=1",
+        "PUGIXML_LIBRARY-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_INCLUDE_DIRS-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_LIBRARIES-ADVANCED:INTERNAL=1"
+      ]
+    },
+    {
+      "path": "/home/rrama28/gnss/runs/native_pvt_confirmation_20261108_1/build/CMakeCache.txt",
+      "dependency_entries": [
+        "PUGIXML_INCLUDE_DIR:PATH=PUGIXML_INCLUDE_DIR-NOTFOUND",
+        "PUGIXML_LIBRARY:FILEPATH=PUGIXML_LIBRARY-NOTFOUND",
+        "VOLK_GNSSSDR_INCLUDE_DIRS:PATH=VOLK_GNSSSDR_INCLUDE_DIRS-NOTFOUND",
+        "VOLK_GNSSSDR_LIBRARIES:FILEPATH=VOLK_GNSSSDR_LIBRARIES-NOTFOUND",
+        "CMAKE_HOME_DIRECTORY:INTERNAL=/home/rrama28/gnss/runs/native_pvt_confirmation_20261108_1/source",
+        "PC_PUGIXML_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_FOUND:INTERNAL=",
+        "PC_PUGIXML_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_LIBS:INTERNAL=",
+        "PC_PUGIXML_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_MODULE_NAME:INTERNAL=",
+        "PC_PUGIXML_PREFIX:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_VERSION:INTERNAL=",
+        "PC_PUGIXML_pugixml_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_PREFIX:INTERNAL=",
+        "PC_PUGIXML_pugixml_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_FOUND:INTERNAL=",
+        "PC_VOLK_GNSSSDR_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_MODULE_NAME:INTERNAL=",
+        "PC_VOLK_GNSSSDR_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_VERSION:INTERNAL=",
+        "PUGIXML_INCLUDE_DIR-ADVANCED:INTERNAL=1",
+        "PUGIXML_LIBRARY-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_INCLUDE_DIRS-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_LIBRARIES-ADVANCED:INTERNAL=1"
+      ]
+    },
+    {
+      "path": "/home/rrama28/src/gnss-sdr-0.0.16/build/CMakeCache.txt",
+      "dependency_entries": [
+        "PUGIXML_INCLUDE_DIR:PATH=PUGIXML_INCLUDE_DIR-NOTFOUND",
+        "PUGIXML_LIBRARY:FILEPATH=PUGIXML_LIBRARY-NOTFOUND",
+        "Protobuf_INCLUDE_DIR:PATH=Protobuf_INCLUDE_DIR-NOTFOUND",
+        "Protobuf_LIBRARY_DEBUG:FILEPATH=Protobuf_LIBRARY_DEBUG-NOTFOUND",
+        "Protobuf_LIBRARY_RELEASE:FILEPATH=Protobuf_LIBRARY_RELEASE-NOTFOUND",
+        "Protobuf_LITE_LIBRARY_DEBUG:FILEPATH=Protobuf_LITE_LIBRARY_DEBUG-NOTFOUND",
+        "Protobuf_LITE_LIBRARY_RELEASE:FILEPATH=Protobuf_LITE_LIBRARY_RELEASE-NOTFOUND",
+        "Protobuf_PROTOC_EXECUTABLE:FILEPATH=Protobuf_PROTOC_EXECUTABLE-NOTFOUND",
+        "Protobuf_PROTOC_LIBRARY_DEBUG:FILEPATH=Protobuf_PROTOC_LIBRARY_DEBUG-NOTFOUND",
+        "Protobuf_PROTOC_LIBRARY_RELEASE:FILEPATH=Protobuf_PROTOC_LIBRARY_RELEASE-NOTFOUND",
+        "VOLK_GNSSSDR_INCLUDE_DIRS:PATH=VOLK_GNSSSDR_INCLUDE_DIRS-NOTFOUND",
+        "VOLK_GNSSSDR_LIBRARIES:FILEPATH=VOLK_GNSSSDR_LIBRARIES-NOTFOUND",
+        "CMAKE_HOME_DIRECTORY:INTERNAL=/home/rrama28/src/gnss-sdr-0.0.16",
+        "PC_PUGIXML_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_FOUND:INTERNAL=",
+        "PC_PUGIXML_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_LIBS:INTERNAL=",
+        "PC_PUGIXML_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_MODULE_NAME:INTERNAL=",
+        "PC_PUGIXML_PREFIX:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_PUGIXML_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_L:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_PUGIXML_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_PUGIXML_VERSION:INTERNAL=",
+        "PC_PUGIXML_pugixml_INCLUDEDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_LIBDIR:INTERNAL=",
+        "PC_PUGIXML_pugixml_PREFIX:INTERNAL=",
+        "PC_PUGIXML_pugixml_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_FOUND:INTERNAL=",
+        "PC_VOLK_GNSSSDR_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_MODULE_NAME:INTERNAL=",
+        "PC_VOLK_GNSSSDR_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_I:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_CFLAGS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_L:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_OTHER:INTERNAL=",
+        "PC_VOLK_GNSSSDR_STATIC_LIBS_PATHS:INTERNAL=",
+        "PC_VOLK_GNSSSDR_VERSION:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_INCLUDEDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_LIBDIR:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_PREFIX:INTERNAL=",
+        "PC_VOLK_GNSSSDR_volk_gnsssdr_VERSION:INTERNAL=",
+        "PUGIXML_INCLUDE_DIR-ADVANCED:INTERNAL=1",
+        "PUGIXML_LIBRARY-ADVANCED:INTERNAL=1",
+        "Protobuf_INCLUDE_DIR-ADVANCED:INTERNAL=1",
+        "Protobuf_LIBRARY_DEBUG-ADVANCED:INTERNAL=1",
+        "Protobuf_LIBRARY_RELEASE-ADVANCED:INTERNAL=1",
+        "Protobuf_LITE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1",
+        "Protobuf_LITE_LIBRARY_RELEASE-ADVANCED:INTERNAL=1",
+        "Protobuf_PROTOC_EXECUTABLE-ADVANCED:INTERNAL=1",
+        "Protobuf_PROTOC_LIBRARY_DEBUG-ADVANCED:INTERNAL=1",
+        "Protobuf_PROTOC_LIBRARY_RELEASE-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_INCLUDE_DIRS-ADVANCED:INTERNAL=1",
+        "VOLK_GNSSSDR_LIBRARIES-ADVANCED:INTERNAL=1"
+      ]
+    },
+    {
+      "path": "/home/rrama28/src/gnss-sdr-0.0.16/build/gpstk-8.0.0/CMakeCache.txt",
+      "dependency_entries": [
+        "CMAKE_HOME_DIRECTORY:INTERNAL=/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/gpstk-8.0.0"
+      ]
+    }
+  ],
+  "dependency_archives": [],
+  "cached_dependency_source_directories": [
+    {
+      "path": "/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/pugixml",
+      "exists": true,
+      "regular_files": []
+    },
+    {
+      "path": "/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/protobuf",
+      "exists": true,
+      "regular_files": []
+    }
+  ],
+  "stock_receiver_sha256": "92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee",
+  "receiver_executed": false,
+  "build_attempted": false,
+  "install_or_download_attempted": false
+}

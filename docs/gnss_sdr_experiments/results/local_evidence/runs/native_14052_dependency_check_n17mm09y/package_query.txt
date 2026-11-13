@@ -1,0 +1,7 @@
+gnss-sdr 0.0.16-1 amd64
+libprotobuf23 3.12.4-1ubuntu7.22.04.6 amd64
+libpugixml1v5 1.12.1-1 amd64
+dpkg-query: no packages found matching libpugixml-dev
+dpkg-query: no packages found matching libprotobuf-dev
+dpkg-query: no packages found matching protobuf-compiler
+dpkg-query: no packages found matching libprotoc23

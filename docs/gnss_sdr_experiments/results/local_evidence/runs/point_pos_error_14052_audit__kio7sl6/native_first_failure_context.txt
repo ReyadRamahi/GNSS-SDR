@@ -1,0 +1,18 @@
+451: I1113 05:28:30.679646 132453 gnss_flowgraph.cc:1804] Channel 0 in state 2
+452: I1113 05:28:30.779739 132453 gnss_flowgraph.cc:1804] Channel 1 in state 2
+453: I1113 05:28:30.779759 132453 gnss_flowgraph.cc:1804] Channel 2 in state 2
+454: I1113 05:28:30.779772 132453 gnss_flowgraph.cc:1804] Channel 3 in state 2
+455: I1113 05:28:30.779784 132453 gnss_flowgraph.cc:1804] Channel 0 in state 2
+456: I1113 05:28:30.809580 132501 gps_l1_ca_telemetry_decoder_gs.cc:493] Preamble detection for GPS L1 satellite GPS PRN 12 (Block IIR-M)
+457: I1113 05:28:30.838124 132501 gps_l1_ca_telemetry_decoder_gs.cc:493] Preamble detection for GPS L1 satellite GPS PRN 12 (Block IIR-M)
+458: I1113 05:28:30.838177 132501 gps_l1_ca_telemetry_decoder_gs.cc:504]  Frame sync SAT GPS PRN 12 (Block IIR-M)
+459: I1113 05:28:30.838543 132498 gps_l1_ca_telemetry_decoder_gs.cc:516] Preamble received for SAT GPS PRN 21 (Block IIR)d_sample_counter=1200
+460: I1113 05:28:30.838907 132495 gps_l1_ca_telemetry_decoder_gs.cc:516] Preamble received for SAT GPS PRN 22 (Block IIR)d_sample_counter=1407
+461: I1113 05:28:30.839270 132504 gps_l1_ca_telemetry_decoder_gs.cc:516] Preamble received for SAT GPS PRN 05 (Block IIR-M)d_sample_counter=1500
+462: I1113 05:28:30.839432 132506 rtklib_pvt_gs.cc:1155] Ephemeris record has arrived from SAT ID 5 (Block IIR-M)inserted with Toe=14400 and GPS Week=396
+463: I1113 05:28:30.854101 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.00: point pos error ()
+464: I1113 05:28:30.854874 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.02: point pos error ()
+465: I1113 05:28:30.856361 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.04: point pos error ()
+466: I1113 05:28:30.857988 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.06: point pos error ()
+467: I1113 05:28:30.859530 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.08: point pos error ()
+468: I1113 05:28:30.861243 132506 rtklib_solver.cc:898] RTKLIB rtkpos error: 03:54:12.10: point pos error ()

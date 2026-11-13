@@ -1,0 +1,51 @@
+{
+  "before": {
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat": "3762516540a8a4b048d580944def3c93b32633a956f12e6160f1767262c12390",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/config_used.conf": "9cf36c4514817051d59a24e76a38554f4510494957fcaeaf4639c77762a1d1c1",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_ephemeris.xml": "5fd2f00e68c5c44aaa548cf688856ae1b5f4612380fb4df4c6afb19bf5086c9e",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_iono.xml": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_utc_model.xml": "6eec19147b051aa0f6e6ac370a2eb01b71ac4cc4d2ab9a4a74b4a66229645baf",
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml": "ed9cef23104a34946e9953bb2fcd02354f0bc0a64e600a563077b9579f929ddf",
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da",
+    "/usr/bin/gnss-sdr": "92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee",
+    "/home/rrama28/gnss/runs/first_epoch_pvt_20261108_4/first_pvt_epoch": "9dba5cb57eb0d22f1340c526ed1e3b97b71e92389c7cb88f4a81e0447c510c16"
+  },
+  "after": {
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat": "3762516540a8a4b048d580944def3c93b32633a956f12e6160f1767262c12390",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/config_used.conf": "9cf36c4514817051d59a24e76a38554f4510494957fcaeaf4639c77762a1d1c1",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_ephemeris.xml": "5fd2f00e68c5c44aaa548cf688856ae1b5f4612380fb4df4c6afb19bf5086c9e",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_iono.xml": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da",
+    "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/gps_utc_model.xml": "6eec19147b051aa0f6e6ac370a2eb01b71ac4cc4d2ab9a4a74b4a66229645baf",
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml": "ed9cef23104a34946e9953bb2fcd02354f0bc0a64e600a563077b9579f929ddf",
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da",
+    "/usr/bin/gnss-sdr": "92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee",
+    "/home/rrama28/gnss/runs/first_epoch_pvt_20261108_4/first_pvt_epoch": "9dba5cb57eb0d22f1340c526ed1e3b97b71e92389c7cb88f4a81e0447c510c16"
+  },
+  "unchanged": true,
+  "comparison_to_prior_stock_manifest_including_IQ": {
+    "/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf": {
+      "expected_sha256": "9cf36c4514817051d59a24e76a38554f4510494957fcaeaf4639c77762a1d1c1",
+      "current_sha256": "9cf36c4514817051d59a24e76a38554f4510494957fcaeaf4639c77762a1d1c1"
+    },
+    "/usr/bin/gnss-sdr": {
+      "expected_sha256": "92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee",
+      "current_sha256": "92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee"
+    },
+    "/home/rrama28/gnss/runs/rx1h_baseline_20261108_035309_7qbMJ8/rx1h.cf32": {
+      "expected_sha256": "00d936f9771ed9d366372cc037b085d84ce65db9fa95474e2bf2e22964946046",
+      "current_sha256": "00d936f9771ed9d366372cc037b085d84ce65db9fa95474e2bf2e22964946046"
+    },
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml": {
+      "expected_sha256": "ed9cef23104a34946e9953bb2fcd02354f0bc0a64e600a563077b9579f929ddf",
+      "current_sha256": "ed9cef23104a34946e9953bb2fcd02354f0bc0a64e600a563077b9579f929ddf"
+    },
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml": {
+      "expected_sha256": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da",
+      "current_sha256": "4680d26ddd973a84ed262260218e880a8db1087eb297da083225b4aaa84379da"
+    },
+    "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_utc_model.xml": {
+      "expected_sha256": "6eec19147b051aa0f6e6ac370a2eb01b71ac4cc4d2ab9a4a74b4a66229645baf",
+      "current_sha256": "6eec19147b051aa0f6e6ac370a2eb01b71ac4cc4d2ab9a4a74b4a66229645baf"
+    }
+  }
+}

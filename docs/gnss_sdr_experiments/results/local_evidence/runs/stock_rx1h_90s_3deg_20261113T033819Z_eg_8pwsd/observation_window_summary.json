@@ -1,0 +1,31 @@
+{
+  "record_format": "4 channels * 7 little-endian float64 values per epoch",
+  "field_order": [
+    "RX_time_s",
+    "interp_TOW_s",
+    "Carrier_Doppler_hz",
+    "Carrier_phase_cycles",
+    "Pseudorange_m",
+    "PRN",
+    "Flag_valid_pseudorange"
+  ],
+  "records": 4485,
+  "bytes": 1004640,
+  "valid_count_distribution": {
+    "0": 851,
+    "1": 299,
+    "3": 900,
+    "4": 2435
+  },
+  "four_valid_segments": [
+    {
+      "first_index": 2050,
+      "last_index": 4484,
+      "first_tow_s": 14052.0,
+      "last_tow_s": 14100.68,
+      "epochs": 2435
+    }
+  ],
+  "every_four_valid_epoch_has_matching_native_point_position_error": true,
+  "limitation": "Valid pseudorange flags do not establish acceptance by all PVT measurement filters; native used-satellite counts and detailed rejection reasons are not logged."
+}

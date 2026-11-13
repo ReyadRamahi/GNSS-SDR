@@ -1,0 +1,25 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+RF Channels: 1
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Configuration error in Tracking_1C block: implementation GPS_L1_CA_DLL_PLL_C_Aid_Tracking not available.
+Processing file /home/rrama28/gnss/captures/lime_iq_rx2_corrected.dat, which contains 46889981 samples (375119848 bytes)
+GNSS signal recorded time to be processed: 23.445 [s]
+E0519 05:11:26.431231 153262 gnss_flowgraph.cc:709] Can't connect channel 0 internally
+Unable to connect flowgraph
+It seems that your configuration file is not well defined.
+A hint to fix your configuration file:
+ * Check your configuration for Channel0 inner blocks.
+   Acquisition blocks documentation at https://gnss-sdr.org/docs/sp-blocks/acquisition/
+   Tracking blocks documentation at https://gnss-sdr.org/docs/sp-blocks/tracking/
+   Telemetry Decoder blocks documentation at https://gnss-sdr.org/docs/sp-blocks/telemetry-decoder/
+Total GNSS-SDR run time: 0.000744741 [seconds]
+GNSS-SDR program ended.

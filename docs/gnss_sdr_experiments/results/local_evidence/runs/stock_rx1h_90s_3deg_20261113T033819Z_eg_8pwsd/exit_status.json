@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-11-13T05:28:27.057524+00:00",
+  "finished_utc": "2026-11-13T05:28:34.692131+00:00",
+  "elapsed_seconds": 7.634608359076083,
+  "exit_status": 0,
+  "command": [
+    "/usr/bin/timeout",
+    "--signal=INT",
+    "--kill-after=10s",
+    "180s",
+    "/usr/bin/gnss-sdr",
+    "--config_file=/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf",
+    "--log_dir=/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal"
+  ],
+  "cwd": "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd"
+}

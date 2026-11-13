@@ -1,0 +1,30 @@
+READ-ONLY HOST DEPENDENCY CHECK
+No CMake configuration, GNSS-SDR compilation or receiver replay was started.
+Host: hft02
+Checked UTC: 2026-11-13T05:59:41.926098+00:00
+Search roots: /home/rrama28, /usr/local, /opt, /tmp
+
+PROBE pugixml exit=1
+<stdin>:1:10: fatal error: pugixml.hpp: No such file or directory
+compilation terminated.
+
+PROBE pugiconfig exit=1
+<stdin>:1:10: fatal error: pugiconfig.hpp: No such file or directory
+compilation terminated.
+
+PROBE protobuf_message exit=1
+<stdin>:1:10: fatal error: google/protobuf/message.h: No such file or directory
+compilation terminated.
+
+PROBE protobuf_common exit=1
+<stdin>:1:10: fatal error: google/protobuf/stubs/common.h: No such file or directory
+compilation terminated.
+
+protoc on PATH: None
+Usable native diagnostic binary found: false
+Existing cached dependency sources:
+/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/pugixml: 0 regular files
+/home/rrama28/src/gnss-sdr-0.0.16/build/thirdparty/protobuf: 0 regular files
+
+Stock executable unchanged: SHA-256 matches previous stock baseline.
+STOP: no source patches, build or replay performed.

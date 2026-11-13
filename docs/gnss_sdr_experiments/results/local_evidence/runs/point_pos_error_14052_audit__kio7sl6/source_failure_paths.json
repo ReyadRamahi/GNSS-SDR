@@ -1,0 +1,39 @@
+[
+  {
+    "condition": "rescode returns nv < NX",
+    "diagnostic_written_to": "msg_aux",
+    "text": "lack of valid sats ns=%d",
+    "empty_caller_reason_in_local_source": true,
+    "note": "Format argument is nv (equations), despite label ns; filtering stage and retained satellites are not recorded in stock artifacts."
+  },
+  {
+    "condition": "lsq returns nonzero info",
+    "diagnostic_written_to": "msg_aux",
+    "text": "lsq error info=%d",
+    "empty_caller_reason_in_local_source": true
+  },
+  {
+    "condition": "iteration limit MAXITR exhausted",
+    "diagnostic_written_to": "msg_aux",
+    "text": "iteration divergent i=%d",
+    "empty_caller_reason_in_local_source": true
+  },
+  {
+    "condition": "pntpos n <= 0",
+    "diagnostic_written_to": "caller msg",
+    "text": "no observation data",
+    "empty_caller_reason_in_local_source": false
+  },
+  {
+    "condition": "valsol chi-square check fails",
+    "diagnostic_written_to": "caller msg",
+    "text": "chi-square error nv=%d vv=%.1f cs=%.1f",
+    "empty_caller_reason_in_local_source": false
+  },
+  {
+    "condition": "valsol GDOP check fails",
+    "diagnostic_written_to": "caller msg",
+    "text": "gdop error nv=%d gdop=%.1f",
+    "empty_caller_reason_in_local_source": false
+  }
+]

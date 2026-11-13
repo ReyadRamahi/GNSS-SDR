@@ -1,0 +1,42 @@
+--- a/rtklib_pntpos.cc
++++ b/rtklib_pntpos.cc
+@@ -34,6 +34,7 @@
+ #include "rtklib_ionex.h"
+ #include "rtklib_sbas.h"
+ #include <cstring>
++#include <cstdio>
+ 
+ /* pseudorange measurement error variance ------------------------------------*/
+ double varerr(const prcopt_t *opt, double el, int sys)
+@@ -431,6 +432,7 @@
+     dtr = x[3];
+ 
+     ecef2pos(rr, pos);
++    std::fprintf(stderr, "EPOCH iter=%d x=%.9f %.9f %.9f clock_m=%.9f\n", iter, rr[0], rr[1], rr[2], dtr);
+ 
+     for (i = *ns = 0; i < n && i < MAXOBS; i++)
+         {
+@@ -457,6 +459,7 @@
+                     continue;
+                 }
+             double elaux = satazel(pos, e, azel + i * 2);
++            std::fprintf(stderr, "FILTER iter=%d sat=%d el_deg=%.9f mask_deg=%.9f\n", iter, obs[i].sat, elaux*R2D, opt->elmin*R2D);
+             if (elaux < opt->elmin)
+                 {
+                     trace(4, "satazel error. el = %lf , elmin = %lf\n", elaux, opt->elmin);
+@@ -636,6 +639,7 @@
+             /* pseudorange residuals */
+             nv = rescode(i, obs, n, rs, dts, vare, svh, nav, x, opt, v, H, var, azel, vsat, resp, &ns);
+ 
++            std::fprintf(stderr, "COUNT iter=%d ns=%d nv=%d required=%d\n", i, ns, nv, NX);
+             if (nv < NX)
+                 {
+                     std::snprintf(msg_aux, sizeof(msg_aux), "lack of valid sats ns=%d", nv);
+@@ -704,6 +708,7 @@
+     free(v);
+     free(H);
+     free(var);
++    std::fprintf(stderr, "ESTPOS failure iter=%d detail=%s\n", i, msg_aux);
+     msg = msg_aux;
+ 
+     return 0;

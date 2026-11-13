@@ -1,0 +1,34 @@
+{
+  "baseline": [
+    {
+      "patch": "error_copy_only.patch",
+      "output": "patching file src/algorithms/libs/rtklib/rtklib_pntpos.cc\n"
+    },
+    {
+      "patch": "baseline_native_logging.patch",
+      "output": "patching file src/algorithms/libs/rtklib/rtklib_pntpos.cc\n"
+    },
+    {
+      "patch": "boundary_logging.patch",
+      "output": "patching file src/algorithms/PVT/libs/rtklib_solver.cc\n"
+    }
+  ],
+  "candidate": [
+    {
+      "patch": "error_copy_only.patch",
+      "output": "patching file src/algorithms/libs/rtklib/rtklib_pntpos.cc\n"
+    },
+    {
+      "patch": "provisional_position_only.patch",
+      "output": "patching file src/algorithms/libs/rtklib/rtklib_pntpos.cc\n"
+    },
+    {
+      "patch": "candidate_native_logging.patch",
+      "output": "patching file src/algorithms/libs/rtklib/rtklib_pntpos.cc\n"
+    },
+    {
+      "patch": "boundary_logging.patch",
+      "output": "patching file src/algorithms/PVT/libs/rtklib_solver.cc\n"
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/libs/rtklib/rtklib_rtkpos.cc
+498: void errmsg(rtk_t *rtk, const char *format, ...)
+499: {
+500:     char buff[256];
+501:     char tstr[32];
+502:     int n;
+503:     va_list ap;
+504:     time2str(rtk->sol.time, tstr, 2);
+505:     n = std::snprintf(buff, sizeof(buff), "%s: ", tstr + 11);
+506:     va_start(ap, format);
+507:     n += vsprintf(buff + n, format, ap);
+508:     va_end(ap);
+509:     n = n < MAXERRMSG - rtk->neb ? n : MAXERRMSG - rtk->neb;
+510:     memcpy(rtk->errbuf + rtk->neb, buff, n);
+511:     rtk->neb += n;
+512:     trace(2, "%s", buff);
+513: }
+
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/libs/rtklib/rtklib_rtkpos.cc
+2765: int rtkpos(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
+2766: {
+2767:     prcopt_t *opt = &rtk->opt;
+2768:     sol_t solb = {{0, 0}, {}, {}, {}, '0', '0', '0', 0.0, 0.0, 0.0};
+2769:     gtime_t time;
+2770:     int i;
+2771:     int nu;
+2772:     int nr;
+2773:     char msg[128] = "";
+2774: 
+2775:     trace(3, "rtkpos  : time=%s n=%d\n", time_str(obs[0].time, 3), n);
+2776:     trace(4, "obs=\n");
+2777:     traceobs(4, obs, n);
+2778:     /*trace(5,"nav=\n"); tracenav(5,nav);*/
+2779: 
+2780:     /* set base station position */
+2781:     if (opt->refpos <= POSOPT_RINEX && opt->mode != PMODE_SINGLE &&
+2782:         opt->mode != PMODE_MOVEB)
+2783:         {
+2784:             for (i = 0; i < 6; i++)
+2785:                 {
+2786:                     rtk->rb[i] = i < 3 ? opt->rb[i] : 0.0;
+2787:                 }
+2788:         }
+2789:     /* count rover/base station observations */
+2790:     for (nu = 0; nu < n && obs[nu].rcv == 1; nu++)
+2791:         {
+2792:         }
+2793:     for (nr = 0; nu + nr < n && obs[nu + nr].rcv == 2; nr++)
+2794:         {
+2795:         }
+2796: 
+2797:     time = rtk->sol.time; /* previous epoch */
+2798: 
+2799:     /* rover position by single point positioning */
+2800:     if (!pntpos(obs, nu, nav, &rtk->opt, &rtk->sol, nullptr, rtk->ssat, msg))
+2801:         {
+2802:             errmsg(rtk, "point pos error (%s)\n", msg);
+2803:             if (!rtk->opt.dynamics)
+2804:                 {
+2805:                     outsolstat(rtk);
+2806:                     return 0;
+2807:                 }
+
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/libs/rtklib/rtklib_pntpos.cc
+563: /* validate solution ---------------------------------------------------------*/
+564: int valsol(const double *azel, const int *vsat, int n,
+565:     const prcopt_t *opt, const double *v, int nv, int nx,
+566:     char *msg)
+567: {
+568:     double azels[MAXOBS * 2] = {0};
+569:     double dop[4];
+570:     double vv;
+571:     int i;
+572:     int ns;
+573: 
+574:     trace(3, "valsol  : n=%d nv=%d\n", n, nv);
+575: 
+576:     /* chi-square validation of residuals */
+577:     vv = dot(v, v, nv);
+578:     if (nv > nx && vv > CHISQR[nv - nx - 1])
+579:         {
+580:             std::snprintf(msg, MAXSOLBUF, "chi-square error nv=%d vv=%.1f cs=%.1f", nv, vv, CHISQR[nv - nx - 1]);
+581:             return 0;
+582:         }
+583:     /* large gdop check */
+584:     for (i = ns = 0; i < n; i++)
+585:         {
+586:             if (!vsat[i])
+587:                 {
+588:                     continue;
+589:                 }
+590:             azels[ns * 2] = azel[i * 2];
+591:             azels[1 + ns * 2] = azel[1 + i * 2];
+592:             ns++;
+593:         }
+594:     dops(ns, azels, opt->elmin, dop);
+595:     if (dop[0] <= 0.0 || dop[0] > opt->maxgdop)
+596:         {
+597:             std::snprintf(msg, MAXSOLBUF, "gdop error nv=%d gdop=%.1f", nv, dop[0]);
+598:             return 0;
+599:         }
+600:     return 1;
+601: }
+602: 
+603: 
+604: /* estimate receiver position ------------------------------------------------*/
+605: int estpos(const obsd_t *obs, int n, const double *rs, const double *dts,
+606:     const double *vare, const int *svh, const nav_t *nav,
+607:     const prcopt_t *opt, sol_t *sol, double *azel, int *vsat,
+608:     double *resp, char *msg)
+609: {
+610:     double x[NX] = {0};
+611:     double dx[NX];
+612:     double Q[NX * NX];
+613:     double *v;
+614:     double *H;
+615:     double *var;
+616:     double sig;
+617:     int i;
+618:     int j;
+619:     int k;
+620:     int info;
+621:     int stat;
+622:     int nv;
+623:     int ns;
+624:     char msg_aux[128];
+625: 
+626:     trace(3, "estpos  : n=%d\n", n);
+627: 
+628:     v = mat(n + 4, 1);
+629:     H = mat(NX, n + 4);
+630:     var = mat(n + 4, 1);
+631: 
+632:     for (i = 0; i < 3; i++)
+633:         {
+634:             x[i] = sol->rr[i];
+635:         }
+636: 
+637:     for (i = 0; i < MAXITR; i++)
+638:         {
+639:             /* pseudorange residuals */
+640:             nv = rescode(i, obs, n, rs, dts, vare, svh, nav, x, opt, v, H, var, azel, vsat, resp, &ns);
+641: 
+642:             std::fprintf(stderr, "COUNT iter=%d ns=%d nv=%d required=%d\n", i, ns, nv, NX);
+643:             if (nv < NX)
+644:                 {
+645:                     std::snprintf(msg_aux, sizeof(msg_aux), "lack of valid sats ns=%d", nv);
+646:                     break;
+647:                 }
+648:             /* weight by variance */
+649:             for (j = 0; j < nv; j++)
+650:                 {
+651:                     sig = sqrt(var[j]);
+652:                     v[j] /= sig;
+653:                     for (k = 0; k < NX; k++)
+654:                         {
+655:                             H[k + j * NX] /= sig;
+656:                         }
+657:                 }
+658:             /* least square estimation */
+659:             if ((info = lsq(H, v, NX, nv, dx, Q)))
+660:                 {
+661:                     std::snprintf(msg_aux, sizeof(msg_aux), "lsq error info=%d", info);
+662:                     break;
+663:                 }
+664:             for (j = 0; j < NX; j++)
+665:                 {
+666:                     x[j] += dx[j];
+667:                 }
+668: 
+669:             if (norm_rtk(dx, NX) < 1e-4)
+670:                 {
+671:                     sol->type = 0;
+672:                     sol->time = timeadd(obs[0].time, -x[3] / SPEED_OF_LIGHT_M_S);
+673:                     sol->dtr[0] = x[3] / SPEED_OF_LIGHT_M_S; /* receiver clock bias (s) */
+674:                     sol->dtr[1] = x[4] / SPEED_OF_LIGHT_M_S; /* glo-gps time offset (s) */
+675:                     sol->dtr[2] = x[5] / SPEED_OF_LIGHT_M_S; /* gal-gps time offset (s) */
+676:                     sol->dtr[3] = x[6] / SPEED_OF_LIGHT_M_S; /* bds-gps time offset (s) */
+677:                     for (j = 0; j < 6; j++)
+678:                         {
+679:                             sol->rr[j] = j < 3 ? x[j] : 0.0;
+680:                         }
+681:                     for (j = 0; j < 3; j++)
+682:                         {
+683:                             sol->qr[j] = static_cast<float>(Q[j + j * NX]);
+684:                         }
+685:                     sol->qr[3] = static_cast<float>(Q[1]);      /* cov xy */
+686:                     sol->qr[4] = static_cast<float>(Q[2 + NX]); /* cov yz */
+687:                     sol->qr[5] = static_cast<float>(Q[2]);      /* cov zx */
+688:                     sol->ns = static_cast<unsigned char>(ns);
+689:                     sol->age = sol->ratio = 0.0;
+690: 
+691:                     /* validate solution */
+692:                     if ((stat = valsol(azel, vsat, n, opt, v, nv, NX, msg)))
+693:                         {
+694:                             sol->stat = opt->sateph == EPHOPT_SBAS ? SOLQ_SBAS : SOLQ_SINGLE;
+695:                         }
+696:                     free(v);
+697:                     free(H);
+698:                     free(var);
+699:                     msg = msg_aux;
+700:                     return stat;
+701:                 }
+702:         }
+703:     if (i >= MAXITR)
+704:         {
+705:             std::snprintf(msg_aux, sizeof(msg_aux), "iteration divergent i=%d", i);
+706:         }
+707: 
+708:     free(v);
+709:     free(H);
+710:     free(var);
+711:     std::fprintf(stderr, "ESTPOS failure iter=%d detail=%s\n", i, msg_aux);
+712:     msg = msg_aux;
+713: 
+714:     return 0;
+
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/libs/rtklib/rtklib_pntpos.cc
+984: int pntpos(const obsd_t *obs, int n, const nav_t *nav,
+985:     const prcopt_t *opt, sol_t *sol, double *azel, ssat_t *ssat,
+986:     char *msg)
+987: {
+988:     prcopt_t opt_ = *opt;
+989:     double *rs;
+990:     double *dts;
+991:     double *var;
+992:     double *azel_;
+993:     double *resp;
+994:     int i;
+995:     int stat;
+996:     int vsat[MAXOBS] = {0};
+997:     int svh[MAXOBS];
+998: 
+999:     sol->stat = SOLQ_NONE;
+1000: 
+1001:     if (n <= 0)
+1002:         {
+1003:             std::strncpy(msg, "no observation data", 20);
+1004:             return 0;
+1005:         }
+1006: 
+1007:     trace(3, "pntpos  : tobs=%s n=%d\n", time_str(obs[0].time, 3), n);
+1008: 
+1009:     sol->time = obs[0].time;
+1010:     msg[0] = '\0';
+1011: 
+1012:     rs = mat(6, n);
+1013:     dts = mat(2, n);
+1014:     var = mat(1, n);
+1015:     azel_ = zeros(2, n);
+1016:     resp = mat(1, n);
+1017: 
+1018:     if (opt_.mode != PMODE_SINGLE)
+1019:         { /* for precise positioning */
+1020: #if 0
+1021:             opt_.sateph  = EPHOPT_BRDC;
+1022: #endif
+1023:             opt_.ionoopt = IONOOPT_BRDC;
+1024:             opt_.tropopt = TROPOPT_SAAS;
+1025:         }
+1026:     /* satellite positions, velocities and clocks */
+1027:     satposs(sol->time, obs, n, nav, opt_.sateph, rs, dts, var, svh);
+1028: 
+1029:     /* estimate receiver position with pseudorange */
+1030:     stat = estpos(obs, n, rs, dts, var, svh, nav, &opt_, sol, azel_, vsat, resp, msg);
+1031: 
+1032:     /* raim fde */
+1033:     if (!stat && n >= 6 && opt->posopt[4])
+1034:         {
+1035:             stat = raim_fde(obs, n, rs, dts, var, svh, nav, &opt_, sol, azel_, vsat, resp, msg);
+1036:         }
+1037:     /* estimate receiver velocity with doppler */
+1038:     if (stat)
+1039:         {
+1040:             estvel(obs, n, rs, dts, nav, &opt_, sol, azel_, vsat);
+1041:         }
+
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/PVT/libs/rtklib_solver.cc
+786:     // **********************************************************************
+787:     // ****** SOLVE PVT******************************************************
+788:     // **********************************************************************
+789: 
+790:     this->set_valid_position(false);
+791:     if ((valid_obs + glo_valid_obs) > 3)
+792:         {
+793:             int result = 0;
+794:             nav_t nav_data{};
+795:             nav_data.eph = eph_data.data();
+796:             nav_data.geph = geph_data.data();
+797:             nav_data.n = valid_obs;
+798:             nav_data.ng = glo_valid_obs;
+
+FILE /home/rrama28/gnss/runs/native_pvt_confirmation_recheck/source/src/algorithms/PVT/libs/rtklib_solver.cc
+931:             result = rtkpos(&d_rtk, d_obs_data.data(), valid_obs + glo_valid_obs, &nav_data);
+932: 
+933:             if (result == 0)
+934:                 {
+935:                     LOG(INFO) << "RTKLIB rtkpos error: " << d_rtk.errbuf;
+936:                     d_rtk.neb = 0;                 // clear error buffer to avoid repeating the error message
+937:                     this->set_time_offset_s(0.0);  // reset rx time estimation
+938:                     this->set_num_valid_observations(0);

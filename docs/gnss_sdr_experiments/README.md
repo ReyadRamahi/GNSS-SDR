@@ -9,7 +9,11 @@ Start here. This folder now groups the GNSS-SDR GPS L1 C/A work by purpose:
 - which configs and scripts were used
 - which assist XML and logs back up the conclusions
 
-## Current Bottom Line
+## Latest November 2026 findings
+
+Start with [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md) and the [exact TOW 14052 candidate report](RX1H_14052_BOOTSTRAP_RESULTS.md). The saved recording supports NAV decoding; native PVT success and external-reference lock remain unverified. The standalone initialization candidate passes the saved 3° epoch window but still depends on experimental PRN21 assistance. Raw recordings and complete build inputs remain local on hft02.
+
+## May 2026 observations (historical)
 
 - Local F9T XML refresh on `hft02` works.
 - GNSS-SDR loads the assistance XML successfully.

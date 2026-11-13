@@ -1,0 +1,47 @@
+{
+  "index_zero_based": 2050,
+  "byte_offset": 459200,
+  "receiver_tow_s": 14052.0,
+  "channels": [
+    {
+      "channel": 0,
+      "RX_time_s": 14052.0,
+      "interp_TOW_s": 14051.996768176508,
+      "Carrier_Doppler_hz": 3961.240856996651,
+      "Carrier_phase_cycles": -118262.4918018141,
+      "Pseudorange_m": 968876.30816882,
+      "PRN": 5.0,
+      "Flag_valid_pseudorange": 1.0
+    },
+    {
+      "channel": 1,
+      "RX_time_s": 14052.0,
+      "interp_TOW_s": 14052.011901261272,
+      "Carrier_Doppler_hz": 1005.7397642385055,
+      "Carrier_phase_cycles": -8530.775128655121,
+      "Pseudorange_m": -3567908.370005769,
+      "PRN": 12.0,
+      "Flag_valid_pseudorange": 1.0
+    },
+    {
+      "channel": 2,
+      "RX_time_s": 14052.0,
+      "interp_TOW_s": 14052.006086997626,
+      "Carrier_Doppler_hz": 3456.1105946364896,
+      "Carrier_phase_cycles": -82367.26570103715,
+      "Pseudorange_m": -1824835.9802434312,
+      "PRN": 21.0,
+      "Flag_valid_pseudorange": 1.0
+    },
+    {
+      "channel": 3,
+      "RX_time_s": 14052.0,
+      "interp_TOW_s": 14052.001575158074,
+      "Carrier_Doppler_hz": -3464.494974370662,
+      "Carrier_phase_cycles": 96761.12438976864,
+      "Pseudorange_m": -472220.51089235547,
+      "PRN": 22.0,
+      "Flag_valid_pseudorange": 1.0
+    }
+  ]
+}

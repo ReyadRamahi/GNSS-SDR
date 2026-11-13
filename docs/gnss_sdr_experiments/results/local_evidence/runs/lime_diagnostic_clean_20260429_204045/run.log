@@ -1,0 +1,89 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+OsmoSdr arguments: soapy=0,driver=lime,serial=0009061C01502715,antenna=LNAW,LNA=20,TIA=9,PGA=0,bandwidth=2000000
+gr-osmosdr 0.2.0.0 (0.2.0) gnuradio 3.10.1.1
+built-in source types: file fcd rtl rtl_tcp uhd hackrf bladerf rfspace airspy airspyhf soapy redpitaya freesrp 
+[1m[31m[ERROR] SoapySDR::loadModule(/usr/local/lib/SoapySDR/modules0.8/libLMS7Support.so)
+  duplicate entry for lime (/usr/lib/x86_64-linux-gnu/SoapySDR/modules0.8/libLMS7Support.so)[0m
+[INFO] Make connection: 'LimeSDR-USB [USB 3.0] 9061C01502715'
+[1m[33m[WARNING] Gateware version mismatch!
+  Expected gateware version 2, revision 23
+  But found version 2, revision 12
+  Follow the FW and FPGA upgrade instructions:
+  http://wiki.myriadrf.org/Lime_Suite#Flashing_images
+  Or run update on the command line: LimeUtil --update
+[0m
+[INFO] Reference clock 30.72 MHz
+[INFO] Device name: LimeSDR-USB
+[INFO] Reference: 30.72 MHz
+[INFO] LMS7002M register cache: Disabled
+[INFO] RX LPF configured
+[INFO] Rx calibration finished
+Actual RX Rate: 2e+06 [SPS]...
+Actual RX Freq: 1.57542e+09 [Hz]...
+PLL Frequency tune error: 0 [Hz]...
+Actual RX Gain: 61 dB...
+Actual Bandwidth: -1 [Hz]...
+RF Channels: 1
+File .//home/rrama28/gnss/output/lime_diagnostic_clean.nmea cannot be saved. Wrong permissions?
+Trying to read GNSS ephemeris from XML file(s)...
+From XML file: Read NAV ephemeris for satellite GPS PRN 20 (Block IIR)
+From XML file: Read NAV ephemeris for satellite GPS PRN 25 (Block IIF)
+From XML file: Read NAV ephemeris for satellite GPS PRN 15 (Block IIR-M)
+From XML file: Read NAV ephemeris for satellite GPS PRN 18 (Block III)
+From XML file: Read NAV ephemeris for satellite GPS PRN 12 (Block IIR-M)
+From XML file: Read NAV ephemeris for satellite GPS PRN 29 (Block IIR-M)
+From XML file: Read GPS UTC model parameters.
+From XML file: Read GPS ionosphere model parameters.
+GNSS assistance data loaded from local XML file(s).
+Get visible satellites at 29/04/2026 20:40:48 UTC, assuming RX position 41.8807 [deg], -87.6439 [deg], 0 [m]
+Using GPS Ephemeris: Sat 15 Az: 177.06 El: 37.5281
+Using GPS Ephemeris: Sat 18 Az: 294.443 El: 26.1439
+Using GPS Ephemeris: Sat 20 Az: 140.679 El: 48.0953
+Using GPS Ephemeris: Sat 25 Az: 226.518 El: 11.2936
+Using GPS Ephemeris: Sat 29 Az: 272.846 El: 69.1812
+Current receiver time: 1 s
+Current receiver time: 2 s
+Current receiver time: 3 s
+Current receiver time: 4 s
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 25 (Block IIF)
+Current receiver time: 8 s
+Current receiver time: 9 s
+Current receiver time: 10 s
+Current receiver time: 11 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 15 (Block IIR-M)
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 29 (Block IIR-M)
+Current receiver time: 12 s
+Current receiver time: 13 s
+Current receiver time: 14 s
+Current receiver time: 15 s
+Current receiver time: 16 s
+Current receiver time: 17 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 18 (Block III)
+Current receiver time: 18 s
+Current receiver time: 19 s
+Current receiver time: 20 s
+Current receiver time: 21 s
+Current receiver time: 22 s
+Current receiver time: 23 s
+Loss of lock in channel 4!
+Current receiver time: 24 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 20 (Block IIR)
+Current receiver time: 25 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 25 (Block IIF)
+Current receiver time: 26 s
+Current receiver time: 27 s
+Loss of lock in channel 2!
+Loss of lock in channel 0!
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 29 (Block IIR-M)
+Current receiver time: 28 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 15 (Block IIR-M)
+Current receiver time: 29 s
+Current receiver time: 30 s
+Current receiver time: 31 s
+Current receiver time: 32 s
+Current receiver t

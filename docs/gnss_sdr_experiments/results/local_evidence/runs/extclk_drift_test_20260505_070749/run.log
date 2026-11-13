@@ -1,0 +1,20 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+RF Channels: 1
+file_source :error: /home/rrama28/gnss/runs/iq_extclk_20260505_061813/lime_iq_capture.dat: No such file or directory
+The receiver was configured to work with a file-based signal source
+but the specified file is unreachable by GNSS-SDR.
+[/home/rrama28/gnss/runs/iq_extclk_20260505_061813/lime_iq_capture.dat]
+
+Please modify your configuration file
+and point SignalSource.filename to a valid raw data file. Then:
+$ gnss-sdr --config_file=/path/to/my_GNSS_SDR_configuration.conf
+Examples of configuration files available at:
+/usr/share/gnss-sdr/conf/
+
+E0505 07:07:52.468462 74624 file_source_base.cc:504] file_signal_source: Unable to open the samples file /home/rrama28/gnss/runs/iq_extclk_20260505_061813/lime_iq_capture.dat, exiting the program.
+E0505 07:07:52.468745 74624 gnss_flowgraph.cc:592] Can't connect signal source block 0 internally: can't open file
+Unable to connect flowgraph
+Total GNSS-SDR run time: 0.00311371 [seconds]
+GNSS-SDR program ended.

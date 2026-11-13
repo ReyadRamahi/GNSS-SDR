@@ -1,0 +1,112 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring GNSS-SDR v0.0.16 to be built on GNU/Linux Ubuntu 22.04 (64 bits)
+-- Build type set to Release.
+-- Checking for ARM
+-- System is not ARM.
+-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Checking for module 'gtest'
+--   No package 'gtest' found
+-- Could NOT find GOOGLETEST (missing: LIBGTEST_DEV_DIR GTEST_INCLUDE_DIRS) 
+-- Found VOLK: /usr/lib/x86_64-linux-gnu/libvolk.so  
+-- Checking for module 'orc-0.4 > 0.4.22'
+--   No package 'orc-0.4' found
+-- Checking for module 'uhd'
+--   No package 'uhd' found
+-- Could NOT find UHD (missing: UHD_LIBRARIES UHD_INCLUDE_DIRS) 
+-- Checking for GNU Radio Module: RUNTIME
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+-- GNURADIO_RUNTIME_FOUND = TRUE
+-- Checking for GNU Radio Module: PMT
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+-- GNURADIO_PMT_FOUND = TRUE
+-- Checking for GNU Radio Module: BLOCKS
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-blocks.so;/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+-- GNURADIO_BLOCKS_FOUND = TRUE
+-- Checking for GNU Radio Module: FFT
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-fft.so;/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+-- GNURADIO_FFT_FOUND = TRUE
+-- Checking for GNU Radio Module: FILTER
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-filter.so;/usr/lib/x86_64-linux-gnu/libgnuradio-fft.so;/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+-- GNURADIO_FILTER_FOUND = TRUE
+-- Checking for GNU Radio Module: ANALOG
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-analog.so;/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so;/usr/lib/x86_64-linux-gnu/libvolk.so
+-- GNURADIO_ANALOG_FOUND = TRUE
+-- Found GNURADIO: TRUE  
+-- Checking for GNU Radio Module: IIO
+--  * INCLUDES=/usr/include
+--  * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-iio.so
+-- GNURADIO_IIO_FOUND = TRUE
+-- Found SPDLOG: /usr/include  
+-- Found FMT: /usr/include  
+-- Could NOT find GPSTK (missing: GPSTK_LIBRARY GPSTK_INCLUDE_DIR) 
+-- Looking for C++ include filesystem
+-- Looking for C++ include filesystem - found
+-- Performing Test CXX_FILESYSTEM_NO_LINK_NEEDED
+-- Performing Test CXX_FILESYSTEM_NO_LINK_NEEDED - Success
+-- Found FILESYSTEM: TRUE  
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.53") found components: atomic chrono date_time serialization system thread 
+-- Performing Test has_span
+-- Performing Test has_span - Failed
+-- Performing Test has_put_time
+-- Performing Test has_put_time - Success
+-- Performing Test has_std_plus_void
+-- Performing Test has_std_plus_void - Success
+-- Performing Test has_transform_reduce
+-- Performing Test has_transform_reduce - Success
+-- Performing Test has_transform_reduce_with_execution_policy
+-- Performing Test has_transform_reduce_with_execution_policy - Success
+-- Could NOT find VOLKGNSSSDR (missing: VOLK_GNSSSDR_LIBRARIES VOLK_GNSSSDR_INCLUDE_DIRS) 
+--  volk_gnsssdr will be built along with gnss-sdr when doing 'make'.
+-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+-- Python checking for python >= 2.7 - found
+-- Python checking for mako >= 0.4.2 - found
+-- Checking for module 'libglog'
+--   Found libglog, version 0.4.0
+-- Found GLOG: /usr/lib/x86_64-linux-gnu/libglog.so  
+-- glog library found at /usr/lib/x86_64-linux-gnu/libglog.so
+-- gflags library found at /usr/lib/x86_64-linux-gnu/libgflags.so
+-- Found GFLAGS: /usr/lib/x86_64-linux-gnu/libgflags.so  
+-- Looking for sgemm_
+-- Looking for sgemm_ - found
+-- Found BLAS: /usr/lib/x86_64-linux-gnu/libblas.so  
+-- Looking for cheev_
+-- Looking for cheev_ - found
+-- Found LAPACK: /usr/lib/x86_64-linux-gnu/liblapack.so;/usr/lib/x86_64-linux-gnu/libblas.so  
+-- Found Armadillo: /usr/include (found version "10.8.2") 
+-- Found GnuTLS: /usr/lib/x86_64-linux-gnu/libgnutls.so (found version "3.7.3") 
+-- Found MATIO: /usr/lib/x86_64-linux-gnu/libmatio.so (found version "1.5.21") 
+-- Could NOT find PUGIXML (missing: PUGIXML_LIBRARY PUGIXML_INCLUDE_DIR) 
+-- PugiXML not found.
+--  PugiXML v1.12 will be downloaded, built, and statically linked when doing 'make'.
+CMake Error at CMakeLists.txt:188 (message):
+  OFFLINE_DEPENDENCY_BLOCKER: pugixml-1.12 needs GIT_REPOSITORY; fetching is
+  forbidden
+Call Stack (most recent call first):
+  CMakeLists.txt:2382 (offline_external_project_add)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/rrama28/gnss/runs/native_pvt_confirmation_20261108_1/build/CMakeFiles/CMakeOutput.log".
+See also "/home/rrama28/gnss/runs/native_pvt_confirmation_20261108_1/build/CMakeFiles/CMakeError.log".

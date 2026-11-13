@@ -1,0 +1,72 @@
+[
+  {
+    "name": "baseline_cold_3deg",
+    "command": [
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/build2/baseline_epoch_window",
+      "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml",
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/baseline_cold_3deg.jsonl",
+      "cold",
+      "3"
+    ],
+    "process_exit": 0,
+    "elapsed_s": 0.5654814471490681
+  },
+  {
+    "name": "baseline_sequential_3deg",
+    "command": [
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/build2/baseline_epoch_window",
+      "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml",
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/baseline_sequential_3deg.jsonl",
+      "sequential",
+      "3"
+    ],
+    "process_exit": 0,
+    "elapsed_s": 0.5651039469521493
+  },
+  {
+    "name": "candidate_cold_3deg",
+    "command": [
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/build2/candidate_epoch_window",
+      "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml",
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/candidate_cold_3deg.jsonl",
+      "cold",
+      "3"
+    ],
+    "process_exit": 0,
+    "elapsed_s": 1.216623842017725
+  },
+  {
+    "name": "candidate_sequential_3deg",
+    "command": [
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/build2/candidate_epoch_window",
+      "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml",
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/candidate_sequential_3deg.jsonl",
+      "sequential",
+      "3"
+    ],
+    "process_exit": 0,
+    "elapsed_s": 0.8155629648827016
+  },
+  {
+    "name": "candidate_first_15deg",
+    "command": [
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/build2/candidate_epoch_window",
+      "/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml",
+      "/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml",
+      "/home/rrama28/gnss/runs/epoch14052_bootstrap_dvazj6li/candidate_first_15deg.jsonl",
+      "first",
+      "15"
+    ],
+    "process_exit": 0,
+    "elapsed_s": 0.06416456797160208
+  }
+]

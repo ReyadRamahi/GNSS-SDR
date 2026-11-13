@@ -1,5 +1,7 @@
 # GNSS-SDR experiments: starting context
 
+> GitHub publication: links below use the repository archive layout. Small text evidence is included; IQ recordings, full observables, source/build copies, binaries and large per-epoch outputs remain on hft02. A clone alone cannot reproduce the experiment without those preserved local inputs.
+
 ## Current state and next unresolved experiment
 
 Evidence reconciled on **2026-11-13**. The goal is live GPS L1 C/A reception on
@@ -9,18 +11,55 @@ decoding. **No native GNSS-SDR PVT fix has been demonstrated in the November
 replays. External-reference lock has not been demonstrated.** These are separate
 open questions; the clock result does not explain the measured software rejection.
 
-The next software experiment is **native confirmation of the first four-observation
-PVT rejection, followed by a coordinate-free initialization comparison** using the
-existing 90-second recording. A standalone reconstruction already reproduces an
-elevation-filtering failure, but the diagnostic receiver build stopped at missing
-development dependencies. Obtain compatible local build inputs before trying that
-comparison; preserve the 3° mask and reapply it at the final solution, compare the
-15° case separately, and measure subsequent-epoch fix continuity. A supplied-position
-single-epoch control is already successful; repeating it would not establish
-autonomous native PVT. No supported installed-version configuration-only seed was
-found. See the [native build report](RX1H_NATIVE_CONFIRMATION.md),
-[configuration audit](RX1H_CONFIGURATION_WORKAROUND_AUDIT.md), and
-[single-epoch diagnosis](RX1H_FIRST_EPOCH_PVT.md).
+The latest **stock 3° baseline replay**, using the installed receiver and unchanged
+90-second input/configuration, completed with **exit 0**, **45 decoded NAV
+subframes**, **2,435 four-valid-pseudorange epochs**, and **no reported/saved native
+PVT fix**. Every four-valid epoch has a matching native point-position error with
+an empty reason. This confirms stock receiver failure, not the specific standalone
+elevation-filtering cause. See the [new run summary](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/summary.json)
+and the stock baseline section below. The run retains the experimental PRN21 XML
+and supplies no receiver coordinates. No diagnostic build or config change was
+part of this replay.
+
+The follow-up **TOW 14052.000 error-path audit** finds an error-text propagation
+defect in the available 0.0.16 source: three `estpos()` failure paths write a
+local buffer, then assign its address to a local pointer instead of copying the
+text to the caller. Native empty parentheses are consistent with that defect,
+but do not identify which failure occurred. Native computed elevations and
+post-filter membership remain unavailable. See the error-path audit section
+below and its [evidence bundle](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/native_evidence_and_missing_fields.json).
+
+A subsequent **host-level prerequisite check for the requested native TOW
+14052 diagnostic** found no usable diagnostic receiver or complete local
+development dependencies. All four header preprocessing probes failed and
+`protoc` was absent. Work stopped before source edits, configuration, build or
+replay, as requested. This is a fresh read-only availability check, not another
+failed diagnostic build. See [status](results/local_evidence/runs/native_14052_dependency_check_n17mm09y/build_status.json)
+and the dependency-check section below. The native failure branch and computed
+elevations at 14052.000 remain unestablished.
+
+The latest **exact-TOW-14052 standalone comparison** now tests a coordinate-free
+initialization candidate. With the saved stock observations and experimental
+PRN21 XML, the unchanged solver rejects PRN5 at **1.72138° on iteration 1**,
+leaving **ns=3, nv=6 < NX=7**. Deferring elevation rejection until an
+observation-derived provisional position exists, then recomputing with the
+original **3°** mask and unchanged final validation, solves **2435/2435** saved
+four-valid epochs (14052.000–14100.680) in both cold and sequential harness modes.
+All four final elevations pass; the **15° control still fails** honestly.
+This is **reconstructed library evidence, not native receiver confirmation**.
+It remains dependent on the experimental PRN21 XML. Position scatter is
+**55.52 m 3D RMS about its mean**; four ranges provide no redundant residual
+check, and no surveyed accuracy reference is available.
+
+See the exact-epoch report (hft02 local artifact: `docs/RX1H_14052_BOOTSTRAP_RESULTS.md`),
+[metrics](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/window_summary.json), and
+[separate native diagnostic/functional patches and build-replay plan](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/native_plan/README.md).
+No full native build was retried; compatible PugiXML/Protobuf development files
+remain missing. The next software experiment is native **diagnostics-only**
+confirmation at 14052, before applying the separately tested behavior candidate.
+The full first-epoch selected native ephemeris and post-filter state are still
+missing. No supported installed-version configuration-only seed was found; see
+[the configuration audit](RX1H_CONFIGURATION_WORKAROUND_AUDIT.md).
 
 The next clock investigation should distinguish **reference-signal presence and
 compatibility, PLL configuration/control, and lock-status reporting**. The November
@@ -72,8 +111,8 @@ been proven equivalent to the installed executable. Sources:
 using RTL-SDR through SoapyRemote as a control and LimeSDR through the Osmosdr/Soapy
 source. The original setup described LNAW and external antenna bias. That description
 does not independently establish the cable route or selected physical socket.
-Curated configs (`docs/configs_used`), sweep scripts (`docs/scripts_used`),
-receiver logs (`docs/results/logs/output`), and harvest logs (`docs/results/logs/rtl_harvest`)
+Curated configs (hft02 local artifact: `docs/configs_used`), sweep scripts (hft02 local artifact: `docs/scripts_used`),
+receiver logs (hft02 local artifact: `docs/results/logs/output`), and harvest logs (hft02 local artifact: `docs/results/logs/rtl_harvest`)
 preserve the early experiments. Dates embedded in logs/configured receiver time
 must not automatically be treated as wall-clock capture timestamps.
 
@@ -83,31 +122,31 @@ must not automatically be treated as wall-clock capture timestamps.
 
 | Run / supporting log | Tracking starts | Losses | Bit sync | NAV | Position messages |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| RTL initial (`docs/results/logs/output/rtlsdr_run.log`) | 20 | 18 | 2 | 36 | 0 |
-| RTL baseline recheck (`docs/results/logs/output/rtl_baseline_recheck.log`) | 196 | 193 | 3 | 427 | 0 |
-| RTL long (`docs/results/logs/output/rtlsdr_long_run.log`) | 66 | 62 | 2 | 96 | 0 |
-| RTL 12-channel long (`docs/results/logs/output/rtlsdr_12ch_long_run.log`) | 113 | 109 | 2 | 214 | 0 |
-| RTL 12-channel 30-minute (`docs/results/logs/output/rtlsdr_12ch_30min.log`) | 174 | 171 | 2 | 315 | 0 |
-| Lime balanced, 3-minute (`docs/results/logs/output/lime_balanced_3min.log`) | 59 | 52 | 0 | 0 | 0 |
-| Lime balanced + assistance, 3-minute (`docs/results/logs/output/lime_balanced_agnss_3min.log`) | 39 | 34 | 0 | 0 | 0 |
-| Lime balanced + assistance, 30-minute (`docs/results/logs/output/lime_balanced_agnss_30min.log`) | 568 | 564 | 0 | 0 | 0 |
+| RTL initial (hft02 local artifact: `docs/results/logs/output/rtlsdr_run.log`) | 20 | 18 | 2 | 36 | 0 |
+| RTL baseline recheck (hft02 local artifact: `docs/results/logs/output/rtl_baseline_recheck.log`) | 196 | 193 | 3 | 427 | 0 |
+| RTL long (hft02 local artifact: `docs/results/logs/output/rtlsdr_long_run.log`) | 66 | 62 | 2 | 96 | 0 |
+| RTL 12-channel long (hft02 local artifact: `docs/results/logs/output/rtlsdr_12ch_long_run.log`) | 113 | 109 | 2 | 214 | 0 |
+| RTL 12-channel 30-minute (hft02 local artifact: `docs/results/logs/output/rtlsdr_12ch_30min.log`) | 174 | 171 | 2 | 315 | 0 |
+| Lime balanced, 3-minute (hft02 local artifact: `docs/results/logs/output/lime_balanced_3min.log`) | 59 | 52 | 0 | 0 | 0 |
+| Lime balanced + assistance, 3-minute (hft02 local artifact: `docs/results/logs/output/lime_balanced_agnss_3min.log`) | 39 | 34 | 0 | 0 | 0 |
+| Lime balanced + assistance, 30-minute (hft02 local artifact: `docs/results/logs/output/lime_balanced_agnss_30min.log`) | 568 | 564 | 0 | 0 | 0 |
 
 The old/default Lime setup used AGC, roughly 3.5 acquisition threshold, 51 taps,
 and band edge 0.45. Sweep families varied acquisition/tracking parameters,
-2/4 Msps in v2 (`docs/results/logs/sweep_v2_runs`), and 2/5/10 Msps, 51/101 taps,
-0.45/0.70/0.90 band edge and AGC in v3 (`docs/results/logs/sweep_v3_runs`).
+2/4 Msps in v2 (hft02 local artifact: `docs/results/logs/sweep_v2_runs`), and 2/5/10 Msps, 51/101 taps,
+0.45/0.70/0.90 band edge and AGC in v3 (hft02 local artifact: `docs/results/logs/sweep_v3_runs`).
 The early summary selected 2 Msps, AGC off, 101 taps and band edge 0.70 from
-this saved candidate (`docs/results/logs/sweep_v3_runs/cfg_sr2M_taps101_band70_agcF.conf`).
+this saved candidate (hft02 local artifact: `docs/results/logs/sweep_v3_runs/cfg_sr2M_taps101_band70_agcF.conf`).
 This improved tracking starts, not NAV or position success. The longer assisted
 run was reported to produce zero NMEA bytes; its original output files are local
 runtime artifacts rather than a guarantee that every curated log has an NMEA peer.
 
 Assistance XML loaded PRNs 28 and 31 plus UTC/ionosphere models; the
-ten-minute assisted log (`docs/results/logs/output/lime_agnss_10min.log`) explicitly
+ten-minute assisted log (hft02 local artifact: `docs/results/logs/output/lime_agnss_10min.log`) explicitly
 records this but also a malformed NMEA pathname/permission error. It and the
-Chicago three-minute attempt (`docs/results/logs/output/lime_agnss_3min_chicago.log`)
+Chicago three-minute attempt (hft02 local artifact: `docs/results/logs/output/lime_agnss_3min_chicago.log`)
 have zero tracking/NAV counts and should not be promoted to successful signal
-controls. The curated assistance (`docs/results/assist`) is historical, reported as
+controls. The curated assistance (hft02 local artifact: `docs/results/assist`) is historical, reported as
 GPS week 2419 in the later software audit, and is unsuitable as current live data.
 
 **Interpretation/limits.** RTL NAV demonstrates a viable reception/decoder path
@@ -127,32 +166,32 @@ historical run label; it is not a newly verified clock reading.
 
 | Purpose and setup | Observed result and evidence | Limits |
 | --- | --- | --- |
-| April 28 external 10 MHz selection using LimeUtil, followed by Soapy probes | 09:05:28-labelled check (`output/clock_checks/lime_refclk_10mhz_20260428_090528.log`) and 22:14:51 retry (`output/clock_checks/lime_extref_retry_20260428_221451.log`) print ADF state 0 and found gateware 2.12 versus expected 2.23. | Soapy `clock_locked=true` describes CGEN, not ADF lock. The nominal 30.72 MHz printout is not a precision oscillator measurement. |
-| April 29 clean Lime configuration | Run (`runs/lime_diagnostic_clean_20260429_204045/run.log`): 8 starts, 3 losses, zero bit sync/NAV/position; last printed receiver time 32 s. | Short historical live result; no sustained external-lock series. |
-| May 2 file-source trials and May 5 raw/external-clock drift comparisons | Raw replay (`runs/raw_drift_test_20260505_054124/run.log`): 47 starts/44 losses through 6 min, zero NAV. Completed external-clock-labelled replay (`runs/extclk_drift_test_20260505_071652/run.log`): 30/29 through 4 min, zero NAV. Earlier attempt (`runs/extclk_drift_test_20260505_070749/run.log`) fails because the IQ filename does not exist. May 2 replay (`runs/file_source_20260502_080526/run.log`): 19/15 through 2 min 35 s, zero NAV. | Filenames/preceding setters do not verify external discipline or isolate frequency drift; the missing-file attempt is invalid as a signal test. |
-| May 11 gain-sweep launch attempts, 45 combinations × 180 s planned | 02:50:52 launch (`runs/historical_launch_logs/gain_sweep_20260511_025052.log`) and 02:54:54 launch (`runs/historical_launch_logs/gain_sweep_20260511_025454.log`) print ADF state 1, then a line-220 arithmetic error (`0` newline `0`) at the first combination and an empty results table. | “SWEEP COMPLETE” is misleading; the referenced result directories are absent in this checkout. The startup lock snapshot is not streaming telemetry. |
-| May 11–14 gain families | [May 14 04:29:32 CSV](results/local_evidence/runs/gain_sweep_20260514_042932/results.csv) and master log (`runs/sweep_master.log`) preserve 25 gain/IF combinations: tracking starts but zero bit sync/NAV/fixes in the CSV. Example gain=15, IF=6 reports actual total gain 45 dB, 23 starts/18 losses, score 5. Sweep script (`scripts/gain_sweep.sh`). | Score rewards start/loss counts; it is not a NAV or accuracy metric. Other gain directories include partial/failed launches; do not infer completion from directory presence. |
-| May 14 baseline and diagnostics | Base (`runs/base_test_20260514_032239/run.log`): 16/13, last time 79 s. Diagnostic (`runs/diag_20260514_033417/run.log`): 47/43, last time 217 s. Both zero bit sync/NAV/position. | No immutable hardware/wiring validation comparable to November capture readbacks. |
-| May 15 Doppler-aided Lime and RTL comparison | Lime 05:26:45 (`runs/doppler_20260515_052645/run.log`): 67/67 through 22 min 15 s; 05:55:09 (`runs/doppler_20260515_055509/run.log`): 16/15 through 199 s; both zero NAV. RTL 06:09:41 (`runs/rtl_doppler_20260515_060941/run.log`): 67 starts, 66 losses, 1 bit sync, 47 NAV, zero position messages. Doppler helper (`scripts/compute_doppler.py`). | Helper defaults to UIUC while other configs use Chicago; historical assistance freshness/week handling was suspect. No isolated proof Doppler aiding fixes Lime. |
-| May 19 RX2-labelled, offset-LO and saved-IQ trials | RX2 test (`runs/rx2_test_20260519_040558/run.log`): 12/5, zero NAV. Offset LO (`runs/lo_offset_20260519_045841/run.log`): 36/29 through 114 s, zero NAV. File replay (`runs/filesource_rx2_20260519_051415/run.log`): 4/2 through 24 s, zero NAV. | `rx2` names and `chan=1` do not prove a selected physical RF socket. The 05:11:26 (`runs/filesource_rx2_20260519_051126/run.log`) and 05:11:30 (`runs/filesource_rx2_20260519_051130/run.log`) attempts could not connect their flowgraphs. |
-| May 20 CFAR/focused tracking, FLL pull-in and IF sign | CFAR-labelled live log (`runs/cfar_20260520_043147/run.log`): 18/18 through 898 s. Focused 05:04:25 (`runs/focused_20260520_050425/run.log`): 84/83 through 898 s. Pull-in (`runs/test1_pullin_20260520_052918/run.log`): 2/2 through 125 s. Negative IF (`runs/test2_if_minus_20260520_054004/run.log`): zero starts through 132 s. All zero bit sync/NAV/position. | A label saying CFAR is not evidence the installed receiver enabled it. Later source/log audit established `Acquisition_1C.pfa` is the relevant switch. |
-| May 20 original/conjugated/swapped-IQ variants at ±500 kHz IF | [Summary](results/local_evidence/runs/conj_results.txt), runner (`scripts/run_conj_test.sh`), and representative replay (`runs/conj_orig_IF500000_20260520_064246/run.log`) exist. Summary rows contain repeated newline-separated zeros; these logs print only 1 s of receiver time despite a 60 s input. | Malformed aggregation and incomplete progress prevent selecting a validated IQ orientation from this series. November's documented capture/replay establishes a working +500 kHz path instead. |
-| May 20 last saved live decoding attempt | 06:55:36 log (`runs/bitsync_fix_20260520_065536/run.log`) prints LNAW/`chan=1`, duplicate Lime plugin registration, 2 Msps, 1574.92 MHz, total gain 45 dB; 4 starts, 3 losses, zero bit sync/NAV, stops at 68 s with `^C`. | The 15-minute launch/history and preceding reference setter described in the [handoff](RX1H_BASELINE.md) are not a completed 15-minute run or verified clock lock. No immutable config snapshot for this live run. |
+| April 28 external 10 MHz selection using LimeUtil, followed by Soapy probes | 09:05:28-labelled check (hft02 local artifact: `output/clock_checks/lime_refclk_10mhz_20260428_090528.log`) and 22:14:51 retry (hft02 local artifact: `output/clock_checks/lime_extref_retry_20260428_221451.log`) print ADF state 0 and found gateware 2.12 versus expected 2.23. | Soapy `clock_locked=true` describes CGEN, not ADF lock. The nominal 30.72 MHz printout is not a precision oscillator measurement. |
+| April 29 clean Lime configuration | [Run](results/local_evidence/runs/lime_diagnostic_clean_20260429_204045/run.log): 8 starts, 3 losses, zero bit sync/NAV/position; last printed receiver time 32 s. | Short historical live result; no sustained external-lock series. |
+| May 2 file-source trials and May 5 raw/external-clock drift comparisons | [Raw replay](results/local_evidence/runs/raw_drift_test_20260505_054124/run.log): 47 starts/44 losses through 6 min, zero NAV. [Completed external-clock-labelled replay](results/local_evidence/runs/extclk_drift_test_20260505_071652/run.log): 30/29 through 4 min, zero NAV. [Earlier attempt](results/local_evidence/runs/extclk_drift_test_20260505_070749/run.log) fails because the IQ filename does not exist. [May 2 replay](results/local_evidence/runs/file_source_20260502_080526/run.log): 19/15 through 2 min 35 s, zero NAV. | Filenames/preceding setters do not verify external discipline or isolate frequency drift; the missing-file attempt is invalid as a signal test. |
+| May 11 gain-sweep launch attempts, 45 combinations × 180 s planned | [02:50:52 launch](results/local_evidence/runs/historical_launch_logs/gain_sweep_20260511_025052.log) and [02:54:54 launch](results/local_evidence/runs/historical_launch_logs/gain_sweep_20260511_025454.log) print ADF state 1, then a line-220 arithmetic error (`0` newline `0`) at the first combination and an empty results table. | “SWEEP COMPLETE” is misleading; the referenced result directories are absent in this checkout. The startup lock snapshot is not streaming telemetry. |
+| May 11–14 gain families | [May 14 04:29:32 CSV](results/local_evidence/runs/gain_sweep_20260514_042932/results.csv) and [master log](results/local_evidence/runs/sweep_master.log) preserve 25 gain/IF combinations: tracking starts but zero bit sync/NAV/fixes in the CSV. Example gain=15, IF=6 reports actual total gain 45 dB, 23 starts/18 losses, score 5. [Sweep script](../../scripts/gain_sweep.sh). | Score rewards start/loss counts; it is not a NAV or accuracy metric. Other gain directories include partial/failed launches; do not infer completion from directory presence. |
+| May 14 baseline and diagnostics | [Base](results/local_evidence/runs/base_test_20260514_032239/run.log): 16/13, last time 79 s. [Diagnostic](results/local_evidence/runs/diag_20260514_033417/run.log): 47/43, last time 217 s. Both zero bit sync/NAV/position. | No immutable hardware/wiring validation comparable to November capture readbacks. |
+| May 15 Doppler-aided Lime and RTL comparison | Lime [05:26:45](results/local_evidence/runs/doppler_20260515_052645/run.log): 67/67 through 22 min 15 s; [05:55:09](results/local_evidence/runs/doppler_20260515_055509/run.log): 16/15 through 199 s; both zero NAV. RTL [06:09:41](results/local_evidence/runs/rtl_doppler_20260515_060941/run.log): 67 starts, 66 losses, 1 bit sync, 47 NAV, zero position messages. [Doppler helper](../../scripts/compute_doppler.py). | Helper defaults to UIUC while other configs use Chicago; historical assistance freshness/week handling was suspect. No isolated proof Doppler aiding fixes Lime. |
+| May 19 RX2-labelled, offset-LO and saved-IQ trials | [RX2 test](results/local_evidence/runs/rx2_test_20260519_040558/run.log): 12/5, zero NAV. [Offset LO](results/local_evidence/runs/lo_offset_20260519_045841/run.log): 36/29 through 114 s, zero NAV. [File replay](results/local_evidence/runs/filesource_rx2_20260519_051415/run.log): 4/2 through 24 s, zero NAV. | `rx2` names and `chan=1` do not prove a selected physical RF socket. The [05:11:26](results/local_evidence/runs/filesource_rx2_20260519_051126/run.log) and [05:11:30](results/local_evidence/runs/filesource_rx2_20260519_051130/run.log) attempts could not connect their flowgraphs. |
+| May 20 CFAR/focused tracking, FLL pull-in and IF sign | [CFAR-labelled live log](results/local_evidence/runs/cfar_20260520_043147/run.log): 18/18 through 898 s. [Focused 05:04:25](results/local_evidence/runs/focused_20260520_050425/run.log): 84/83 through 898 s. [Pull-in](results/local_evidence/runs/test1_pullin_20260520_052918/run.log): 2/2 through 125 s. [Negative IF](results/local_evidence/runs/test2_if_minus_20260520_054004/run.log): zero starts through 132 s. All zero bit sync/NAV/position. | A label saying CFAR is not evidence the installed receiver enabled it. Later source/log audit established `Acquisition_1C.pfa` is the relevant switch. |
+| May 20 original/conjugated/swapped-IQ variants at ±500 kHz IF | [Summary](results/local_evidence/runs/conj_results.txt), [runner](../../scripts/run_conj_test.sh), and [representative replay](results/local_evidence/runs/conj_orig_IF500000_20260520_064246/run.log) exist. Summary rows contain repeated newline-separated zeros; these logs print only 1 s of receiver time despite a 60 s input. | Malformed aggregation and incomplete progress prevent selecting a validated IQ orientation from this series. November's documented capture/replay establishes a working +500 kHz path instead. |
+| May 20 last saved live decoding attempt | [06:55:36 log](results/local_evidence/runs/bitsync_fix_20260520_065536/run.log) prints LNAW/`chan=1`, duplicate Lime plugin registration, 2 Msps, 1574.92 MHz, total gain 45 dB; 4 starts, 3 losses, zero bit sync/NAV, stops at 68 s with `^C`. | The 15-minute launch/history and preceding reference setter described in the [handoff](RX1H_BASELINE.md) are not a completed 15-minute run or verified clock lock. No immutable config snapshot for this live run. |
 
-Additional original capture folders remain under IQ captures (`iq_captures`),
-May captures (`captures`), and IQ from Alex (`iq_from_alex`). The supplied
+Additional original capture folders remain under IQ captures (hft02 local artifact: `iq_captures`),
+May captures (hft02 local artifact: `captures`), and IQ from Alex (hft02 local artifact: `iq_from_alex`). The supplied
 artifacts do not establish a documented known-good independent GPS control for the
-Alex data. Legacy F9T workflow (`f9t/README_F9T_EPHEMERIS_RUN.md`) describes
-EVK/ZED-F9T UBX → convbin → RINEX NAV → assistance XML; saved F9T runs (`f9t/assist_runs`)
-and assistance backups (`assist/backups`) preserve provenance. This cleanup
+Alex data. Legacy F9T workflow (hft02 local artifact: `f9t/README_F9T_EPHEMERIS_RUN.md`) describes
+EVK/ZED-F9T UBX → convbin → RINEX NAV → assistance XML; saved F9T runs (hft02 local artifact: `f9t/assist_runs`)
+and assistance backups (hft02 local artifact: `assist/backups`) preserve provenance. This cleanup
 did not validate every UBX conversion or assert current freshness of those files.
 
 ### November 8: software-first replay of the April recording
 
 **Purpose/setup.** Reproduce the symptom without a live USB stream using
-offline runner (`scripts/run_offline_baseline.sh`) and
-template (`configs/lime_offline_baseline.conf`). The archived input is
-April 28 IQ (`iq_captures/lime_l1/lime_baseline_no_10mhz_20260428_044448.dat`),
+[offline runner](../../scripts/run_offline_baseline.sh) and
+[template](../../configs/lime_offline_baseline.conf). The archived input is
+April 28 IQ (hft02 local artifact: `iq_captures/lime_l1/lime_baseline_no_10mhz_20260428_044448.dat`),
 928,049,648 bytes, assumed CF32/2 Msps/1575.42 MHz, nominal duration **58.003103 s**.
 Metadata is inferred from the historical capture setup, not embedded in this file.
 Acquisition: 1 ms, CFAR `pfa=0.001`, blocking offline mode, default lock tests,
@@ -179,11 +218,11 @@ are not proof of stronger signal.
 
 **Purpose/setup.** Establish one reproducible driver-reported H input, isolate
 system LimeSuite 20.10, and save IQ before changing receiver processing. See
-capture script (`scripts/capture_rx1h_baseline.py`),
-launcher (`scripts/run_rx1h_baseline.sh`), and [handoff](RX1H_BASELINE.md).
+[capture script](../../scripts/capture_rx1h_baseline.py),
+[launcher](../../scripts/run_rx1h_baseline.sh), and [handoff](RX1H_BASELINE.md).
 User executed live captures; later analysis used files only.
 
-The 03:38:36-labelled first attempt (`runs/rx1h_baseline_20261108_033836_SOAd6t/run.log`)
+The 03:38:36-labelled [first attempt](results/local_evidence/runs/rx1h_baseline_20261108_033836_SOAd6t/run.log)
 read antenna/rate successfully but aborted before IQ creation, exit **1**, because
 the validator required exact floating-point equality to 2,000,000 samples/s.
 Readback was **1,999,999.9809265137 samples/s**, a difference of
@@ -199,8 +238,8 @@ physical filter bandwidth. The successful captures each returned exit **0**:
 
 | Capture label | Saved CF32 IQ | Evidence |
 | --- | --- | --- |
-| 2026-11-08 03:41:30 | 60,000,000 complex samples, **480,000,000 bytes**, nominal 30 s | [summary](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/summary.json), [before](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/before_capture.json), [after](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/after_capture.json), log (`runs/rx1h_baseline_20261108_034130_Y7gMFe/run.log`) |
-| 2026-11-08 03:53:09 | 180,000,000 complex samples, **1,440,000,000 bytes**, nominal 90 s | [summary](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/summary.json), [before](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/before_capture.json), [after](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/after_capture.json), log (`runs/rx1h_baseline_20261108_035309_7qbMJ8/run.log`) |
+| 2026-11-08 03:41:30 | 60,000,000 complex samples, **480,000,000 bytes**, nominal 30 s | [summary](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/summary.json), [before](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/before_capture.json), [after](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/after_capture.json), [log](results/local_evidence/runs/rx1h_baseline_20261108_034130_Y7gMFe/run.log) |
+| 2026-11-08 03:53:09 | 180,000,000 complex samples, **1,440,000,000 bytes**, nominal 90 s | [summary](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/summary.json), [before](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/before_capture.json), [after](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/after_capture.json), [log](results/local_evidence/runs/rx1h_baseline_20261108_035309_7qbMJ8/run.log) |
 
 Logs report successful RX calibration and no stream errors. Summaries check finite,
 nonzero-variance beginning/middle/end windows; the more detailed
@@ -219,7 +258,7 @@ loss on those channels; reported final-ten-second median C/N0 was about
 **38.8/36.7 dB-Hz**. See [decoded satellites](results/local_evidence/runs/rx1h_offline_4ms_rnuld_e8/decoded_satellites.json)
 and the [capture/tracking analysis](RX1H_BASELINE.md).
 
-The working 4 ms config (`configs/lime_rx1h_offline_4ms.conf`) uses 12 GPS L1
+The working [4 ms config](../../configs/lime_rx1h_offline_4ms.conf) uses 12 GPS L1
 channels, one acquisition at a time, ±10 kHz Doppler search, blocking acquisition,
 101-tap filter with passband edge 0.70, PLL 40 Hz, DLL 2 Hz, FLL 10 Hz and FLL
 pull-in enabled; assistance is off. Exact per-run snapshots take precedence over
@@ -233,7 +272,7 @@ so the result does not isolate one cause of the historical failures.
 ### November 8: 90 s replay, PRN21 ephemeris, and four-observation PVT trials
 
 **Purpose/setup.** Give the verified RX1_H path more NAV time. The
-90 s baseline snapshot (`runs/rx1h_offline_90s_1i1wopzh/config_used.conf`)
+[90 s baseline snapshot](results/local_evidence/runs/rx1h_offline_90s_1i1wopzh/config_used.conf)
 changes only the IQ filename from the working 30 s config.
 
 **Measured.** [Baseline summary](results/local_evidence/runs/rx1h_offline_90s_1i1wopzh/summary.json):
@@ -243,7 +282,7 @@ native ephemerides only 5/12 in that replay, **0 position messages/NMEA bytes**.
 record PRN5 holding about **88.6 s**, PRN21 **89.4 s**, PRN12's final track
 **67.3 s**, and PRN22's two roughly 25–26 s segments.
 
-The localhost NAV audit (`scripts/audit_offline_nav.py`) returned exit **0**,
+The [localhost NAV audit](../../scripts/audit_offline_nav.py) returned exit **0**,
 capturing **43** messages with SF1–5 from all four PRNs:
 
 | PRN | IODC | SF2 / SF3 IODE | Health | Native audit ephemeris |
@@ -253,17 +292,17 @@ capturing **43** messages with SF1–5 from all four PRNs:
 | 21 | **983** | **215 / 215** | 0 | No |
 | 22 | 23 | 23 / 23 | 0 | Yes |
 
-Primary records: NAV messages (`runs/nav_audit_9dvjj0co/nav_messages.json`),
+Primary records: [NAV messages](results/local_evidence/runs/nav_audit_9dvjj0co/nav_messages.json),
 [audit summary](results/local_evidence/runs/nav_audit_9dvjj0co/summary.json),
-native XML (`runs/nav_audit_9dvjj0co/gps_ephemeris.xml`).
+[native XML](results/local_evidence/runs/nav_audit_9dvjj0co/gps_ephemeris.xml).
 The [handoff](RX1H_90S_RESULTS.md) identifies local 0.0.16's full-IODC-versus-IODE
 comparison: **983 differs from 215, but `983 & 255 == 215`**. This implementation
 matches the rejection; installed-binary source equivalence remains unproven.
 
-**Experimental data workaround.** Recovery script (`scripts/recover_nav_ephemeris.py`)
+**Experimental data workaround.** [Recovery script](../../scripts/recover_nav_ephemeris.py)
 decodes the saved NAV bits using local field definitions, cross-validates **37
 fields** against each native PRN5/12/22 record, and adds PRN21 with its true
-IODC=983/IODE=215 retained. Recovered XML (`runs/nav_audit_9dvjj0co/recovered_ephemeris.xml`)
+IODC=983/IODE=215 retained. [Recovered XML](results/local_evidence/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml)
 and [provenance](results/local_evidence/runs/nav_audit_9dvjj0co/recovered_ephemeris.provenance.json)
 are retrospective assistance for this recording, not current live data or a
 receiver software fix. No receiver-position prior was supplied for these replays.
@@ -293,11 +332,11 @@ diagnose a clock/reference fault.
 ### November 8: first-epoch reconstruction and blocked native confirmation
 
 **Purpose/setup.** Extract the first focused-replay four-valid epoch and trace
-the local RTKLIB point solver. Diagnostic script (`scripts/diagnose_first_pvt_epoch.py`)
+the local RTKLIB point solver. [Diagnostic script](../../scripts/diagnose_first_pvt_epoch.py)
 uses epoch **2650**, byte offset **593600**, **224 bytes** (four channels × seven
 little-endian doubles). All RX times are GPS TOW **14064.000 s**. Exact
 [epoch JSON](results/local_evidence/runs/first_epoch_pvt_20261108_4/epoch.json) and
-bytes (`runs/first_epoch_pvt_20261108_4/epoch.bin`) are saved.
+bytes (hft02 local artifact: `runs/first_epoch_pvt_20261108_4/epoch.bin`) are saved.
 
 | PRN | Saved pseudorange, m |
 | --- | ---: |
@@ -316,13 +355,13 @@ squares succeeds. Iteration 1 begins at
 
 | Same saved epoch | Result |
 | --- | --- |
-| 15° from zero (`runs/first_epoch_pvt_20261108_4/native_path_trace.log`) | PRN5 and PRN22 rejected; **2 satellites, 5 equations, 7 required**; solver return **0**, status **0** |
-| 3° from zero (`runs/first_epoch_pvt_20261108_4/existing_3deg_trace.log`) | PRN5 still rejected; **3 satellites, 6 equations, 7 required**; solver return **0**, status **0** |
-| 3° with independent-position seed (`runs/first_epoch_pvt_20261108_4/existing_3deg_seeded_diagnostic.log`) | Converges after four iterations, **4 satellites, 7 equations**; solver return **1**, `SOLQ_SINGLE=5`; LLH **41.880810573°, −87.644068692°, 256.807 m**, clock **−81.656300 ms** |
+| [15° from zero](results/local_evidence/runs/first_epoch_pvt_20261108_4/native_path_trace.log) | PRN5 and PRN22 rejected; **2 satellites, 5 equations, 7 required**; solver return **0**, status **0** |
+| [3° from zero](results/local_evidence/runs/first_epoch_pvt_20261108_4/existing_3deg_trace.log) | PRN5 still rejected; **3 satellites, 6 equations, 7 required**; solver return **0**, status **0** |
+| [3° with independent-position seed](results/local_evidence/runs/first_epoch_pvt_20261108_4/existing_3deg_seeded_diagnostic.log) | Converges after four iterations, **4 satellites, 7 equations**; solver return **1**, `SOLQ_SINGLE=5`; LLH **41.880810573°, −87.644068692°, 256.807 m**, clock **−81.656300 ms** |
 
 These are solver return values, not process exit codes or new native receiver
 fixes. The original focused replay's
-internal log directory (`runs/rx1h_four_prn_axlbe7v2/internal`) records
+internal log directory (hft02 local artifact: `runs/rx1h_four_prn_axlbe7v2/internal`) records
 `03:54:24.00: point pos error ()` at the same TOW; the detailed rejection is
 from local-source reconstruction. The first failed selection is PRN5 elevation,
 then `nv < NX`; final chi-square/GDOP validation is not reached. The error text
@@ -346,22 +385,22 @@ identity. Four fields are explicit zero defaults, and local FIT/AODO definitions
 are not independent ICD validation. These caveats preclude an autonomous real-time
 or independently validated ephemeris claim.
 
-The logging-only patch (`runs/first_epoch_pvt_20261108_4/logging_only.patch`)
+The [logging-only patch](results/local_evidence/runs/first_epoch_pvt_20261108_4/logging_only.patch)
 was used in a copied solver. The
-error-propagation proposal (`runs/first_epoch_pvt_20261108_4/proposed_error_propagation.patch`)
+[error-propagation proposal](results/local_evidence/runs/first_epoch_pvt_20261108_4/proposed_error_propagation.patch)
 fixes local pointer assignment `msg = msg_aux` rather than a caller-buffer copy;
-it remains unapplied. The PVT-boundary logging proposal (`runs/first_epoch_pvt_20261108_4/proposed_boundary_logging.patch`)
+it remains unapplied. The [PVT-boundary logging proposal](results/local_evidence/runs/first_epoch_pvt_20261108_4/proposed_boundary_logging.patch)
 is also not evidence of a running diagnostic receiver. `_1`/`_2` diagnostic
 directories preserve compiler failures, `_3` the earlier 15° reconstruction,
 and `_4` the three-case successful harness. `PVT.rtk_trace_level=4` alone did
 not expose the local glog `VLOG` trace; saved harness commands use the glog route.
 
-**Native build attempt.** Preparation script (`scripts/prepare_native_pvt_diagnostic.py`)
+**Native build attempt.** [Preparation script](../../scripts/prepare_native_pvt_diagnostic.py)
 made a logging-only source copy with hardware adapters/tests and dependency
 fetching disabled. [First status](results/local_evidence/runs/native_pvt_confirmation_20261108_1/status.json)
 and [recheck status](results/local_evidence/runs/native_pvt_confirmation_recheck/status.json) both
 record **CMake return code 1**, receiver built/executed **false**, behavior changed
-**false**. Configure log (`runs/native_pvt_confirmation_20261108_1/configure.log`)
+**false**. [Configure log](results/local_evidence/runs/native_pvt_confirmation_20261108_1/configure.log)
 and [dependency probes](results/local_evidence/runs/native_pvt_confirmation_20261108_1/dependency_probes.json)
 show missing `pugixml.hpp`, `google/protobuf/message.h`, and `protoc`, with empty
 cached dependency-source directories. The guard stops at
@@ -405,7 +444,7 @@ one guarded low-level FX3 connection to serial **0009061C01502715**, library
 raw bit 1 high. Guard/helper returned **0** and closed cleanly. See
 [summary](results/local_evidence/runs/extref_once_20261109T004414Z_1bph5bsj/summary.json),
 [guard](results/local_evidence/runs/extref_once_20261109T004414Z_1bph5bsj/guard.json),
-packet/status log (`runs/extref_once_20261109T004414Z_1bph5bsj/diagnostic.jsonl`),
+[packet/status log](results/local_evidence/runs/extref_once_20261109T004414Z_1bph5bsj/diagnostic.jsonl),
 and [result report](LIMESDR_REFERENCE_DIAGNOSTIC_RESULT.md).
 
 **Interpretation/limits.** This supersedes old 2.12 identity for that measured
@@ -427,13 +466,13 @@ Prepared November 9; **executed by the user November 13**. The
 retain preparation-time statements “not executed” / `hardware_execution_approved=false`.
 They are historical preparation records, superseded as execution status by the
 actual [guard](results/local_evidence/runs/extref_idle_prepared_20261109T012546Z_95hauim6/guard.json)
-and test log (`runs/extref_idle_prepared_20261109T012546Z_95hauim6/test.jsonl`),
+and [test log](results/local_evidence/runs/extref_idle_prepared_20261109T012546Z_95hauim6/test.jsonl),
 which match the user-supplied result in this chat. Do not rerun the completed
 one-shot directory: its exclusive attempt marker and logs now exist.
 
-The Python launcher (`scripts/run_lime_external_reference_test.py`) verifies
+The [Python launcher](../../scripts/run_lime_external_reference_test.py) verifies
 prepared hashes and host-root ownership checks, then launches the
-C++ helper (`scripts/lime_external_reference_test.cc`). No owners, scan
+[C++ helper](../../scripts/lime_external_reference_test.cc). No owners, scan
 failures, attached interface drivers or USB metadata errors were recorded;
 the device negotiated 5000 Mbit/s. One FX3 connection used local LimeSuite
 22.09.0-ge829d3ed and matched HW4/FW4/GW2.23. This was idle: no receiver stream,
@@ -465,9 +504,9 @@ it is not replacement of the oscillator by a direct 10 MHz RFIC clock.
 
 The helper's exit 0 requires a complete high window with no recorded read/timing
 gaps and successful cleanup. Here, **301 low samples caused exit 4**. Empty
-stderr (`runs/extref_idle_prepared_20261109T012546Z_95hauim6/test.stderr`)
+[stderr](results/local_evidence/runs/extref_idle_prepared_20261109T012546Z_95hauim6/test.stderr)
 and a blank summary error string do not mean the lock criterion passed.
-The nine offline self-test scenarios (`runs/extref_idle_prepared_20261109T012546Z_95hauim6/self_test.jsonl`)
+The nine [offline self-test scenarios](results/local_evidence/runs/extref_idle_prepared_20261109T012546Z_95hauim6/self_test.jsonl)
 checked software accounting/cleanup before this execution; they were not RF tests.
 
 **Meaning and limits.** The run **did not demonstrate external-reference lock**,
@@ -479,17 +518,474 @@ not a continuous electrical trace. Cleanup disabled ADF control in favor of DAC
 code 125; it did not restore an unknown exact prior ADF state or verify DAC voltage.
 No causal link to the November PVT failure follows from this idle clock test.
 
+### Stock 90-second replay: installed receiver, unchanged configuration, 3° mask
+
+**Purpose/setup.** Run one baseline on `hft02` using the installed
+`/usr/bin/gnss-sdr`, without a build, installation, download, new RF capture or
+configuration change. The binary reports **0.0.16** and the host package query
+reports **gnss-sdr 0.0.16-1 amd64**. Its SHA-256 is
+`92bd1d9e38228b8663021056203c0d9a2241f2b9a1de103d64dc5ab752335fee`, matching the
+previous installed-binary audit. A fresh scratch directory was created at
+`/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/`.
+The directory label records preparation time; the actual receiver execution
+times below come from the run status, not its directory name.
+
+Required input paths were checked before execution:
+
+- Configuration: `/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf`.
+  It selects `File_Signal_Source`, 2 Msps, +500 kHz IF, four channels pinned to
+  PRNs 5/12/21/22, `RTKLIB_PVT` Single mode, and **`PVT.elevation_mask=3.0`**.
+- IQ: `/home/rrama28/gnss/runs/rx1h_baseline_20261108_035309_7qbMJ8/rx1h.cf32`,
+  **1,440,000,000 bytes / 180,000,000 complex samples**, nominal **90 seconds**.
+- Ephemeris: `/home/rrama28/gnss/runs/nav_audit_9dvjj0co/recovered_ephemeris.xml`,
+  the **experimental** four-entry map including PRN21.
+- Ionosphere and UTC: `/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_iono.xml`
+  and `/home/rrama28/gnss/runs/nav_audit_9dvjj0co/gps_utc_model.xml`.
+
+All required inputs were present and readable. The receiver was launched with
+the original configuration path; the run's `config_used.conf` is a byte-identical
+provenance copy. No coordinate prior was supplied. The exact receiver command,
+executed once with stdin closed and stdout/stderr captured to `run.log`, was:
+
+```bash
+cd /home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd
+/usr/bin/timeout --signal=INT --kill-after=10s 180s /usr/bin/gnss-sdr \
+  --config_file=/home/rrama28/gnss/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf \
+  --log_dir=/home/rrama28/gnss/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal \
+  </dev/null >run.log 2>&1
+```
+
+The saved [command and exit record](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/exit_status.json)
+records start **2026-11-13T05:28:27.057524Z**, finish **05:28:34.692131Z**,
+elapsed **7.634608 s**, and **exit status 0**. The timeout did not fire. The
+file source announced **89.9 s** to process and the final console receiver-time
+line reached **1 min 30 s**. Exit zero is completion evidence, not a position fix.
+
+**Measured receiver output.** The [console log](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/run.log)
+reports **5 tracking starts**, **1 loss-of-lock event**, **4 bit-sync events**, and
+**45 decoded GPS NAV subframes**:
+
+| PRN | NAV messages | Subframe types represented |
+| --- | ---: | --- |
+| 5 | 13 | 1, 2, 3, 4, 5 |
+| 12 | 9 | 1, 2, 3, 4, 5 |
+| 21 | 12 | 1, 2, 3, 4, 5 |
+| 22 | 11 | 1, 2, 3, 4, 5 |
+
+The receiver explicitly logs loading all four assistance ephemerides. This does
+not establish native acceptance of PRN21's decoded ephemeris without the workaround.
+It also prints an `unrecognized XML syntaxFile: ./gps_almanac.xml` warning for
+the unprovided optional default almanac in the fresh working directory. The
+configured ephemeris/iono/UTC inputs loaded successfully; no default almanac was
+created or substituted.
+
+**First four valid observations and native rejection.** The native
+observables dump (hft02 local artifact: `runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat`)
+is **1,004,640 bytes / 4,485 epochs**, interpreted with the already documented
+four-channel, seven-double layout. There are **2,435 consecutive epochs** with
+all four `Flag_valid_pseudorange` values equal to 1, spanning TOW
+**14052.000–14100.680**, nominal **48.7 s** at 20 ms cadence. The first is
+zero-based epoch **2050**, byte offset **459200**. All four RX times are
+**14052.000 s**:
+
+| Channel | PRN | Interpolated transmit tag, s | Saved pseudorange, m | Valid-pseudorange flag |
+| --- | --- | ---: | ---: | ---: |
+| 0 | 5 | 14051.996768176508 | 968876.308168820 | 1 |
+| 1 | 12 | 14052.011901261272 | -3567908.370005769 | 1 |
+| 2 | 21 | 14052.006086997626 | -1824835.980243431 | 1 |
+| 3 | 22 | 14052.001575158074 | -472220.510892355 | 1 |
+
+Exact values are retained in [first-epoch JSON](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/first_four_valid_observations.json).
+These are valid observation flags at the Observables output, **not proof that
+four measurements survive PVT's elevation and other filters**. The stock logs
+do not expose the final used-satellite count or individual rejection reasons.
+
+The [native INFO log](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal/gnss-sdr.hft02.rrama28.log.INFO.20261113-052827.132453)
+line **463** records the first solver failure:
+
+```text
+RTKLIB rtkpos error: 03:54:12.00: point pos error ()
+```
+
+This is the same GPS time-of-day as TOW 14052.000. Every four-valid epoch has a
+matching native point-position error: **2,435 errors**, all with **empty reason
+text**. There are **zero native position messages**, and no NMEA file or position
+output file remains after exit. The NMEA printer was initialized, but initialization
+of an output writer does not establish a fix. **No native PVT fix was reported or
+saved.** Counts/window matching are saved in the
+[observation summary](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observation_window_summary.json)
+and [native error records](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/native_pvt_errors.json).
+
+**Interpretation/limits.** This run directly establishes that the stock receiver
+decodes NAV and reaches four valid observation flags, yet reports point-position
+failure throughout that interval. It does **not** directly confirm the standalone
+elevation-filtering diagnosis: the stock log supplies no elevation, intermediate
+position, filtered satellite list, residuals, or detailed solver failure condition.
+The earlier standalone diagnosis remains prior evidence only.
+
+The first four-valid epoch in this run is **14052.000**, not the earlier focused
+run's **14064.000**. No identity of those acquisition histories is asserted. This
+run also has four valid flags at TOW **14064.000** and a native empty-reason error
+there (INFO line **1113**); its actual observations are saved separately in
+[TOW 14064 JSON](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/tow_14064_observations.json).
+Those measurements were not replaced by the earlier standalone inputs, and no
+independent position or standalone solver was rerun.
+
+**Outputs/preservation.** All new receiver outputs are in the fresh directory:
+`run.log`, `internal/`, `observables.dat`, `tracking_ch_0.dat` through
+`tracking_ch_3.dat`, and the receiver's saved `gps_ephemeris.xml`, `gps_iono.xml`
+and `gps_utc_model.xml`. Run metadata, exact version/package output, first-epoch
+observations, analysis and [summary](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/summary.json)
+are stored alongside them. Before/after SHA-256 verification confirms that the
+original config, IQ, three navigation inputs and installed binary are
+[unchanged](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/input_hashes.json).
+No earlier result was overwritten. Only this workspace report was updated;
+the user-provided read-only document snapshot was not edited.
+
+### Empty-error audit: first stock failure at GPS TOW 14052.000
+
+**Scope/evidence.** This follow-up inspects the existing stock replay and local
+source copies only. No receiver or standalone solver was executed; no IQ was
+reprocessed, build attempted, configuration changed, or source patch applied.
+The [native log](results/local_evidence/runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/internal/gnss-sdr.hft02.rrama28.log.INFO.20261113-052827.132453)
+line **463** remains the direct receiver evidence:
+
+```text
+RTKLIB rtkpos error: 03:54:12.00: point pos error ()
+```
+
+The prefix is GPS time-of-day corresponding to **TOW 14052.000**, not its
+wall-clock execution time. The saved observation record is epoch **2050**, byte
+offset **459200**. The audit independently checked those exact raw dump bytes
+against the saved first-epoch JSON. A new
+[native context extract](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/native_first_failure_context.txt)
+preserves the surrounding lines. All four assistance entries were loaded before
+this epoch; PRN5 receives another ephemeris update at line **462**, immediately
+before the first error, with Toe=14400 and WN=396. That line does not contain the
+full updated ephemeris or all of its health/issue fields. The end-of-run XML is
+not a complete PVT-boundary snapshot of this epoch.
+
+**Where the text originates — source-level finding.** The inspected source is
+the existing separate `native_pvt_confirmation_recheck/source/` tree. It already
+contains the previously prepared logging-only changes, but was never built into
+the stock executable. Its diagnostic additions explain shifted line numbers;
+they do not constitute native receiver evidence. Exact source-to-installed-binary
+equivalence is still unproven. The relevant unchanged algorithm and error-buffer
+logic are preserved in [numbered source excerpts](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/source_excerpts.txt):
+
+1. `Rtklib_Solver::get_PVT()` calls `rtkpos()`. On return 0 it logs
+   `RTKLIB rtkpos error: ` followed by `d_rtk.errbuf`. This is the stock log's
+   `rtklib_solver.cc:898` emission point.
+2. `rtkpos()` creates `char msg[128] = ""`, then calls `pntpos(..., msg)`.
+   If that call fails, it formats `point pos error (%s)` using `msg`.
+   `errmsg()` prefixes the solution time and copies the formatted text into
+   `rtk.errbuf`. Its outer formatting does not generate a satellite rejection
+   reason independently.
+3. `pntpos()` explicitly clears `msg[0]` for nonempty input, propagates satellite
+   positions, and calls `estpos(..., msg)`.
+4. Three `estpos()` failure branches write their detailed reason into a local
+   `char msg_aux[128]`. The common failure exit then executes **`msg = msg_aux`**.
+   C++ passes that pointer by value: assigning it changes only the callee's
+   pointer. It copies no bytes back into the caller's cleared buffer. Therefore
+   `rtkpos()` can receive failure with `msg` still empty and print `()`.
+
+This identifies a **source-level cause of lost diagnostic text**, separately
+from the unresolved cause of the position failure in the installed receiver.
+The observed native formatting is consistent with this code; it does not by
+itself prove which branch the installed executable took.
+
+| Local-source return path | Detailed text written | Destination | Expected caller text on this path |
+| --- | --- | --- | --- |
+| `rescode()` returns `nv < NX` | `lack of valid sats ns=%d` | Local `msg_aux` | Empty after the ineffective pointer assignment |
+| `lsq()` returns nonzero `info` | `lsq error info=%d` | Local `msg_aux` | Empty |
+| All `MAXITR=10` iterations are exhausted | `iteration divergent i=%d` | Local `msg_aux` | Empty |
+| `pntpos()` receives `n <= 0` | `no observation data` | Caller `msg` | Nonempty |
+| Converged estimate fails residual validation | `chi-square error ...` | Caller `msg` via `valsol()` | Nonempty |
+| Converged estimate fails geometry validation | `gdop error ...` | Caller `msg` via `valsol()` | Nonempty |
+
+The first row's `%d` argument is **`nv`, the equation count**, despite its `ns`
+label. It must not be read as a satellite count. In this source `NX=7`, covering
+position, receiver clock and three additional constellation clock offsets.
+`ns` counts retained satellite measurements; `nv` also includes clock constraints.
+The redundant pointer assignment on the converged path does **not** erase an
+error already written by `valsol()` into the caller's buffer. Thus those validation
+failures normally provide a reason in this implementation. This narrows the
+source-based interpretation of blank text but is not a definitive exclusion of
+paths in an unverified binary build. The four-channel GPS configuration also
+cannot meet the `n >= 6` prerequisite for the RAIM retry. Velocity estimation
+occurs only after successful position estimation; its failure is not what this
+point-position error reports. The catalog is saved as
+[source failure paths](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/source_failure_paths.json).
+
+**Which observations reached which stage.** The available source first gates
+GPS L1 observations on the valid-pseudorange flag, matching PRN/signal and a
+healthy ephemeris. It then converts them to RTKLIB observations, marking
+`rcv=1`, and only invokes `rtkpos()` when more than three converted observations
+exist. With exactly four configured GPS channels, the emitted solver error is
+therefore consistent with **all four PRNs reaching the point-solver input**.
+That membership/count is a **source-derived inference**, not a native dump of
+the converted array. The native evidence directly records four Observables
+flags and the solver failure; it does not record the array at the call boundary.
+
+Within `rescode()` there are separate system, duplicate, geometric-distance,
+elevation, code/pseudorange availability, satellite-exclusion, ionosphere and
+troposphere rejection branches. Four inputs do not establish four retained
+measurements or a least-squares call. At the first stock epoch:
+
+| PRN | Native saved valid-pseudorange flag | Native computed elevation | Native result of requested 3° mask | Survives all native measurement filters |
+| --- | ---: | --- | --- | --- |
+| 5 | 1 | Not recorded | Not recorded | Not recorded |
+| 12 | 1 | Not recorded | Not recorded | Not recorded |
+| 21 | 1 | Not recorded | Not recorded | Not recorded |
+| 22 | 1 | Not recorded | Not recorded | Not recorded |
+
+The actual post-filter **`ns`**, equation count **`nv`**, iteration number,
+least-squares return code and per-satellite `vsat` values at **14052.000** are
+missing. The wrapper sets its public valid-observation count to **zero on any
+`rtkpos()` failure**; that reset is not evidence that zero measurements survived.
+The stock INFO log contains none of the `estpos`, `resprng`, `satazel error`,
+`lack of valid sats`, `lsq error`, `iteration divergent`, `gdop error`,
+`chi-square error`, `RTKLIB TRACE` or prepared PVT-boundary diagnostic records.
+Tracking dumps do not supply the solver's current position/elevations. Absent
+NMEA/position output and end-of-run navigation XML cannot recover these fields.
+The [native evidence/missing-fields record](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/native_evidence_and_missing_fields.json)
+explicitly stores the unavailable fields as null.
+
+**Prior standalone values, not native values for this epoch.** The already
+saved [3° standalone trace](results/local_evidence/runs/first_epoch_pvt_20261108_4/existing_3deg_trace.log)
+is for the other replay's **TOW 14064.000**, with its saved observations and an
+ECEF-zero initialization. Its iteration-1 results are:
+
+| PRN | Standalone-derived elevation at 14064.000 | 3° mask in that standalone solve |
+| --- | ---: | --- |
+| 5 | 1.797421352° | Reject |
+| 12 | 58.147161664° | Pass |
+| 21 | 27.267272705° | Pass |
+| 22 | 14.171253275° | Pass |
+
+That reconstruction retained **3 measurements / 6 equations**, failed `nv < 7`,
+and printed the local reason while its caller buffer remained empty. This is
+specific prior evidence for the elevation hypothesis and the error-copy defect.
+It supplies **no observed native elevations or filter counts for TOW 14052.000**.
+No new standalone calculation was made or transferred to the first stock epoch.
+
+**Smallest diagnostic change, proposed only.** To distinguish the three
+message-losing branches, replace just the common failure-exit pointer assignment
+with a bounded copy into the existing caller's 128-byte buffer:
+
+```cpp
+std::snprintf(msg, 128, "%s", msg_aux);
+```
+
+This changes error reporting only. It does not change initialization, the 3° mask,
+filtering, weights or solution validity. The earlier
+[error-copy proposal](results/local_evidence/runs/first_epoch_pvt_20261108_4/proposed_error_propagation.patch)
+already contains this fix plus removal of the redundant converged-path assignment;
+it remains **unapplied**.
+
+To test elevation filtering specifically, also add a bounded diagnostic for
+**TOW 14052.000** at the native error branch: print the actual converted input
+PRNs/count, configured mask, and each satellite's `ssat[sat-1].azel[1]`, `.vs`
+and residual. The available `pntpos()` code populates those arrays even after
+an `estpos()` failure. Log them before the wrapper resets its public observation
+count. An early rejection before geometry leaves zero angle placeholders, so
+zero must not be presented as a computed elevation; tag geometry-not-computed
+and the rejected branch inside `rescode()` when necessary. A target-only record
+just after `rescode()` returns can additionally capture **iteration, `x`, `ns`,
+`nv`, `NX` and `vsat`**, without confusing equations with satellites. These are
+the minimal additional observations needed to tie low elevation to the actual
+native failure, rather than infer it from the earlier standalone solve.
+
+The old prepared PVT-boundary logging targets **14064.000**; it would miss the
+first failure unless its target were changed to **14052.000**. Existing glog
+verbosity could expose some internal traces, but does not fix the missing buffer
+copy and is not itself a saved measurement. No logging flag, receiver, config or
+source was changed for this audit. No build or new replay was attempted.
+
+**Preservation.** The [audit preservation record](results/local_evidence/runs/point_pos_error_14052_audit__kio7sl6/preservation_hashes.json)
+confirms unchanged hashes for the inspected original replay files, configuration,
+ephemeris inputs, installed binary and source copies. IQ was not opened or replayed.
+Only this report and new analysis artifacts were written. The stock replay still
+depends on experimental PRN21 XML, supplies no receiver coordinates and has no
+reported native PVT fix. No native elevation-filtering confirmation follows from
+the existing empty-reason errors. No commit or push was made.
+
+### Native TOW 14052 diagnostic request: blocked at local dependency check
+
+**Purpose/outcome.** Check for an existing diagnostic receiver or an isolated
+build with complete compatible dependencies before adding bounded error copying
+and TOW-14052-only logging. Following the native build report, a fresh read-only
+inventory was performed **on hft02 outside the restricted filesystem view** at
+**2026-11-13T05:59:41.926098Z**. No usable native diagnostic receiver was found
+in the searched locations. Required development inputs are still absent, so
+work stopped **before changing a source copy, configuring/building GNSS-SDR or
+running a replay**. No install, download, sudo, stock replacement, commit or push
+was performed.
+
+Evidence is saved in the fresh directory
+`/home/rrama28/gnss/runs/native_14052_dependency_check_n17mm09y/`:
+
+- [Host inventory](results/local_evidence/runs/native_14052_dependency_check_n17mm09y/host_inventory.json):
+  searched paths, binary candidates, CMake cache entries, development files,
+  package-cache/source-cache checks, compiler preprocessing results and access limits.
+- [Preflight log](results/local_evidence/runs/native_14052_dependency_check_n17mm09y/preflight.log):
+  exact missing-header diagnostics; this is not a GNSS-SDR build/replay log.
+- [Package versions](results/local_evidence/runs/native_14052_dependency_check_n17mm09y/package_query.txt):
+  installed stock receiver and dependency runtimes; missing development packages.
+- [Build status](results/local_evidence/runs/native_14052_dependency_check_n17mm09y/build_status.json):
+  explicitly records source edits, build and replay as not performed.
+
+**Existing binary/build search.** The inventory covered accessible locations under
+`/home/rrama28`, `/usr/local`, `/opt` and `/tmp`, standard system development
+paths, and relevant archives in `/var/cache/apt/archives`. It excluded credential,
+editor/plugin, Git, package-cache and generated dependency directories listed in
+the JSON; unrelated protected service/container directories could not be read.
+Thus this is a scoped availability result, not proof about every filesystem
+location. The only matching non-stock ELF programs found were
+`runs/first_epoch_pvt_20261108_3/first_pvt_epoch` and
+`runs/first_epoch_pvt_20261108_4/first_pvt_epoch`: **standalone epoch harnesses**, not
+native receiver executables. They were not run.
+
+The two existing isolated receiver build directories
+`runs/native_pvt_confirmation_20261108_1/build/` and
+`runs/native_pvt_confirmation_recheck/build/` still cache missing PugiXML
+development paths and contain no usable receiver. The original
+`/home/rrama28/src/gnss-sdr-0.0.16/build/` cache also lists missing PugiXML,
+Protobuf headers/libraries/compiler and VOLK-GNSSSDR library discovery. Its
+`build/thirdparty/pugixml/` and `build/thirdparty/protobuf/` directories each
+contain **zero regular files**. No matching local dependency archive or alternate
+header/compiler set was found in the searched locations. The existing GPSTk
+build cache does not supply these missing dependencies.
+
+**Exact confirmed missing files.** The host compiler's `c++ -x c++ -E -` probes
+each returned **1**, with fatal missing-include diagnostics:
+
+| Required development input | Missing conventional path | Compatible version for existing runtime |
+| --- | --- | --- |
+| PugiXML public header | `/usr/include/pugixml.hpp` | 1.12.1 |
+| PugiXML configuration header | `/usr/include/pugiconfig.hpp` | 1.12.1 |
+| Protobuf public message header | `/usr/include/google/protobuf/message.h` | 3.12.4 |
+| Protobuf support header | `/usr/include/google/protobuf/stubs/common.h` | 3.12.4 |
+| Protobuf schema compiler | `/usr/bin/protoc`; also absent at `/usr/local/bin/protoc` and on PATH | 3.12.4 |
+
+The Protobuf headers must come from the **complete matching header distribution**;
+the two named files are confirmed missing examples, not a sufficient header set
+by themselves. The inventory also found no alternate copies of these required
+files under its search roots.
+
+The versioned runtimes **do exist**:
+`/usr/lib/x86_64-linux-gnu/libpugixml.so.1.12`
+(`libpugixml1v5 1.12.1-1 amd64`) and
+`/usr/lib/x86_64-linux-gnu/libprotobuf.so.23.0.4`
+(`libprotobuf23 3.12.4-1ubuntu7.22.04.6 amd64`). The automatic link-time discovery
+names `libpugixml.so` and `libprotobuf.so` are absent; explicit local CMake
+library paths could use the existing versioned files once matching headers and
+tools are available. If a future local `protoc` dynamically needs
+`/usr/lib/x86_64-linux-gnu/libprotoc.so.23`, that compiler runtime is absent too.
+No new runtime or headers were substituted. These are confirmed prerequisites;
+later compile/link stages remain untested.
+
+**Native result and limits.** There is **no new native TOW 14052 trace**, so this
+attempt cannot identify the actual solver failure path, per-satellite elevations,
+3° decisions, iteration or `ns/nv` counts. It does not promote the earlier
+standalone elevation diagnosis to native confirmation. The stock executable's
+SHA-256 still matches the previous stock baseline; configs and inputs were not
+modified. The requested diagnostic would retain the same experimental PRN21 XML,
+3° mask and no supplied coordinates, but that replay was not performed. No
+fabricated build or replay log is presented in place of the preflight result.
+
+## 2026-11-13: exact 14052 reconstruction and provisional-position candidate
+
+**Scope.** This task built only isolated standalone epoch harnesses using existing
+local dependencies. It did not retry a full receiver build or perform a new native
+replay. Original configs, saved observations/NAV, IQ and the installed binary are
+unchanged; [fresh hash checks](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/preservation.json)
+include the 1.44 GB IQ against the prior stock-run manifest. No package changes,
+downloads, sudo, upload, commit or push occurred.
+
+**Inputs.** The actual stock replay's
+observables (hft02 local artifact: `runs/stock_rx1h_90s_3deg_20261113T033819Z_eg_8pwsd/observables.dat`)
+record 2050 / offset 459200 contains RX TOW exactly **14052.000** for all four
+channels, range-valid flags 1, and PRNs **5,12,21,22**. All saved values were retained
+in [epoch14052.json](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/epoch14052.json).
+No 14064 measurements were substituted. The unchanged experimental assistance
+contains healthy ephemerides with Toe/Toc 14400, WN 396 -> full week 2444 and age
+-348 s; native-library ephemeris selection and satellite-position calculation
+succeed. These are preloaded assistance, including later NAV tag 14088, not proof
+of unassisted availability at that epoch. [Navigation audit](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/navigation_input_audit.json)
+verifies PRN21 alone was added and all existing PRN5/12/22 XML fields stayed intact.
+
+**First reconstructed failure.** Zero initial ECEF/clock -> iteration 0 ns=4/nv=7 ->
+successful first LSQ update -> iteration 1 elevations PRN5 **1.721378797°**,
+PRN12 **58.103683246°**, PRN21 **27.176934912°**, PRN22 **14.259101015°**.
+Only PRN5 fails 3°. Then **ns=3 / nv=6 / required=7** fails before the next LSQ call.
+The string `lack of valid sats ns=6` misleadingly prints the equation count.
+[Full baseline trace](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/baseline_first.log)
+and [JSON result](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/baseline_first.jsonl)
+record the state/counts. The existing harness independently reproduces this exact
+14052 failure with empty caller text; the separate bounded copy repair exposes
+the reason without changing solver decisions.
+
+**Candidate and continuity.** A [separate functional patch](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/build2/provisional_position_only.patch)
+defers only the mask during zero-position bootstrap; after provisional convergence
+it runs residual selection/solve with the original 3° options and existing final
+validation. The shared 10-iteration limit remains. At 14052 provisional iterations 0–6
+retain four satellites; configured-mask iteration 7 passes with elevations
+**4.184817452°,57.826873826°,30.054682690°,17.235804852°** and ns=4/nv=7.
+The [candidate trace](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/candidate_first.log)
+shows `valsol()` and standalone `SOLQ_SINGLE` status5. No receiver coordinates
+were supplied. The baseline fails **0/2435 successes**; the candidate succeeds
+**2435/2435**, from 14052.000 to14100.680 without 20 ms gaps, both resetting at every
+epoch and carrying position forward. The [original 15° control](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/candidate_first_15deg.jsonl)
+rejects PRN5 after provisional convergence and reports insufficient equations.
+
+**Quality limits.** Sequential residual RMS is at most 2.71e-5 m, maximum absolute
+residual 5.15e-5 m, GDOP 7.03115–7.09429. With only four ranges, `nv==NX`; the unchanged
+chi-square test has no redundant degrees of freedom. Nearly zero residuals do
+not establish accuracy. Positions scatter 55.52 m RMS in 3D, with maximum 16.83 m
+consecutive step and height 144.55–360.87 m. The historical approximate location
+provides a consistency check only: 12.55 m horizontal difference at the first
+solution, 1.05–109.05 m over the sequence; no surveyed coordinates/height are
+available. An independent position calculation was not repeated or used as a seed.
+[Metrics and counts](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/window_summary.json),
+[exact commands/exits](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/window_commands.json),
+[build commands](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/build2/build_commands.json)
+and full report/reproduction (hft02 local artifact: `docs/RX1H_14052_BOOTSTRAP_RESULTS.md`) are retained.
+
+**Still unverified.** No successful **native receiver** fix or native failure-path
+confirmation is claimed. Missing full native selected ephemeris at the first
+failure, native initial state/solver boundary, and post-filter trace prevent that
+conclusion. Saved final XML equals the assistance numerically but cannot prove
+first-epoch state. CN0/extra flags were not dumped; SNR masking is disabled in
+the reconstructed setup. Native feedback and acquisition scheduling are outside
+the harness. **All successful candidate tests depend on the experimental PRN21
+XML**, and the available local source is not proven identical to the packaged
+binary. External-reference lock remains unverified and was not tested here.
+
+**Prepared next step.** [Native plan](results/local_evidence/runs/epoch14052_bootstrap_dvazj6li/native_plan/README.md)
+separates error-copy repair, exact-TOW diagnostics and functional candidate.
+Both native patch profiles apply cleanly; solver diagnostic units compile, but
+the full receiver/boundary wrapper do not have a verified build. Matching
+PugiXML 1.12.1 headers and Protobuf 3.12.4 headers/protoc (and libprotoc runtime if
+needed) remain the confirmed local blockers. The plan uses preprovisioned
+compatible dependencies elsewhere and network-disabled builds, then diagnoses
+before changing behavior. It specifies inputs, replay command and logs to
+separate filtering, LSQ, divergence and final-validation paths. No external
+upload, provisioning or CI execution occurred; obtain approval first.
+
 ## Where to resume and what not to infer
 
-1. Preserve 90 s IQ (`runs/rx1h_baseline_20261108_035309_7qbMJ8/rx1h.cf32`),
-   focused observations (`runs/rx1h_four_prn_axlbe7v2/observables.dat`),
-   focused config (`runs/rx1h_four_prn_axlbe7v2/config_used.conf`), the
-   3° config (`runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf`), and their
+1. Preserve 90 s IQ (hft02 local artifact: `runs/rx1h_baseline_20261108_035309_7qbMJ8/rx1h.cf32`),
+   focused observations (hft02 local artifact: `runs/rx1h_four_prn_axlbe7v2/observables.dat`),
+   [focused config](results/local_evidence/runs/rx1h_four_prn_axlbe7v2/config_used.conf), the
+   [3° config](results/local_evidence/runs/rx1h_pvt_lowmask_cs0kpzfz/config_used.conf), and their
    experimental NAV provenance as the regression set. Independent-position
    calculations and standalone seeded successes must remain labelled as such.
 2. Resolve the native build dependency gap before claiming a native rejection
-   trace, unaided initialization repair, or continuous fixes. Keep the logging,
-   caller-error correction and functional initialization proposal distinct.
+   trace or continuous receiver fixes. The exact 14052 standalone bootstrap
+   candidate now passes the saved 2435-epoch window, but does not establish native
+   or unassisted cold-start success. Keep logging, caller-error correction and
+   the tested functional candidate distinct.
 3. For clock work, start from the completed low-status result and documented DAC
    end state. A source setter, reference readback, Soapy CGEN/LO lock, a historical
    high MUXOUT sample, or successful NAV does not prove sustained external lock.
@@ -513,13 +1009,13 @@ This cleanup creates only this document. It moves the original project summary
 from `docs/GNSS_SDR_PROJECT_SUMMARY.md` to
 [GNSS_SDR_PROJECT_SUMMARY.md](GNSS_SDR_PROJECT_SUMMARY.md), without changing its
 contents. It moves the two otherwise unreferenced root gain-sweep launch logs to
-historical launch logs (`runs/historical_launch_logs`), preserving their
+[historical launch logs](results/local_evidence/runs/historical_launch_logs), preserving their
 names and contents. Their embedded absolute references to absent run directories
 were already unresolved; moving the logs neither repairs nor changes those records.
 
-Other historical reports stay in docs (`docs`): their relative sibling and
+Other historical reports stay in [docs](..): their relative sibling and
 `../runs`/`../output` links must keep working. Scripts stay in
-scripts (`scripts`) because launchers derive the project root from their
+[scripts](../../scripts) because launchers derive the project root from their
 own location and prepared manifests hash exact source paths. Configs and run
 directories stay in place because templates, helper scripts, JSON provenance,
 build metadata and saved commands contain exact paths into them. Examples include

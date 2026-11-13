@@ -1,0 +1,30 @@
+--- a/src/algorithms/libs/rtklib/src/algorithms/libs/rtklib/rtklib_pntpos.cc
++++ b/src/algorithms/libs/rtklib/rtklib_pntpos.cc
+@@ -631,10 +631,14 @@
+             x[i] = sol->rr[i];
+         }
+ 
++    bool provisional_position = norm_rtk(x, 3) == 0.0;
++    prcopt_t provisional_opt = *opt;
++    provisional_opt.elmin = -GNSS_PI / 2.0;
++
+     for (i = 0; i < MAXITR; i++)
+         {
+             /* pseudorange residuals */
+-            nv = rescode(i, obs, n, rs, dts, vare, svh, nav, x, opt, v, H, var, azel, vsat, resp, &ns);
++            nv = rescode(i, obs, n, rs, dts, vare, svh, nav, x, provisional_position ? &provisional_opt : opt, v, H, var, azel, vsat, resp, &ns);
+ 
+             if (nv < NX)
+                 {
+@@ -664,6 +668,11 @@
+ 
+             if (norm_rtk(dx, NX) < 1e-4)
+                 {
++                    if (provisional_position)
++                        {
++                            provisional_position = false;
++                            continue;  // Recompute with the configured mask before validation.
++                        }
+                     sol->type = 0;
+                     sol->time = timeadd(obs[0].time, -x[3] / SPEED_OF_LIGHT_M_S);
+                     sol->dtr[0] = x[3] / SPEED_OF_LIGHT_M_S; /* receiver clock bias (s) */

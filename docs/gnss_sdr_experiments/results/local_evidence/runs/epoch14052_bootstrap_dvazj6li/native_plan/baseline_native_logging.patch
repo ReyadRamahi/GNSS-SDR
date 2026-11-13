@@ -1,0 +1,116 @@
+--- a/src/algorithms/libs/rtklib/rtklib_pntpos.cc
++++ b/src/algorithms/libs/rtklib/rtklib_pntpos.cc
+@@ -34,6 +34,7 @@
+ #include "rtklib_ionex.h"
+ #include "rtklib_sbas.h"
+ #include <cstring>
++#include <cstdio>
+ 
+ /* pseudorange measurement error variance ------------------------------------*/
+ double varerr(const prcopt_t *opt, double el, int sys)
+@@ -431,6 +432,7 @@
+     dtr = x[3];
+ 
+     ecef2pos(rr, pos);
++    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "STATE iter=%d x=%.12f %.12f %.12f clock_m=%.12f\n", iter, rr[0], rr[1], rr[2], dtr);
+ 
+     for (i = *ns = 0; i < n && i < MAXOBS; i++)
+         {
+@@ -453,18 +455,22 @@
+             /* geometric distance/azimuth/elevation angle */
+             if ((r = geodist(rs + i * 6, rr, e)) <= 0.0)
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=geodist\n", iter, obs[i].sat);
+                     trace(4, "geodist error\n");
+                     continue;
+                 }
+             double elaux = satazel(pos, e, azel + i * 2);
++            if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "ELEV iter=%d prn=%d elevation_deg=%.12f effective_mask_deg=%.12f passes=%d\n", iter, obs[i].sat, elaux*R2D, opt->elmin*R2D, elaux >= opt->elmin);
+             if (elaux < opt->elmin)
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=elevation\n", iter, obs[i].sat);
+                     trace(4, "satazel error. el = %lf , elmin = %lf\n", elaux, opt->elmin);
+                     continue;
+                 }
+             /* psudorange with code bias correction */
+             if ((P = prange(obs + i, nav, azel + i * 2, iter, opt, &vmeas)) == 0.0)
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=prange_or_snr\n", iter, obs[i].sat);
+                     trace(4, "prange error\n");
+                     continue;
+                 }
+@@ -472,6 +478,7 @@
+             /* excluded satellite? */
+             if (satexclude(obs[i].sat, svh[i], opt))
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=health_or_exclusion\n", iter, obs[i].sat);
+                     trace(4, "satexclude error\n");
+                     continue;
+                 }
+@@ -480,6 +487,7 @@
+             if (!ionocorr(obs[i].time, nav, obs[i].sat, pos, azel + i * 2,
+                     iter > 0 ? opt->ionoopt : IONOOPT_BRDC, &dion, &vion))
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=ionosphere\n", iter, obs[i].sat);
+                     trace(4, "ionocorr error\n");
+                     continue;
+                 }
+@@ -493,6 +501,7 @@
+             if (!tropcorr(obs[i].time, nav, pos, azel + i * 2,
+                     iter > 0 ? opt->tropopt : TROPOPT_SAAS, &dtrp, &vtrp))
+                 {
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_REJECT iter=%d sat=%d reason=troposphere\n", iter, obs[i].sat);
+                     trace(4, "tropocorr error\n");
+                     continue;
+                 }
+@@ -636,6 +645,7 @@
+             /* pseudorange residuals */
+             nv = rescode(i, obs, n, rs, dts, vare, svh, nav, x, opt, v, H, var, azel, vsat, resp, &ns);
+ 
++            if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "COUNTS iter=%d phase=%s n=%d ns=%d nv=%d required=%d\n", i, "configured", n, ns, nv, NX);
+             if (nv < NX)
+                 {
+                     std::snprintf(msg_aux, sizeof(msg_aux), "lack of valid sats ns=%d", nv);
+@@ -657,6 +667,7 @@
+                     std::snprintf(msg_aux, sizeof(msg_aux), "lsq error info=%d", info);
+                     break;
+                 }
++            if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_LSQ iter=%d info=0 step_norm=%.12f\n", i, norm_rtk(dx,NX));
+             for (j = 0; j < NX; j++)
+                 {
+                     x[j] += dx[j];
+@@ -689,6 +700,7 @@
+                         {
+                             sol->stat = opt->sateph == EPHOPT_SBAS ? SOLQ_SBAS : SOLQ_SINGLE;
+                         }
++                    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "NATIVE14052_VALIDATION stat=%d ns=%d nv=%d reason=%s\n", stat, ns, nv, msg);
+                     free(v);
+                     free(H);
+                     free(var);
+@@ -704,6 +716,7 @@
+     free(v);
+     free(H);
+     free(var);
++    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6) std::fprintf(stderr, "FAIL iter=%d ns=%d nv=%d reason=%s\n", i, ns, nv, msg_aux);
+     std::snprintf(msg, 128, "%s", msg_aux);
+ 
+     return 0;
+@@ -1021,6 +1034,18 @@
+     /* satellite positions, velocities and clocks */
+     satposs(sol->time, obs, n, nav, opt_.sateph, rs, dts, var, svh);
+ 
++    if (std::fabs(time2gpst(obs[0].time, nullptr) - 14052.0) < 1e-6)
++        {
++            std::fprintf(stderr, "NATIVE14052_OPTIONS mode=%d mask_deg=%.12f iono=%d trop=%d maxgdop=%.12f init=%.12f %.12f %.12f\n", opt_.mode, opt_.elmin*R2D, opt_.ionoopt, opt_.tropopt, opt_.maxgdop, sol->rr[0], sol->rr[1], sol->rr[2]);
++            for (int k=0; k<n; ++k)
++                std::fprintf(stderr, "NATIVE14052_INPUT sat=%d tow=%.12f P=%.12f SNR=%d rs=%.12f %.12f %.12f dts=%.17g variance=%.12f svh=%d\n", obs[k].sat, time2gpst(obs[k].time,nullptr), obs[k].P[0], obs[k].SNR[0], rs[k*6], rs[k*6+1], rs[k*6+2], dts[k*2], var[k], svh[k]);
++            for (int k=0; k<nav->n; ++k)
++                {
++                    const auto& e=nav->eph[k];
++                    std::fprintf(stderr, "NATIVE14052_EPH sat=%d week=%d toe=%.12f toc=%.12f iode=%d iodc=%d health=%d sva=%d A=%.17g e=%.17g i0=%.17g OMG0=%.17g omg=%.17g M0=%.17g deln=%.17g OMGd=%.17g idot=%.17g crc=%.17g crs=%.17g cuc=%.17g cus=%.17g cic=%.17g cis=%.17g f0=%.17g f1=%.17g f2=%.17g tgd=%.17g\n", e.sat,e.week,time2gpst(e.toe,nullptr),time2gpst(e.toc,nullptr),e.iode,e.iodc,e.svh,e.sva,e.A,e.e,e.i0,e.OMG0,e.omg,e.M0,e.deln,e.OMGd,e.idot,e.crc,e.crs,e.cuc,e.cus,e.cic,e.cis,e.f0,e.f1,e.f2,e.tgd[0]);
++                }
++        }
++
+     /* estimate receiver position with pseudorange */
+     stat = estpos(obs, n, rs, dts, var, svh, nav, &opt_, sol, azel_, vsat, resp, msg);
+ 

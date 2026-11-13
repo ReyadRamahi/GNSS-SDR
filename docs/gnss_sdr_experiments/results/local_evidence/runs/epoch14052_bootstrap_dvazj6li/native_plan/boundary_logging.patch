@@ -1,0 +1,42 @@
+--- a/src/algorithms/PVT/libs/rtklib_solver.cc
++++ b/src/algorithms/PVT/libs/rtklib_solver.cc
+@@ -39,6 +39,8 @@
+ #include <glog/logging.h>
+ #include <matio.h>
+ #include <exception>
++#include <cmath>
++#include <iomanip>
+ #include <utility>
+ #include <vector>
+ 
+@@ -891,6 +893,30 @@
+                         }
+                 }
+ 
++            // Diagnostic only: input to the native solver at the target epoch.
++            if (valid_obs + glo_valid_obs > 0 &&
++                std::fabs(time2gpst(d_obs_data[0].time, nullptr) - 14052.0) < 1e-6)
++                {
++                    for (const auto& entry : gnss_observables_map)
++                        {
++                            const auto& o = entry.second;
++                            LOG(INFO) << std::setprecision(17) << "NATIVE14052_BOUNDARY channel=" << entry.first
++                                      << " prn=" << o.PRN << " rx=" << o.RX_time << " tx_ms=" << o.interp_TOW_ms
++                                      << " P=" << o.Pseudorange_m << " CN0=" << o.CN0_dB_hz
++                                      << " valid_range=" << o.Flag_valid_pseudorange
++                                      << " valid_word=" << o.Flag_valid_word
++                                      << " valid_symbol=" << o.Flag_valid_symbol_output;
++                            const auto selected = gps_ephemeris_map.find(o.PRN);
++                            if (selected != gps_ephemeris_map.end())
++                                {
++                                    const auto& e = selected->second;
++                                    LOG(INFO) << "NATIVE14052_RAW_EPH prn=" << e.PRN << " WN=" << e.WN
++                                              << " toe=" << e.toe << " toc=" << e.toc << " nav_tow=" << e.tow
++                                              << " health=" << e.SV_health << " accuracy=" << e.SV_accuracy
++                                              << " IODC=" << e.IODC << " IODE2=" << e.IODE_SF2 << " IODE3=" << e.IODE_SF3;
++                                }
++                        }
++                }
+             result = rtkpos(&d_rtk, d_obs_data.data(), valid_obs + glo_valid_obs, &nav_data);
+ 
+             if (result == 0)

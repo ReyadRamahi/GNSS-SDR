@@ -1,0 +1,475 @@
+Initializing GNSS-SDR v0.0.16 ... Please wait.
+Logging will be written at "/tmp"
+Use gnss-sdr --log_dir=/path/to/log to change that.
+RF Channels: 1
+Processing file /home/rrama28/gnss/runs/iq_capture_20260505_053251/lime_iq_capture.dat, which contains 720000000 samples (5760000000 bytes)
+GNSS signal recorded time to be processed: 359.9 [s]
+Trying to read GNSS ephemeris from XML file(s)...
+From XML file: Read NAV ephemeris for satellite GPS PRN 26 (Block IIF)
+From XML file: Read NAV ephemeris for satellite GPS PRN 03 (Block IIF)
+From XML file: Read NAV ephemeris for satellite GPS PRN 16 (Block IIR)
+From XML file: Read NAV ephemeris for satellite GPS PRN 01 (Block IIF)
+From XML file: Read NAV ephemeris for satellite GPS PRN 04 (Block III)
+From XML file: Read GPS UTC model parameters.
+From XML file: Read GPS ionosphere model parameters.
+GNSS assistance data loaded from local XML file(s).
+Current receiver time: 1 s
+Get visible satellites at 05/05/2026 05:41:25 UTC, assuming RX position 41.8807 [deg], -87.6439 [deg], 0 [m]
+Using GPS Ephemeris: Sat 1 Az: 236.581 El: 1.30187
+Using GPS Ephemeris: Sat 3 Az: 264.7 El: 54.0235
+Using GPS Ephemeris: Sat 4 Az: 306.557 El: 33.0189
+Using GPS Ephemeris: Sat 16 Az: 180.609 El: 43.3819
+Using GPS Ephemeris: Sat 26 Az: 134.667 El: 71.0956
+Current receiver time: 2 s
+Current receiver time: 3 s
+Current receiver time: 4 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 5 s
+Current receiver time: 6 s
+Current receiver time: 7 s
+Current receiver time: 8 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 9 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 10 s
+Current receiver time: 11 s
+Current receiver time: 12 s
+Current receiver time: 13 s
+Current receiver time: 14 s
+Current receiver time: 15 s
+Current receiver time: 16 s
+Current receiver time: 17 s
+Current receiver time: 18 s
+Current receiver time: 19 s
+Current receiver time: 20 s
+Loss of lock in channel 1!
+Current receiver time: 21 s
+Current receiver time: 22 s
+Current receiver time: 23 s
+Current receiver time: 24 s
+Loss of lock in channel 0!
+Current receiver time: 25 s
+Loss of lock in channel 3!
+Current receiver time: 26 s
+Current receiver time: 27 s
+Current receiver time: 28 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 29 s
+Current receiver time: 30 s
+Current receiver time: 31 s
+Current receiver time: 32 s
+Current receiver time: 33 s
+Current receiver time: 34 s
+Current receiver time: 35 s
+Current receiver time: 36 s
+Current receiver time: 37 s
+Current receiver time: 38 s
+Current receiver time: 39 s
+Current receiver time: 40 s
+Current receiver time: 41 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 42 s
+Current receiver time: 43 s
+Current receiver time: 44 s
+Loss of lock in channel 2!
+Current receiver time: 45 s
+Current receiver time: 46 s
+Current receiver time: 47 s
+Current receiver time: 48 s
+Current receiver time: 49 s
+Current receiver time: 50 s
+Current receiver time: 51 s
+Current receiver time: 52 s
+Current receiver time: 53 s
+Current receiver time: 54 s
+Current receiver time: 55 s
+Current receiver time: 56 s
+Current receiver time: 57 s
+Loss of lock in channel 0!
+Current receiver time: 58 s
+Current receiver time: 59 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 1 min 0 s
+Current receiver time: 1 min 1 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 1 min 2 s
+Current receiver time: 1 min 3 s
+Current receiver time: 1 min 4 s
+Current receiver time: 1 min 5 s
+Current receiver time: 1 min 6 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 1 min 7 s
+Current receiver time: 1 min 8 s
+Current receiver time: 1 min 9 s
+Current receiver time: 1 min 10 s
+Current receiver time: 1 min 11 s
+Current receiver time: 1 min 12 s
+Current receiver time: 1 min 13 s
+Current receiver time: 1 min 14 s
+Current receiver time: 1 min 15 s
+Loss of lock in channel 2!
+Current receiver time: 1 min 16 s
+Current receiver time: 1 min 17 s
+Loss of lock in channel 3!
+Current receiver time: 1 min 18 s
+Current receiver time: 1 min 19 s
+Current receiver time: 1 min 20 s
+Current receiver time: 1 min 21 s
+Current receiver time: 1 min 22 s
+Loss of lock in channel 1!
+Current receiver time: 1 min 23 s
+Current receiver time: 1 min 24 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 1 min 25 s
+Current receiver time: 1 min 26 s
+Current receiver time: 1 min 27 s
+Current receiver time: 1 min 28 s
+Current receiver time: 1 min 29 s
+Current receiver time: 1 min 30 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 1 min 31 s
+Current receiver time: 1 min 32 s
+Current receiver time: 1 min 33 s
+Current receiver time: 1 min 34 s
+Current receiver time: 1 min 35 s
+Current receiver time: 1 min 36 s
+Loss of lock in channel 1!
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 1 min 37 s
+Current receiver time: 1 min 38 s
+Current receiver time: 1 min 39 s
+Current receiver time: 1 min 40 s
+Current receiver time: 1 min 41 s
+Current receiver time: 1 min 42 s
+Current receiver time: 1 min 43 s
+Current receiver time: 1 min 44 s
+Current receiver time: 1 min 45 s
+Current receiver time: 1 min 46 s
+Loss of lock in channel 3!
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 1 min 47 s
+Current receiver time: 1 min 48 s
+Current receiver time: 1 min 49 s
+Current receiver time: 1 min 50 s
+Current receiver time: 1 min 51 s
+Current receiver time: 1 min 52 s
+Loss of lock in channel 4!
+Current receiver time: 1 min 53 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 1 min 54 s
+Current receiver time: 1 min 55 s
+Current receiver time: 1 min 56 s
+Current receiver time: 1 min 57 s
+Current receiver time: 1 min 58 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 1 min 59 s
+Current receiver time: 2 min 0 s
+Current receiver time: 2 min 1 s
+Current receiver time: 2 min 2 s
+Loss of lock in channel 1!
+Current receiver time: 2 min 3 s
+Current receiver time: 2 min 4 s
+Current receiver time: 2 min 5 s
+Current receiver time: 2 min 6 s
+Current receiver time: 2 min 7 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 2 min 8 s
+Current receiver time: 2 min 9 s
+Loss of lock in channel 3!
+Current receiver time: 2 min 10 s
+Current receiver time: 2 min 11 s
+Current receiver time: 2 min 12 s
+Current receiver time: 2 min 13 s
+Current receiver time: 2 min 14 s
+Loss of lock in channel 0!
+Current receiver time: 2 min 15 s
+Current receiver time: 2 min 16 s
+Current receiver time: 2 min 17 s
+Current receiver time: 2 min 18 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 2 min 19 s
+Current receiver time: 2 min 20 s
+Current receiver time: 2 min 21 s
+Current receiver time: 2 min 22 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 2 min 23 s
+Loss of lock in channel 4!
+Current receiver time: 2 min 24 s
+Current receiver time: 2 min 25 s
+Current receiver time: 2 min 26 s
+Current receiver time: 2 min 27 s
+Current receiver time: 2 min 28 s
+Current receiver time: 2 min 29 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 2 min 30 s
+Current receiver time: 2 min 31 s
+Current receiver time: 2 min 32 s
+Current receiver time: 2 min 33 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 2 min 34 s
+Loss of lock in channel 2!
+Current receiver time: 2 min 35 s
+Current receiver time: 2 min 36 s
+Current receiver time: 2 min 37 s
+Current receiver time: 2 min 38 s
+Loss of lock in channel 1!
+Current receiver time: 2 min 39 s
+Current receiver time: 2 min 40 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 2 min 41 s
+Current receiver time: 2 min 42 s
+Current receiver time: 2 min 43 s
+Current receiver time: 2 min 44 s
+Current receiver time: 2 min 45 s
+Loss of lock in channel 0!
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 2 min 46 s
+Current receiver time: 2 min 47 s
+Current receiver time: 2 min 48 s
+Current receiver time: 2 min 49 s
+Loss of lock in channel 3!
+Current receiver time: 2 min 50 s
+Current receiver time: 2 min 51 s
+Current receiver time: 2 min 52 s
+Current receiver time: 2 min 53 s
+Loss of lock in channel 4!
+Current receiver time: 2 min 54 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 2 min 55 s
+Current receiver time: 2 min 56 s
+Current receiver time: 2 min 57 s
+Current receiver time: 2 min 58 s
+Current receiver time: 2 min 59 s
+Current receiver time: 3 min 0 s
+Current receiver time: 3 min 1 s
+Loss of lock in channel 1!
+Current receiver time: 3 min 2 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 3 min 3 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 3 min 4 s
+Current receiver time: 3 min 5 s
+Current receiver time: 3 min 6 s
+Current receiver time: 3 min 7 s
+Current receiver time: 3 min 8 s
+Current receiver time: 3 min 9 s
+Current receiver time: 3 min 10 s
+Loss of lock in channel 3!
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 3 min 11 s
+Current receiver time: 3 min 12 s
+Current receiver time: 3 min 13 s
+Current receiver time: 3 min 14 s
+Current receiver time: 3 min 15 s
+Current receiver time: 3 min 16 s
+Current receiver time: 3 min 17 s
+Current receiver time: 3 min 18 s
+Loss of lock in channel 0!
+Current receiver time: 3 min 19 s
+Loss of lock in channel 4!
+Current receiver time: 3 min 20 s
+Current receiver time: 3 min 21 s
+Current receiver time: 3 min 22 s
+Current receiver time: 3 min 23 s
+Current receiver time: 3 min 24 s
+Current receiver time: 3 min 25 s
+Current receiver time: 3 min 26 s
+Loss of lock in channel 2!
+Current receiver time: 3 min 27 s
+Current receiver time: 3 min 28 s
+Current receiver time: 3 min 29 s
+Current receiver time: 3 min 30 s
+Current receiver time: 3 min 31 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 3 min 32 s
+Current receiver time: 3 min 33 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 3 min 34 s
+Current receiver time: 3 min 35 s
+Current receiver time: 3 min 36 s
+Current receiver time: 3 min 37 s
+Current receiver time: 3 min 38 s
+Current receiver time: 3 min 39 s
+Current receiver time: 3 min 40 s
+Current receiver time: 3 min 41 s
+Current receiver time: 3 min 42 s
+Current receiver time: 3 min 43 s
+Current receiver time: 3 min 44 s
+Current receiver time: 3 min 45 s
+Current receiver time: 3 min 46 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 3 min 47 s
+Loss of lock in channel 0!
+Current receiver time: 3 min 48 s
+Current receiver time: 3 min 49 s
+Loss of lock in channel 4!
+Current receiver time: 3 min 50 s
+Current receiver time: 3 min 51 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 3 min 52 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 3 min 53 s
+Current receiver time: 3 min 54 s
+Current receiver time: 3 min 55 s
+Current receiver time: 3 min 56 s
+Current receiver time: 3 min 57 s
+Current receiver time: 3 min 58 s
+Current receiver time: 3 min 59 s
+Current receiver time: 4 min 0 s
+Current receiver time: 4 min 1 s
+Current receiver time: 4 min 2 s
+Loss of lock in channel 3!
+Current receiver time: 4 min 3 s
+Current receiver time: 4 min 4 s
+Current receiver time: 4 min 5 s
+Current receiver time: 4 min 6 s
+Current receiver time: 4 min 7 s
+Loss of lock in channel 4!
+Current receiver time: 4 min 8 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Loss of lock in channel 0!
+Current receiver time: 4 min 9 s
+Current receiver time: 4 min 10 s
+Current receiver time: 4 min 11 s
+Current receiver time: 4 min 12 s
+Current receiver time: 4 min 13 s
+Current receiver time: 4 min 14 s
+Current receiver time: 4 min 15 s
+Current receiver time: 4 min 16 s
+Current receiver time: 4 min 17 s
+Current receiver time: 4 min 18 s
+Current receiver time: 4 min 19 s
+Current receiver time: 4 min 20 s
+Current receiver time: 4 min 21 s
+Current receiver time: 4 min 22 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 4 min 23 s
+Current receiver time: 4 min 24 s
+Loss of lock in channel 2!
+Current receiver time: 4 min 25 s
+Current receiver time: 4 min 26 s
+Current receiver time: 4 min 27 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 4 min 28 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 4 min 29 s
+Current receiver time: 4 min 30 s
+Current receiver time: 4 min 31 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 4 min 32 s
+Current receiver time: 4 min 33 s
+Current receiver time: 4 min 34 s
+Current receiver time: 4 min 35 s
+Current receiver time: 4 min 36 s
+Current receiver time: 4 min 37 s
+Current receiver time: 4 min 38 s
+Loss of lock in channel 0!
+Current receiver time: 4 min 39 s
+Current receiver time: 4 min 40 s
+Current receiver time: 4 min 41 s
+Current receiver time: 4 min 42 s
+Current receiver time: 4 min 43 s
+Loss of lock in channel 4!
+Current receiver time: 4 min 44 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Loss of lock in channel 2!
+Current receiver time: 4 min 45 s
+Current receiver time: 4 min 46 s
+Current receiver time: 4 min 47 s
+Loss of lock in channel 1!
+Current receiver time: 4 min 48 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 4 min 49 s
+Current receiver time: 4 min 50 s
+Current receiver time: 4 min 51 s
+Current receiver time: 4 min 52 s
+Current receiver time: 4 min 53 s
+Loss of lock in channel 0!
+Current receiver time: 4 min 54 s
+Current receiver time: 4 min 55 s
+Current receiver time: 4 min 56 s
+Current receiver time: 4 min 57 s
+Current receiver time: 4 min 58 s
+Current receiver time: 4 min 59 s
+Current receiver time: 5 min 0 s
+Loss of lock in channel 4!
+Current receiver time: 5 min 1 s
+Current receiver time: 5 min 2 s
+Current receiver time: 5 min 3 s
+Current receiver time: 5 min 4 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 5 min 5 s
+Current receiver time: 5 min 6 s
+Current receiver time: 5 min 7 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Current receiver time: 5 min 8 s
+Current receiver time: 5 min 9 s
+Current receiver time: 5 min 10 s
+Current receiver time: 5 min 11 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 5 min 12 s
+Current receiver time: 5 min 13 s
+Current receiver time: 5 min 14 s
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 5 min 15 s
+Current receiver time: 5 min 16 s
+Current receiver time: 5 min 17 s
+Current receiver time: 5 min 18 s
+Current receiver time: 5 min 19 s
+Current receiver time: 5 min 20 s
+Loss of lock in channel 2!
+Current receiver time: 5 min 21 s
+Current receiver time: 5 min 22 s
+Current receiver time: 5 min 23 s
+Loss of lock in channel 3!
+Current receiver time: 5 min 24 s
+Current receiver time: 5 min 25 s
+Current receiver time: 5 min 26 s
+Current receiver time: 5 min 27 s
+Loss of lock in channel 4!
+Current receiver time: 5 min 28 s
+Current receiver time: 5 min 29 s
+Tracking of GPS L1 C/A signal started on channel 2 for satellite GPS PRN 16 (Block IIR)
+Current receiver time: 5 min 30 s
+Loss of lock in channel 0!
+Current receiver time: 5 min 31 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 5 min 32 s
+Tracking of GPS L1 C/A signal started on channel 4 for satellite GPS PRN 04 (Block III)
+Current receiver time: 5 min 33 s
+Current receiver time: 5 min 34 s
+Current receiver time: 5 min 35 s
+Current receiver time: 5 min 36 s
+Current receiver time: 5 min 37 s
+Current receiver time: 5 min 38 s
+Current receiver time: 5 min 39 s
+Current receiver time: 5 min 40 s
+Current receiver time: 5 min 41 s
+Current receiver time: 5 min 42 s
+Current receiver time: 5 min 43 s
+Current receiver time: 5 min 44 s
+Current receiver time: 5 min 45 s
+Loss of lock in channel 2!
+Tracking of GPS L1 C/A signal started on channel 0 for satellite GPS PRN 26 (Block IIF)
+Current receiver time: 5 min 46 s
+Current receiver time: 5 min 47 s
+Loss of lock in channel 1!
+Current receiver time: 5 min 48 s
+Tracking of GPS L1 C/A signal started on channel 3 for satellite GPS PRN 04 (Block III)
+Loss of lock in channel 4!
+Current receiver time: 5 min 49 s
+Current receiver time: 5 min 50 s
+Current receiver time: 5 min 51 s
+Current receiver time: 5 min 52 s
+Current receiver time: 5 min 53 s
+Current receiver time: 5 min 54 s
+Current receiver time: 5 min 55 s
+Tracking of GPS L1 C/A signal started on channel 1 for satellite GPS PRN 03 (Block IIF)
+Current receiver time: 5 min 56 s
+Current receiver time: 5 min 57 s
+Current receiver time: 5 min 58 s
+Current receiver time: 5 min 59 s
+Current receiver time: 6 min 0 s
+Stopping GNSS-SDR, please wait!
+Total GNSS-SDR run time: 51.4861 [seconds]
+GNSS-SDR program ended.

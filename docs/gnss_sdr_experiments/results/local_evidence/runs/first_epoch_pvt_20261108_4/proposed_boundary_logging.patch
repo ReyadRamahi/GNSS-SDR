@@ -1,0 +1,53 @@
+--- a/src/algorithms/PVT/libs/rtklib_solver.cc
++++ b/src/algorithms/PVT/libs/rtklib_solver.cc
+@@ -39,6 +39,8 @@
+ #include <glog/logging.h>
+ #include <matio.h>
+ #include <exception>
++#include <cmath>
++#include <iomanip>
+ #include <utility>
+ #include <vector>
+ 
+@@ -891,6 +893,41 @@
+                         }
+                 }
+ 
++            // Diagnostic only: one epoch, before entering the native solver.
++            if (!gnss_observables_map.empty() &&
++                std::abs(gnss_observables_map.cbegin()->second.RX_time - 14064.0) < 1e-6)
++                {
++                    for (const auto& entry : gnss_observables_map)
++                        {
++                            const auto& o = entry.second;
++                            const auto e = gps_ephemeris_map.find(o.PRN);
++                            LOG(INFO) << std::setprecision(17) << "PVT_EPOCH_INPUT channel=" << entry.first
++                                      << " prn=" << o.PRN << " rx=" << o.RX_time
++                                      << " tx_ms=" << o.interp_TOW_ms << " P=" << o.Pseudorange_m
++                                      << " valid_range=" << o.Flag_valid_pseudorange
++                                      << " valid_word=" << o.Flag_valid_word
++                                      << " valid_symbol=" << o.Flag_valid_symbol_output
++                                      << " valid_acq=" << o.Flag_valid_acquisition
++                                      << " pll180=" << o.Flag_PLL_180_deg_phase_locked
++                                      << " CN0=" << o.CN0_dB_hz;
++                            if (e != gps_ephemeris_map.end())
++                                {
++                                    LOG(INFO) << "PVT_EPOCH_EPH prn=" << e->second.PRN
++                                              << " WN=" << e->second.WN << " toe=" << e->second.toe
++                                              << " toc=" << e->second.toc << " tow=" << e->second.tow
++                                              << " health=" << e->second.SV_health << " IODC=" << e->second.IODC
++                                              << " IODE2=" << e->second.IODE_SF2 << " IODE3=" << e->second.IODE_SF3;
++                                }
++                        }
++                    for (int k = 0; k < valid_obs; ++k)
++                        {
++                            LOG(INFO) << std::setprecision(17) << "PVT_RTK_INPUT sat=" << static_cast<int>(d_obs_data[k].sat)
++                                      << " P=" << d_obs_data[k].P[0]
++                                      << " SNR_quarter_dB=" << static_cast<int>(d_obs_data[k].SNR[0])
++                                      << " week=" << eph_data[k].week << " toes=" << eph_data[k].toes
++                                      << " health=" << eph_data[k].svh << " iode=" << eph_data[k].iode;
++                        }
++                }
+             result = rtkpos(&d_rtk, d_obs_data.data(), valid_obs + glo_valid_obs, &nav_data);
+ 
+             if (result == 0)
