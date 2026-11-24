@@ -1,17 +1,25 @@
 # GNSS-SDR / LimeSDR / F9T Experiment Docs
 
-For the current application, Python tools, and dataset paths, see the [repository map](../STRUCTURE.md) and [documentation index](../README.md). Paths below are relative to this experiment archive unless an original machine path is shown.
+## Start with the latest run
 
-Start here. This folder now groups the GNSS-SDR GPS L1 C/A work by purpose:
+- [Experiment results](EXPERIMENT_RESULTS.md) documents the November 23, 2026 CT LimeSDR recording and offline GPS fix.
+- [Docker replay](../../docker/gnss-sdr/README.md) shows how to build the receiver and replay a verified copy of the recording.
+- [MATLAB RINEX cross-check](scripts_used/matlab_analysis/solve_lime_rinex.m) solves the receiver position from exported observations and ephemerides.
 
-- what the project is trying to do
-- what the current blocker is
-- which configs and scripts were used
-- which assist XML and logs back up the conclusions
+## Find earlier work
 
-## Latest November 2026 findings
+| Looking for | Open |
+| --- | --- |
+| Live F9T assistance and receiver workflow | [Workflow](WORKFLOW.md) |
+| Project goals and earlier results | [Project summary](GNSS_SDR_PROJECT_SUMMARY.md) and [experiment log](EXPERIMENT_LOG.md) |
+| Receiver configuration families | [Config index](configs_used/CONFIG_INDEX.md) |
+| Capture, MATLAB, and F9T scripts | [Scripts index](scripts_used/README.md) |
+| Logs, assistance data, and run evidence | [Results index](results/README.md) |
+| 10 MHz reference-lock investigation | [External reference audit](LIMESDR_EXTERNAL_REFERENCE_AUDIT.md) |
+| November 13 standalone positioning investigation | [TOW 14052 report](RX1H_14052_BOOTSTRAP_RESULTS.md) |
 
-Start with [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md) and the [exact TOW 14052 candidate report](RX1H_14052_BOOTSTRAP_RESULTS.md). The saved recording supports NAV decoding; native PVT success and external-reference lock remain unverified. The standalone initialization candidate passes the saved 3° epoch window but still depends on experimental PRN21 assistance. Raw recordings and complete build inputs remain local on hft02.
+<details>
+<summary>May 2026 observations and archive notes</summary>
 
 ## May 2026 observations (historical)
 
@@ -26,13 +34,9 @@ Start with [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md) and the [exact TOW 140
 - **IQ correction confirmed working:** offline MATLAB correction (`iq_correct.m`) reduced imbalance from 123% to 0.00%. Corrected file fed into GNSS-SDR via `File_Signal_Source` — tracking started on PRN 03 and PRN 07.
 - Remaining blocker: corrected capture was only 9.9 seconds — too short for bit sync or NAV decode. Need a 2–3 minute corrected capture.
 
-## Read In This Order
+## May 2 IQ correction handoff
 
-1. [LIMESDR_IQ_CORRECTED_FILE_SOURCE_HANDOFF_20260502.md](LIMESDR_IQ_CORRECTED_FILE_SOURCE_HANDOFF_20260502.md) ← most recent
-2. [WORKFLOW.md](WORKFLOW.md)
-3. [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md)
-4. [configs_used/CONFIG_INDEX.md](configs_used/CONFIG_INDEX.md)
-5. [GNSS_SDR_PROJECT_SUMMARY.md](GNSS_SDR_PROJECT_SUMMARY.md)
+[Captured-file IQ correction workflow](LIMESDR_IQ_CORRECTED_FILE_SOURCE_HANDOFF_20260502.md)
 
 ## Folder Map
 
@@ -45,7 +49,7 @@ Start with [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md) and the [exact TOW 140
 - `results/logs/`
   - logs grouped into baseline runs, current F9T+Lime focused runs, Lime sweep phases, RTL reference runs, and F9T refresh logs
 
-## Most Relevant Current Artifacts
+## Artifacts from earlier runs
 
 - **IQ correction script:** `scripts_used/matlab_analysis/iq_correct.m`
 - **IQ-corrected file source config:** `configs_used/f9t_lime_current/lime_iq_corrected_file_source.conf`
@@ -62,4 +66,5 @@ Start with [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md) and the [exact TOW 140
 ## Notes On The Reorganization
 
 - The older `f9t_refresh_workflow/` category has been split into the main `configs_used/`, `scripts_used/`, and `results/` trees so future work is organized by artifact type instead of by one historical workflow.
-- No non-Markdown file contents were edited. Non-Markdown artifacts were only moved into clearer folders.
+
+</details>

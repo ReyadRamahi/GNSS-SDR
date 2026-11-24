@@ -1,16 +1,11 @@
-# Results
+# Experiment artifacts
 
-This folder holds the artifacts produced by the experiments.
+Start with the [experiment results](../EXPERIMENT_RESULTS.md) for the latest findings and the [Docker replay guide](../../../docker/gnss-sdr/README.md) for the reproducible receiver setup.
 
-## Subfolders
+| Folder | Contents |
+| --- | --- |
+| [`assist/`](assist/) | Assistance XML grouped by source and purpose |
+| [`logs/`](logs/) | GNSS-SDR logs and summary text by experiment family |
+| [`local_evidence/`](local_evidence/) | Published subsets of server-side run evidence |
 
-- `assist/`
-  - assistance XML grouped by source and purpose
-- `logs/`
-  - GNSS-SDR logs and summary text grouped by experiment family
-
-If you are trying to understand the current state quickly:
-
-1. read `../LIMESDR_F9T_HANDOFF_20260428.md`
-2. inspect `logs/f9t_lime_current/`
-3. inspect `assist/f9t_latest/`
+The earlier F9T/Lime experiments are documented in the [April 29 handoff](../LIMESDR_F9T_HANDOFF_20260429.md). The [latest F9T XML snapshot in this archive](assist/f9t_latest/) and [focused logs](logs/f9t_lime_current/) record that workflow.

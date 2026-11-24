@@ -23,6 +23,7 @@ Run the commands below from the repository root. Frontend commands run inside `f
 │   ├── benchmark_gnss_sdr.py
 │   ├── validate_multipath.py
 │   └── README.md
+├── docker/gnss-sdr/               # Versioned offline receiver images and replay guide
 ├── tests/                          # Python tests
 ├── data/
 │   ├── README.md
@@ -39,6 +40,7 @@ Run the commands below from the repository root. Frontend commands run inside `f
 │   └── README.md
 └── docs/
     ├── README.md
+    ├── DEVELOPMENT.md             # Dashboard setup, runtime behavior, and tests
     ├── STRUCTURE.md
     └── gnss_sdr_experiments/        # Preserved experiment archive
         ├── configs_used/
@@ -76,4 +78,4 @@ Update external Python imports to use the `gnss_sdr` package and analysis comman
 
 `frontend/dist/`, `node_modules/`, `.venv/`, caches, downloaded raw recordings, and local `outputs/` are ignored. Use `outputs/` for newly generated benchmark/validation reports when supplying output flags.
 
-The experiment archive is grouped by artifact type and keeps its existing relative paths. Its historical machine paths, config snapshots, recorded logs, and dated findings describe the runs that produced them; they are not generic setup instructions for a new checkout. Start current setup from the root README, data guide, and server guide.
+The experiment archive is grouped by artifact type and keeps its existing relative paths. Its historical machine paths, config snapshots, recorded logs, and dated findings describe the runs that produced them; they are not generic setup instructions for a new checkout. Start with the [documentation index](README.md) for setup, the [data guide](../data/README.md) for recordings, or the [Docker replay guide](../docker/gnss-sdr/README.md) for offline positioning.

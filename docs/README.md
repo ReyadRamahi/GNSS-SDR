@@ -1,11 +1,17 @@
 # Documentation
 
-- [Repository structure and migration map](STRUCTURE.md): where code, tools, datasets, tests, and archived experiments live.
-- [Project README](../README.md): setup, development, runtime behavior, and test commands.
-- [Frontend learning guide](../frontend/README.md): React components, hooks, Three.js, clouds, and themes.
-- [Dataset setup](../data/README.md): local recordings and default receiver config paths.
-- [Command-line analysis tools](../tools/README.md): benchmarking and multipath validation.
-- [Server guide](../server/README.md): REST/WebSocket endpoints and data/static-file locations.
-- [Experiment archive](gnss_sdr_experiments/README.md): receiver experiments, configs, scripts, saved results, and historical handoffs.
+## Receiver experiments
 
-Use the repository map for current checkout paths. Dated hardware notes and captured logs retain the original machine paths needed to interpret those experiments.
+- [Latest experiments and results](gnss_sdr_experiments/EXPERIMENT_RESULTS.md)
+- [Reproduce the LimeSDR fix with Docker](../docker/gnss-sdr/README.md)
+- [Receiver workflows, configs, and historical handoffs](gnss_sdr_experiments/README.md)
+- [Dataset setup and default receiver configs](../data/README.md)
+
+## Dashboard and analysis
+
+- [Local development, playback, and tests](DEVELOPMENT.md)
+- [Frontend learning guide](../frontend/README.md)
+- [FastAPI and WebSocket guide](../server/README.md)
+- [Benchmarking and multipath validation tools](../tools/README.md)
+
+Use the [repository map](STRUCTURE.md) for checkout paths. Dated hardware notes and logs preserve the machine paths from the original experiments.
