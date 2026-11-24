@@ -40,4 +40,13 @@ docker run --rm --network none \
 
 The replay reads the capture through a read-only mount. The output directory holds the NMEA solution and the RINEX observation and navigation files after a successful fix. If the receiver appears stalled, check whether it reaches `Processing file` before interpreting the result. Use a fresh output directory for each run, including version comparisons, so cached ephemerides do not carry over.
 
-The Ubuntu recipe is for diagnosis. The 0.0.20 replay produced a fix again with the same file and config after an earlier startup delay. The older-package attempts that stalled before processing the file do not establish why the earlier `hft02` run failed.
+## Version comparison
+
+Both ARM64 images completed a replay of the same checksum-verified 300-second recording with the same configuration and fresh output directories.
+
+| Package | GPS NAV messages logged | Position epochs printed |
+| --- | ---: | ---: |
+| Ubuntu 22.04, GNSS-SDR 0.0.16-1 | 272 | 0 |
+| Debian trixie, GNSS-SDR 0.0.20-1 | 257 | 149 |
+
+The 0.0.20 package is the recommended starting point for this offline replay. The packages also use different dependency versions, so the comparison does not identify an individual code change or establish the cause of the earlier live or offline failures on `hft02`. Try 0.0.20 alongside the existing host installation before changing the system package.
