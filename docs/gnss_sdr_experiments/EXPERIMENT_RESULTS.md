@@ -2,13 +2,37 @@
 
 > GitHub publication: links below use the repository archive layout. Small text evidence is included; IQ recordings, full observables, source/build copies, binaries and large per-epoch outputs remain on hft02. A clone alone cannot reproduce the experiment without those preserved local inputs.
 
-## Current state and next unresolved experiment
+## November 23, 2026 CT — 300-second LimeSDR SoapyRemote recording produced a GPS fix
+
+GNSS-SDR **0.0.20** replayed a fresh, 300-second `hft02` LimeSDR capture on an Apple silicon Mac in a Debian ARM64 container with networking disabled. The receiver decoded broadcast GPS L1 C/A navigation messages from the file and obtained a standalone 3D code-based position in downtown Chicago. The run used no injected ephemerides or receiver position. The first fix was at **23:03:00.240 CST on November 23** (05:03:00.240 UTC on November 24).
+
+- Capture run `soapyremote_l1_300s_20261124T050218_582059Z`. SoapyRemote accessed the LimeSDR from `hft02` through the local server. RX0/LNAH (RX1_H), 45 dB read-back gain, nominal 2 MS/s and 1574.92 MHz RF center. The headerless, interleaved little-endian CF32 file contained 600,000,000 complex samples (4,800,000,000 bytes). Both the raw file and metadata passed SHA-256 verification after transfer.
+- The [replay config](configs_used/baseline/lime_soapyremote_l1_cf32_replay.conf) translates the measured +500,009.766 Hz IF to baseband, uses 4 ms coherent acquisition, and assigns six channels to PRNs 5, 12, 13, 15, 20 and 25 identified by MATLAB acquisition. The 5° elevation mask and channel assignments are specific to this replay. GNSS-SDR exported NMEA and RINEX observation/navigation files.
+- The targeted replay printed **125 position epochs**, including **96 with five satellites**. In those 96 epochs, about **95%** of horizontal positions fell within **62 m** of their median. This is within-run scatter. Absolute accuracy and altitude were not validated against surveyed truth.
+- [MATLAB R2026b Navigation Toolbox](scripts_used/matlab_analysis/solve_lime_rinex.m) solved all 125 exported RINEX epochs with `rinexread`, `gnssmeasurements`, and `receiverposition`. The median horizontal positions from the two solvers differed by about **14 m**. They shared the same I/Q-derived observations and navigation data. MATLAB’s direct-I/Q path acquired the six PRNs and decoded parity-valid navigation subframes from PRN 5, which was insufficient for a MATLAB-only raw-I/Q fix.
+- Reference selection and external 10 MHz lock were unverified. The transport reported limited socket buffers, and the saved sample count cannot establish gap-free capture. The earlier November 13 stock 0.0.16 replay below remains a separate result.
+
+### Repeat the offline replay on hft02
+
+The SoapyRemote server, Lime driver and the GNU Radio/gr-osmosdr capture path already ran the capture on the host. Use the original file and its sidecar from the run directory, or restore the checksum-verified copy. Check `command -v gnss-sdr` and `gnss-sdr --version` before installing anything. The November 13 inventory reported 0.0.16-1. For version-matched reproduction, use GNSS-SDR 0.0.20 in a Debian trixie container if the host already has a suitable runtime, or install/build 0.0.20 into a separate user prefix. GNSS-SDR alone produces the fix and RINEX files. MATLAB with Navigation Toolbox is needed only for the optional RINEX cross-check.
+
+Run from a new output directory so files and cached ephemerides from other runs do not enter the replay. Set `capture` to the absolute CF32 path and `config` to the absolute path to the archived config.
+
+```bash
+gnss-sdr --config_file="$config" --signal_source="$capture" | tee replay.log
+```
+
+For the MATLAB cross-check, add the directory containing `solve_lime_rinex.m` to the MATLAB path and call `solve_lime_rinex(runDir)` with that output directory. The function reads the captured-date `lime_l1.26O` and `lime_l1.26N` files.
+
+See [GNSS-SDR installation](https://gnss-sdr.org/build-and-install/), [file-source configuration](https://gnss-sdr.org/docs/sp-blocks/signal-source/), and [MathWorks’ RINEX positioning workflow](https://www.mathworks.com/help/nav/ref/gnssmeasurements.html).
+
+## November 13, 2026 — prior stock replay and diagnostics
 
 Evidence reconciled on **2026-11-13**. The goal is live GPS L1 C/A reception on
 `hft02`, followed eventually by receiver/satellite/status output to a dashboard.
 The latest saved LimeSDR recording demonstrates sustained navigation-message
-decoding. **No native GNSS-SDR PVT fix has been demonstrated in the November
-replays. External-reference lock has not been demonstrated.** These are separate
+decoding. **The November 13 stock GNSS-SDR replay produced no native PVT fix.
+External-reference lock had not been demonstrated.** These are separate
 open questions; the clock result does not explain the measured software rejection.
 
 The latest **stock 3° baseline replay**, using the installed receiver and unchanged
