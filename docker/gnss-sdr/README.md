@@ -40,6 +40,27 @@ docker run --rm --network none \
 
 The replay reads the capture through a read-only mount. The output directory holds the NMEA solution and the RINEX observation and navigation files after a successful fix. If the receiver appears stalled, check whether it reaches `Processing file` before interpreting the result. Use a fresh output directory for each run, including version comparisons, so cached ephemerides do not carry over.
 
+## Optional LimeSDR capture image
+
+Build the capture target to add GNU Radio, gr-osmosdr, NumPy, the Python SoapySDR API, and the Lime and SoapyRemote modules. The default build remains the lean offline receiver.
+
+```bash
+docker build --target capture -t gnss-sdr-capture:0.0.20 docker/gnss-sdr
+docker run --rm --network none --entrypoint SoapySDRUtil gnss-sdr-capture:0.0.20 --info
+```
+
+Use `--entrypoint python3` to run a capture script you mount into the container. Review the existing `hft02` helper's absolute paths and host-specific Soapy module overrides before reusing it. The container can use its own packaged modules and standard discovery paths. Mount a writable output directory on a local disk for long recordings.
+
+If the Lime is still attached to `hft02`, its existing SoapyRemote server continues to handle USB. A capture container on the Linux host can use `--network host` and the existing loopback endpoint. A capture container on another computer needs network access to the server and its stream transport. The offline replay can run anywhere the capture file is available, with networking disabled. See [Docker host networking](https://docs.docker.com/engine/network/drivers/host/).
+
+### Sample timestamps
+
+Docker packaging does not change the SDR's sample clock or the hardware timestamp on a sample that arrives intact. Live streaming adds scheduling, buffering, and transport risk. Judge continuity from stream metadata and overrun reports.
+
+The verified 300-second CF32 file stores I/Q values only. Its host launch and activation-request times cannot identify the UTC time of its first ADC sample. For a timing run, use a capture program that records each buffer's file sample index, actual sample count, `readStream` flags, and valid `timeNs` values. Check that successive device timestamps advance by the preceding sample count at the recorded rate, and record discontinuities. Use device timestamps only when `SOAPY_SDR_HAS_TIME` is set. [SoapySDR stream API](https://github.com/pothosware/SoapySDR/blob/master/include/SoapySDR/Device.hpp)
+
+For absolute UTC or alignment across receivers, verify how the particular radio and firmware relate the hardware sample counter to PPS and UTC. A locked 10 MHz reference stabilizes the sample rate. PPS supplies the timing edge, and a known relationship between that edge and the sample counter supplies the time origin. The earlier run left external-reference selection and lock unverified.
+
 ## Version comparison
 
 Both ARM64 images completed a replay of the same checksum-verified 300-second recording with the same configuration and fresh output directories.
