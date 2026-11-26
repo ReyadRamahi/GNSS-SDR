@@ -3,12 +3,12 @@ tests/test_websocket.py
 WebSocket endpoint and tail_nmea background task tests.
 """
 import asyncio
-from pathlib import Path
+import socket
 
 import pytest
 from fastapi.testclient import TestClient
 
-from server.main import app, manager, tail_nmea
+from server.main import RECEIVER_ACTIVITY, app, manager, tail_nmea
 
 
 # ---------------------------------------------------------------------------
@@ -98,3 +98,14 @@ def test_websocket_broadcast(tmp_path, monkeypatch):
             nmea_file.write_text(sentence + "\n")
             data = ws.receive_text()
             assert data == sentence
+
+
+def test_receiver_monitor_heartbeat_reaches_websocket(monkeypatch):
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as probe:
+        probe.bind(("127.0.0.1", 0))
+        port = probe.getsockname()[1]
+    monkeypatch.setenv("GNSS_MONITOR_PORT", str(port))
+    with TestClient(app) as client, client.websocket_connect("/ws") as ws:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sender:
+            sender.sendto(b"monitor payload", ("127.0.0.1", port))
+        assert ws.receive_text() == RECEIVER_ACTIVITY

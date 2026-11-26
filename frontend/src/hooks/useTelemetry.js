@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { EMPTY, applySentence } from "../lib/telemetry.js";
+import {
+  EMPTY, LIVE_TIMEOUT_MS, RECEIVER_ACTIVITY, applySentence, liveFixHealth, parseSentence,
+} from "../lib/telemetry.js";
 import { createDemo } from "../lib/demo.js";
 
 // React effects own network connections and clean them up on unmount.
@@ -7,6 +9,7 @@ export default function useTelemetry(demo) {
   const [data, setData] = useState(EMPTY);
   const [status, setStatus] = useState("connecting");
   const [error, setError] = useState("");
+  const [now, setNow] = useState(Date.now);
   useEffect(() => {
     if (demo) {
       setData(createDemo());
@@ -24,7 +27,7 @@ export default function useTelemetry(demo) {
       polling = false;
     const controller = new AbortController();
     async function poll() {
-      if (polling || Date.now() - lastLive < 6000) return;
+      if (polling || lastLive !== 0) return;
       polling = true;
       try {
         const paths = ["positions", "satellites", "satellite-history", "raw"];
@@ -37,7 +40,7 @@ export default function useTelemetry(demo) {
             return r.json();
           }),
         );
-        if (stopped || Date.now() - lastLive < 6000) return;
+        if (stopped || lastLive !== 0) return;
         const [positions, satellites, history, raw] = results;
         if (
           !Array.isArray(positions) ||
@@ -74,14 +77,21 @@ export default function useTelemetry(demo) {
       );
       socket.onmessage = ({ data: line }) => {
         if (typeof line !== "string" || stopped) return;
-        const valid = applySentence(EMPTY, line).valid;
-        if (valid) {
-          if (Date.now() - lastLive >= 6000) setData(EMPTY);
-          lastLive = Date.now();
+        const receivedAt = Date.now();
+        const parsed = parseSentence(line);
+        const active = parsed !== null || line === RECEIVER_ACTIVITY;
+        const firstLive = lastLive === 0 && active;
+        const resumed = active && lastLive !== 0 && receivedAt - lastLive >= LIVE_TIMEOUT_MS;
+        if (active) {
+          lastLive = receivedAt;
+          setNow(receivedAt);
           setStatus("live");
           setError("");
         }
-        setData((previous) => applySentence(previous, line).data);
+        setData((previous) => {
+          const base = firstLive ? EMPTY : resumed ? { ...previous, health: {} } : previous;
+          return applySentence(base, line, receivedAt, parsed).data;
+        });
       };
       socket.onclose = () => {
         if (!stopped) reconnect = setTimeout(connect, 3000);
@@ -91,13 +101,16 @@ export default function useTelemetry(demo) {
     poll();
     connect();
     const timer = setInterval(poll, 3000);
+    const freshness = setInterval(() => setNow(Date.now()), 1000);
     return () => {
       stopped = true;
       controller.abort();
       clearInterval(timer);
+      clearInterval(freshness);
       clearTimeout(reconnect);
       socket?.close();
     };
   }, [demo]);
-  return { data, status, error };
+  const health = status === "live" ? liveFixHealth(data.health, now) : null;
+  return { data, status: health?.state === "stale" ? "stale" : status, error, health };
 }

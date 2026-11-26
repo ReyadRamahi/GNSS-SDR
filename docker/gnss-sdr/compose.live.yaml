@@ -1,0 +1,26 @@
+services:
+  receiver:
+    build:
+      context: .
+      target: capture
+    network_mode: host
+    command: ["--config_file=/config/live.conf"]
+    volumes:
+      - live-output:/output
+      - ../../configs/lime_soapyremote_live_l1.conf:/config/live.conf:ro
+    depends_on:
+      - dashboard
+
+  dashboard:
+    build:
+      context: ../..
+      dockerfile: docker/gnss-sdr/Dockerfile.dashboard
+    network_mode: host
+    environment:
+      GNSS_LIVE_NMEA: /output/gnss_pvt.nmea
+      GNSS_MONITOR_PORT: "15532"
+    volumes:
+      - live-output:/output:ro
+
+volumes:
+  live-output:

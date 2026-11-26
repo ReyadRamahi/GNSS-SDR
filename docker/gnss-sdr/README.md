@@ -71,3 +71,40 @@ Both ARM64 images completed a replay of the same checksum-verified 300-second re
 | Debian trixie, GNSS-SDR 0.0.20-1 | 257 | 149 |
 
 The 0.0.20 package is the recommended starting point for this offline replay. The packages also use different dependency versions, so the comparison does not identify an individual code change or establish the cause of the earlier live or offline failures on `hft02`. Try 0.0.20 alongside the existing host installation before changing the system package.
+
+## Live fix-health dashboard on Linux
+
+Run from the checkout root on the Linux host with access to the LimeSDR SoapyRemote server. The live configuration assumes that server is reachable at `127.0.0.1:55132` and uses the lab receiver's RX1_H/LNAH input. Check receiver availability before starting. Update the device selector in [the live config](../../configs/lime_soapyremote_live_l1.conf) for another radio or endpoint.
+
+```bash
+docker compose -p lime-live -f docker/gnss-sdr/compose.live.yaml up --build -d
+docker compose -p lime-live -f docker/gnss-sdr/compose.live.yaml logs -f receiver
+```
+
+If Docker Engine is available without the Compose plugin, use the same services directly:
+
+```bash
+docker build --target capture -t lime-live-receiver docker/gnss-sdr
+docker build -f docker/gnss-sdr/Dockerfile.dashboard -t lime-live-dashboard .
+docker volume create lime-live-output
+
+docker run -d --rm --name lime-live-dashboard --network host \
+  -e GNSS_LIVE_NMEA=/output/gnss_pvt.nmea -e GNSS_MONITOR_PORT=15532 \
+  --mount type=volume,source=lime-live-output,target=/output,readonly \
+  lime-live-dashboard
+
+docker run -d --rm --name lime-live-receiver --network host \
+  --mount type=volume,source=lime-live-output,target=/output \
+  --mount "type=bind,source=$PWD/configs/lime_soapyremote_live_l1.conf,target=/config/live.conf,readonly" \
+  lime-live-receiver --config_file=/config/live.conf
+```
+
+The receiver writes NMEA to a shared volume and sends Monitor activity to loopback UDP port 15532. The dashboard reads NMEA and forwards both streams over its existing WebSocket. It shows GGA fix status and satellite count, GSA geometry and satellite IDs, and GSV signal strength for used GPS satellites. Fix age is elapsed time since the latest valid fix arrived in the browser. After six seconds without receiver activity, the app marks the last position stale. Monitor activity can show an active receiver while it is still acquiring a fix.
+
+The dashboard listens on `127.0.0.1:8000`. To view it from your Mac, run the SSH tunnel locally and open [the forwarded dashboard](http://localhost:8000).
+
+```bash
+ssh -N -L 8000:127.0.0.1:8000 your-user@hft02
+```
+
+Stop the containers with `docker compose -p lime-live -f docker/gnss-sdr/compose.live.yaml down`. For the standalone containers, use `docker stop lime-live-receiver lime-live-dashboard`. The named output volume retains the NMEA file. The fix-health indicators describe the available observations and their geometry. Surveyed truth or a validated error model is needed to estimate accuracy in meters.

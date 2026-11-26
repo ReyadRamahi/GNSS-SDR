@@ -1,4 +1,6 @@
 // Pure data functions: no React or browser dependencies.
+export const LIVE_TIMEOUT_MS = 6000;
+export const RECEIVER_ACTIVITY = '{"type":"receiver_activity"}';
 export const EMPTY = { positions: [], satellites: {}, history: {}, raw: [] };
 export function signalColor(sat) {
   if (sat.predicted_los === false) return "#f17c6c";
@@ -85,6 +87,8 @@ export function parseSentence(line) {
   }
   const f = body.split(",");
   if (f[0].endsWith("GGA")) {
+    if (!f[1] || !/^[0-9]+$/.test(f[6] || "")) return null;
+    if (Number(f[6]) === 0) return { noFix: true };
     const coord = (v, h, n) =>
       (Number(v.slice(0, n)) + Number(v.slice(n)) / 60) *
       (["S", "W"].includes(h) ? -1 : 1);
@@ -114,7 +118,22 @@ export function parseSentence(line) {
       return null;
     return { fix };
   }
+  if (["GPGSA", "GNGSA"].includes(f[0])) {
+    if (f.length < 18 || !["1", "2", "3"].includes(f[2]) ||
+        (f[18] && f[18] !== "1")) return null;
+    const dop = (value) => Number.isFinite(Number(value)) && Number(value) > 0
+      ? Number(value) : null;
+    return {
+      geometry: {
+        mode: Number(f[2]),
+        usedPrns: [...new Set(f.slice(3, 15).filter((v) => /^\d+$/.test(v)).map(Number))],
+        hdop: dop(f[16]),
+        vdop: dop(f[17]),
+      },
+    };
+  }
   if (f[0].endsWith("GSV")) {
+    if (f.length < 4 || !f.slice(1, 4).every((v) => /^\d+$/.test(v))) return null;
     const sats = [];
     for (let i = 4; i + 3 < f.length; i += 4) {
       if (!f[i] || !Number.isFinite(Number(f[i]))) continue;
@@ -131,9 +150,33 @@ export function parseSentence(line) {
   }
   return null;
 }
-export function applySentence(data, line) {
-  const parsed = parseSentence(line);
+export function applySentence(data, line, receivedAt = Date.now(), parsed = parseSentence(line)) {
+  if (line === RECEIVER_ACTIVITY) {
+    return { data: { ...data, health: { ...data.health, activityAt: receivedAt } }, valid: true };
+  }
   const next = { ...data, raw: [...data.raw, line].slice(-50) };
+  if (parsed) {
+    const health = { ...data.health, activityAt: receivedAt };
+    if (parsed.fix || parsed.noFix) {
+      health.geometry = null;
+      health.fixState = parsed.fix ? "fix" : "no-fix";
+      if (parsed.fix) {
+        health.fixAt = receivedAt;
+        health.usedCount = parsed.fix.num_satellites;
+      }
+    }
+    if (parsed.geometry) {
+      health.geometry = parsed.geometry;
+      if (parsed.geometry.mode === 1) health.fixState = "no-fix";
+    }
+    if (parsed.sats && line.startsWith("$GPGSV,")) {
+      health.signals = { ...health.signals };
+      for (const sat of parsed.sats) {
+        health.signals[sat.prn] = { cn0: sat.cn0, receivedAt };
+      }
+    }
+    next.health = health;
+  }
   if (parsed?.fix)
     next.positions = [...data.positions, parsed.fix].slice(-10000);
   if (parsed?.sats) {
@@ -150,4 +193,25 @@ export function applySentence(data, line) {
     }
   }
   return { data: next, valid: !!parsed };
+}
+
+export function liveFixHealth(health, now) {
+  if (health?.activityAt == null) return null;
+  const fixAge = health.fixAt == null ? null : Math.max(0, (now - health.fixAt) / 1000);
+  const stale = now - health.activityAt >= LIVE_TIMEOUT_MS;
+  const currentFix = !stale && health.fixState === "fix" &&
+    now - health.fixAt < LIVE_TIMEOUT_MS;
+  const geometry = currentFix ? health.geometry : null;
+  const cn0 = (geometry?.usedPrns || [])
+    .map((prn) => health.signals?.[prn])
+    .filter((signal) => signal?.cn0 != null && now - signal.receivedAt < LIVE_TIMEOUT_MS)
+    .map((signal) => signal.cn0);
+  return {
+    state: stale ? "stale" : currentFix ? "fix" : "no-fix",
+    fixAge,
+    usedCount: currentFix ? health.usedCount : null,
+    hdop: geometry?.hdop ?? null,
+    vdop: geometry?.vdop ?? null,
+    usedCn0: cn0.length ? cn0.reduce((sum, value) => sum + value, 0) / cn0.length : null,
+  };
 }

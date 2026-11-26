@@ -205,6 +205,7 @@ h1 {
   background: var(--accent);
   flex-shrink: 0;
 }
+.connection.stale i,
 .connection.offline i,
 .connection.connecting i,
 .status-dot.dim {
@@ -1425,4 +1426,44 @@ dd {
     scroll-behavior: auto !important;
     transition: none !important;
   }
+}
+
+.fix-health {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.fix-health h2,
+.fix-health p,
+.fix-health dl,
+.fix-health dd {
+  margin: 0;
+}
+.fix-health h2 {
+  font-size: 14px;
+}
+.fix-health p,
+.fix-health dt {
+  color: var(--muted);
+  font-size: 11px;
+}
+.fix-health p[data-state="fix"] {
+  color: var(--accent);
+}
+.fix-health p[data-state="stale"] {
+  color: var(--warning);
+}
+.fix-health dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 25px;
+}
+.fix-health dd {
+  font: 13px ui-monospace, monospace;
 }

@@ -48,8 +48,13 @@ export default function App() {
   const [demo, setDemo] = useState(
     new URLSearchParams(location.search).get("demo") === "1",
   );
-  const { data, status, error } = useTelemetry(demo);
-  const live = status === "live";
+  const { data, status, error, health } = useTelemetry(demo);
+  const live = status === "live" || status === "stale";
+  const healthLabel = health && {
+    fix: "Current fix",
+    "no-fix": "Receiver active, no current fix",
+    stale: "Receiver stream stale",
+  }[health.state];
   const playback = usePlayback(data, live, `${demo}-${live}`);
   const { receiver, satellites } = useMemo(
     () =>
@@ -58,6 +63,10 @@ export default function App() {
         : frameAt(data, playback.stamps, playback.index),
     [data, live, playback.stamps, playback.index],
   );
+  const currentFix = health ? health.state === "fix" : Boolean(receiver?.fix_quality);
+  const positionLabel = currentFix
+    ? "Position fix"
+    : health && receiver ? "Last reported position" : "No position fix";
   const [theme, setTheme] = useState(() => {
     try {
       return localStorage.getItem("gnss-theme") === "light" ? "light" : "dark";
@@ -140,6 +149,7 @@ export default function App() {
               offline: "Offline",
               replay: "Recording",
               live: "Live receiver",
+              stale: "Stale receiver",
               demo: "Simulated demo",
             }[status]
           }
@@ -214,6 +224,32 @@ export default function App() {
                 </span>
               </div>
             </div>
+          )}
+          {health && (
+            <section className="fix-health" aria-label="Live position fix health">
+              <div>
+                <h2>Live fix health</h2>
+                <p role="status" data-state={health.state}>{healthLabel}</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Last fix age</dt>
+                  <dd>{health.fixAge == null ? "Unavailable" : `${Math.floor(health.fixAge)} s`}</dd>
+                </div>
+                <div>
+                  <dt>Satellites used</dt>
+                  <dd>{health.usedCount ?? "Unavailable"}</dd>
+                </div>
+                <div>
+                  <dt>HDOP / VDOP</dt>
+                  <dd>{health.hdop?.toFixed(1) ?? "—"} / {health.vdop?.toFixed(1) ?? "—"}</dd>
+                </div>
+                <div>
+                  <dt>Mean used C/N₀</dt>
+                  <dd>{health.usedCn0 == null ? "Unavailable" : `${health.usedCn0.toFixed(1)} dB-Hz`}</dd>
+                </div>
+              </dl>
+            </section>
           )}
           {error && (
             <div className="notice" role="status">
@@ -545,10 +581,8 @@ export default function App() {
           )}
           <footer className="receiver-strip">
             <span>
-              <i
-                className={`status-dot ${receiver?.fix_quality ? "" : "dim"}`}
-              />
-              {receiver?.fix_quality ? "Position fix" : "No position fix"}
+              <i className={`status-dot ${currentFix ? "" : "dim"}`} />
+              {positionLabel}
             </span>
             <span className="mono">
               {coordinate(receiver?.latitude, "N", "S")} <b>/</b>{" "}

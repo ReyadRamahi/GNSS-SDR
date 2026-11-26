@@ -7,6 +7,7 @@ A GPS software receiver experiment archive, a live and replay dashboard, and Pyt
 | Goal | Guide |
 | --- | --- |
 | See the latest receiver results | [LimeSDR experiment results](docs/gnss_sdr_experiments/EXPERIMENT_RESULTS.md) |
+| Run the live fix-health dashboard | [Live receiver and dashboard setup](docker/gnss-sdr/README.md#live-fix-health-dashboard-on-linux) |
 | Reproduce the offline GPS fix | [GNSS-SDR Docker replay](docker/gnss-sdr/README.md) |
 | Run the dashboard or tests | [Local development guide](docs/DEVELOPMENT.md) |
 | Find datasets, configs, or historical logs | [Documentation index](docs/README.md) |

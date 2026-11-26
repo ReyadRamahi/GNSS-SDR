@@ -13,6 +13,8 @@ Built frontend files are served from frontend/dist/ at the project root.
 from __future__ import annotations
 
 import asyncio
+import os
+import time
 from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
@@ -43,7 +45,8 @@ NMEA_PATH = (
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN"
     / "2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.nmea"
 )
-LIVE_NMEA_PATH = ROOT / "gnss_pvt.nmea"
+LIVE_NMEA_PATH = Path(os.environ.get("GNSS_LIVE_NMEA", ROOT / "gnss_pvt.nmea"))
+RECEIVER_ACTIVITY = '{"type":"receiver_activity"}'
 FRONTEND_DIR = ROOT / "frontend" / "dist"
 
 
@@ -64,38 +67,66 @@ class ConnectionManager:
 
     async def broadcast(self, message: str) -> None:
         dead: Set[WebSocket] = set()
-        for ws in self.active:
+        for ws in tuple(self.active):
             try:
                 await ws.send_text(message)
             except Exception:
                 dead.add(ws)
-        self.active -= dead
+        self.active.difference_update(dead)
 
 
 manager = ConnectionManager()
 
 
+class ReceiverMonitor(asyncio.DatagramProtocol):
+    """Forward GNSS-SDR Monitor activity from the local receiver once per second."""
+
+    def __init__(self) -> None:
+        self.last_report = float("-inf")
+        self.pending: asyncio.Task | None = None
+
+    def datagram_received(self, data: bytes, addr: tuple[str, int]) -> None:
+        now = time.monotonic()
+        if data and now - self.last_report >= 1 and (self.pending is None or self.pending.done()):
+            self.last_report = now
+            self.pending = asyncio.create_task(manager.broadcast(RECEIVER_ACTIVITY))
+
+
 async def tail_nmea() -> None:
-    """Tail gnss_pvt.nmea and broadcast each new line to connected WebSocket clients."""
+    """Broadcast complete NMEA lines appended after startup."""
+    identity: tuple[int, int] | None = None
     position = 0
+    partial = b""
+    try:
+        initial = LIVE_NMEA_PATH.stat()
+        identity = (initial.st_dev, initial.st_ino)
+        position = initial.st_size
+    except FileNotFoundError:
+        pass
+
     while True:
         try:
             await asyncio.sleep(0.1)
-            if not LIVE_NMEA_PATH.exists():
-                position = 0
-                continue
-            with open(LIVE_NMEA_PATH, "r", errors="replace") as fh:
+            with LIVE_NMEA_PATH.open("rb") as fh:
+                stat = os.fstat(fh.fileno())
+                current = (stat.st_dev, stat.st_ino)
+                if current != identity or stat.st_size < position:
+                    identity, position, partial = current, 0, b""
                 fh.seek(position)
-                lines = fh.readlines()
+                chunk = fh.read(65536)
                 position = fh.tell()
+            lines = (partial + chunk).split(b"\n")
+            partial = lines.pop()
+            if len(partial) > 4096:
+                partial = b""
             for raw in lines:
-                line = raw.strip()
+                line = raw.decode("ascii", errors="replace").strip()
                 if line:
                     await manager.broadcast(line)
+        except FileNotFoundError:
+            identity, position, partial = None, 0, b""
         except asyncio.CancelledError:
             break
-        except Exception:
-            pass
 
 # ---------------------------------------------------------------------------
 # Application state — populated at startup
@@ -185,8 +216,20 @@ async def lifespan(app: FastAPI):
             f"[startup] WARNING: NMEA file not found at {NMEA_PATH}. "
             "Download the CTTC GPS dataset to enable full endpoints."
         )
-    asyncio.create_task(tail_nmea())
-    yield
+    transport = None
+    monitor_port = int(os.environ.get("GNSS_MONITOR_PORT", "0"))
+    if monitor_port:
+        transport, _ = await asyncio.get_running_loop().create_datagram_endpoint(
+            ReceiverMonitor, local_addr=("127.0.0.1", monitor_port),
+        )
+    tail = asyncio.create_task(tail_nmea())
+    try:
+        yield
+    finally:
+        tail.cancel()
+        await asyncio.gather(tail, return_exceptions=True)
+        if transport is not None:
+            transport.close()
 
 
 app = FastAPI(title="GNSS-SDR Dashboard", version="0.1.0", lifespan=lifespan)
